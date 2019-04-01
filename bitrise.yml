@@ -1,0 +1,222 @@
+---
+format_version: '6'
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: react-native
+trigger_map:
+- push_branch: develop
+  workflow: quality-assurance
+- pull_request_source_branch: "*"
+  workflow: quality-assurance
+- tag: v*
+  workflow: deploy-all
+workflows:
+  quality-assurance:
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.11: {}
+    - yarn:
+        title: Yarn install
+    - yarn:
+        inputs:
+        - command: lint
+        title: Lint Typescript
+  deploy-all:
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.11: {}
+    - script@1.1.5:
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+
+            # Finds the latest git tag and strips the 'v' from it, this will be the application version number
+
+            (git describe --tags `git rev-list --tags --max-count=1` || echo -e 'v0.0.1') | sed 's/v//' | tr -d '\n' | envman add --key LIFELY_APP_VERSION
+
+            envman run bash -c 'echo "App version set at: $LIFELY_APP_VERSION"'
+        title: Set version
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+
+            echo "
+            BOILERPLATE_DEVELOPMENT=false
+            " > .env
+
+            pwd
+            echo "Printing .env"
+            cat .env
+        title: Create .env
+    - yarn@0.0.8:
+        title: Yarn install
+    - yarn@0.0.8:
+        inputs:
+        - command: lint
+        title: Lint Typescript
+    - yarn@0.0.8:
+        inputs:
+        - command: build
+    after_run:
+    - build-android
+    - build-ios
+    - publish-android
+    - archive-ios
+  build-ios:
+    steps:
+    - certificate-and-profile-installer@1.10.1:
+        inputs:
+        - install_defaults: 'no'
+    - set-xcode-build-number@1.0.7:
+        inputs:
+        - build_short_version_string: "$LIFELY_APP_VERSION"
+        - plist_path: "$XCODE_INFO_PLIST_PATH"
+    - xcode-archive@2.4.16:
+        inputs:
+        - export_method: app-store
+        - xcodebuild_options: "-UseModernBuildSystem=NO"
+        - force_team_id: S6M83XC583
+        - force_code_sign_identity: 'iPhone Distribution: Lifely (S6M83XC583)'
+        - force_provisioning_profile_specifier: S6M83XC583/Boilerplate Distribution
+        - force_provisioning_profile: 82aee27d-d2b6-4346-ab2a-d508f198714f
+        - configuration: Release
+  build-android:
+    steps:
+    - change-android-versioncode-and-versionname@1.1.1:
+        inputs:
+        - new_version_name: "$LIFELY_APP_VERSION"
+        - build_gradle_path: android/app/build.gradle
+    - install-missing-android-tools@2.3.3:
+        inputs:
+        - gradlew_path: android/gradlew
+    - gradle-runner@1.8.3:
+        inputs:
+        - gradle_task: assembleRelease
+        - gradlew_path: android/gradlew
+        - gradle_file: android/build.gradle
+    - sign-apk@1.2.4: {}
+  publish-android:
+    steps:
+    - google-play-deploy@1.5.1:
+        inputs:
+        - package_name: "$LIFELY_APP_ID"
+        - service_account_json_key_path: "$BITRISEIO_GOOGLE_PLAY_SERVICE_ACCOUNT_URL"
+  archive-ios:
+    steps:
+    - deploy-to-itunesconnect-deliver@2.14.1:
+        inputs:
+        - team_name: Lifely
+        - app_id: "$APPLE_APP_KEY"
+        - bundle_id: "$LIFELY_APP_ID"
+        - password: "$APPLE_ID_PASSWORD"
+        - itunescon_user: "$APPLE_ID_EMAIL"
+  deploy-android:
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.11: {}
+    - script@1.1.5:
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+
+            # Finds the latest git tag and strips the 'v' from it, this will be the application version number
+
+            (git describe --tags `git rev-list --tags --max-count=1` || echo -e 'v0.0.1') | sed 's/v//' | tr -d '\n' | envman add --key LIFELY_APP_VERSION
+
+            envman run bash -c 'echo "App version set at: $LIFELY_APP_VERSION"'
+        title: Set version
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+
+            echo "
+            BOILERPLATE_DEVELOPMENT=false
+            " > .env
+
+            pwd
+            echo "Printing .env"
+            cat .env
+        title: Create .env
+    - yarn@0.0.8:
+        title: Yarn install
+    - yarn@0.0.8:
+        inputs:
+        - command: lint
+        title: Lint Typescript
+    - yarn@0.0.8:
+        inputs:
+        - command: build
+    after_run:
+    - build-android
+    - publish-android
+  deploy-ios:
+    steps:
+    - activate-ssh-key@4.0.3:
+        run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+    - git-clone@4.0.11: {}
+    - script@1.1.5:
+        inputs:
+        - content: |
+            #!/usr/bin/env bash
+
+            # Finds the latest git tag and strips the 'v' from it, this will be the application version number
+
+            (git describe --tags `git rev-list --tags --max-count=1` || echo -e 'v0.0.1') | sed 's/v//' | tr -d '\n' | envman add --key LIFELY_APP_VERSION
+
+            envman run bash -c 'echo "App version set at: $LIFELY_APP_VERSION"'
+        title: Set version
+    - script@1.1.5:
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+
+            echo "
+            BOILERPLATE_DEVELOPMENT=false
+            " > .env
+
+            pwd
+            echo "Printing .env"
+            cat .env
+        title: Create .env
+    - yarn@0.0.8:
+        title: Yarn install
+    - yarn@0.0.8:
+        inputs:
+        - command: lint
+        title: Lint Typescript
+    - yarn@0.0.8:
+        inputs:
+        - command: build
+    after_run:
+    - build-ios
+    - archive-ios
+app:
+  envs:
+  - opts:
+      is_expand: false
+    PROJECT_LOCATION: android
+  - opts:
+      is_expand: false
+    MODULE: app
+  - opts:
+      is_expand: false
+    BUILD_VARIANT: Release
+  - opts:
+      is_expand: false
+    BITRISE_PROJECT_PATH: ios/Boilerplate.xcodeproj
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: Boilerplate
+  - opts:
+      is_expand: false
+    BITRISE_EXPORT_METHOD: app-store
+  - opts:
+      is_expand: false
+    XCODE_INFO_PLIST_PATH: ios/Boilerplate/Info.plist
+  - opts:
+      is_expand: false
+    LIFELY_APP_ID: nl.lifely.boilerplate

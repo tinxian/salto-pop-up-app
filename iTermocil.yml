@@ -1,0 +1,11 @@
+windows:
+  - name: big-screen-vertical
+    root: ./
+    layout: double-main-horizontal
+    panes:
+      - yarn watch
+      - yarn translations-watch
+      - sleep 5 && yarn start-metro --reset-cache
+      - commands:
+        - yarn helpme
+        focus: true
