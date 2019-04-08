@@ -1,4 +1,5 @@
 import React from 'react'
+import theme from '../../theme.json'
 
 interface Props { }
 
@@ -7,23 +8,30 @@ interface ThemeType {
     NavigationIconsColor: string
 }
 
-const DEFAULT_VALUE: ThemeType = {
-    NavigationColor: '#fff',
-    NavigationIconsColor: '#000'
-}
+const ThemeContext = React.createContext(theme);
 
-const ThemeContext = React.createContext(DEFAULT_VALUE);
+export class ThemeProvider extends React.Component<Props, ThemeType> {
 
-export class ThemeProvider extends React.Component<Props> {
+    public state: ThemeType = theme
 
     public render() {
         const { children } = this.props
 
         return (
-            <ThemeContext.Provider value={DEFAULT_VALUE}>
+            <ThemeContext.Provider value={{
+                ...this.state,
+                setThemeState: this.setThemeStateValue
+            }}>
                 {children}
             </ThemeContext.Provider>
         )
+    }
+
+    private setThemeStateValue = (values: { [key in keyof ThemeType]: string }) => {
+        this.setState({
+            ...this.state,
+            ...values,
+        })
     }
 }
 

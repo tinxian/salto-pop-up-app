@@ -4,6 +4,7 @@ import { LocalizationProvider, initializeLocalization } from './services/Localiz
 import { Root } from './screens/Root'
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
+import { ThemeProvider } from './providers/ThemeProvider';
 
 const RootNavigator = createStackNavigator({
     Root,
@@ -14,11 +15,11 @@ const RootNavigator = createStackNavigator({
         },
     },
 }, {
-    headerMode: 'none',
-    mode: 'modal',
-})
+        headerMode: 'none',
+        mode: 'modal',
+    })
 
-export class AppProviders extends React.Component<{navigation: any}> {
+export class AppProviders extends React.Component<{ navigation: any }> {
 
     public static router: any = RootNavigator.router
 
@@ -26,7 +27,9 @@ export class AppProviders extends React.Component<{navigation: any}> {
         return (
             <View style={styles.container}>
                 <LocalizationProvider initialize={initializeLocalization}>
-                    <RootNavigator navigation={this.props.navigation} />
+                    <ThemeProvider>
+                        <RootNavigator navigation={this.props.navigation} />
+                    </ThemeProvider>
                 </LocalizationProvider>
             </View>
         )
