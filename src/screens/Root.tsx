@@ -16,7 +16,7 @@ export class Root extends Component<Props> {
         const { navigation } = this.props
         return (
             <View style={styles.container}>
-                <Intro onKitchensink={() => navigation.navigate('KitchenSink')} />
+                <Intro onKitchensink={() => navigation.navigate('OnDemandList')} />
             </View>
         )
     }
