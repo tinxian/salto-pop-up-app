@@ -40,8 +40,14 @@ export interface EpisodeStreamType {
 
 export class Videos {
     public static async getAllVideos() {
-        const result: AxiosResponse<EpisodeResponseType> = await axios.get('https://vod.salto.nl/data/ondemand/pride')
+        try {
+            const result: AxiosResponse<EpisodeResponseType> = await axios.get('https://vod.salto.nl/data/ondemand/pride')
 
-        return result
+            return result.data.episodes
+        } catch(err) {
+            console.log(err)
+
+            return []
+        }
     }
 }
