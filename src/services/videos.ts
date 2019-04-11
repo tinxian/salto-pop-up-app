@@ -1,3 +1,9 @@
+import axios, { AxiosResponse } from 'axios'
+
+export interface EpisodeResponseType {
+    episodes: EpisodeType[]
+}
+
 export interface EpisodeType {
     id: string
     title: string
@@ -30,4 +36,12 @@ export interface EpisodeStreamType {
     hls: string
     mp4: string
     dash: string
+}
+
+export class Videos {
+    public static async getAllVideos() {
+        const result: AxiosResponse<EpisodeResponseType> = await axios.get('https://vod.salto.nl/data/ondemand/pride')
+
+        return result
+    }
 }
