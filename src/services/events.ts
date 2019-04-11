@@ -4,7 +4,7 @@ export interface EventType {
     featured: boolean
     organisation: string
     slug: string
-    type: EventKind // radio or tv
+    type: EventKind
     channels: ChannelType[]
     description: string
     website: string
