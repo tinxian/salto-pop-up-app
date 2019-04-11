@@ -4,11 +4,25 @@ import { LocalizationProvider, initializeLocalization } from './services/Localiz
 import { Root } from './screens/Root'
 import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationRouter } from 'react-navigation'
 import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
+import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
+import { OnDemandList } from './screens/OnDemand/OnDemandList'
 
 const RootNavigator = createStackNavigator({
     Root,
     KitchenSink: {
         screen: KitchenSinkTabView,
+        navigationOptions: {
+            // gesturesEnabled: false,
+        },
+    },
+    OnDemandList: {
+        screen: OnDemandList,
+        navigationOptions: {
+            // gesturesEnabled: false,
+        },
+    },
+    OnDemandVideoScreen: {
+        screen: OnDemandVideoScreen,
         navigationOptions: {
             // gesturesEnabled: false,
         },
