@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { LocalizationProvider, initializeLocalization } from './services/LocalizationService'
 import { Root } from './screens/Root'
-import { createStackNavigator, createAppContainer } from 'react-navigation'
+import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationRouter } from 'react-navigation'
 import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
 
 const RootNavigator = createStackNavigator({
@@ -14,13 +14,13 @@ const RootNavigator = createStackNavigator({
         },
     },
 }, {
-    headerMode: 'none',
-    mode: 'modal',
-})
+        headerMode: 'none',
+        mode: 'modal',
+    })
 
-export class AppProviders extends React.Component<{navigation: any}> {
+export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
 
-    public static router: any = RootNavigator.router
+    public static router: NavigationRouter<{}, {}> = RootNavigator.router
 
     public render() {
         return (

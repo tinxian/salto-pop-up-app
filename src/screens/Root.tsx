@@ -4,7 +4,7 @@ import SplashScreen from 'react-native-splash-screen'
 import { Intro } from 'src/BP/Intro/Intro'
 import { NavigationScreenProps } from 'react-navigation'
 
-interface Props extends NavigationScreenProps {}
+interface Props extends NavigationScreenProps { }
 
 export class Root extends Component<Props> {
 
