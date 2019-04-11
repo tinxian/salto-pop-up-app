@@ -22,6 +22,7 @@ export interface State {
 export class OnDemandVideoItem extends React.Component<Props, State> {
     public render() {
         const { item } = this.props
+
         return (
             <TouchableHighlight onPress={this.handleOnPress}>
                 <View style={this.getStyles()}>
@@ -46,6 +47,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
 
     private getStyles() {
         const { style } = this.props
+
         return [
             styles.container,
             style,

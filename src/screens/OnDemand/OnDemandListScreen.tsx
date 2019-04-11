@@ -28,9 +28,11 @@ export class OnDemandList extends React.Component<Props, State> {
 
     public render() {
         const { data, loading } = this.state
+
         if (loading) {
             return <ActivityIndicator />
         }
+
         return (
             <View style={this.getStyles()}>
                 <FlatList
