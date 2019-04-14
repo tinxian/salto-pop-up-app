@@ -25,6 +25,7 @@
 		5FAF8568158E4E478F673EF5 /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 42AD885443B54516BD923757 /* libRNSVG.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		95FCCA1E901041F3AE01726E /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A18D79A31E84DF79EFEB87D /* libRCTVideo.a */; };
+		9A28B62587D345FE9EB2BC54 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5B64F8C6A8416A9E62D94C /* libRNShare.a */; };
 		A1AB59224F2D4D868459C0E6 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6C55472DA74ABA90CC7523 /* libReactNativeConfig.a */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		D3D12FE045A4436FB738CC34 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849C2E62900B40C8B209BB18 /* libSplashScreen.a */; };
@@ -346,6 +347,13 @@
 			remoteGlobalIDString = 358F4ED71D1E81A9004DF814;
 			remoteInfo = RCTBlob;
 		};
+		E4D5D09A2263890D0014468B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D4F68C0F536C416CB72165C5 /* RNShare.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNShare;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -381,7 +389,9 @@
 		9DCE32A4AC314272B2BD8B1D /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTVideo.xcodeproj; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; };
 		A96357989C4A4060B1CE8B0C /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
+		D4F68C0F536C416CB72165C5 /* RNShare.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNShare.xcodeproj; path = "../node_modules/react-native-share/ios/RNShare.xcodeproj"; sourceTree = "<group>"; };
 		DC6C55472DA74ABA90CC7523 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
+		EF5B64F8C6A8416A9E62D94C /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -406,6 +416,7 @@
 				5FAF8568158E4E478F673EF5 /* libRNSVG.a in Frameworks */,
 				4930E4A9E09E440B845DBBD8 /* libRNGestureHandler.a in Frameworks */,
 				95FCCA1E901041F3AE01726E /* libRCTVideo.a in Frameworks */,
+				9A28B62587D345FE9EB2BC54 /* libRNShare.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +594,7 @@
 				321D5AE64A7B4CF8A8F8608E /* RNSVG.xcodeproj */,
 				7D03CF62BB034C55B0CE58F8 /* RNGestureHandler.xcodeproj */,
 				9DCE32A4AC314272B2BD8B1D /* RCTVideo.xcodeproj */,
+				D4F68C0F536C416CB72165C5 /* RNShare.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -653,6 +665,7 @@
 				42AD885443B54516BD923757 /* libRNSVG.a */,
 				A96357989C4A4060B1CE8B0C /* libRNGestureHandler.a */,
 				2A18D79A31E84DF79EFEB87D /* libRCTVideo.a */,
+				EF5B64F8C6A8416A9E62D94C /* libRNShare.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -670,6 +683,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E4D5D0972263890C0014468B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E4D5D09B2263890D0014468B /* libRNShare.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -714,6 +735,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -780,6 +802,10 @@
 				{
 					ProductGroup = 96C55C3F21B02C2D00A1DCB2 /* Products */;
 					ProjectRef = 7D03CF62BB034C55B0CE58F8 /* RNGestureHandler.xcodeproj */;
+				},
+				{
+					ProductGroup = E4D5D0972263890C0014468B /* Products */;
+					ProjectRef = D4F68C0F536C416CB72165C5 /* RNShare.xcodeproj */;
 				},
 				{
 					ProductGroup = 96C55BFE21AFEACC00A1DCB2 /* Products */;
@@ -1113,6 +1139,13 @@
 			remoteRef = ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		E4D5D09B2263890D0014468B /* libRNShare.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNShare.a;
+			remoteRef = E4D5D09A2263890D0014468B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1185,6 +1218,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-share/ios",
 				);
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1193,6 +1227,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
@@ -1226,6 +1261,7 @@
 					"$(SRCROOT)/../node_modules/react-native-svg/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-video/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-share/ios",
 				);
 				INFOPLIST_FILE = Boilerplate/Info.plist;
 				INFOPLIST_OTHER_PREPROCESSOR_FLAGS = "-traditional";
@@ -1234,6 +1270,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
 					"\"$(SRCROOT)/Boilerplate\"",
