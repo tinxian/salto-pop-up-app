@@ -16,10 +16,15 @@ export interface Props {
 }
 
 export interface State {
-
+    loading: boolean
 }
 
 export class OnDemandVideoItem extends React.Component<Props, State> {
+
+    public state: State = {
+        loading: true,
+    }
+
     public render() {
         const { item } = this.props
 
@@ -29,6 +34,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                     <Image
                         style={styles.item}
                         source={{ uri: this.props.item.poster }}
+                        onLoadEnd={() => this.setState({ loading: false })}
                     />
                     <Text>{item.programName}</Text>
                     <Text>{item.title}</Text>

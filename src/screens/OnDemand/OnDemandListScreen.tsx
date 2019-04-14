@@ -3,7 +3,7 @@ import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator } from 'react-
 import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/OnDemandVideoItem/OnDemandVideoItem'
-import { Videos } from 'src/services/videos';
+import { Videos, EpisodeType } from 'src/services/videos';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -11,19 +11,22 @@ interface Props extends NavigationScreenProps<{}> {
 
 interface State {
     loading: boolean,
-    data: any[]
+    data: EpisodeType[]
 }
 
-export class OnDemandList extends React.Component<Props, State> {
+export class OnDemandListScreen extends React.Component<Props, State> {
     public state: State = {
         loading: true,
         data: [],
     }
 
     public async componentDidMount() {
-        const response = await Videos.getAllVideos()
+        const episodes = await Videos.getAllVideos()
 
-        this.setState({ data: response.data.episodes })
+        this.setState({
+            data: episodes,
+            loading: false,
+        })
     }
 
     public render() {
