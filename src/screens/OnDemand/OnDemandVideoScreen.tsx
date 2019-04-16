@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { Component } from 'react'
-import { View, Text, StyleSheet, StyleProp, Button } from 'react-native'
-import { NavigationScreenProp, NavigationScreenProps } from 'react-navigation'
+import { View, StyleSheet, StyleProp } from 'react-native'
+import { NavigationScreenProps } from 'react-navigation'
 import Video from 'react-native-video'
 
 interface Params {
@@ -25,13 +24,13 @@ export class OnDemandVideoScreen extends React.Component<OnDemandVideoScreenProp
     public render() {
         return (
             <View style={this.getStyles()}>
-                    <View style={styles.newDiv}>
-                        <Video
-                            style={{ flex: 1 }}
-                            controls={true}
-                            source={{ uri: this.props.navigation.getParam('uri') }}
-                        />
-                    </View>
+                <View style={styles.newDiv}>
+                    <Video
+                        style={{ flex: 1 }}
+                        controls={true}
+                        source={{ uri: this.props.navigation.getParam('uri') }}
+                    />
+                </View>
             </View>
         )
     }

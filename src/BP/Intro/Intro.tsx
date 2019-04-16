@@ -1,35 +1,46 @@
 import React from 'react'
 import {
-   View,
-   StyleSheet,
-   StyleProp,
-   Text,
-   TouchableHighlight,
-   Platform,
-   Linking,
+    View,
+    StyleSheet,
+    StyleProp,
+    Text,
+    TouchableHighlight,
+    Platform,
+    Linking,
+    Button,
 } from 'react-native'
 import { environment } from 'src/services/environment'
 import { WebViewImage } from '../Components/WebView/WebViewImage'
 import { namespaceLocalize } from 'src/services/LocalizationService'
 import { colors } from 'src/utils/colors'
+import Share from 'react-native-share';
 
 interface Props {
     style?: StyleProp<{}>
     onKitchensink: () => void
 }
 
-interface State {}
+interface State { }
 
 export class Intro extends React.Component<Props, State> {
 
     private loc = namespaceLocalize(t => t.Boilerplate)
 
     public render() {
+
+        let shareOptions = {
+            title: "React Native",
+            message: "Hola mundo",
+            url: "http://facebook.github.io/react-native/",
+            subject: "Share Link" //  for email
+        };
+
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{this.loc(t => t.Title)}</Text>
                 </View>
+                <Button title="share" onPress={() => Share.open(shareOptions)} />
                 {this.renderContent()}
                 {this.renderButton()}
             </View>
@@ -113,7 +124,7 @@ export class Intro extends React.Component<Props, State> {
                 <React.Fragment>
                     <Text style={styles.subtitle}>{this.loc(t => t.Instructions.Edit)}</Text>
                     <View style={styles.instructions}>
-                        <View style={[ styles.boilerplate, { marginBottom: 16 } ]}>
+                        <View style={[styles.boilerplate, { marginBottom: 16 }]}>
                             <Text style={styles.instructionsTitle}>{this.loc(t => t.Instructions.Ios.Simulator)}</Text>
                             <Text style={styles.text}>{this.loc(t => t.Instructions.Ios.Reload)}</Text>
                             <Text style={styles.text}>{this.loc(t => t.Instructions.Ios.Menu)}</Text>
@@ -129,7 +140,7 @@ export class Intro extends React.Component<Props, State> {
                 <React.Fragment>
                     <Text style={styles.subtitle}>{this.loc(t => t.Instructions.Edit)}</Text>
                     <View style={styles.instructions}>
-                        <View style={[ styles.boilerplate, { marginBottom: 16 } ]}>
+                        <View style={[styles.boilerplate, { marginBottom: 16 }]}>
                             <Text style={styles.instructionsTitle}>{this.loc(t => t.Instructions.Android.Emulator)}</Text>
                             <Text style={styles.text}>{this.loc(t => t.Instructions.Android.Reload)}</Text>
                             <Text style={styles.text}>{this.loc(t => t.Instructions.Android.Menu)}</Text>

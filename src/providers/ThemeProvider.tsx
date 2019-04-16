@@ -8,7 +8,7 @@ interface ThemeType {
     NavigationIconsColor: string
 }
 
-const ThemeContext = React.createContext(theme);
+const ThemeContext = React.createContext({})
 
 export class ThemeProvider extends React.Component<Props, ThemeType> {
 
@@ -18,10 +18,12 @@ export class ThemeProvider extends React.Component<Props, ThemeType> {
         const { children } = this.props
 
         return (
-            <ThemeContext.Provider value={{
-                ...this.state,
-                setThemeState: this.setThemeStateValue
-            }}>
+            <ThemeContext.Provider
+                value={{
+                    theme: this.state,
+                    setThemeState: this.setThemeStateValue,
+                }}
+            >
                 {children}
             </ThemeContext.Provider>
         )
@@ -34,5 +36,3 @@ export class ThemeProvider extends React.Component<Props, ThemeType> {
         })
     }
 }
-
-
