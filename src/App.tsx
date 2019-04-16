@@ -7,6 +7,7 @@ import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LiveStreamScreen } from './screens/LiveStreamScreen/LiveStreamScreen'
+import { RadioScreen } from './screens/RadioScreen/RadioScreen'
 
 const RootNavigator = createStackNavigator({
     Root,
@@ -24,6 +25,12 @@ const RootNavigator = createStackNavigator({
     },
     LiveStreamScreen: {
         screen: LiveStreamScreen,
+        navigationOptions: {
+            // gesturesEnabled: false,
+        },
+    },
+    RadioScreen: {
+        screen: RadioScreen,
         navigationOptions: {
             // gesturesEnabled: false,
         },
