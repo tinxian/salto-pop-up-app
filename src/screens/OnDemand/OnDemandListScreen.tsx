@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { View, Text, StyleSheet, StyleProp, FlatList, Button, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import axios from 'axios'
+
 import { OnDemandVideoItem } from 'src/components/OnDemandVideoItem/OnDemandVideoItem'
+import { Videos, EpisodeType } from 'src/services/videos';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -10,48 +11,44 @@ interface Props extends NavigationScreenProps<{}> {
 
 interface State {
     loading: boolean,
-    data: any[]
+    data: EpisodeType[]
 }
 
-export class OnDemandList extends React.Component<Props, State> {
+export class OnDemandListScreen extends React.Component<Props, State> {
     public state: State = {
         loading: true,
         data: [],
     }
 
     public async componentDidMount() {
+        const episodes = await Videos.getAllVideos()
 
-        await axios.get('https://vod.salto.nl/data/ondemand/pride')
-        .then(response => {
-            this.setState({
-                data: response.data.episodes,
-                loading: false,
-            })
-        })
-        .catch(error => {
-            // handle error
-            console.log(error)
+        this.setState({
+            data: episodes,
+            loading: false,
         })
     }
 
     public render() {
         const { data, loading } = this.state
+
         if (loading) {
-            return <ActivityIndicator/>
+            return <ActivityIndicator />
         }
+
         return (
             <View style={this.getStyles()}>
                 <FlatList
                     data={data}
-                    keyExtractor={(item) => {
+                    keyExtractor={item => {
                         return item.id
                     }}
                     renderItem={({ item }) => (
                         <OnDemandVideoItem
                             onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { uri: item.streams.mp4 })}
                             item={item}
-                    />
-                )}
+                        />
+                    )}
                 />
             </View>
         )
@@ -66,7 +63,7 @@ export class OnDemandList extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-    container:     {
-        flex:    1,
+    container: {
+        flex: 1,
     },
 })

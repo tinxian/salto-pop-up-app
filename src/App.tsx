@@ -5,7 +5,7 @@ import { Root } from './screens/Root'
 import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationRouter } from 'react-navigation'
 import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
-import { OnDemandList } from './screens/OnDemand/OnDemandList'
+import { OnDemandList } from './screens/OnDemand/OnDemandListScreen'
 
 const RootNavigator = createStackNavigator({
     Root,

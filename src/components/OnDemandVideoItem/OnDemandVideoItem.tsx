@@ -7,26 +7,37 @@ import {
     StyleProp,
     TouchableHighlight,
 } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { EpisodeType } from 'src/services/videos'
 
 export interface Props {
     style?: StyleProp<{}>,
-    item: any
-    onPress?: (item: any) => void
+    item: EpisodeType
+    onPress?: (item: EpisodeType) => void
 }
 
 export interface State {
-
+    loading: boolean
 }
 
 export class OnDemandVideoItem extends React.Component<Props, State> {
+
+    public state: State = {
+        loading: true,
+    }
+
     public render() {
+        const { item } = this.props
+
         return (
             <TouchableHighlight onPress={this.handleOnPress}>
                 <View style={this.getStyles()}>
-                    <Image style={{ width: '100%', height: 220 }} source={{ uri: this.props.item.poster }}/>
-                    <Text>{this.props.item.programName}</Text>
-                    <Text>{this.props.item.title}</Text>
+                    <Image
+                        style={styles.item}
+                        source={{ uri: this.props.item.poster }}
+                        onLoadEnd={() => this.setState({ loading: false })}
+                    />
+                    <Text>{item.programName}</Text>
+                    <Text>{item.title}</Text>
                 </View>
             </TouchableHighlight >
         )
@@ -42,6 +53,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
 
     private getStyles() {
         const { style } = this.props
+
         return [
             styles.container,
             style,
@@ -54,4 +66,8 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 300,
     },
+    item: {
+        width: '100%',
+        height: 220,
+    }
 })
