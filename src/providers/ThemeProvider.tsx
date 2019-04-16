@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Context } from 'react'
 import theme from '../../theme.json'
 
 interface Props { }
@@ -8,7 +8,12 @@ interface ThemeType {
     NavigationIconsColor: string
 }
 
-const ThemeContext = React.createContext({})
+interface ContextType {
+    theme: ThemeType
+    setThemeState?: (values: { [key in keyof ThemeType]: string }) => void
+}
+
+export const ThemeContext: Context<ContextType> = React.createContext({ theme })
 
 export class ThemeProvider extends React.Component<Props, ThemeType> {
 
@@ -35,4 +40,28 @@ export class ThemeProvider extends React.Component<Props, ThemeType> {
             ...values,
         })
     }
+}
+
+const hoistStatics = require('hoist-non-react-statics')
+
+export interface ThemeInjectedProps {
+    themeContext: ContextType
+}
+
+export function withThemeContext<Props>(Component: React.ComponentClass<ThemeInjectedProps & Props>) {
+    class ComponentWithTheme extends React.Component<ThemeInjectedProps & Props, {}> {
+
+        public render() {
+            return (
+
+                <ThemeContext.Consumer>
+                    {
+                        context => <Component {...this.props} themeContext={context} />
+                    }
+                </ThemeContext.Consumer>
+            )
+        }
+    }
+
+    return hoistStatics(ComponentWithTheme, Component) as React.ComponentClass<Props>
 }

@@ -2,17 +2,18 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { LocalizationProvider, initializeLocalization } from './services/LocalizationService'
 import { Root } from './screens/Root'
-import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationRouter } from 'react-navigation'
-import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
+import { createAppContainer, NavigationScreenProp, NavigationRouter, createBottomTabNavigator } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LiveStreamScreen } from './screens/LiveStreamScreen/LiveStreamScreen'
 import { RadioScreen } from './screens/RadioScreen/RadioScreen'
+import { withThemeContext, ThemeInjectedProps } from './providers/ThemeProvider';
 
-const RootNavigator = createStackNavigator({
+
+const RootNavigator = createBottomTabNavigator({
     Root,
     KitchenSink: {
-        screen: KitchenSinkTabView,
+        screen: OnDemandVideoScreen,
         navigationOptions: {
             // gesturesEnabled: false,
         },
@@ -42,24 +43,27 @@ const RootNavigator = createStackNavigator({
         },
     },
 }, {
-    headerMode: 'none',
-    mode: 'modal',
-})
+        headerMode: 'none',
+        mode: 'modal',
+    })
 
-export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
+export const AppProviders = withThemeContext( // TODO: example remove this
+    class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
+        public static router: NavigationRouter<{}, {}> = RootNavigator.router
 
-    public static router: NavigationRouter<{}, {}> = RootNavigator.router
+        public render() {
 
-    public render() {
-        return (
-            <View style={styles.container}>
-                <LocalizationProvider initialize={initializeLocalization}>
-                    <RootNavigator navigation={this.props.navigation} />
-                </LocalizationProvider>
-            </View>
-        )
-    }
-}
+            return (
+                <View style={styles.container}>
+                    <LocalizationProvider initialize={initializeLocalization}>
+                        <RootNavigator
+                            navigation={this.props.navigation}
+                        />
+                    </LocalizationProvider>
+                </View>
+            )
+        }
+    })
 
 export const App = createAppContainer(AppProviders)
 
