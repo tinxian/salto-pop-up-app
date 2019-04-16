@@ -5,7 +5,8 @@ import { Root } from './screens/Root'
 import { createStackNavigator, createAppContainer, NavigationScreenProp, NavigationRouter } from 'react-navigation'
 import { KitchenSinkTabView } from './BP/KitchenSink/KitchenSink'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
-import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen';
+import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
+import { LiveStreamScreen } from './screens/LiveStreamScreen/LiveStreamScreen'
 
 const RootNavigator = createStackNavigator({
     Root,
@@ -21,6 +22,12 @@ const RootNavigator = createStackNavigator({
             // gesturesEnabled: false,
         },
     },
+    LiveStreamScreen: {
+        screen: LiveStreamScreen,
+        navigationOptions: {
+            // gesturesEnabled: false,
+        },
+    },
     OnDemandVideoScreen: {
         screen: OnDemandVideoScreen,
         navigationOptions: {
@@ -28,9 +35,9 @@ const RootNavigator = createStackNavigator({
         },
     },
 }, {
-        headerMode: 'none',
-        mode: 'modal',
-    })
+    headerMode: 'none',
+    mode: 'modal',
+})
 
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> }> {
 
