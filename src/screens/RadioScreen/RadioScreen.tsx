@@ -16,14 +16,14 @@ export class RadioScreen extends React.Component<Props, State> {
         try {
             SoundPlayer.playUrl('https://icecast.streamone.net/46ANH44CYA8S')
         } catch (e) {
-            throw(e)
+            throw (e)
         }
     }
     public render() {
-        return(
+        return (
             <View style={this.getStyles()}>
-                <Button title="Play" onPress={() => SoundPlayer.play()}/>
-                <Button title="Pause" onPress={() => SoundPlayer.pause()}/>
+                <Button title="Play" onPress={() => SoundPlayer.play()} />
+                <Button title="Pause" onPress={() => SoundPlayer.pause()} />
             </View>
         )
     }
