@@ -28,19 +28,11 @@ export class Intro extends React.Component<Props, State> {
 
     public render() {
 
-        let shareOptions = {
-            title: "React Native",
-            message: "Hola mundo",
-            url: "http://facebook.github.io/react-native/",
-            subject: "Share Link" //  for email
-        };
-
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.title}>{this.loc(t => t.Title)}</Text>
                 </View>
-                <Button title="share" onPress={() => Share.open(shareOptions)} />
                 {this.renderContent()}
                 {this.renderButton()}
             </View>
