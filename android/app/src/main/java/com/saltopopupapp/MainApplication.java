@@ -1,4 +1,4 @@
-package nl.lifely.boilerplate;
+package com.saltopopupapp;
 
 import android.app.Application;
 

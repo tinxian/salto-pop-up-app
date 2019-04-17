@@ -1,4 +1,4 @@
-package nl.lifely.boilerplate;
+package com.saltopopupapp;
 
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;
@@ -15,7 +15,7 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         SplashScreen.show(this);
-        return "Boilerplate";
+        return "saltoPopUpApp";
     }
 
     @Override

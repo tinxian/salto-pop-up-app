@@ -45,12 +45,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "nl.lifely.boilerplate",
+    package = "com.saltopopupapp",
 )
 
 android_resource(
     name = "res",
-    package = "nl.lifely.boilerplate",
+    package = "com.saltopopupapp",
     res = "src/main/res",
 )
 

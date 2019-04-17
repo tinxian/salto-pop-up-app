@@ -1,0 +1,26 @@
+User defaults from command line:
+    IDEArchivePathOverride = /var/folders/22/9ppn85hx6nsd323x7y65cqyr0000gn/T/__codesigndoc__030410799/Boilerplate.xcarchive
+
+note: Using new build system
+
+** CLEAN SUCCEEDED **
+
+note: Using new build system
+note: Planning build
+note: Constructing build description
+Build system information
+error: "Boilerplate" requires a provisioning profile. Select a provisioning profile for the "Release" build configuration in the project editor. (in target 'Boilerplate')
+
+Build system information
+warning: The iOS deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'SplashScreen')
+
+Build system information
+warning: The iOS deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'RNGestureHandler')
+
+Build system information
+warning: The iOS deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'RCTVideo')
+
+Build system information
+warning: The iOS deployment target is set to 7.0, but the range of supported deployment target versions for this platform is 8.0 to 12.2.99. (in target 'RNShare')
+
+** ARCHIVE FAILED **
