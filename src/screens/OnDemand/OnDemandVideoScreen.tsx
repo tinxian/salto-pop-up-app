@@ -2,11 +2,11 @@ import * as React from 'react'
 import { View, StyleSheet, StyleProp, Button, Text, StatusBar, Dimensions } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
-// import Share from 'react-native-share';
 import { EpisodeType } from 'src/services/videos'
 import { Title } from 'src/components/Typography/Title'
 import Video from 'react-native-video'
 import { ExpandableContainer } from 'src/components/Animation/ExpandableContainer';
+
 interface Params {
     item: EpisodeType,
 }
@@ -20,8 +20,6 @@ interface State {
     loading: boolean
     fullScreen: boolean
 }
-
-
 
 export class OnDemandVideoScreen extends React.Component<Props, State> {
     public state: State = {
@@ -50,7 +48,12 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
         return (
             <View style={this.getStyles()}>
                 <StatusBar hidden={true} animated={true} />
-                <ExpandableContainer expand={fullScreen} startHeight={300} maxHeight={Dimensions.get('window').height}>
+                <ExpandableContainer
+                    expand={fullScreen}
+                    startHeight={300}
+                    maxHeight={Dimensions.get('window').height}
+                    style={styles.videoContainer}
+                >
                     <VideoPlayer
                         style={{ flex: 1 }}
                         ref={(ref: Video) => this.player = ref}
@@ -66,38 +69,32 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
                 <Title numberOfLines={2} >{item.title}</Title>
                 <View style={styles.actions}>
                     {/* <Button title="share" onPress={() => Share.open(this.getShareOptions())} /> */}
-                    <Button title="Back" onPress={this.handleFullScreenToggle} />
+                    {/* <Button title="Share" onPress={this.handleShare} /> */}
                 </View>
                 <Text>{item.description}</Text>
             </View>
         )
     }
 
+    // private handleShare = () => {
+    //     Share.open(this.getShareOptions())
+    // }
+
     private handleFullScreenToggle = () => {
         const { fullScreen } = this.state
         this.setState({ fullScreen: !fullScreen })
     }
 
-    private getVideoStyles(): StyleProp<{}> {
-        const { fullScreen } = this.state
+    // private getShareOptions = () => {
+    //     const item = this.props.navigation.getParam('item')
 
-        return [
-            styles.videoContainer,
-            fullScreen && { height: Dimensions.get('screen').height },
-        ]
-
-    }
-
-    private getShareOptions = () => {
-        const item = this.props.navigation.getParam('item')
-
-        return {
-            title: item.title,
-            message: `Kijk naar deze video van ${item.programName}`,
-            url: item.streams.mp4,
-            subject: `Kijk naar deze video van ${item.programName}` //  for email
-        }
-    }
+    //     return {
+    //         title: item.title,
+    //         message: `Kijk naar deze video van ${item.programName}`,
+    //         url: item.streams.mp4,
+    //         subject: `Kijk naar deze video van ${item.programName}` //  for email
+    //     }
+    // }
 
     private getStyles() {
         const { style } = this.props
@@ -111,12 +108,9 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'white',
     },
     videoContainer: {
         backgroundColor: '#000',
-        height: 300,
-        width: '100%',
         overflow: 'hidden',
     },
     loader: {

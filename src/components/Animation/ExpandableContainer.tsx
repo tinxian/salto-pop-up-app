@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Animated } from 'react-native'
+import { StyleProp, Animated } from 'react-native'
 
 
 interface Props {
