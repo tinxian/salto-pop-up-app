@@ -1,10 +1,12 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button, ActivityIndicator, Text, StatusBar } from 'react-native'
+import { View, StyleSheet, StyleProp, Button, Text, StatusBar, Dimensions } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
+import VideoPlayer from 'react-native-video-controls'
+// import Share from 'react-native-share';
+import { EpisodeType } from 'src/services/videos'
+import { Title } from 'src/components/Typography/Title'
 import Video from 'react-native-video'
-import Share from 'react-native-share';
-import { EpisodeType } from 'src/services/videos';
-import { Title } from 'src/components/Typography/Title';
+import { ExpandableContainer } from 'src/components/Animation/ExpandableContainer';
 interface Params {
     item: EpisodeType,
 }
@@ -16,23 +18,24 @@ interface Props extends NavigationScreenProps<Params> {
 
 interface State {
     loading: boolean
+    fullScreen: boolean
 }
+
+
 
 export class OnDemandVideoScreen extends React.Component<Props, State> {
     public state: State = {
         loading: true,
+        fullScreen: false,
     }
 
-    // public static navigationOptions = ({ navigation }: NavigationScreenProps<{}>) => ({
-    //     drawerLockMode: 'locked-closed',
-    //     gesturesEnabled: true,
-    //     gestureResponseDistance: { horizontal: '100%', vertical: '100%' },
-
-
-    // })
+    private player: Video | null
 
     public componentDidMount() {
         StatusBar.setHidden(true, 'fade')
+        if (this.player) {
+            // this.player.presentFullscreenPlayer()
+        }
     }
 
     public componentWillUnmount() {
@@ -40,34 +43,49 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
     }
 
     public render() {
-        const { loading } = this.state
+        const { fullScreen } = this.state
         const item = this.props.navigation.getParam('item')
+
+
         return (
             <View style={this.getStyles()}>
                 <StatusBar hidden={true} animated={true} />
-                <View style={styles.videoContainer}>
-                    {loading && (
-                        <View style={styles.loader}>
-                            <ActivityIndicator />
-                        </View>
-                    )}
-                    <Video
+                <ExpandableContainer expand={fullScreen} startHeight={300} maxHeight={Dimensions.get('window').height}>
+                    <VideoPlayer
                         style={{ flex: 1 }}
-                        controls={true}
-
-                        onLoad={() => this.setState({ loading: false })}
+                        ref={(ref: Video) => this.player = ref}
                         source={{ uri: item.streams.mp4 }}
+                        onBack={() => this.props.navigation.goBack()}
+                        onEnterFullscreen={this.handleFullScreenToggle}
+                        onExitFullscreen={this.handleFullScreenToggle}
                     />
-                </View>
+                </ExpandableContainer>
+
+
 
                 <Title numberOfLines={2} >{item.title}</Title>
                 <View style={styles.actions}>
-                    <Button title="share" onPress={() => Share.open(this.getShareOptions())} />
-                    <Button title="Back" onPress={() => this.props.navigation.goBack()} />
+                    {/* <Button title="share" onPress={() => Share.open(this.getShareOptions())} /> */}
+                    <Button title="Back" onPress={this.handleFullScreenToggle} />
                 </View>
                 <Text>{item.description}</Text>
             </View>
         )
+    }
+
+    private handleFullScreenToggle = () => {
+        const { fullScreen } = this.state
+        this.setState({ fullScreen: !fullScreen })
+    }
+
+    private getVideoStyles(): StyleProp<{}> {
+        const { fullScreen } = this.state
+
+        return [
+            styles.videoContainer,
+            fullScreen && { height: Dimensions.get('screen').height },
+        ]
+
     }
 
     private getShareOptions = () => {
@@ -99,6 +117,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         height: 300,
         width: '100%',
+        overflow: 'hidden',
     },
     loader: {
         width: '100%',

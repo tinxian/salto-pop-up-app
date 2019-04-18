@@ -12,13 +12,13 @@ interface State {
 
 export class LiveStreamScreen extends React.Component<Props, State> {
     public render() {
-        return(
+        return (
             <View style={this.getStyles()}>
-                  <Video
-                        style={{ flex: 1 }}
-                        controls={true}
-                        source={{ uri: 'https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8' }}
-                    />
+                <Video
+                    style={{ flex: 1 }}
+                    controls={true}
+                    source={{ uri: 'https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8' }}
+                />
             </View>
         )
     }
@@ -32,7 +32,7 @@ export class LiveStreamScreen extends React.Component<Props, State> {
 }
 
 const styles = StyleSheet.create({
-    container:   {
+    container: {
         flex: 1,
     },
 })

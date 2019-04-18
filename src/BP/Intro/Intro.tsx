@@ -7,13 +7,12 @@ import {
     TouchableHighlight,
     Platform,
     Linking,
-    Button,
 } from 'react-native'
 import { environment } from 'src/services/environment'
 import { WebViewImage } from '../Components/WebView/WebViewImage'
 import { namespaceLocalize } from 'src/services/LocalizationService'
 import { colors } from 'src/utils/colors'
-import Share from 'react-native-share';
+
 
 interface Props {
     style?: StyleProp<{}>
