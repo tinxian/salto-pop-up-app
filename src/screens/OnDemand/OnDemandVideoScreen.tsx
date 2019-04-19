@@ -3,10 +3,11 @@ import { View, StyleSheet, StyleProp, Button, Text, StatusBar, Dimensions } from
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
-import { Title } from 'src/components/Typography/Title'
+import { Title } from 'src/components/core/Typography/Title'
 import Video from 'react-native-video'
-import { ExpandableContainer } from 'src/components/Animation/ExpandableContainer';
+import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer';
 import Share from 'react-native-share';
+import { Media } from 'src/services/media';
 
 interface Params {
     item: EpisodeType,
@@ -28,13 +29,11 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
         fullScreen: false,
     }
 
-    private player: Video | null
+    public player: Video | null
 
     public componentDidMount() {
+        Media.stopOtherMedia()
         StatusBar.setHidden(true, 'fade')
-        if (this.player) {
-            // this.player.presentFullscreenPlayer()
-        }
     }
 
     public componentWillUnmount() {
@@ -108,6 +107,7 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: 'transparent',
     },
     videoContainer: {
         backgroundColor: '#000',

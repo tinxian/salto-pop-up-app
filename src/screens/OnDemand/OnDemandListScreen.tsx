@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 
-import { OnDemandVideoItem } from 'src/components/OnDemandVideoItem/OnDemandVideoItem'
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
 import { Videos, EpisodeType } from 'src/services/videos';
 
 interface Props extends NavigationScreenProps<{}> {
