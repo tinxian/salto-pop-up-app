@@ -6,6 +6,7 @@ import { EpisodeType } from 'src/services/videos'
 import { Title } from 'src/components/Typography/Title'
 import Video from 'react-native-video'
 import { ExpandableContainer } from 'src/components/Animation/ExpandableContainer';
+import Share from 'react-native-share';
 
 interface Params {
     item: EpisodeType,
@@ -69,32 +70,32 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
                 <Title numberOfLines={2} >{item.title}</Title>
                 <View style={styles.actions}>
                     {/* <Button title="share" onPress={() => Share.open(this.getShareOptions())} /> */}
-                    {/* <Button title="Share" onPress={this.handleShare} /> */}
+                    <Button title="Share" onPress={this.handleShare} />
                 </View>
                 <Text>{item.description}</Text>
             </View>
         )
     }
 
-    // private handleShare = () => {
-    //     Share.open(this.getShareOptions())
-    // }
+    private handleShare = () => {
+        Share.open(this.getShareOptions())
+    }
 
     private handleFullScreenToggle = () => {
         const { fullScreen } = this.state
         this.setState({ fullScreen: !fullScreen })
     }
 
-    // private getShareOptions = () => {
-    //     const item = this.props.navigation.getParam('item')
+    private getShareOptions = () => {
+        const item = this.props.navigation.getParam('item')
 
-    //     return {
-    //         title: item.title,
-    //         message: `Kijk naar deze video van ${item.programName}`,
-    //         url: item.streams.mp4,
-    //         subject: `Kijk naar deze video van ${item.programName}` //  for email
-    //     }
-    // }
+        return {
+            title: item.title,
+            message: `Kijk naar deze video van ${item.programName}`,
+            url: item.streams.mp4,
+            subject: `Kijk naar deze video van ${item.programName}` //  for email
+        }
+    }
 
     private getStyles() {
         const { style } = this.props
