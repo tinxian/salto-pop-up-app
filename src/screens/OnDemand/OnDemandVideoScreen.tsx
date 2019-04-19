@@ -69,7 +69,6 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
 
                 <Title numberOfLines={2} >{item.title}</Title>
                 <View style={styles.actions}>
-                    {/* <Button title="share" onPress={() => Share.open(this.getShareOptions())} /> */}
                     <Button title="Share" onPress={this.handleShare} />
                 </View>
                 <Text>{item.description}</Text>
