@@ -45,7 +45,7 @@ export const RootNavigator = createStackNavigator({
         screen: OnDemandVideoScreen,
         navigationOptions: {
             // header: null,
-            // gesturesEnabled: true,
+            gesturesEnabled: true,
             // gestureResponseDistance: { horizontal: '100%', vertical: '100%' },
             // drawerLockMode: 'locked-closed',
             mode: 'modal',
