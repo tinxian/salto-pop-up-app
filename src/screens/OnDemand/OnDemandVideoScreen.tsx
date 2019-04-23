@@ -21,12 +21,14 @@ interface Props extends NavigationScreenProps<Params> {
 interface State {
     loading: boolean
     fullScreen: boolean
+    height: number
 }
 
 export class OnDemandVideoScreen extends React.Component<Props, State> {
     public state: State = {
         loading: true,
         fullScreen: false,
+        height: Dimensions.get('window').height,
     }
 
     public player: Video | null
@@ -41,17 +43,17 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
     }
 
     public render() {
-        const { fullScreen } = this.state
+        const { fullScreen, height } = this.state
         const item = this.props.navigation.getParam('item')
 
 
         return (
-            <View style={this.getStyles()}>
+            <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                 <StatusBar hidden={true} animated={true} />
                 <ExpandableContainer
                     expand={fullScreen}
                     startHeight={300}
-                    maxHeight={Dimensions.get('window').height}
+                    maxHeight={height}
                     style={styles.videoContainer}
                 >
                     <VideoPlayer
@@ -73,6 +75,10 @@ export class OnDemandVideoScreen extends React.Component<Props, State> {
                 <Text>{item.description}</Text>
             </View>
         )
+    }
+
+    private handleLayoutChange = () => {
+        this.setState({ height: Dimensions.get('window').height })
     }
 
     private handleShare = () => {
