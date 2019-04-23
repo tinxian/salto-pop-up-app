@@ -3,11 +3,7 @@ package com.saltopopupapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.horcrux.svg.SvgPackage;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import cl.json.RNSharePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -33,12 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new SvgPackage(),
-            new SplashScreenReactPackage(),
+            new MainReactPackage(),
             new RNSoundPlayerPackage(),
-            new RNGestureHandlerPackage(),
-            new ReactNativeConfigPackage(),
             new RNSharePackage(),
             new ReactVideoPackage(),
             new RNGestureHandlerPackage(),

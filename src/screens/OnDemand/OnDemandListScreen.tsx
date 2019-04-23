@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 
-import { OnDemandVideoItem } from 'src/components/OnDemandVideoItem/OnDemandVideoItem'
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
 import { Videos, EpisodeType } from 'src/services/videos';
 
 interface Props extends NavigationScreenProps<{}> {
@@ -29,6 +29,8 @@ export class OnDemandListScreen extends React.Component<Props, State> {
         })
     }
 
+
+
     public render() {
         const { data, loading } = this.state
 
@@ -38,6 +40,7 @@ export class OnDemandListScreen extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
+                <StatusBar hidden={false} animated={false} />
                 <FlatList
                     data={data}
                     keyExtractor={item => {
@@ -45,7 +48,7 @@ export class OnDemandListScreen extends React.Component<Props, State> {
                     }}
                     renderItem={({ item }) => (
                         <OnDemandVideoItem
-                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { uri: item.streams.mp4 })}
+                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item })}
                             item={item}
                         />
                     )}
