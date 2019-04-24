@@ -1,8 +1,9 @@
 import { createStackNavigator, createBottomTabNavigator, TabBarBottom } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { RadioScreen } from './screens/RadioScreen/RadioScreen'
-import { LiveStreamScreen } from './screens/LiveStreamScreen/LiveStreamScreen'
+import { LiveStreamScreen } from './screens/LiveStream/LiveStreamScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
+import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
 
 const OnDemandVideo = createStackNavigator({
     OnDemandVideoListScreen: {
@@ -48,6 +49,13 @@ export const RootNavigator = createStackNavigator({
             gesturesEnabled: true,
             // gestureResponseDistance: { horizontal: '100%', vertical: '100%' },
             // drawerLockMode: 'locked-closed',
+            mode: 'modal',
+        },
+    },
+    LivestreamVideoScreen: {
+        screen: LivestreamVideoScreen,
+        navigationOptions: {
+            gesturesEnabled: true,
             mode: 'modal',
         },
     },

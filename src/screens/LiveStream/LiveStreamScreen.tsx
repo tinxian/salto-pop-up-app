@@ -1,8 +1,9 @@
 import * as React from 'react'
 import { View, StyleSheet, StyleProp, Button } from 'react-native'
 import Video from 'react-native-video'
+import { NavigationScreenProps } from 'react-navigation';
 
-interface Props {
+interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
 }
 
@@ -14,11 +15,7 @@ export class LiveStreamScreen extends React.Component<Props, State> {
     public render() {
         return (
             <View style={this.getStyles()}>
-                <Video
-                    style={{ flex: 1 }}
-                    controls={true}
-                    source={{ uri: 'https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8' }}
-                />
+                <Button title="open livestream" onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')} />
             </View>
         )
     }
