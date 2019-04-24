@@ -1,0 +1,12 @@
+{
+    "app": {
+        "appName": "Pride2019",
+        "EventEndpointPrefix": "Pride2019",
+        "EventStart": "12-12-2019",
+        "eventEnd": "20-12-2019"
+    },
+    "theme": {
+        "NavigationColor": "#fff",
+        "NavigationIconsColor": "#000"
+    }
+}
