@@ -3,9 +3,12 @@ import theme from '../../theme.json'
 
 interface Props { }
 
-interface ThemeType {
-    NavigationColor: string
+export interface ThemeType {
+    NavigationBackgroundColor: string
     NavigationIconsColor: string
+    NavigationIconsActiveColor: string
+    RadioPlayerControlsColor: string,
+    RadioPlayerBackgroundColor: string
 }
 
 interface ContextType {

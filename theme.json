@@ -1,4 +1,7 @@
 {
-    "NavigationColor": "#fff",
-    "NavigationIconsColor": "#000"
+    "NavigationBackgroundColor": "black",
+    "NavigationIconsColor": "#fff",
+    "NavigationIconsActiveColor": "pink",
+    "RadioPlayerControlsColor": "pink",
+    "RadioPlayerBackgroundColor": "#000"
 }
