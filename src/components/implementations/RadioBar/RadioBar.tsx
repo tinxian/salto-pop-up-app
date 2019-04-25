@@ -1,46 +1,81 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button, Text } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Platform } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { ThemeType } from 'src/providers/ThemeProvider';
 
 interface Props {
     style?: StyleProp<{}>
+    theme: ThemeType
 }
 
 interface State {
     loading: boolean
+    active: boolean
 }
 
 export class RadioBar extends React.Component<Props, State> {
 
+    public state: State = {
+        loading: false,
+        active: false,
+    }
+
     public componentDidMount() {
 
-        SoundPlayer.onFinishedPlaying((success: boolean) => { // success is true when the sound is played
-            console.log('finished playing', success)
-        })
-
-        SoundPlayer.onFinishedLoading(async (success: boolean) => {
-            console.log('finished loading', success)
-            // ready to `play()`, `getInfo()`, etc
-            console.log(await SoundPlayer.getInfo())
+        SoundPlayer.onFinishedLoading(() => {
+            this.setState({
+                loading: false,
+            })
         })
     }
 
     public render() {
+
         return (
             <View style={this.getStyles()}>
-                <Text>Radfio title</Text>
+                <Text style={{ color: this.props.theme.RadioPlayerControlsColor }}>Radfio title</Text>
                 <View style={styles.controls}>
-                    <Button title="Play" onPress={this.playRadio} />
-                    <Button title="Pause" onPress={() => SoundPlayer.pause()} />
+                    {this.renderControls()}
                 </View>
             </View>
         )
     }
 
-    private playRadio = () => {
+    private renderControls() {
+        const { loading, active } = this.state
+        const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
+
+        if (loading) {
+            return <ActivityIndicator />
+        }
+
+        return (
+            <React.Fragment>
+
+                {/* <Button title="Play" onPress={this.playRadio} />
+                <Button title="Pause" onPress={() => SoundPlayer.pause()} /> */}
+                <Icon
+                    name={!active ? `${prefix}-play` : `${prefix}-pause`}
+                    color={this.props.theme.RadioPlayerControlsColor}
+                    size={25}
+                    onPress={this.toggleRadioRadio}
+                />
+            </React.Fragment>
+        )
+    }
+
+    private toggleRadioRadio = () => {
+        const { active } = this.state
         try {
-            this.setState({ loading: true })
-            SoundPlayer.playUrl('https://icecast.streamone.net/46ANH44CYA8S')
+            this.setState({ loading: false, active: !active })
+
+            if (!active) {
+                SoundPlayer.playUrl('https://icecast.streamone.net/46ANH44CYA8S')
+                return
+            }
+            SoundPlayer.pause()
+
         } catch (e) {
             throw (e)
         }
@@ -49,6 +84,7 @@ export class RadioBar extends React.Component<Props, State> {
     private getStyles() {
         const { style } = this.props
         return [
+            { backgroundColor: this.props.theme.RadioPlayerBackgroundColor },
             styles.container,
             style,
         ]
@@ -62,7 +98,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 44,
-
+        paddingHorizontal: 16,
     },
     controls: {
         flexDirection: 'row',

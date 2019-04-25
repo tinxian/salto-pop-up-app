@@ -40,6 +40,9 @@ const TabNavigator = createBottomTabNavigator({
             activeTintColor: '#42f44b',
             inactiveTintColor: 'gray',
             showLabel: false,
+            style: {
+                backgroundColor: 'transparent',
+            },
         },
         defaultNavigationOptions: ({ navigation }: NavigationScreenProps) => ({
             tabBarComponent: SaltoTabBarBottom,

@@ -1,9 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, TouchableHighlight, Image } from 'react-native';
+import { StyleSheet, View, TouchableHighlight, Platform } from 'react-native';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { NavigationScreenProps, NavigationRoute, NavigationState } from 'react-navigation';
 import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar';
-import { NavigationIconTypes } from 'src/utils/icons';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 interface State {
     activeIndex: number
@@ -17,9 +17,12 @@ export const SaltoTabBarBottom = withThemeContext(
         }
 
         public render() {
+            const { theme } = this.props.themeContext
             return (
                 <View style={this.getStyles()}>
-                    <RadioBar />
+                    <RadioBar
+                        theme={theme}
+                    />
                     <View style={styles.tabContainer}>
                         {this.renderTabs()}
                     </View>
@@ -33,7 +36,12 @@ export const SaltoTabBarBottom = withThemeContext(
 
             return routes.map((route, index) => (
                 <TouchableHighlight style={styles.toucharea} key={index} onPress={() => this.handleOnPress(index, route)}>
-                    <Image style={this.getIconStyles(index)} source={NavigationIconTypes.home} />
+                    {/* <Image style={this.getIconStyles(index)} source={NavigationIconTypes.home} /> */}
+                    <Icon
+                        name={this.getIcon(route)}
+                        color={this.getIconColor(index)}
+                        size={25}
+                    />
                 </TouchableHighlight>
             ))
         }
@@ -43,22 +51,33 @@ export const SaltoTabBarBottom = withThemeContext(
             this.props.navigation.navigate(route.routeName)
         }
 
-        private getIconStyles(index: number) {
+        private getIcon(route: NavigationRoute<{}>) {
+            const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
+            const navIcons = {
+                OnDemandVideo: `${prefix}-home`,
+                LiveStreamScreen: `${prefix}-videocam`,
+                MoreScreen: `${prefix}-more`,
 
-            if (this.state.activeIndex === index) {
-                return {
-                    color: this.props.themeContext.theme.ActiveNavigationIconsColor,
-                    tintColor: this.props.themeContext.theme.ActiveNavigationIconsColor,
-                }
             }
 
-            return undefined
+            return navIcons[route.routeName]
+
+        }
+
+        private getIconColor(index: number) {
+
+            if (this.state.activeIndex === index) {
+                return this.props.themeContext.theme.NavigationIconsActiveColor
+            }
+
+            return this.props.themeContext.theme.NavigationIconsColor
 
         }
 
         private getStyles() {
             return [
                 styles.container,
+                { backgroundColor: this.props.themeContext.theme.NavigationBackgroundColor }
             ]
         }
     })
