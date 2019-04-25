@@ -6,6 +6,7 @@ interface Props { }
 interface ThemeType {
     NavigationColor: string
     NavigationIconsColor: string
+    ActiveNavigationIconsColor: string
 }
 
 interface ContextType {

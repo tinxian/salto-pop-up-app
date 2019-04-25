@@ -1,4 +1,5 @@
 {
-    "NavigationColor": "#fff",
-    "NavigationIconsColor": "#000"
+    "NavigationColor": "black",
+    "NavigationIconsColor": "#000",
+    "ActiveNavigationIconsColor": "pink"
 }

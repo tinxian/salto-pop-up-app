@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation';
+import { View, StyleSheet, StyleProp, Text } from 'react-native'
 
-interface Props extends NavigationScreenProps {
+interface Props {
     style: StyleProp<{}>
 }
 
@@ -10,11 +9,12 @@ interface State {
 
 }
 
-export class LiveStreamScreen extends React.Component<Props, State> {
+export class MoreScreen extends React.Component<Props, State> {
+
     public render() {
         return (
             <View style={this.getStyles()}>
-                <Button title="open livestream" onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')} />
+                <Text>WIP</Text>
             </View>
         )
     }
