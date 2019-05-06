@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, TouchableHighlight, Platform } from 'react-native';
+import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { NavigationScreenProps, NavigationRoute, NavigationState } from 'react-navigation';
 import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar';
@@ -35,14 +35,14 @@ export const SaltoTabBarBottom = withThemeContext(
             const routes = this.props.navigation.state.routes
 
             return routes.map((route, index) => (
-                <TouchableHighlight style={styles.toucharea} key={index} onPress={() => this.handleOnPress(index, route)}>
+                <TouchableOpacity style={styles.toucharea} key={index} onPress={() => this.handleOnPress(index, route)}>
                     {/* <Image style={this.getIconStyles(index)} source={NavigationIconTypes.home} /> */}
                     <Icon
                         name={this.getIcon(route)}
                         color={this.getIconColor(index)}
                         size={25}
                     />
-                </TouchableHighlight>
+                </TouchableOpacity>
             ))
         }
 
@@ -54,8 +54,8 @@ export const SaltoTabBarBottom = withThemeContext(
         private getIcon(route: NavigationRoute<{}>) {
             const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
             const navIcons = {
-                OnDemandVideo: `${prefix}-home`,
-                LiveStreamScreen: `${prefix}-videocam`,
+                HomeScreen: `${prefix}-home`,
+                OnDemandVideo: `${prefix}-videocam`,
                 MoreScreen: `${prefix}-more`,
 
             }
@@ -77,7 +77,7 @@ export const SaltoTabBarBottom = withThemeContext(
         private getStyles() {
             return [
                 styles.container,
-                { backgroundColor: this.props.themeContext.theme.NavigationBackgroundColor }
+                { backgroundColor: this.props.themeContext.theme.NavigationBackgroundColor },
             ]
         }
     })

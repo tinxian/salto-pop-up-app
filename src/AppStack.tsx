@@ -1,6 +1,6 @@
 import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
-import { LiveStreamScreen } from './screens/LiveStream/LiveStreamScreen'
+import { HomeScreen } from './screens/LiveStream/LiveStreamScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
 import { MoreScreen } from './screens/More/MoreScreen';
@@ -16,14 +16,14 @@ const OnDemandVideo = createStackNavigator({
 })
 
 const TabNavigator = createBottomTabNavigator({
-    OnDemandVideo: {
-        screen: OnDemandVideo,
+    HomeScreen: {
+        screen: HomeScreen,
         navigationOptions: {
             // gesturesEnabled: false,
         },
     },
-    LiveStreamScreen: {
-        screen: LiveStreamScreen,
+    OnDemandVideo: {
+        screen: OnDemandVideo,
         navigationOptions: {
             // gesturesEnabled: false,
         },

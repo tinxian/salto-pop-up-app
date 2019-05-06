@@ -1,7 +1,7 @@
 {
-    "NavigationBackgroundColor": "black",
+    "NavigationBackgroundColor": "#a679ff",
     "NavigationIconsColor": "#fff",
-    "NavigationIconsActiveColor": "pink",
-    "RadioPlayerControlsColor": "pink",
-    "RadioPlayerBackgroundColor": "#000"
+    "NavigationIconsActiveColor": "#ff6262",
+    "RadioPlayerControlsColor": "#ff6262",
+    "RadioPlayerBackgroundColor": "#ffa8f3"
 }

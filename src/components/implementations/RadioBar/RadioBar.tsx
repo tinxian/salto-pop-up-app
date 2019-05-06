@@ -28,6 +28,12 @@ export class RadioBar extends React.Component<Props, State> {
                 loading: false,
             })
         })
+
+        SoundPlayer.onFinishedPlaying((success: boolean) => { // success is true when the sound is played
+            this.setState({
+                active: false,
+            })
+        })
     }
 
     public render() {

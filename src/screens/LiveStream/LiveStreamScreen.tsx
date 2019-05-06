@@ -10,7 +10,7 @@ interface State {
 
 }
 
-export class LiveStreamScreen extends React.Component<Props, State> {
+export class HomeScreen extends React.Component<Props, State> {
     public render() {
         return (
             <View style={this.getStyles()}>
