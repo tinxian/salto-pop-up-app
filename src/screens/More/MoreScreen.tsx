@@ -20,7 +20,8 @@ interface MoreItem {
 }
 
 const moreItems: MoreItem[] = [
-    { screen: 'settings', label: 'Settings', icon: getIcon('settings') },
+    { screen: 'Settings', label: 'Instellingen', icon: getIcon('settings') },
+    { screen: 'Events', label: 'Andere evenementen', icon: getIcon('megaphone') },
 ]
 
 export class MoreScreen extends React.Component<Props, State> {

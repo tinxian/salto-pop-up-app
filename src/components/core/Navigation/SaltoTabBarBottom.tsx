@@ -96,8 +96,7 @@ const styles = StyleSheet.create({
         width: 42,
         alignItems: 'center',
         justifyContent: 'center',
-
-    }
+    },
 })
 
 const getActiveRouteState = function (route: NavigationState): NavigationState {

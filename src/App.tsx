@@ -6,6 +6,7 @@ import {
     createAppContainer,
     NavigationScreenProp,
     NavigationRouter,
+    SafeAreaView,
 } from 'react-navigation'
 import { ThemeInjectedProps } from './providers/ThemeProvider';
 import { RootNavigator } from './AppStack'
@@ -20,6 +21,7 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
 
     public render() {
         return (
+
             <View style={styles.container}>
                 <LocalizationProvider initialize={initializeLocalization}>
                     <RootNavigator

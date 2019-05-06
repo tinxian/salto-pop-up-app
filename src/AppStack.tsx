@@ -1,16 +1,17 @@
-import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/LiveStream/LiveStreamScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
 import { MoreScreen } from './screens/More/MoreScreen';
 import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom';
+import React from 'react';
 
 const OnDemandVideo = createStackNavigator({
     OnDemandVideoListScreen: {
         screen: OnDemandListScreen,
         navigationOptions: {
-            // gesturesEnabled: false,
+            header: null,
         },
     },
 })
@@ -20,18 +21,21 @@ const TabNavigator = createBottomTabNavigator({
         screen: HomeScreen,
         navigationOptions: {
             // gesturesEnabled: false,
+            header: null,
         },
     },
     OnDemandVideo: {
         screen: OnDemandVideo,
         navigationOptions: {
             // gesturesEnabled: false,
+            header: null,
         },
     },
     MoreScreen: {
         screen: MoreScreen,
         navigationOptions: {
             // gesturesEnabled: false,
+            header: null,
         },
     },
 },
@@ -50,10 +54,22 @@ const TabNavigator = createBottomTabNavigator({
     } as any // refer to react-navigation createBottomTabNavigator for all possible settings
 )
 
+export class TabNavigatorComponent extends React.Component<NavigationScreenProps, {}> {
+    static router = TabNavigator.router;
+    public render() {
+        const { navigation } = this.props
+        return (
+            <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+                <TabNavigator navigation={navigation} />
+            </SafeAreaView>
+        )
+    }
+}
+
 
 export const RootNavigator = createStackNavigator({
     Main: {
-        screen: TabNavigator,
+        screen: TabNavigatorComponent,
     },
     OnDemandVideoScreen: {
         screen: OnDemandVideoScreen,

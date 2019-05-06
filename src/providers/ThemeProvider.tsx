@@ -9,6 +9,7 @@ export interface ThemeType {
     NavigationIconsActiveColor: string
     RadioPlayerControlsColor: string,
     RadioPlayerBackgroundColor: string
+    ButtonColor: string
 }
 
 interface ContextType {

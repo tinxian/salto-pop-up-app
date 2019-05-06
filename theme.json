@@ -1,7 +1,8 @@
 {
-    "NavigationBackgroundColor": "#a679ff",
+    "NavigationBackgroundColor": "#cc0511",
     "NavigationIconsColor": "#fff",
-    "NavigationIconsActiveColor": "#ff6262",
-    "RadioPlayerControlsColor": "#ff6262",
-    "RadioPlayerBackgroundColor": "#ffa8f3"
+    "NavigationIconsActiveColor": "#9f1b21",
+    "RadioPlayerControlsColor": "#fff",
+    "RadioPlayerBackgroundColor": "#E30613",
+    "ButtonColor": "#FF00FF"
 }

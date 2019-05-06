@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button, Text, StatusBar, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, ScrollView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -8,6 +8,10 @@ import Video from 'react-native-video'
 import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer';
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
+
+import { getIcon } from 'src/utils/icons';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 
 interface Params {
     item: EpisodeType,
@@ -23,92 +27,106 @@ interface State {
     fullScreen: boolean
     height: number
 }
+export const OnDemandVideoScreen = withThemeContext(
+    class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps, State> {
+        public state: State = {
+            loading: true,
+            fullScreen: false,
+            height: Dimensions.get('window').height,
+        }
 
-export class OnDemandVideoScreen extends React.Component<Props, State> {
-    public state: State = {
-        loading: true,
-        fullScreen: false,
-        height: Dimensions.get('window').height,
-    }
+        public player: Video | null
 
-    public player: Video | null
+        public componentDidMount() {
+            Media.stopOtherMedia()
+            StatusBar.setHidden(true, 'fade')
+        }
 
-    public componentDidMount() {
-        Media.stopOtherMedia()
-        StatusBar.setHidden(true, 'fade')
-    }
+        public componentWillUnmount() {
+            StatusBar.setHidden(false, 'fade')
+        }
 
-    public componentWillUnmount() {
-        StatusBar.setHidden(false, 'fade')
-    }
-
-    public render() {
-        const { fullScreen, height } = this.state
-        const item = this.props.navigation.getParam('item')
-
-
-        return (
-            <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
-                <StatusBar hidden={true} animated={true} />
-                <ExpandableContainer
-                    expand={fullScreen}
-                    startHeight={300}
-                    maxHeight={height}
-                    style={styles.videoContainer}
-                >
-                    <VideoPlayer
-                        style={{ flex: 1 }}
-                        ref={(ref: Video) => this.player = ref}
-                        source={{ uri: item.streams.mp4 }}
-                        onBack={() => this.props.navigation.goBack()}
-                        onEnterFullscreen={this.handleFullScreenToggle}
-                        onExitFullscreen={this.handleFullScreenToggle}
-                    />
-                </ExpandableContainer>
+        public render() {
+            const { fullScreen, height } = this.state
+            const item = this.props.navigation.getParam('item')
 
 
+            return (
+                <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
+                    <StatusBar hidden={true} animated={true} />
+                    <ExpandableContainer
+                        expand={fullScreen}
+                        startHeight={300}
+                        maxHeight={height}
+                        style={styles.videoContainer}
+                    >
+                        <VideoPlayer
+                            style={{ flex: 1 }}
+                            ref={(ref: Video) => this.player = ref}
+                            source={{ uri: item.streams.mp4 }}
+                            onBack={() => this.props.navigation.goBack()}
+                            onEnterFullscreen={this.handleFullScreenToggle}
+                            onExitFullscreen={this.handleFullScreenToggle}
+                        />
+                    </ExpandableContainer>
 
-                <Title numberOfLines={2} >{item.title}</Title>
-                <View style={styles.actions}>
-                    <Button title="Share" onPress={this.handleShare} />
+
+                    <ScrollView>
+                        <View style={styles.meta}>
+                            <View style={{ flex: 1 }}>
+                                <Title numberOfLines={2} >{item.title}</Title>
+                            </View>
+                            <TouchableHighlight onPress={this.handleShare}>
+                                <View style={styles.shareButton}>
+                                    <Icon
+                                        name={getIcon('share-alt')}
+                                        color={this.props.themeContext.theme.ButtonColor}
+                                        size={25}
+                                    />
+                                </View>
+                            </TouchableHighlight>
+
+
+                        </View>
+                        <Text>{item.description}</Text>
+                    </ScrollView>
                 </View>
-                <Text>{item.description}</Text>
-            </View>
-        )
-    }
+            )
+        }
 
-    private handleLayoutChange = () => {
-        this.setState({ height: Dimensions.get('window').height })
-    }
+        private handleLayoutChange = () => {
+            this.setState({ height: Dimensions.get('window').height })
+        }
 
-    private handleShare = () => {
-        Share.open(this.getShareOptions())
-    }
+        private handleShare = () => {
+            Share.open(this.getShareOptions())
+        }
 
-    private handleFullScreenToggle = () => {
-        const { fullScreen } = this.state
-        this.setState({ fullScreen: !fullScreen })
-    }
+        private handleFullScreenToggle = () => {
+            const { fullScreen } = this.state
+            this.setState({ fullScreen: !fullScreen })
+        }
 
-    private getShareOptions = () => {
-        const item = this.props.navigation.getParam('item')
+        private getShareOptions = () => {
+            const item = this.props.navigation.getParam('item')
 
-        return {
-            title: item.title,
-            message: `Kijk naar deze video van ${item.programName}`,
-            url: item.streams.mp4,
-            subject: `Kijk naar deze video van ${item.programName}` //  for email
+            return {
+                title: item.title,
+                message: `Kijk naar deze video van ${item.programName}`,
+                url: item.streams.mp4,
+                subject: `Kijk naar deze video van ${item.programName}` //  for email
+            }
+        }
+
+        private getStyles() {
+            const { style } = this.props
+            return [
+                styles.container,
+                style,
+            ]
         }
     }
-
-    private getStyles() {
-        const { style } = this.props
-        return [
-            styles.container,
-            style,
-        ]
-    }
-}
+)
 
 const styles = StyleSheet.create({
     container: {
@@ -125,9 +143,19 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    actions: {
+    meta: {
+        width: '100%',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+    },
+    shareButton: {
+        marginLeft: 12,
+        width: 44,
+        height: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 })

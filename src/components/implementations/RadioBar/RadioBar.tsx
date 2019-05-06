@@ -3,6 +3,7 @@ import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Platform } from '
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider';
+import { getIcon } from 'src/utils/icons';
 
 interface Props {
     style?: StyleProp<{}>
@@ -50,7 +51,6 @@ export class RadioBar extends React.Component<Props, State> {
 
     private renderControls() {
         const { loading, active } = this.state
-        const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
 
         if (loading) {
             return <ActivityIndicator />
@@ -58,11 +58,8 @@ export class RadioBar extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
-
-                {/* <Button title="Play" onPress={this.playRadio} />
-                <Button title="Pause" onPress={() => SoundPlayer.pause()} /> */}
                 <Icon
-                    name={!active ? `${prefix}-play` : `${prefix}-pause`}
+                    name={!active ? getIcon('play') : getIcon('square')}
                     color={this.props.theme.RadioPlayerControlsColor}
                     size={25}
                     onPress={this.toggleRadioRadio}
@@ -105,10 +102,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         height: 44,
         paddingHorizontal: 16,
+        borderBottomWidth: StyleSheet.hairlineWidth,
+        borderColor: '#ccc',
     },
     controls: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-    }
+    },
 })
