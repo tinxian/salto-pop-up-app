@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleProp, Text, StyleSheet, TextProps } from 'react-native';
 
 interface Props extends TextProps {
-    style?: StyleProp<{}>
+    textStyle?: StyleProp<{}>
 }
 
 export class Title extends React.Component<Props, {}> {
@@ -15,10 +15,10 @@ export class Title extends React.Component<Props, {}> {
     }
 
     private getStyles() {
-        const { style } = this.props
+        const { textStyle } = this.props
         return [
             styles.container,
-            style,
+            textStyle,
         ]
     }
 }

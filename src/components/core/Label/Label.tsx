@@ -13,7 +13,7 @@ export class Label extends React.Component<Props, {}> {
         const { text } = this.props
         return (
             <View style={this.getStyles()}>
-                <Text style={this.getTextStyles()} >{text}</Text>
+                <Text numberOfLines={1} style={this.getTextStyles()} >{text}</Text>
             </View>
         )
     }
@@ -40,13 +40,13 @@ export class Label extends React.Component<Props, {}> {
 const styles = StyleSheet.create({
     container: {
         position: 'relative',
-        paddingHorizontal: 31,
-        paddingVertical: 5,
-        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 6,
+        borderRadius: 12,
     },
     text: {
-        lineHeight: 23,
-        fontSize: 18,
+        lineHeight: 14,
+        fontSize: 14,
         fontWeight: '600',
     },
 })

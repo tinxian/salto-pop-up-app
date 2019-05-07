@@ -21,6 +21,12 @@ export function getEventMessage(startDate: Date, endDate: Date) {
     }
 
     return `No data about this event`
+}
 
+export function getMillisecondsInMinutes(milliseconds: number) {
 
+    const min = Math.floor((milliseconds / 1000 / 60) << 0)
+    const sec = Math.floor((milliseconds / 1000) % 60)
+
+    return `${min}:${sec}`
 }

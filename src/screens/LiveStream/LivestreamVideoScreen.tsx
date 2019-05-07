@@ -7,6 +7,7 @@ import { ExpandableContainer } from 'src/components/core/Animation/ExpandableCon
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
+import SocketIOClient from 'socket.io-client'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -26,11 +27,20 @@ export class LivestreamVideoScreen extends React.Component<Props, State> {
         height: Dimensions.get('window').height,
     }
 
+
     public player: Video | null
+    private socket: any
 
     public componentDidMount() {
         Media.stopOtherMedia()
         StatusBar.setHidden(true, 'fade')
+        this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
+        this.socket.emit('join', 'stadsfm') // emits 'hi server' to your server
+
+        // Listens to channel2 and display the data recieved
+        this.socket.on('update', (data: any) => {
+            console.log('Nu op salto ...', data)
+        });
     }
 
     public componentWillUnmount() {
@@ -70,6 +80,7 @@ export class LivestreamVideoScreen extends React.Component<Props, State> {
                 <View style={styles.actions}>
                     <Button title="Share" onPress={this.handleShare} />
                 </View>
+
                 {/* <Text>{item.description}</Text> */}
             </View>
         )

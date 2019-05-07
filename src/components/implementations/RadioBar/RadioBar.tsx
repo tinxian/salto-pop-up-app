@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Platform } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, ActivityIndicator } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider';
@@ -41,7 +41,7 @@ export class RadioBar extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
-                <Text style={{ color: this.props.theme.RadioPlayerControlsColor }}>Radfio title</Text>
+                <Text style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  </Text>
                 <View style={styles.controls}>
                     {this.renderControls()}
                 </View>
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 44,
-        paddingHorizontal: 16,
+        paddingHorizontal: 22,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: '#ccc',
     },

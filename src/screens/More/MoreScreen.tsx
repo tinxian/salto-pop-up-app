@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     itemContainer: {
         height: 44,
         flex: 1,
-        marginLeft: 16,
         flexDirection: 'row',
         alignItems: 'center',
 

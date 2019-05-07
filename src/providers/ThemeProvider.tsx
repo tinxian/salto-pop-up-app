@@ -14,6 +14,7 @@ export interface ThemeType {
     LabelTextColor: string
     PageBackgroundColor: string
     SaltoColor: string
+    TextColor: string
 
 }
 

@@ -50,15 +50,15 @@ export const HomeScreen = withThemeContext(
         }
 
         private getMedia() {
+            const { TextColor } = this.props.themeContext.theme
             const currentDate = new Date()
 
             if (isWithinRange(currentDate, new Date(), new Date())) {
                 return (
                     <View>
-                        <View style={styles.titleContainer}>
-                            <Title>Pride door salto live</Title>
-                        </View>
                         <LivestreamItem
+                            textColor={TextColor}
+                            title={'Pride door salto live'}
                             onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
                         // thumbnail={require("../../../../src/assets/images/logos/salto.png")}
                         />

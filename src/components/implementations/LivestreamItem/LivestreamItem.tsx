@@ -1,7 +1,6 @@
 import * as React from 'react'
 import {
     View,
-    Text,
     Image,
     StyleSheet,
     StyleProp,
@@ -11,10 +10,14 @@ import {
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { Title } from 'src/components/core/Typography/Title';
+
 export interface Props {
     style?: StyleProp<{}>,
+    title?: string
     thumbnail?: ImageSourcePropType
     onPress?: () => void
+    textColor?: string
 }
 
 export interface State {
@@ -28,27 +31,32 @@ export class LivestreamItem extends React.Component<Props, State> {
     }
 
     public render() {
-        const { thumbnail } = this.props
+        const { thumbnail, title } = this.props
 
         return (
-            <TouchableHighlight onPress={this.handleOnPress}>
-                <View style={this.getStyles()}>
-                    {thumbnail && (
-                        <Image
-                            style={styles.item}
-                            source={thumbnail}
-                            onLoadEnd={() => this.setState({ loading: false })}
+            <View style={this.getStyles()}>
+
+                <TouchableHighlight onPress={this.handleOnPress}>
+
+                    <View style={styles.thumbnail}>
+                        {thumbnail && (
+                            <Image
+                                style={styles.item}
+                                source={thumbnail}
+                                onLoadEnd={() => this.setState({ loading: false })}
+                            />
+                        )}
+                        <Icon
+                            name={getIcon('play-circle')}
+                            color={'#ffffff'}
+                            size={60}
+                            style={styles.playButton}
                         />
-                    )}
-                    <Icon
-                        name={getIcon('play-circle')}
-                        color={'#ffffff'}
-                        size={60}
-                        style={styles.playButton}
-                    />
-                    <LiveIndicator style={styles.liveIndicator} />
-                </View>
-            </TouchableHighlight >
+                        <LiveIndicator style={styles.liveIndicator} />
+                    </View>
+                </TouchableHighlight >
+                <Title textStyle={this.getTitleStyles()}>{title}</Title>
+            </View>
         )
     }
 
@@ -58,6 +66,15 @@ export class LivestreamItem extends React.Component<Props, State> {
         if (onPress) {
             onPress()
         }
+    }
+
+    private getTitleStyles() {
+        const { textColor } = this.props
+
+        return [
+            styles.title,
+            { color: textColor },
+        ]
     }
 
     private getStyles() {
@@ -72,6 +89,9 @@ export class LivestreamItem extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
+
+    },
+    thumbnail: {
         backgroundColor: '#000',
         width: '100%',
         height: 186,
@@ -91,5 +111,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: '100%',
         height: 220,
+    },
+    title: {
+        marginVertical: 12,
     }
 })
