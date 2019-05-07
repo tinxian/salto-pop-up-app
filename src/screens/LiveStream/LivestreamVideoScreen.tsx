@@ -6,6 +6,7 @@ import Video from 'react-native-video'
 import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer'
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -60,12 +61,10 @@ export class LivestreamVideoScreen extends React.Component<Props, State> {
                         disableTimer={true}
                         disablePlayPause={true}
                     />
-                    <View style={styles.liveIndicator} >
-                        <Text style={styles.LiveIndicatorText}>live</Text>
-                    </View>
+
                 </ExpandableContainer>
 
-
+                <LiveIndicator style={styles.liveIndicator} />
 
                 {/* <Title numberOfLines={2} >{item.title}</Title> */}
                 <View style={styles.actions}>
@@ -114,15 +113,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     liveIndicator: {
-        borderRadius: 4,
         position: 'absolute',
-        padding: 4,
-        backgroundColor: 'red',
         bottom: 10,
         right: 10,
-    },
-    LiveIndicatorText: {
-        color: '#ffffff',
     },
     videoContainer: {
         backgroundColor: '#000',

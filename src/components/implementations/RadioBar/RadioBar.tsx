@@ -61,7 +61,7 @@ export class RadioBar extends React.Component<Props, State> {
                 <Icon
                     name={!active ? getIcon('play') : getIcon('square')}
                     color={this.props.theme.RadioPlayerControlsColor}
-                    size={25}
+                    size={33}
                     onPress={this.toggleRadioRadio}
                 />
             </React.Fragment>

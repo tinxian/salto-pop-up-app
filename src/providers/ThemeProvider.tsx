@@ -10,6 +10,15 @@ export interface ThemeType {
     RadioPlayerControlsColor: string,
     RadioPlayerBackgroundColor: string
     ButtonColor: string
+    LabelColor: string
+    LabelTextColor: string
+    PageBackgroundColor: string
+    SaltoColor: string
+
+}
+
+export interface ConfigType {
+
 }
 
 interface ContextType {

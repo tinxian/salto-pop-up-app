@@ -6,13 +6,17 @@ import {
     StyleSheet,
     StyleProp,
     TouchableHighlight,
+    ImageSourcePropType,
 } from 'react-native'
 import { EpisodeType } from 'src/services/videos'
 
 export interface Props {
     style?: StyleProp<{}>,
-    item: EpisodeType
-    onPress?: (item: EpisodeType) => void
+    item?: EpisodeType
+    poster: ImageSourcePropType
+    title: string
+    programName?: string
+    onPress?: (item?: EpisodeType) => void
 }
 
 export interface State {
@@ -26,18 +30,18 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     public render() {
-        const { item } = this.props
+        const { poster, title, programName } = this.props
 
         return (
             <TouchableHighlight onPress={this.handleOnPress}>
                 <View style={this.getStyles()}>
                     <Image
                         style={styles.item}
-                        source={{ uri: this.props.item.poster }}
+                        source={poster}
                         onLoadEnd={() => this.setState({ loading: false })}
                     />
-                    <Text>{item.programName}</Text>
-                    <Text>{item.title}</Text>
+                    {programName && <Text>{programName}</Text>}
+                    <Text>{title}</Text>
                 </View>
             </TouchableHighlight >
         )

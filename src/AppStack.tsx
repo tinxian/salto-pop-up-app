@@ -1,6 +1,6 @@
 import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
-import { HomeScreen } from './screens/LiveStream/LiveStreamScreen'
+import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
 import { MoreScreen } from './screens/More/MoreScreen';

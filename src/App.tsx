@@ -11,6 +11,7 @@ import {
 import { ThemeInjectedProps } from './providers/ThemeProvider';
 import { RootNavigator } from './AppStack'
 import SplashScreen from 'react-native-splash-screen';
+import { Label } from './components/core/Label/Label';
 
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
     public static router: NavigationRouter<{}, {}> = RootNavigator.router
