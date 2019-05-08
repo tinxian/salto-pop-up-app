@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Image } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider'
@@ -30,26 +30,13 @@ export class RadioBar extends React.Component<Props, State> {
     private socket: any
 
     public componentDidMount() {
-
         SoundPlayer.onFinishedLoading(() => {
             this.setState({
                 loading: false,
             })
         })
 
-        SoundPlayer.onFinishedPlaying((success: boolean) => { // success is true when the sound is played
-            this.setState({
-                active: false,
-            })
-        })
-
-        this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
-        this.socket.emit('join', { channel: 'stadsfm' });// emits 'hi server' to your server
-
-        // Listens to channel2 and display the data recieved
-        this.socket.on('update', (data: LiveStreamDataType) => {
-            this.setState({ programData: data })
-        })
+        this.initLiveData()
     }
 
     public render() {
@@ -65,17 +52,29 @@ export class RadioBar extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
+                <TouchableOpacity onPress={this.toggleRadio}>
+                    <View style={styles.controls}>
+                        <React.Fragment>
+                            <Image style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
+                            <View style={styles.cover} />
+                            {this.renderControls()}
+                        </React.Fragment>
+                    </View>
+                </TouchableOpacity>
                 <View style={{ flex: 1 }}>
                     <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
-
-                </View>
-                <View style={styles.controls}>
-                    <Image style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
-                    <View style={styles.cover} />
-                    {this.renderControls()}
                 </View>
             </View>
         )
+    }
+
+    private initLiveData() {
+        this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
+        this.socket.emit('join', { channel: 'stadsfm' });// emits 'hi server' to your server
+
+        this.socket.on('update', (data: LiveStreamDataType) => {
+            this.setState({ programData: data })
+        })
     }
 
     private renderControls() {
@@ -86,18 +85,15 @@ export class RadioBar extends React.Component<Props, State> {
         }
 
         return (
-            <React.Fragment>
-                <Icon
-                    name={!active ? getIcon('play') : getIcon('square')}
-                    color={this.props.theme.RadioPlayerControlsColor}
-                    size={33}
-                    onPress={this.toggleRadioRadio}
-                />
-            </React.Fragment>
+            <Icon
+                name={!active ? getIcon('play') : getIcon('square')}
+                color={this.props.theme.RadioPlayerControlsColor}
+                size={33}
+            />
         )
     }
 
-    private toggleRadioRadio = () => {
+    private toggleRadio = () => {
         const { active } = this.state
         try {
             this.setState({ loading: false, active: !active })
@@ -130,15 +126,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 44,
-        paddingLeft: 22,
+        paddingRight: 22,
         borderBottomWidth: StyleSheet.hairlineWidth,
+        borderTopWidth: StyleSheet.hairlineWidth,
         borderColor: '#ccc',
     },
     controls: {
+        backgroundColor: '#000000',
+        marginRight: 12,
         width: 50,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
     },
     cover: {
         position: 'absolute',
