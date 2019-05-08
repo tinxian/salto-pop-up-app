@@ -12,6 +12,8 @@ import { Media } from 'src/services/media';
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
+import { Label } from 'src/components/core/Label/Label';
+import { format } from 'date-fns';
 
 interface Params {
     item: EpisodeType,
@@ -48,8 +50,8 @@ export const OnDemandVideoScreen = withThemeContext(
 
         public render() {
             const { fullScreen, height } = this.state
+            const { themeContext } = this.props
             const item = this.props.navigation.getParam('item')
-
 
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
@@ -79,16 +81,24 @@ export const OnDemandVideoScreen = withThemeContext(
                             <TouchableHighlight onPress={this.handleShare}>
                                 <View style={styles.shareButton}>
                                     <Icon
-                                        name={getIcon('share-alt')}
+                                        name={getIcon('share')}
                                         color={this.props.themeContext.theme.ButtonColor}
                                         size={25}
                                     />
                                 </View>
                             </TouchableHighlight>
-
-
                         </View>
-                        <Text>{item.description}</Text>
+                        <View style={styles.content}>
+                            <View style={styles.labelWrapper}>
+                                <Label
+                                    color={themeContext.theme.LabelColor}
+                                    textColor={themeContext.theme.LabelTextColor}
+                                    text={item.programName}
+                                />
+                                <Text>{format(item.date, 'DD-MM-YYYY')}</Text>
+                            </View>
+                            <Text>{item.description}</Text>
+                        </View>
                     </ScrollView>
                 </View>
             )
@@ -119,9 +129,10 @@ export const OnDemandVideoScreen = withThemeContext(
         }
 
         private getStyles() {
-            const { style } = this.props
+            const { style, themeContext } = this.props
             return [
                 styles.container,
+                { backgroundColor: themeContext.theme.PageBackgroundColor },
                 style,
             ]
         }
@@ -132,6 +143,14 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: 'transparent',
+    },
+    content: {
+        paddingHorizontal: 12,
+    },
+    labelWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 12,
     },
     videoContainer: {
         backgroundColor: '#000',
@@ -148,7 +167,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        paddingHorizontal: 16,
+        paddingHorizontal: 12,
         paddingVertical: 12,
     },
     shareButton: {

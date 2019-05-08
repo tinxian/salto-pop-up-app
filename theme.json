@@ -1,8 +1,13 @@
 {
-    "NavigationBackgroundColor": "#cc0511",
-    "NavigationIconsColor": "#fff",
-    "NavigationIconsActiveColor": "#9f1b21",
-    "RadioPlayerControlsColor": "#fff",
-    "RadioPlayerBackgroundColor": "#E30613",
-    "ButtonColor": "#FF00FF"
+    "NavigationBackgroundColor": "#F2F4F8",
+    "NavigationIconsColor": "#303030",
+    "NavigationIconsActiveColor": "#F06159",
+    "RadioPlayerControlsColor": "#F06159",
+    "RadioPlayerBackgroundColor": "#F2F4F8",
+    "ButtonColor": "#F06159",
+    "LabelColor": "#F06159",
+    "LabelTextColor": "#ffffff",
+    "PageBackgroundColor": "#ffffff",
+    "SaltoColor": "#E30613",
+    "TextColor": "#000000"
 }

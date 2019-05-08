@@ -6,7 +6,6 @@ import {
     createAppContainer,
     NavigationScreenProp,
     NavigationRouter,
-    SafeAreaView,
 } from 'react-navigation'
 import { ThemeInjectedProps } from './providers/ThemeProvider';
 import { RootNavigator } from './AppStack'

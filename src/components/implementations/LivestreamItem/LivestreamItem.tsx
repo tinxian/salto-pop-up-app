@@ -6,39 +6,32 @@ import {
     StyleProp,
     TouchableHighlight,
     ImageSourcePropType,
-    Text,
 } from 'react-native'
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Title } from 'src/components/core/Typography/Title';
-import { EpisodeType } from 'src/services/videos';
-import { Label } from 'src/components/core/Label/Label';
-import { ThemeType } from 'src/providers/ThemeProvider';
-import { getMillisecondsInMinutes } from 'src/utils/date';
 
 export interface Props {
     style?: StyleProp<{}>,
-    item?: EpisodeType
-    theme: ThemeType
-    poster: ImageSourcePropType
     title?: string
-    programName?: string
-    onPress?: (item?: EpisodeType) => void
+    thumbnail?: ImageSourcePropType
+    onPress?: () => void
+    textColor?: string
 }
 
 export interface State {
     loading: boolean
 }
 
-export class OnDemandVideoItem extends React.Component<Props, State> {
+export class LivestreamItem extends React.Component<Props, State> {
 
     public state: State = {
         loading: true,
     }
 
     public render() {
-        const { poster, title, item } = this.props
-        const { LabelColor } = this.props.theme
+        const { thumbnail, title } = this.props
 
         return (
             <View style={this.getStyles()}>
@@ -46,31 +39,23 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                 <TouchableHighlight onPress={this.handleOnPress}>
 
                     <View style={styles.thumbnail}>
-                        {poster && (
+                        {thumbnail && (
                             <Image
                                 style={styles.item}
-                                source={poster}
+                                source={thumbnail}
                                 onLoadEnd={() => this.setState({ loading: false })}
                             />
                         )}
-                        <View style={styles.cover} />
                         <Icon
                             name={getIcon('play-circle')}
                             color={'#ffffff'}
                             size={60}
                             style={styles.playButton}
                         />
-                        {item && (
-                            <View style={styles.durationContainer}>
-                                <Text style={styles.durationText}>{getMillisecondsInMinutes(item.duration)}</Text>
-                            </View>
-                        )}
+                        <LiveIndicator style={styles.liveIndicator} />
                     </View>
                 </TouchableHighlight >
-                <View style={styles.metaContainer}>
-                    <Title numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
-                    {item && <Label style={styles.label} color={LabelColor} text={item.programName} />}
-                </View>
+                <Title textStyle={this.getTitleStyles()}>{title}</Title>
             </View>
         )
     }
@@ -84,11 +69,11 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     private getTitleStyles() {
-        const { TextColor } = this.props.theme
+        const { textColor } = this.props
 
         return [
             styles.title,
-            { color: TextColor },
+            { color: textColor },
         ]
     }
 
@@ -128,40 +113,6 @@ const styles = StyleSheet.create({
         height: 220,
     },
     title: {
-        flexWrap: 'wrap',
-        flex: 1,
         marginVertical: 12,
-    },
-    metaContainer: {
-        height: 50,
-        marginBottom: 12,
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    label: {
-        marginLeft: 12,
-        maxWidth: 120,
-    },
-    durationContainer: {
-        paddingHorizontal: 8,
-        paddingVertical: 6,
-        backgroundColor: '#000000',
-        borderRadius: 3,
-        position: 'absolute',
-        right: 10,
-        bottom: 10,
-    },
-    durationText: {
-        color: '#ffffff'
-    },
-    cover: {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#000',
-        opacity: 0.4,
     }
 })
-

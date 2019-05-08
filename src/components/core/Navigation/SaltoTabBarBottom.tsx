@@ -40,7 +40,7 @@ export const SaltoTabBarBottom = withThemeContext(
                     <Icon
                         name={this.getIcon(route)}
                         color={this.getIconColor(index)}
-                        size={25}
+                        size={32}
                     />
                 </TouchableOpacity>
             ))
@@ -55,7 +55,7 @@ export const SaltoTabBarBottom = withThemeContext(
             const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
             const navIcons = {
                 HomeScreen: `${prefix}-home`,
-                OnDemandVideo: `${prefix}-videocam`,
+                OnDemandVideo: `${prefix}-tv`,
                 MoreScreen: `${prefix}-more`,
 
             }
