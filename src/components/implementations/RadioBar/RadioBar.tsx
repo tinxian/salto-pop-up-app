@@ -55,15 +55,21 @@ export class RadioBar extends React.Component<Props, State> {
                 <TouchableOpacity onPress={this.toggleRadio}>
                     <View style={styles.controls}>
                         <React.Fragment>
-                            <Image style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
+                            <Image resizeMethod={'resize'} style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
                             <View style={styles.cover} />
                             {this.renderControls()}
                         </React.Fragment>
                     </View>
                 </TouchableOpacity>
-                <View style={{ flex: 1 }}>
+                <View style={{ flex: 1, paddingRight: 12 }}>
                     <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
                 </View>
+                <Icon
+                    name={getIcon('arrow-up')}
+                    color={this.props.theme.RadioPlayerControlsColor}
+                    size={22}
+                />
+
             </View>
         )
     }
@@ -125,7 +131,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        height: 44,
         paddingRight: 22,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderTopWidth: StyleSheet.hairlineWidth,
