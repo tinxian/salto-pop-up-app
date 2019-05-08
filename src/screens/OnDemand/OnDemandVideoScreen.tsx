@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, ScrollView } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, ScrollView, FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -14,9 +14,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 
 interface Params {
     item: EpisodeType,
+    data: EpisodeType[],
 }
 
 interface Props extends NavigationScreenProps<Params> {
@@ -52,6 +54,7 @@ export const OnDemandVideoScreen = withThemeContext(
             const { fullScreen, height } = this.state
             const { themeContext } = this.props
             const item = this.props.navigation.getParam('item')
+            const data = this.getRelevantVideosFromEpisode()
 
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
@@ -72,34 +75,58 @@ export const OnDemandVideoScreen = withThemeContext(
                         />
                     </ExpandableContainer>
 
+                    <FlatList
+                        ListHeaderComponent={() => this.renderMetaHeader(item)}
+                        data={data}
+                        contentContainerStyle={this.getWrapperStyles()}
+                        keyExtractor={item => {
+                            return item.id
+                        }}
+                        renderItem={({ item }) => (
+                            <OnDemandVideoItem
+                                onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data })}
+                                poster={{ uri: item.poster }}
+                                theme={themeContext.theme}
+                                title={item.title}
+                                programName={item.programName}
+                                item={item}
+                            />
+                        )}
+                    />
+                </View>
+            )
+        }
 
-                    <ScrollView>
-                        <View style={styles.meta}>
-                            <View style={{ flex: 1 }}>
-                                <Title numberOfLines={2} >{item.title}</Title>
-                            </View>
-                            <TouchableHighlight onPress={this.handleShare}>
-                                <View style={styles.shareButton}>
-                                    <Icon
-                                        name={getIcon('share')}
-                                        color={this.props.themeContext.theme.ButtonColor}
-                                        size={25}
-                                    />
-                                </View>
-                            </TouchableHighlight>
+        private renderMetaHeader(item: EpisodeType) {
+            const { themeContext } = this.props
+
+            return (
+                <View>
+                    <View style={styles.meta}>
+                        <View style={{ flex: 1 }}>
+                            <Title numberOfLines={2} >{item.title}</Title>
                         </View>
-                        <View style={styles.content}>
-                            <View style={styles.labelWrapper}>
-                                <Label
-                                    color={themeContext.theme.LabelColor}
-                                    textColor={themeContext.theme.LabelTextColor}
-                                    text={item.programName}
+                        <TouchableHighlight onPress={this.handleShare}>
+                            <View style={styles.shareButton}>
+                                <Icon
+                                    name={getIcon('share')}
+                                    color={this.props.themeContext.theme.ButtonColor}
+                                    size={25}
                                 />
-                                <Text>{format(item.date, 'DD-MM-YYYY')}</Text>
                             </View>
-                            <Text>{item.description}</Text>
+                        </TouchableHighlight>
+                    </View>
+                    <View style={styles.content}>
+                        <View style={styles.labelWrapper}>
+                            <Label
+                                color={themeContext.theme.LabelColor}
+                                textColor={themeContext.theme.LabelTextColor}
+                                text={item.programName}
+                            />
+                            <Text>{format(item.date, 'DD-MM-YYYY')}</Text>
                         </View>
-                    </ScrollView>
+                        <Text>{item.description}</Text>
+                    </View>
                 </View>
             )
         }
@@ -126,6 +153,26 @@ export const OnDemandVideoScreen = withThemeContext(
                 url: item.streams.mp4,
                 subject: `Kijk naar deze video van ${item.programName}` //  for email
             }
+        }
+
+        private getRelevantVideosFromEpisode() {
+            const data = this.props.navigation.getParam('data')
+            const item = this.props.navigation.getParam('item')
+
+            return data.filter(i => {
+
+                return i.programName === item.programName && i.id !== item.id
+
+            })
+
+        }
+
+        private getWrapperStyles() {
+            const { PageBackgroundColor } = this.props.themeContext.theme
+            return [
+                { backgroundColor: PageBackgroundColor },
+                styles.content,
+            ]
         }
 
         private getStyles() {

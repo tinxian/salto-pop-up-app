@@ -82,7 +82,7 @@ export const OnDemandListScreen = withThemeContext(
                     }}
                     renderItem={({ item }) => (
                         <OnDemandVideoItem
-                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item })}
+                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data })}
                             poster={{ uri: item.poster }}
                             theme={theme}
                             title={item.title}
