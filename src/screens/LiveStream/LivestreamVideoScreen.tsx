@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button, StatusBar, Dimensions, Text, ScrollView, TouchableHighlight, Image } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, Text, ScrollView, TouchableHighlight, Image } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'

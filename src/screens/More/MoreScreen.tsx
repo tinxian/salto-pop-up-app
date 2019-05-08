@@ -6,7 +6,6 @@ import { Title } from 'src/components/core/Navigation/NavigationIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StatusBar } from 'react-native';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { withThemeContext } from 'src/providers/ThemeProvider';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>

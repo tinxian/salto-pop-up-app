@@ -4,7 +4,7 @@ import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
 import { Videos, EpisodeType } from 'src/services/videos';
-import { withThemeContext, ThemeInjectedProps, ThemeContext } from 'src/providers/ThemeProvider';
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Title } from 'src/components/core/Typography/Title';
 
 interface Props extends NavigationScreenProps<{}> {

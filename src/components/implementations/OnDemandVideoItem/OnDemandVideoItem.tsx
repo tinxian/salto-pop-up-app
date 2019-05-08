@@ -21,7 +21,7 @@ export interface Props {
     item?: EpisodeType
     theme: ThemeType
     poster: ImageSourcePropType
-    title: string
+    title?: string
     programName?: string
     onPress?: (item?: EpisodeType) => void
 }

@@ -11,7 +11,7 @@ import { Media } from 'src/services/media';
 
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { withThemeContext, ThemeInjectedProps, ThemeContext } from 'src/providers/ThemeProvider';
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
 
@@ -52,8 +52,6 @@ export const OnDemandVideoScreen = withThemeContext(
             const { fullScreen, height } = this.state
             const { themeContext } = this.props
             const item = this.props.navigation.getParam('item')
-            console.log(item.lastBroadcast)
-
 
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>

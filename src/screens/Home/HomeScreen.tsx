@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Button, Image, ScrollView, Dimensions, Text } from 'react-native'
+import { View, StyleSheet, StyleProp, Image, ScrollView, Dimensions } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation';
 import { Label } from 'src/components/core/Label/Label';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
@@ -50,14 +50,14 @@ export const HomeScreen = withThemeContext(
         }
 
         private getMedia() {
-            const { TextColor } = this.props.themeContext.theme
+            const { themeContext } = this.props
             const currentDate = new Date()
 
             if (isWithinRange(currentDate, new Date(), new Date())) {
                 return (
                     <View>
                         <LivestreamItem
-                            textColor={TextColor}
+                            textColor={themeContext.theme.TextColor}
                             title={'Pride door salto live'}
                             onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
                         // thumbnail={require("../../../../src/assets/images/logos/salto.png")}
@@ -68,6 +68,7 @@ export const HomeScreen = withThemeContext(
 
             return (
                 <OnDemandVideoItem
+                    theme={themeContext.theme}
                     title={'Aftermovie pride 2018'}
                     poster={{
                         uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e'

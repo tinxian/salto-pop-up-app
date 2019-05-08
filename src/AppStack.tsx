@@ -1,4 +1,4 @@
-import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView, StackRouter } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
@@ -6,6 +6,7 @@ import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScree
 import { MoreScreen } from './screens/More/MoreScreen';
 import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom';
 import React from 'react';
+/* tslint:disable:no-unused-variable */
 
 const OnDemandVideo = createStackNavigator({
     OnDemandVideoListScreen: {
@@ -55,7 +56,14 @@ const TabNavigator = createBottomTabNavigator({
 )
 
 export class TabNavigatorComponent extends React.Component<NavigationScreenProps, {}> {
-    private static router = TabNavigator.router
+    private router: any
+
+    public componentDidMount() {
+        this.router = TabNavigator.router
+
+
+    }
+
     public render() {
         const { navigation } = this.props
         return (
