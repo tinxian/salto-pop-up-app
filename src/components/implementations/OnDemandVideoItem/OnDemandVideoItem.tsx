@@ -53,6 +53,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                                 onLoadEnd={() => this.setState({ loading: false })}
                             />
                         )}
+                        <View style={styles.cover} />
                         <Icon
                             name={getIcon('play-circle')}
                             color={'#ffffff'}
@@ -154,6 +155,13 @@ const styles = StyleSheet.create({
     },
     durationText: {
         color: '#ffffff'
+    },
+    cover: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#000',
+        opacity: 0.4,
     }
 })
 

@@ -1,9 +1,12 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Image } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { ThemeType } from 'src/providers/ThemeProvider';
-import { getIcon } from 'src/utils/icons';
+import { ThemeType } from 'src/providers/ThemeProvider'
+import { getIcon } from 'src/utils/icons'
+import SocketIOClient from 'socket.io-client'
+import { LiveStreamDataType } from 'src/services/media';
+
 
 interface Props {
     style?: StyleProp<{}>
@@ -13,6 +16,7 @@ interface Props {
 interface State {
     loading: boolean
     active: boolean
+    programData?: LiveStreamDataType
 }
 
 export class RadioBar extends React.Component<Props, State> {
@@ -20,7 +24,10 @@ export class RadioBar extends React.Component<Props, State> {
     public state: State = {
         loading: false,
         active: false,
+        programData: undefined,
     }
+
+    private socket: any
 
     public componentDidMount() {
 
@@ -35,14 +42,36 @@ export class RadioBar extends React.Component<Props, State> {
                 active: false,
             })
         })
+
+        this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
+        this.socket.emit('join', { channel: 'stadsfm' });// emits 'hi server' to your server
+
+        // Listens to channel2 and display the data recieved
+        this.socket.on('update', (data: LiveStreamDataType) => {
+            this.setState({ programData: data })
+        })
     }
 
     public render() {
+        const { programData } = this.state
+
+        if (!programData) {
+            return (
+                <View style={this.getStyles()}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
 
         return (
             <View style={this.getStyles()}>
-                <Text style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  </Text>
+                <View style={{ flex: 1 }}>
+                    <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
+
+                </View>
                 <View style={styles.controls}>
+                    <Image style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
+                    <View style={styles.cover} />
                     {this.renderControls()}
                 </View>
             </View>
@@ -101,13 +130,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 44,
-        paddingHorizontal: 22,
+        paddingLeft: 22,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderColor: '#ccc',
     },
     controls: {
+        width: 50,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
     },
+    cover: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#000',
+        opacity: 0.4,
+    }
 })
