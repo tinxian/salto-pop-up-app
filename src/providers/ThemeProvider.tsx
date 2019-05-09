@@ -19,6 +19,7 @@ export interface ColorsType {
     TextColor: string
     SubTitleColor: string
     TitleColor: string
+    VideoBackgroundColor: string
 }
 
 export interface ImagesType {
