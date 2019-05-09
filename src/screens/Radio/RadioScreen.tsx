@@ -1,10 +1,7 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, Text, ScrollView, TouchableHighlight, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
-import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer'
-import Share from 'react-native-share';
 import { Media, LiveStreamDataType } from 'src/services/media';
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
 import SocketIOClient from 'socket.io-client'
@@ -93,7 +90,7 @@ export const RadioScreen = withThemeContext(
             return (
                 <Icon
                     name={!active ? getIcon('play') : getIcon('square')}
-                    color={themeContext.theme.RadioPlayerControlsColor}
+                    color={themeContext.theme.colors.RadioPlayerControlsColor}
                     size={33}
                 />
             )
@@ -107,7 +104,7 @@ export const RadioScreen = withThemeContext(
             const { style, themeContext } = this.props
             return [
                 styles.container,
-                { color: themeContext.theme.PageBackgroundColor },
+                { color: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }

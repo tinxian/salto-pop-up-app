@@ -1,14 +1,26 @@
 {
-    "NavigationBackgroundColor": "#F2F4F8",
-    "NavigationIconsColor": "#303030",
-    "NavigationIconsActiveColor": "#F06159",
-    "RadioPlayerControlsColor": "#F06159",
-    "RadioPlayerBackgroundColor": "#F2F4F8",
-    "ButtonColor": "#F06159",
-    "LabelColor": "#F06159",
-    "LabelTextColor": "#ffffff",
-    "PageBackgroundColor": "#ffffff",
-    "SaltoColor": "#E30613",
-    "TextColor": "#000000",
-    "SubTitleColor": "#868686"
+    "colors": {
+        "NavigationBackgroundColor": "#000",
+        "NavigationIconsColor": "purple",
+        "NavigationIconsActiveColor": "yellow",
+        "RadioPlayerControlsColor": "yellow",
+        "RadioPlayerBackgroundColor": "#000",
+        "ButtonColor": "yellow",
+        "LabelColor": "yellow",
+        "LabelTextColor": "#000",
+        "PageBackgroundColor": "#000",
+        "SaltoColor": "#E30613",
+        "TextColor": "#ffffff",
+        "TitleColor": "#ffffff",
+        "VideoBackgroundColor": "#ffffff",
+        "SubTitleColor": "#868686"
+    },
+    "images": {
+        "HeaderBackgroundUrl": {
+            "uri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvvUAdV98QrvtXELWkdutsmIgp6JFxD5CNnu2fvzuzm_r0rKtDDw"
+        },
+        "saltoLogo": {
+            "uri": ""
+        }
+    }
 }

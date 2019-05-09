@@ -48,7 +48,6 @@ export const LivestreamVideoScreen = withThemeContext(
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
-                console.log(data)
                 this.setState({ programData: data })
             });
         }
@@ -100,15 +99,15 @@ export const LivestreamVideoScreen = withThemeContext(
                             <View style={styles.content}>
                                 <View style={styles.labelWrapper}>
                                     <Label
-                                        color={themeContext.theme.LabelColor}
-                                        textColor={themeContext.theme.LabelTextColor}
+                                        color={themeContext.theme.colors.LabelColor}
+                                        textColor={themeContext.theme.colors.LabelTextColor}
                                         text={programData.channel}
                                     />
                                     <TouchableHighlight onPress={this.handleShare}>
                                         <View style={styles.shareButton}>
                                             <Icon
                                                 name={getIcon('share')}
-                                                color={this.props.themeContext.theme.ButtonColor}
+                                                color={this.props.themeContext.theme.colors.ButtonColor}
                                                 size={25}
                                             />
                                         </View>

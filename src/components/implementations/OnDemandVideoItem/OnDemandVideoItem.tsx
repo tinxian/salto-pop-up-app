@@ -40,7 +40,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
 
     public render() {
         const { poster, title, item } = this.props
-        const { LabelColor, SubTitleColor } = this.props.theme
+        const { LabelColor, SubTitleColor } = this.props.theme.colors
 
         return (
             <View style={this.getStyles()}>
@@ -91,7 +91,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     private getTitleStyles() {
-        const { TextColor } = this.props.theme
+        const { TextColor } = this.props.theme.colors
 
         return [
             styles.title,
