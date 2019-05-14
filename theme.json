@@ -13,7 +13,8 @@
         "TextColor": "#ffffff",
         "TitleColor": "#ffffff",
         "VideoBackgroundColor": "#ffffff",
-        "SubTitleColor": "#868686"
+        "SubTitleColor": "#868686",
+        "playButtonColor": "#ffffff"
     },
     "images": {
         "HeaderBackgroundUrl": {

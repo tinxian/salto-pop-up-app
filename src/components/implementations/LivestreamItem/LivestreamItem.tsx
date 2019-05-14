@@ -32,7 +32,7 @@ export class LivestreamItem extends React.Component<Props, State> {
     }
 
     public render() {
-        const { thumbnail, title } = this.props
+        const { thumbnail, title, theme } = this.props
 
         return (
             <View style={this.getStyles()}>
@@ -49,7 +49,7 @@ export class LivestreamItem extends React.Component<Props, State> {
                         )}
                         <Icon
                             name={getIcon('play-circle')}
-                            color={'#ffffff'}
+                            color={theme.colors.playButtonColor}
                             size={60}
                             style={styles.playButton}
                         />

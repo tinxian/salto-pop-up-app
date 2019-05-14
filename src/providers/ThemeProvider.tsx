@@ -14,14 +14,13 @@ export interface ColorsType {
     LabelColor: string
     LabelTextColor: string
     PageBackgroundColor: string
-    VideoBackgroundColor: string
     SaltoColor: string
     TextColor: string
     SubTitleColor: string
     TitleColor: string
     VideoBackgroundColor: string
-}
-
+    playButtonColor: string
+} 
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
 }
