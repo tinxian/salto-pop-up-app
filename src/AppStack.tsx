@@ -2,10 +2,12 @@ import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, 
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
-import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
-import { MoreScreen } from './screens/More/MoreScreen';
-import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom';
-import React from 'react';
+import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen'
+import { MoreScreen } from './screens/More/MoreScreen'
+import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom'
+import React from 'react'
+import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
+import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
 /* tslint:disable:no-unused-variable */
 
 const OnDemandVideo = createStackNavigator({
@@ -56,13 +58,7 @@ const TabNavigator = createBottomTabNavigator({
 )
 
 export class TabNavigatorComponent extends React.Component<NavigationScreenProps, {}> {
-    private router: any
-
-    public componentDidMount() {
-        this.router = TabNavigator.router
-
-
-    }
+    private static router = TabNavigator.router
 
     public render() {
         const { navigation } = this.props
@@ -73,7 +69,6 @@ export class TabNavigatorComponent extends React.Component<NavigationScreenProps
         )
     }
 }
-
 
 export const RootNavigator = createStackNavigator({
     Main: {
@@ -93,9 +88,23 @@ export const RootNavigator = createStackNavigator({
             mode: 'modal',
         },
     },
+    SettingsScreen: {
+        screen: SettingsScreen,
+        navigationOptions: {
+            gesturesEnabled: false,
+            mode: 'modal',
+        },
+    },
+    OtherEventsScreen: {
+        screen: OtherEventsScreen,
+        navigationOptions: {
+            gesturesEnabled: false,
+            mode: 'modal',
+        },
+    },
 
 }, {
-        headerMode: 'none',
-        mode: 'modal',
-    }
+    headerMode: 'none',
+    mode: 'modal',
+}
 )

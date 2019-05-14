@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, FlatList, TouchableHighlight, Image, Dimensions, TouchableOpacity } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import { Title } from 'src/components/core/Navigation/NavigationIcon'
@@ -15,69 +15,61 @@ interface State {
 
 }
 
-interface MoreItem {
-    screen: string
-    label: string
-    icon: string
+interface OtherEventItem {
+    title: string
+    subtitle: string
+    logo: string
+    link?: string
 }
 
-const moreItems: MoreItem[] = [
-    { screen: 'SettingsScreen', label: 'Instellingen', icon: getIcon('settings') },
-    { screen: 'OtherEventsScreen', label: 'Andere evenementen', icon: getIcon('megaphone') },
+const OtherEventItems: OtherEventItem[] = [
+    { title: 'ADE x SALTO', subtitle: 'Tijdlijn, nieuws en live ', logo: 'https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg' },
+    { title: 'SALTO x SALTO', subtitle: 'Nieuws, nieuws en nieuws ', logo: 'https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg' },
 ]
 
-export const MoreScreen = withThemeContext(
-    class MoreScreen extends React.Component<Props & ThemeInjectedProps, State> {
+export const OtherEventsScreen = withThemeContext(
+    class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
 
         public render() {
             return (
                 <View style={this.getStyles()}>
-                    <StatusBar hidden={false} animated={false} />
-                    <Image
-                        style={styles.background}
-                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT64sLpyaGTic1h0Vu8qMSBA6BNXyR6zxqd4xh-4FUcl99kt4hk' }}
-                    />
-                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
-                    <FlatList<MoreItem>
+
+                    <FlatList<OtherEventItem>
                         ListHeaderComponent={() => (
+                            <>
+                            <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
+                            <Icon name={getIcon('close')} size={50}/>
+                        </TouchableOpacity>
                             <View style={styles.titleContainer}>
-                                <Title>Meer</Title>
+                                <Title>Andere evenementen</Title>
                             </View>
+                            </>
                         )}
                         contentContainerStyle={this.getWrapperStyles()}
-                        contentInset={{ top: 100 }}
-                        contentOffset={{ x: 0, y: -100 }}
-                        data={moreItems}
+                        data={OtherEventItems}
                         renderItem={item => this.renderItem(item.item)}
-                        keyExtractor={item => item.label}
+                        keyExtractor={item => item.title}
                     />
                 </View>
             )
         }
 
-        private renderItem(item: MoreItem) {
+        private renderItem(item: OtherEventItem) {
             return (
-                <TouchableHighlight onPress={() => this.onItemPress(item)}>
                     <View style={styles.itemContainer}>
-                        <Icon
-                            name={item.icon}
-                            color={'#000'}
-                            size={25}
+                        <Image style={styles.itemLogo}
+                            source={{ uri: item.logo }}
                         />
                         <View style={styles.labelContainer}>
-                            <Text style={styles.label}>
-                                {item.label}
+                            <Text style={this.getTitleStyles()}>
+                                {item.title}
+                            </Text>
+                            <Text style={this.getSubtitleStyles()}>
+                                {item.subtitle}
                             </Text>
                         </View>
                     </View>
-                </TouchableHighlight>
             )
-        }
-
-        private onItemPress = (item: MoreItem) => {
-            const { navigation } = this.props
-
-            navigation.navigate(item.screen)
         }
 
         private getWrapperStyles() {
@@ -85,6 +77,22 @@ export const MoreScreen = withThemeContext(
             return [
                 { backgroundColor: PageBackgroundColor },
                 styles.content,
+            ]
+        }
+
+        private getTitleStyles() {
+            const { TextColor } = this.props.themeContext.theme
+            return [
+                { color: TextColor },
+                styles.label,
+            ]
+        }
+
+        private getSubtitleStyles() {
+            const { TextColor } = this.props.themeContext.theme
+            return [
+                { color: TextColor },
+                styles.subtitle,
             ]
         }
 
@@ -103,24 +111,23 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     itemContainer: {
-        height: 44,
         flex: 1,
         flexDirection: 'row',
+        marginTop: 20,
         alignItems: 'center',
 
     },
     labelContainer: {
-        height: 44,
         flex: 1,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: '#ccc',
+        flexDirection: 'column',
         marginLeft: 12,
     },
     label: {
         fontSize: 12,
         fontWeight: '700',
+    },
+    subtitle: {
+        fontSize: 10,
     },
     background: {
         position: 'absolute',
@@ -131,6 +138,10 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 20,
         left: 20,
+    },
+    itemLogo: {
+        width: 80,
+        height: 80,
     },
     content: {
         minHeight: Dimensions.get('screen').height,
