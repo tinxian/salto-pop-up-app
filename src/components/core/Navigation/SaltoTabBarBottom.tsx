@@ -22,6 +22,7 @@ export const SaltoTabBarBottom = withThemeContext(
                 <View style={this.getStyles()}>
                     <RadioBar
                         theme={theme}
+                        onPressBar={this.navigateToRadioScreen}
                     />
                     <View style={styles.tabContainer}>
                         {this.renderTabs()}
@@ -51,6 +52,11 @@ export const SaltoTabBarBottom = withThemeContext(
             this.props.navigation.navigate(route.routeName)
         }
 
+        private navigateToRadioScreen = () => {
+            const { navigation } = this.props
+            navigation.navigate('RadioScreen')
+        }
+
         private getIcon(route: NavigationRoute<{}>) {
             const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
             const navIcons = {
@@ -71,7 +77,6 @@ export const SaltoTabBarBottom = withThemeContext(
             }
 
             return this.props.themeContext.theme.NavigationIconsColor
-
         }
 
         private getStyles() {

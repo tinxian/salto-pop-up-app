@@ -6,6 +6,7 @@ import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScree
 import { MoreScreen } from './screens/More/MoreScreen';
 import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom';
 import React from 'react';
+import { RadioScreen } from './screens/Radio/RadioScreen';
 
 const OnDemandVideo = createStackNavigator({
     OnDemandVideoListScreen: {
@@ -80,6 +81,13 @@ export const RootNavigator = createStackNavigator({
     },
     LivestreamVideoScreen: {
         screen: LivestreamVideoScreen,
+        navigationOptions: {
+            gesturesEnabled: true,
+            mode: 'modal',
+        },
+    },
+    RadioScreen: {
+        screen: RadioScreen,
         navigationOptions: {
             gesturesEnabled: true,
             mode: 'modal',

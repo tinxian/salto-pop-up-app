@@ -11,6 +11,7 @@ import { LiveStreamDataType } from 'src/services/media';
 interface Props {
     style?: StyleProp<{}>
     theme: ThemeType
+    onPressBar?: () => void
 }
 
 interface State {
@@ -53,24 +54,25 @@ export class RadioBar extends React.Component<Props, State> {
         }
 
         return (
-            <View style={this.getStyles()}>
-                <TouchableOpacity onPress={this.toggleRadio}>
-                    <View style={styles.controls}>
-                        <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
-                        <View style={styles.cover} />
-                        {this.renderControls()}
+            <TouchableOpacity onPress={this.onPressBar}>
+                <View style={this.getStyles()}>
+                    <TouchableOpacity onPress={this.toggleRadio}>
+                        <View style={styles.controls}>
+                            <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
+                            <View style={styles.cover} />
+                            {this.renderControls()}
+                        </View>
+                    </TouchableOpacity>
+                    <View style={{ flex: 1, paddingRight: 12 }}>
+                        <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
                     </View>
-                </TouchableOpacity>
-                <View style={{ flex: 1, paddingRight: 12 }}>
-                    <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
+                    <Icon
+                        name={getIcon('arrow-up')}
+                        color={this.props.theme.RadioPlayerControlsColor}
+                        size={22}
+                    />
                 </View>
-                <Icon
-                    name={getIcon('arrow-up')}
-                    color={this.props.theme.RadioPlayerControlsColor}
-                    size={22}
-                />
-
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -97,6 +99,14 @@ export class RadioBar extends React.Component<Props, State> {
                 size={33}
             />
         )
+    }
+
+    private onPressBar = () => {
+        const { onPressBar } = this.props
+
+        if (onPressBar) {
+            onPressBar()
+        }
     }
 
     private toggleRadio = () => {
@@ -153,5 +163,5 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: '#000',
         opacity: 0.4,
-    }
+    },
 })
