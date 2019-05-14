@@ -1,14 +1,14 @@
 {
     "colors": {
-        "NavigationBackgroundColor": "#000",
-        "NavigationIconsColor": "purple",
+        "NavigationBackgroundColor": "#484848",
+        "NavigationIconsColor": "#ffffff",
         "NavigationIconsActiveColor": "yellow",
         "RadioPlayerControlsColor": "yellow",
-        "RadioPlayerBackgroundColor": "#000",
+        "RadioPlayerBackgroundColor": "#212121",
         "ButtonColor": "yellow",
         "LabelColor": "yellow",
         "LabelTextColor": "#000",
-        "PageBackgroundColor": "#000",
+        "PageBackgroundColor": "#000000",
         "SaltoColor": "#E30613",
         "TextColor": "#ffffff",
         "TitleColor": "#ffffff",
@@ -16,11 +16,12 @@
         "SubTitleColor": "#868686",
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
-        "LiveIndicatorTextColor": "#ffffff"
+        "LiveIndicatorTextColor": "#ffffff",
+        "SeperatorColor": "purple"
     },
     "images": {
         "HeaderBackgroundUrl": {
-            "uri": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvvUAdV98QrvtXELWkdutsmIgp6JFxD5CNnu2fvzuzm_r0rKtDDw"
+            "uri": "https://i2.wp.com/www.redpers.nl/wp-content/uploads/2016/10/Brading_ade_opening_mauricevinken.jpg?fit=1024%2C683&ssl=1"
         },
         "saltoLogo": {
             "uri": ""

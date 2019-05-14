@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, Text, ScrollView, TouchableHighlight, Image } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
@@ -15,7 +15,8 @@ import { format } from 'date-fns';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Label } from 'src/components/core/Label/Label';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import { Videos } from 'src/services/videos';
+import { Videos, ScheduleType } from 'src/services/videos';
+import { InformationList } from 'src/components/core/List/InformationList';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -27,7 +28,7 @@ interface State {
     fullScreen: boolean
     height: number
     programData?: LiveStreamDataType
-    schedule?: any
+    schedule: ScheduleType[]
 }
 
 export const LivestreamVideoScreen = withThemeContext(
@@ -37,7 +38,7 @@ export const LivestreamVideoScreen = withThemeContext(
             fullScreen: false,
             height: Dimensions.get('window').height,
             programData: undefined,
-            schedule: undefined,
+            schedule: [],
         }
 
 
@@ -66,7 +67,7 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         public render() {
-            const { fullScreen, height, programData } = this.state
+            const { fullScreen, height, programData, schedule } = this.state
             const { themeContext } = this.props
 
 
@@ -90,7 +91,7 @@ export const LivestreamVideoScreen = withThemeContext(
                             disableTimer={true}
                             disablePlayPause={true}
                         />
-                        {programData && programData.live && (
+                        {programData && (
                             <LiveIndicator
                                 color={themeContext.theme.colors.RadioPlayerBackgroundColor}
                                 textColor={themeContext.theme.colors.LiveIndicatorTextColor}
@@ -122,14 +123,19 @@ export const LivestreamVideoScreen = withThemeContext(
                             </View>
                             <View style={styles.content}>
                                 <View style={styles.labelWrapper}>
+                                    <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
                                     <Label
                                         color={themeContext.theme.colors.LabelColor}
                                         textColor={themeContext.theme.colors.LabelTextColor}
                                         text={programData.channel}
                                     />
-                                    <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
 
                                 </View>
+
+                                <InformationList
+                                    data={schedule}
+                                    theme={themeContext.theme}
+                                />
                             </View>
                         </ScrollView>
                     )}

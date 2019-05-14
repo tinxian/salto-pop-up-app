@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
         maxWidth: 120,
     },
     durationContainer: {
-        paddingHorizontal: 8,
+        paddingHorizontal: 12,
         paddingVertical: 6,
         backgroundColor: '#000000',
         borderRadius: 3,

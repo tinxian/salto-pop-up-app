@@ -65,11 +65,11 @@ export class RadioBar extends React.Component<Props, State> {
                         </View>
                     </TouchableOpacity>
                     <View style={{ flex: 1, paddingRight: 12 }}>
-                        <SubTitle numberOfLines={1} color={this.props.theme.colors.RadioPlayerControlsColor}>Nu live:  {programData.title}</SubTitle>
+                        <SubTitle numberOfLines={1} color={this.props.theme.colors.TextColor}>Nu live:  {programData.title}</SubTitle>
                     </View>
                     <Icon
                         name={getIcon('arrow-up')}
-                        color={this.props.theme.colors.RadioPlayerControlsColor}
+                        color={this.props.theme.colors.TextColor}
                         size={22}
                     />
                 </View>
@@ -144,9 +144,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingRight: 22,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderColor: '#ccc',
     },
     controls: {
         overflow: 'hidden',

@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     content: {
-        paddingHorizontal: 22,
+        paddingHorizontal: 12,
         height: Dimensions.get('screen').height,
         borderRadius: 8,
     },

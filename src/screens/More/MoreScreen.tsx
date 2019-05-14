@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
     },
     content: {
         minHeight: Dimensions.get('screen').height,
-        paddingHorizontal: 22,
+        paddingHorizontal: 12,
         borderRadius: 8,
     },
     titleContainer: {

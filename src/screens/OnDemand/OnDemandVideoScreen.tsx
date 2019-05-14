@@ -117,17 +117,16 @@ export const OnDemandVideoScreen = withThemeContext(
                             </View>
                         </TouchableHighlight>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.labelWrapper}>
-                            <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                            <Label
-                                color={themeContext.theme.colors.LabelColor}
-                                textColor={themeContext.theme.colors.LabelTextColor}
-                                text={item.programName}
-                            />
-                        </View>
-                        <Text>{item.description}</Text>
+
+                    <View style={styles.labelWrapper}>
+                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                        <Label
+                            color={themeContext.theme.colors.LabelColor}
+                            textColor={themeContext.theme.colors.LabelTextColor}
+                            text={item.programName}
+                        />
                     </View>
+                    <Text>{item.description}</Text>
                 </View>
             )
         }
@@ -198,6 +197,7 @@ const styles = StyleSheet.create({
     labelWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 12,
     },
     videoContainer: {
@@ -215,8 +215,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        paddingHorizontal: 12,
-        paddingVertical: 12,
+        paddingVertical: 8,
     },
     shareButton: {
         marginLeft: 12,

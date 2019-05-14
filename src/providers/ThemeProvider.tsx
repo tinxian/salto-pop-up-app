@@ -22,6 +22,7 @@ export interface ColorsType {
     playButtonColor: string
     LiveIndicatorBackgroundColor: string
     LiveIndicatorTextColor: string
+    SeperatorColor: string
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
