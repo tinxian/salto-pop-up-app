@@ -45,7 +45,9 @@ export class RadioBar extends React.Component<Props, State> {
         if (!programData) {
             return (
                 <View style={this.getStyles()}>
-                    <ActivityIndicator />
+                    <View style={styles.controls}>
+                        <ActivityIndicator />
+                    </View>
                 </View>
             )
         }
@@ -54,11 +56,9 @@ export class RadioBar extends React.Component<Props, State> {
             <View style={this.getStyles()}>
                 <TouchableOpacity onPress={this.toggleRadio}>
                     <View style={styles.controls}>
-                        <React.Fragment>
-                            <Image resizeMethod={'resize'} style={{ height: '100%', width: 50, position: 'absolute' }} source={{ uri: programData.logo }} />
-                            <View style={styles.cover} />
-                            {this.renderControls()}
-                        </React.Fragment>
+                        <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
+                        <View style={styles.cover} />
+                        {this.renderControls()}
                     </View>
                 </TouchableOpacity>
                 <View style={{ flex: 1, paddingRight: 12 }}>
@@ -128,6 +128,7 @@ export class RadioBar extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
+        height: 40,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -137,9 +138,11 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
     },
     controls: {
+        overflow: 'hidden',
         backgroundColor: '#000000',
         marginRight: 12,
-        width: 50,
+        width: 56,
+        height: 40,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

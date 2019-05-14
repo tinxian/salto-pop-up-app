@@ -4977,9 +4977,10 @@ react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.10:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
-react-native-rename@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/react-native-rename/-/react-native-rename-2.3.2.tgz#85381e61ae784ac39f937afb44f802f99dc39249"
+react-native-rename@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/react-native-rename/-/react-native-rename-2.4.1.tgz#54256367b0375ae49f5026b35914d5ba2a229221"
+  integrity sha512-gwJicwseYsfE4P7SfdOy4F399X84b/rO4r32Fkmli13+aTmoOQk+arIJsjlBb2IzS/1/m4IOr39xZK7zEgR+/Q==
   dependencies:
     cheerio "^0.22.0"
     colors "^1.1.2"

@@ -9,5 +9,6 @@
     "LabelTextColor": "#ffffff",
     "PageBackgroundColor": "#ffffff",
     "SaltoColor": "#E30613",
-    "TextColor": "#000000"
+    "TextColor": "#000000",
+    "SubTitleColor": "#868686"
 }

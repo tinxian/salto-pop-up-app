@@ -15,6 +15,8 @@ import { EpisodeType } from 'src/services/videos';
 import { Label } from 'src/components/core/Label/Label';
 import { ThemeType } from 'src/providers/ThemeProvider';
 import { getMillisecondsInMinutes } from 'src/utils/date';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { format } from 'date-fns';
 
 export interface Props {
     style?: StyleProp<{}>,
@@ -38,7 +40,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
 
     public render() {
         const { poster, title, item } = this.props
-        const { LabelColor } = this.props.theme
+        const { LabelColor, SubTitleColor } = this.props.theme
 
         return (
             <View style={this.getStyles()}>
@@ -67,10 +69,15 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                         )}
                     </View>
                 </TouchableHighlight >
-                <View style={styles.metaContainer}>
+                <View style={styles.descriptionContainer}>
                     <Title numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
-                    {item && <Label style={styles.label} color={LabelColor} text={item.programName} />}
                 </View>
+                {item && (
+                    <View style={styles.metaContainer}>
+                        <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                        <Label style={styles.label} color={LabelColor} text={item.programName} />
+                    </View>
+                )}
             </View>
         )
     }
@@ -130,15 +137,19 @@ const styles = StyleSheet.create({
     title: {
         flexWrap: 'wrap',
         flex: 1,
-        marginVertical: 12,
     },
     metaContainer: {
-        height: 50,
         marginBottom: 12,
+
         width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    descriptionContainer: {
+        marginTop: 12,
+        marginBottom: 8,
+        width: '100%',
     },
     label: {
         marginLeft: 12,

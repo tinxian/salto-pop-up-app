@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, ScrollView, FlatList } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -15,6 +15,7 @@ import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvide
 import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
 
 interface Params {
     item: EpisodeType,
@@ -118,12 +119,12 @@ export const OnDemandVideoScreen = withThemeContext(
                     </View>
                     <View style={styles.content}>
                         <View style={styles.labelWrapper}>
+                            <SubTitle color={themeContext.theme.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
                             <Label
                                 color={themeContext.theme.LabelColor}
                                 textColor={themeContext.theme.LabelTextColor}
                                 text={item.programName}
                             />
-                            <Text>{format(item.date, 'DD-MM-YYYY')}</Text>
                         </View>
                         <Text>{item.description}</Text>
                     </View>
