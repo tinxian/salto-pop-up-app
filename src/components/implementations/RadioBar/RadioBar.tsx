@@ -64,11 +64,11 @@ export class RadioBar extends React.Component<Props, State> {
                         </View>
                     </TouchableOpacity>
                     <View style={{ flex: 1, paddingRight: 12 }}>
-                        <Text numberOfLines={1} style={{ color: this.props.theme.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
+                        <Text numberOfLines={1} style={{ color: this.props.theme.colors.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
                     </View>
                     <Icon
                         name={getIcon('arrow-up')}
-                        color={this.props.theme.RadioPlayerControlsColor}
+                        color={this.props.theme.colors.RadioPlayerControlsColor}
                         size={22}
                     />
                 </View>
@@ -95,7 +95,7 @@ export class RadioBar extends React.Component<Props, State> {
         return (
             <Icon
                 name={!active ? getIcon('play') : getIcon('square')}
-                color={this.props.theme.RadioPlayerControlsColor}
+                color={this.props.theme.colors.RadioPlayerControlsColor}
                 size={33}
             />
         )
@@ -128,7 +128,7 @@ export class RadioBar extends React.Component<Props, State> {
     private getStyles() {
         const { style } = this.props
         return [
-            { backgroundColor: this.props.theme.RadioPlayerBackgroundColor },
+            { backgroundColor: this.props.theme.colors.RadioPlayerBackgroundColor },
             styles.container,
             style,
         ]

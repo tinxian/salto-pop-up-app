@@ -73,16 +73,17 @@ export const SaltoTabBarBottom = withThemeContext(
         private getIconColor(index: number) {
 
             if (this.state.activeIndex === index) {
-                return this.props.themeContext.theme.NavigationIconsActiveColor
+                return this.props.themeContext.theme.colors.NavigationIconsActiveColor
             }
 
-            return this.props.themeContext.theme.NavigationIconsColor
+            return this.props.themeContext.theme.colors.NavigationIconsColor
+
         }
 
         private getStyles() {
             return [
                 styles.container,
-                { backgroundColor: this.props.themeContext.theme.NavigationBackgroundColor },
+                { backgroundColor: this.props.themeContext.theme.colors.NavigationBackgroundColor },
             ]
         }
     })

@@ -2,10 +2,10 @@ import * as React from 'react'
 import { View, StyleSheet, StyleProp, Text, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
 import { getIcon } from 'src/utils/icons';
 import { NavigationScreenProps } from 'react-navigation';
-import { Title } from 'src/components/core/Navigation/NavigationIcon';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { StatusBar } from 'react-native';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
+import { TitleSizeType, Title } from 'src/components/core/Typography/Title';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -30,18 +30,20 @@ export const MoreScreen = withThemeContext(
     class MoreScreen extends React.Component<Props & ThemeInjectedProps, State> {
 
         public render() {
+            const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
+            const { colors } = this.props.themeContext.theme
             return (
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
                     <Image
                         style={styles.background}
-                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT64sLpyaGTic1h0Vu8qMSBA6BNXyR6zxqd4xh-4FUcl99kt4hk' }}
+                        source={HeaderBackgroundUrl}
                     />
                     <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
                     <FlatList<MoreItem>
                         ListHeaderComponent={() => (
                             <View style={styles.titleContainer}>
-                                <Title>Meer</Title>
+                                <Title size={TitleSizeType.large} color={colors.TitleColor}>Meer</Title>
                             </View>
                         )}
                         contentContainerStyle={this.getWrapperStyles()}
@@ -81,7 +83,7 @@ export const MoreScreen = withThemeContext(
         }
 
         private getWrapperStyles() {
-            const { PageBackgroundColor } = this.props.themeContext.theme
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
                 { backgroundColor: PageBackgroundColor },
                 styles.content,
@@ -90,8 +92,10 @@ export const MoreScreen = withThemeContext(
 
         private getStyles() {
             const { style } = this.props
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
                 styles.container,
+                { backgroundColor: PageBackgroundColor },
                 style,
             ]
         }

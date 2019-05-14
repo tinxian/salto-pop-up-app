@@ -11,13 +11,14 @@ import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { Title } from 'src/components/core/Typography/Title';
+import { ThemeType } from 'src/providers/ThemeProvider';
 
 export interface Props {
     style?: StyleProp<{}>,
     title?: string
     thumbnail?: ImageSourcePropType
     onPress?: () => void
-    textColor?: string
+    theme: ThemeType
 }
 
 export interface State {
@@ -38,7 +39,7 @@ export class LivestreamItem extends React.Component<Props, State> {
 
                 <TouchableHighlight onPress={this.handleOnPress}>
 
-                    <View style={styles.thumbnail}>
+                    <View style={this.getThumbnailStyles()}>
                         {thumbnail && (
                             <Image
                                 style={styles.item}
@@ -69,11 +70,20 @@ export class LivestreamItem extends React.Component<Props, State> {
     }
 
     private getTitleStyles() {
-        const { textColor } = this.props
+        const { TextColor } = this.props.theme.colors
 
         return [
             styles.title,
-            { color: textColor },
+            { color: TextColor },
+        ]
+    }
+
+    private getThumbnailStyles() {
+        const { VideoBackgroundColor } = this.props.theme.colors
+
+        return [
+            styles.thumbnail,
+            { backgroundColor: VideoBackgroundColor },
         ]
     }
 

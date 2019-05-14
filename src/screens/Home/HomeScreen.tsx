@@ -4,7 +4,7 @@ import { NavigationScreenProps } from 'react-navigation';
 import { Label } from 'src/components/core/Label/Label';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
-import { Title } from 'src/components/core/Typography/Title';
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { getEventMessage } from 'src/utils/date';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { isWithinRange } from 'date-fns';
@@ -20,12 +20,13 @@ interface State {
 export const HomeScreen = withThemeContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public render() {
-            const { LabelColor, LabelTextColor } = this.props.themeContext.theme
+            const { LabelColor, LabelTextColor, TitleColor } = this.props.themeContext.theme.colors
+            const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
             return (
                 <View style={this.getStyles()}>
                     <Image
                         style={styles.background}
-                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT64sLpyaGTic1h0Vu8qMSBA6BNXyR6zxqd4xh-4FUcl99kt4hk' }}
+                        source={HeaderBackgroundUrl}
                     />
                     <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
 
@@ -36,8 +37,17 @@ export const HomeScreen = withThemeContext(
                             <View style={this.getContentStyles()}>
 
                                 <View style={styles.labelContainer}>
-                                    <Title>Home</Title>
-                                    <Label color={LabelColor} textColor={LabelTextColor} text={getEventMessage(new Date(), new Date())} />
+                                    <Title
+                                        color={TitleColor}
+                                        size={TitleSizeType.large}
+                                    >
+                                        Home
+                                    </Title>
+                                    <Label
+                                        color={LabelColor}
+                                        textColor={LabelTextColor}
+                                        text={getEventMessage(new Date(), new Date())}
+                                    />
                                 </View>
                                 {this.getMedia()}
 
@@ -50,14 +60,14 @@ export const HomeScreen = withThemeContext(
         }
 
         private getMedia() {
-            const { themeContext } = this.props
+            const { theme } = this.props.themeContext
             const currentDate = new Date()
 
             if (isWithinRange(currentDate, new Date(), new Date())) {
                 return (
                     <View>
                         <LivestreamItem
-                            textColor={themeContext.theme.TextColor}
+                            theme={theme}
                             title={'Pride door salto live'}
                             onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
                         // thumbnail={require("../../../../src/assets/images/logos/salto.png")}
@@ -68,7 +78,7 @@ export const HomeScreen = withThemeContext(
 
             return (
                 <OnDemandVideoItem
-                    theme={themeContext.theme}
+                    theme={theme}
                     title={'Aftermovie pride 2018'}
                     poster={{
                         uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e'
@@ -79,15 +89,16 @@ export const HomeScreen = withThemeContext(
         }
 
         private getStyles() {
-            const { style } = this.props
+            const { style, themeContext } = this.props
             return [
                 styles.container,
+                { backgroundColor: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }
 
         private getContentStyles() {
-            const { PageBackgroundColor } = this.props.themeContext.theme
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
                 { backgroundColor: PageBackgroundColor },
                 styles.content,

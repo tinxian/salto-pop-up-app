@@ -53,7 +53,7 @@ export const OnDemandVideoScreen = withThemeContext(
 
         public render() {
             const { fullScreen, height } = this.state
-            const { themeContext } = this.props
+            const { theme } = this.props.themeContext
             const item = this.props.navigation.getParam('item')
             const data = this.getRelevantVideosFromEpisode()
 
@@ -87,7 +87,7 @@ export const OnDemandVideoScreen = withThemeContext(
                             <OnDemandVideoItem
                                 onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data })}
                                 poster={{ uri: item.poster }}
-                                theme={themeContext.theme}
+                                theme={theme}
                                 title={item.title}
                                 programName={item.programName}
                                 item={item}
@@ -111,7 +111,7 @@ export const OnDemandVideoScreen = withThemeContext(
                             <View style={styles.shareButton}>
                                 <Icon
                                     name={getIcon('share')}
-                                    color={this.props.themeContext.theme.ButtonColor}
+                                    color={this.props.themeContext.theme.colors.ButtonColor}
                                     size={25}
                                 />
                             </View>
@@ -119,10 +119,10 @@ export const OnDemandVideoScreen = withThemeContext(
                     </View>
                     <View style={styles.content}>
                         <View style={styles.labelWrapper}>
-                            <SubTitle color={themeContext.theme.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                            <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
                             <Label
-                                color={themeContext.theme.LabelColor}
-                                textColor={themeContext.theme.LabelTextColor}
+                                color={themeContext.theme.colors.LabelColor}
+                                textColor={themeContext.theme.colors.LabelTextColor}
                                 text={item.programName}
                             />
                         </View>
@@ -169,7 +169,7 @@ export const OnDemandVideoScreen = withThemeContext(
         }
 
         private getWrapperStyles() {
-            const { PageBackgroundColor } = this.props.themeContext.theme
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
                 { backgroundColor: PageBackgroundColor },
                 styles.content,
@@ -180,7 +180,7 @@ export const OnDemandVideoScreen = withThemeContext(
             const { style, themeContext } = this.props
             return [
                 styles.container,
-                { backgroundColor: themeContext.theme.PageBackgroundColor },
+                { backgroundColor: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }

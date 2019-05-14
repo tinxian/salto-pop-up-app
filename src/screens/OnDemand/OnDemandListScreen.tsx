@@ -5,7 +5,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
 import { Videos, EpisodeType } from 'src/services/videos';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { Title } from 'src/components/core/Typography/Title';
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -35,12 +35,13 @@ export const OnDemandListScreen = withThemeContext(
 
 
         public render() {
+            const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
             return (
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
                     <Image
                         style={styles.background}
-                        source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT64sLpyaGTic1h0Vu8qMSBA6BNXyR6zxqd4xh-4FUcl99kt4hk' }}
+                        source={HeaderBackgroundUrl}
                     />
                     <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
                     {this.renderList()}
@@ -69,7 +70,12 @@ export const OnDemandListScreen = withThemeContext(
                 <FlatList
                     ListHeaderComponent={() => (
                         <View style={styles.titleContainer}>
-                            <Title>Videos</Title>
+                            <Title
+                                size={TitleSizeType.large}
+                                color={theme.colors.TitleColor}
+                            >
+                                Videos
+                            </Title>
                         </View>
                     )}
                     refreshing={loading}
@@ -95,7 +101,7 @@ export const OnDemandListScreen = withThemeContext(
 
         }
         private getWrapperStyles() {
-            const { PageBackgroundColor } = this.props.themeContext.theme
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
                 { backgroundColor: PageBackgroundColor },
                 styles.content,
