@@ -2,11 +2,13 @@ import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, 
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
-import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen';
-import { MoreScreen } from './screens/More/MoreScreen';
-import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom';
-import React from 'react';
-import { RadioScreen } from './screens/Radio/RadioScreen';
+import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen'
+import { MoreScreen } from './screens/More/MoreScreen'
+import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom'
+import React from 'react'
+import { RadioScreen } from './screens/Radio/RadioScreen'
+import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
+import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
 
 const OnDemandVideo = createStackNavigator({
     OnDemandVideoListScreen: {
@@ -67,7 +69,6 @@ export class TabNavigatorComponent extends React.Component<NavigationScreenProps
     }
 }
 
-
 export const RootNavigator = createStackNavigator({
     Main: {
         screen: TabNavigatorComponent,
@@ -90,12 +91,22 @@ export const RootNavigator = createStackNavigator({
         screen: RadioScreen,
         navigationOptions: {
             gesturesEnabled: true,
+            headerMode: 'none',
             mode: 'modal',
         },
     },
-
-}, {
-        headerMode: 'none',
-        mode: 'modal',
-    }
-)
+    SettingsScreen: {
+        screen: SettingsScreen,
+        navigationOptions: {
+            gesturesEnabled: false,
+            mode: 'modal',
+        },
+    },
+    OtherEventsScreen: {
+        screen: OtherEventsScreen,
+        navigationOptions: {
+            gesturesEnabled: false,
+            mode: 'modal',
+        },
+    },
+})
