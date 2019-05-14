@@ -4,8 +4,8 @@ import { StyleProp, StyleSheet, View, Text } from 'react-native'
 interface Props {
     style?: StyleProp<{}>,
     text: string
-    color?: string
-    textColor?: string
+    color: string
+    textColor: string
 }
 
 export class Label extends React.Component<Props, {}> {

@@ -14,7 +14,9 @@
         "TitleColor": "#ffffff",
         "VideoBackgroundColor": "#ffffff",
         "SubTitleColor": "#868686",
-        "playButtonColor": "#ffffff"
+        "playButtonColor": "#ffffff",
+        "LiveIndicatorBackgroundColor": "#E30613",
+        "LiveIndicatorTextColor": "#ffffff"
     },
     "images": {
         "HeaderBackgroundUrl": {

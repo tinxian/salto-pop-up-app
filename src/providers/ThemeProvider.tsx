@@ -20,7 +20,9 @@ export interface ColorsType {
     TitleColor: string
     VideoBackgroundColor: string
     playButtonColor: string
-} 
+    LiveIndicatorBackgroundColor: string
+    LiveIndicatorTextColor: string
+}
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
 }

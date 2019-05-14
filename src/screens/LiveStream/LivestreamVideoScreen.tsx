@@ -14,6 +14,8 @@ import { getIcon } from 'src/utils/icons';
 import { format } from 'date-fns';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Label } from 'src/components/core/Label/Label';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Videos } from 'src/services/videos';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -25,6 +27,7 @@ interface State {
     fullScreen: boolean
     height: number
     programData?: LiveStreamDataType
+    schedule?: any
 }
 
 export const LivestreamVideoScreen = withThemeContext(
@@ -34,13 +37,14 @@ export const LivestreamVideoScreen = withThemeContext(
             fullScreen: false,
             height: Dimensions.get('window').height,
             programData: undefined,
+            schedule: undefined,
         }
 
 
         public player: Video | null
         private socket: any
 
-        public componentDidMount() {
+        public async componentDidMount() {
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
             this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
@@ -50,6 +54,11 @@ export const LivestreamVideoScreen = withThemeContext(
             this.socket.on('update', (data: LiveStreamDataType) => {
                 this.setState({ programData: data })
             });
+
+            const schedule = await Videos.getScheduleByChannel('salto1')
+            console.log('schedule', schedule)
+
+            this.setState({ schedule })
         }
 
         public componentWillUnmount() {
@@ -81,20 +90,35 @@ export const LivestreamVideoScreen = withThemeContext(
                             disableTimer={true}
                             disablePlayPause={true}
                         />
-                        {programData && programData.live && <LiveIndicator style={styles.liveIndicator} />}
+                        {programData && programData.live && (
+                            <LiveIndicator
+                                color={themeContext.theme.colors.RadioPlayerBackgroundColor}
+                                textColor={themeContext.theme.colors.LiveIndicatorTextColor}
+                                style={styles.liveIndicator}
+                            />
+                        )}
 
                     </ExpandableContainer>
 
 
                     {/* <Title numberOfLines={2} >{item.title}</Title> */}
+
                     {programData && (
+
                         <ScrollView>
                             <View style={styles.meta}>
                                 <View style={{ flex: 1 }}>
-                                    <Title numberOfLines={2} >{programData.title}</Title>
+                                    <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{programData.title}</Title>
                                 </View>
-                                <Text>Gestart: {format(programData.time, 'HH:mm')}</Text>
-
+                                <TouchableHighlight onPress={this.handleShare}>
+                                    <View style={styles.shareButton}>
+                                        <Icon
+                                            name={getIcon('share')}
+                                            color={this.props.themeContext.theme.colors.ButtonColor}
+                                            size={25}
+                                        />
+                                    </View>
+                                </TouchableHighlight>
                             </View>
                             <View style={styles.content}>
                                 <View style={styles.labelWrapper}>
@@ -103,25 +127,12 @@ export const LivestreamVideoScreen = withThemeContext(
                                         textColor={themeContext.theme.colors.LabelTextColor}
                                         text={programData.channel}
                                     />
-                                    <TouchableHighlight onPress={this.handleShare}>
-                                        <View style={styles.shareButton}>
-                                            <Icon
-                                                name={getIcon('share')}
-                                                color={this.props.themeContext.theme.colors.ButtonColor}
-                                                size={25}
-                                            />
-                                        </View>
-                                    </TouchableHighlight>
+                                    <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
 
                                 </View>
-                                <Image style={{ width: '100%', height: '100%' }} source={{ uri: programData.artwork }} />
-
                             </View>
                         </ScrollView>
                     )}
-
-
-                    {/* <Text>{item.description}</Text> */}
                 </View>
             )
         }
@@ -150,9 +161,10 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         private getStyles() {
-            const { style } = this.props
+            const { style, themeContext } = this.props
             return [
                 styles.container,
+                { backgroundColor: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }

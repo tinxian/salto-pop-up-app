@@ -105,7 +105,7 @@ export const OnDemandVideoScreen = withThemeContext(
                 <View>
                     <View style={styles.meta}>
                         <View style={{ flex: 1 }}>
-                            <Title numberOfLines={2} >{item.title}</Title>
+                            <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{item.title}</Title>
                         </View>
                         <TouchableHighlight onPress={this.handleShare}>
                             <View style={styles.shareButton}>

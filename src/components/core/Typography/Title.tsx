@@ -4,7 +4,7 @@ import { StyleProp, Text, StyleSheet, TextProps } from 'react-native';
 interface Props extends TextProps {
     textStyle?: StyleProp<{}>
     size?: TitleSizeType
-    color?: string
+    color: string
 }
 
 export enum TitleSizeType {

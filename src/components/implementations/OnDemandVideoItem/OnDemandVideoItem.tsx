@@ -39,8 +39,8 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     public render() {
-        const { poster, title, item } = this.props
-        const { LabelColor, SubTitleColor } = this.props.theme.colors
+        const { poster, title, item, theme } = this.props
+        const { LabelColor, SubTitleColor, LabelTextColor } = this.props.theme.colors
 
         return (
             <View style={this.getStyles()}>
@@ -70,12 +70,12 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                     </View>
                 </TouchableHighlight >
                 <View style={styles.descriptionContainer}>
-                    <Title numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
+                    <Title color={theme.colors.TextColor} numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
                 </View>
                 {item && (
                     <View style={styles.metaContainer}>
                         <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                        <Label style={styles.label} color={LabelColor} text={item.programName} />
+                        <Label style={styles.label} color={LabelColor} textColor={LabelTextColor} text={item.programName} />
                     </View>
                 )}
             </View>
