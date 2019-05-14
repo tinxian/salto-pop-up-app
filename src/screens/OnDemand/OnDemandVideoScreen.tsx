@@ -16,6 +16,7 @@ import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
 
 interface Params {
     item: EpisodeType,
@@ -126,7 +127,7 @@ export const OnDemandVideoScreen = withThemeContext(
                             text={item.programName}
                         />
                     </View>
-                    <Text>{item.description}</Text>
+                    <Paragraph color={themeContext.theme.colors.TextColor}>{item.description}</Paragraph>
                 </View>
             )
         }
