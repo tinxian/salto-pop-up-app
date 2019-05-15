@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -16,6 +16,7 @@ import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
 
 interface Params {
     item: EpisodeType,
@@ -105,7 +106,7 @@ export const OnDemandVideoScreen = withThemeContext(
                 <View>
                     <View style={styles.meta}>
                         <View style={{ flex: 1 }}>
-                            <Title numberOfLines={2} >{item.title}</Title>
+                            <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{item.title}</Title>
                         </View>
                         <TouchableHighlight onPress={this.handleShare}>
                             <View style={styles.shareButton}>
@@ -117,17 +118,16 @@ export const OnDemandVideoScreen = withThemeContext(
                             </View>
                         </TouchableHighlight>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.labelWrapper}>
-                            <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                            <Label
-                                color={themeContext.theme.colors.LabelColor}
-                                textColor={themeContext.theme.colors.LabelTextColor}
-                                text={item.programName}
-                            />
-                        </View>
-                        <Text>{item.description}</Text>
+
+                    <View style={styles.labelWrapper}>
+                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                        <Label
+                            color={themeContext.theme.colors.LabelColor}
+                            textColor={themeContext.theme.colors.LabelTextColor}
+                            text={item.programName}
+                        />
                     </View>
+                    <Paragraph color={themeContext.theme.colors.TextColor}>{item.description}</Paragraph>
                 </View>
             )
         }
@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
     labelWrapper: {
         flexDirection: 'row',
         justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: 12,
     },
     videoContainer: {
@@ -215,8 +216,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        paddingHorizontal: 12,
-        paddingVertical: 12,
+        paddingVertical: 8,
     },
     shareButton: {
         marginLeft: 12,

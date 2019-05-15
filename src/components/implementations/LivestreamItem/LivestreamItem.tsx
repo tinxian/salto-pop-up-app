@@ -53,10 +53,14 @@ export class LivestreamItem extends React.Component<Props, State> {
                             size={60}
                             style={styles.playButton}
                         />
-                        <LiveIndicator style={styles.liveIndicator} />
+                        <LiveIndicator
+                            color={theme.colors.RadioPlayerBackgroundColor}
+                            textColor={theme.colors.LiveIndicatorTextColor}
+                            style={styles.liveIndicator}
+                        />
                     </View>
                 </TouchableHighlight >
-                <Title textStyle={this.getTitleStyles()}>{title}</Title>
+                <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
             </View>
         )
     }

@@ -27,6 +27,7 @@ export const HomeScreen = withThemeContext(
                     <Image
                         style={styles.background}
                         source={HeaderBackgroundUrl}
+                        resizeMode={'repeat'}
                     />
                     <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
 
@@ -123,9 +124,9 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     content: {
-        paddingHorizontal: 22,
+        paddingHorizontal: 12,
         height: Dimensions.get('screen').height,
-        borderRadius: 8,
+        borderRadius: 25,
     },
     logo: {
         position: 'absolute',

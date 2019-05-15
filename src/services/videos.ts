@@ -1,7 +1,13 @@
 import axios, { AxiosResponse } from 'axios'
+import { format } from 'date-fns';
 
 export interface EpisodeResponseType {
     episodes: EpisodeType[]
+}
+
+export interface ScheduleResponseType {
+    date: string
+    schedule: ScheduleType[]
 }
 
 export interface EpisodeType {
@@ -17,6 +23,17 @@ export interface EpisodeType {
     poster: string
     thumbnail: string
     streams: EpisodeStreamType
+}
+export interface ScheduleType {
+    date: string
+    end: string
+    link: string
+    live: boolean
+    name: string
+    program: ProgramType
+    time: string
+    timestamp: Date
+    type: 'fixed' | 'caroussel'
 }
 
 export interface BroadcastType {
@@ -44,7 +61,21 @@ export class Videos {
             const result: AxiosResponse<EpisodeResponseType> = await axios.get('https://vod.salto.nl/data/ondemand/pride')
 
             return result.data.episodes
-        } catch(err) {
+        } catch (err) {
+            console.log(err)
+
+            return []
+        }
+    }
+
+    public static async getScheduleByChannel(channel: string) {
+        try {
+            const date = format(new Date(), 'YYYYMMDD')
+            const result: AxiosResponse<ScheduleResponseType> = await axios.get(`https://api.salto.nl/api/schedule/${channel}/day/${date}`)
+            const schedule = result.data.schedule.filter(item => item.time.replace(':', '') >= format(new Date(), 'HHmm'))
+
+            return schedule
+        } catch (err) {
             console.log(err)
 
             return []

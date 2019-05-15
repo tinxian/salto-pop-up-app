@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, TouchableHighlight, Image, Dimensions, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import { Title } from 'src/components/core/Typography/Title'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { StatusBar } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 
 interface Props extends NavigationScreenProps<{}> {
@@ -31,18 +30,19 @@ export const OtherEventsScreen = withThemeContext(
     class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
 
         public render() {
+            const { colors } = this.props.themeContext.theme
             return (
                 <View style={this.getStyles()}>
 
                     <FlatList<OtherEventItem>
                         ListHeaderComponent={() => (
                             <>
-                            <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
-                            <Icon name={getIcon('close')} size={50}/>
-                        </TouchableOpacity>
-                            <View style={styles.titleContainer}>
-                                <Title>Andere evenementen</Title>
-                            </View>
+                                <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
+                                    <Icon name={getIcon('close')} size={50} />
+                                </TouchableOpacity>
+                                <View style={styles.titleContainer}>
+                                    <Title color={colors.TextColor}>Andere evenementen</Title>
+                                </View>
                             </>
                         )}
                         contentContainerStyle={this.getWrapperStyles()}
@@ -56,20 +56,20 @@ export const OtherEventsScreen = withThemeContext(
 
         private renderItem(item: OtherEventItem) {
             return (
-                    <View style={styles.itemContainer}>
-                        <Image
-                            style={styles.itemLogo}
-                            source={{ uri: item.logo }}
-                        />
-                        <View style={styles.labelContainer}>
-                            <Text style={this.getTitleStyles()}>
-                                {item.title}
-                            </Text>
-                            <Text style={this.getSubtitleStyles()}>
-                                {item.subtitle}
-                            </Text>
-                        </View>
+                <View style={styles.itemContainer}>
+                    <Image
+                        style={styles.itemLogo}
+                        source={{ uri: item.logo }}
+                    />
+                    <View style={styles.labelContainer}>
+                        <Text style={this.getTitleStyles()}>
+                            {item.title}
+                        </Text>
+                        <Text style={this.getSubtitleStyles()}>
+                            {item.subtitle}
+                        </Text>
                     </View>
+                </View>
             )
         }
 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     content: {
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 22,
-        borderRadius: 8,
+        borderRadius: 25,
     },
     titleContainer: {
         flexDirection: 'row',

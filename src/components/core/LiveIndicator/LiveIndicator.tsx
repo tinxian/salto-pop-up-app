@@ -5,16 +5,26 @@ import { StyleProp, StyleSheet, View, Text } from 'react-native'
 
 interface Props {
     style?: StyleProp<{}>,
+    color: string,
+    textColor: string
 }
 
 export class LiveIndicator extends React.Component<Props, {}> {
     public render() {
-
         return (
             <View style={this.getStyles()} >
-                <Text style={styles.text}>live</Text>
+                <Text style={this.getTextStyles()}>live</Text>
             </View>
         )
+    }
+
+    private getTextStyles() {
+        const { textColor } = this.props
+
+        return [
+            styles.text,
+            { color: textColor }
+        ]
     }
 
     private getStyles() {

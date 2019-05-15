@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
 import { LiveStreamDataType } from 'src/services/media';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
 
 
 interface Props {
@@ -64,11 +65,11 @@ export class RadioBar extends React.Component<Props, State> {
                         </View>
                     </TouchableOpacity>
                     <View style={{ flex: 1, paddingRight: 12 }}>
-                        <Text numberOfLines={1} style={{ color: this.props.theme.colors.RadioPlayerControlsColor }}>Nu live:  {programData.title}</Text>
+                        <SubTitle numberOfLines={1} color={this.props.theme.colors.TextColor}>Nu live:  {programData.title}</SubTitle>
                     </View>
                     <Icon
                         name={getIcon('arrow-up')}
-                        color={this.props.theme.colors.RadioPlayerControlsColor}
+                        color={this.props.theme.colors.TextColor}
                         size={22}
                     />
                 </View>
@@ -143,9 +144,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingRight: 22,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        borderColor: '#ccc',
     },
     controls: {
         overflow: 'hidden',

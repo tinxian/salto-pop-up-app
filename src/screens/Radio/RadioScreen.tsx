@@ -51,6 +51,7 @@ export const RadioScreen = withThemeContext(
 
         public render() {
             const { programData } = this.state
+            const { colors } = this.props.themeContext.theme
 
             if (!programData) {
                 return (
@@ -72,7 +73,7 @@ export const RadioScreen = withThemeContext(
                             {this.renderControls()}
                         </View>
                     </TouchableOpacity>
-                    <LiveIndicator />
+                    <LiveIndicator color={colors.LiveIndicatorBackgroundColor} textColor={colors.LiveIndicatorTextColor} />
 
                     {/* <Text>{item.description}</Text> */}
                 </View>
