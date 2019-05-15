@@ -5,6 +5,7 @@
         "NavigationIconsActiveColor": "yellow",
         "RadioPlayerControlsColor": "yellow",
         "RadioPlayerBackgroundColor": "#212121",
+        "BottomDrawerColor": "#212121",
         "ButtonColor": "yellow",
         "LabelColor": "yellow",
         "LabelTextColor": "#000",

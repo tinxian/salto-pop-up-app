@@ -10,6 +10,7 @@ export interface ColorsType {
     NavigationIconsActiveColor: string
     RadioPlayerControlsColor: string,
     RadioPlayerBackgroundColor: string
+    BottomDrawerColor: string
     ButtonColor: string
     LabelColor: string
     LabelTextColor: string
