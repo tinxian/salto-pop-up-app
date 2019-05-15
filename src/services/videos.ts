@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { format } from 'date-fns';
+import { format } from 'date-fns'
 
 export interface EpisodeResponseType {
     episodes: EpisodeType[]
@@ -72,7 +72,9 @@ export class Videos {
         try {
             const date = format(new Date(), 'YYYYMMDD')
             const result: AxiosResponse<ScheduleResponseType> = await axios.get(`https://api.salto.nl/api/schedule/${channel}/day/${date}`)
+            console.log(result)
             const schedule = result.data.schedule.filter(item => item.time.replace(':', '') >= format(new Date(), 'HHmm'))
+            schedule.sort((a, b) => parseInt(a.time, 10) - parseInt(b.time, 10))
 
             return schedule
         } catch (err) {

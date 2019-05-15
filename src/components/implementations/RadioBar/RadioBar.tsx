@@ -1,13 +1,14 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity, Text } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
-import { LiveStreamDataType } from 'src/services/media';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
-
+import { LiveStreamDataType } from 'src/services/media'
+import { SubTitle } from 'src/components/core/Typography/SubTitle'
+import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/BottomDrawerManager'
+import { RadioScreen } from 'src/screens/Radio/RadioScreen'
 
 interface Props {
     style?: StyleProp<{}>
@@ -55,31 +56,39 @@ export class RadioBar extends React.Component<Props, State> {
         }
 
         return (
-            <TouchableOpacity onPress={this.onPressBar}>
-                <View style={this.getStyles()}>
-                    <TouchableOpacity onPress={this.toggleRadio}>
-                        <View style={styles.controls}>
-                            <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
-                            <View style={styles.cover} />
-                            {this.renderControls()}
+            <BottomDrawerManager
+                renderHandler={open => (
+                    <TouchableOpacity onPress={open}>
+                    <View style={this.getStyles()}>
+                        <TouchableOpacity onPress={this.toggleRadio}>
+                            <View style={styles.controls}>
+                                <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
+                                <View style={styles.cover} />
+                                {this.renderControls()}
+                            </View>
+                        </TouchableOpacity>
+                        <View style={{ flex: 1, paddingRight: 12 }}>
+                            <SubTitle numberOfLines={1} color={this.props.theme.colors.TextColor}>Nu live:  {programData.title}</SubTitle>
                         </View>
-                    </TouchableOpacity>
-                    <View style={{ flex: 1, paddingRight: 12 }}>
-                        <SubTitle numberOfLines={1} color={this.props.theme.colors.TextColor}>Nu live:  {programData.title}</SubTitle>
+                        <Icon
+                            name={getIcon('arrow-up')}
+                            color={this.props.theme.colors.TextColor}
+                            size={22}
+                        />
                     </View>
-                    <Icon
-                        name={getIcon('arrow-up')}
-                        color={this.props.theme.colors.TextColor}
-                        size={22}
-                    />
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            )}
+                renderContent={() => (
+                    <RadioScreen/>
+                )}
+            />
+
         )
     }
 
     private initLiveData() {
-        this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
-        this.socket.emit('join', { channel: 'stadsfm' });// emits 'hi server' to your server
+        this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
+        this.socket.emit('join', { channel: 'stadsfm' })
 
         this.socket.on('update', (data: LiveStreamDataType) => {
             this.setState({ programData: data })

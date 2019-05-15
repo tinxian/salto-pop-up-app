@@ -4,19 +4,19 @@ import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
 import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer'
-import Share from 'react-native-share';
-import { Media, LiveStreamDataType } from 'src/services/media';
-import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
+import Share from 'react-native-share'
+import { Media, LiveStreamDataType } from 'src/services/media'
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
 import SocketIOClient from 'socket.io-client'
-import { Title } from 'src/components/core/Typography/Title';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { getIcon } from 'src/utils/icons';
-import { format } from 'date-fns';
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { Label } from 'src/components/core/Label/Label';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import { Videos, ScheduleType } from 'src/services/videos';
-import { InformationList } from 'src/components/core/List/InformationList';
+import { Title } from 'src/components/core/Typography/Title'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { getIcon } from 'src/utils/icons'
+import { format } from 'date-fns'
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { Label } from 'src/components/core/Label/Label'
+import { SubTitle } from 'src/components/core/Typography/SubTitle'
+import { Videos, ScheduleType } from 'src/services/videos'
+import { InformationList } from 'src/components/core/List/InformationList'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -41,23 +41,21 @@ export const LivestreamVideoScreen = withThemeContext(
             schedule: [],
         }
 
-
         public player: Video | null
         private socket: any
 
         public async componentDidMount() {
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
-            this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
-            this.socket.emit('join', { channel: 'salto1' });// emits 'hi server' to your server
+            this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
+            this.socket.emit('join', { channel: 'salto1' })// emits 'hi server' to your server
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
                 this.setState({ programData: data })
-            });
+            })
 
             const schedule = await Videos.getScheduleByChannel('salto1')
-            console.log('schedule', schedule)
 
             this.setState({ schedule })
         }
@@ -69,7 +67,6 @@ export const LivestreamVideoScreen = withThemeContext(
         public render() {
             const { fullScreen, height, programData, schedule } = this.state
             const { themeContext } = this.props
-
 
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
@@ -100,7 +97,6 @@ export const LivestreamVideoScreen = withThemeContext(
                         )}
 
                     </ExpandableContainer>
-
 
                     {/* <Title numberOfLines={2} >{item.title}</Title> */}
 
@@ -162,7 +158,7 @@ export const LivestreamVideoScreen = withThemeContext(
                 title: 'livestream',
                 message: `Kijk naar deze video van Salto`,
                 url: 'url',
-                subject: `Kijk naar deze video van Salto` //  for email
+                subject: `Kijk naar deze video van Salto`, //  for email
             }
         }
 

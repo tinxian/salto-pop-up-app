@@ -1,22 +1,24 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import Video from 'react-native-video'
-import { Media, LiveStreamDataType } from 'src/services/media';
-import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
+import { Media, LiveStreamDataType } from 'src/services/media'
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
 import SocketIOClient from 'socket.io-client'
-import Icon from 'react-native-vector-icons/Ionicons';
-import { getIcon } from 'src/utils/icons';
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
+import Icon from 'react-native-vector-icons/Ionicons'
+import { getIcon } from 'src/utils/icons'
+import { Videos, ScheduleType } from 'src/services/videos'
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { InformationList } from 'src/components/core/List/InformationList'
 
-interface Props extends NavigationScreenProps {
-    style: StyleProp<{}>,
+interface Props  {
     uri?: string,
 }
 
 interface State {
     loading: boolean
     programData?: LiveStreamDataType
+    schedule: ScheduleType[]
     active: boolean
 }
 
@@ -26,23 +28,28 @@ export const RadioScreen = withThemeContext(
             loading: true,
             programData: undefined,
             active: false,
+            schedule: [],
         }
-
 
         public player: Video | null
         private socket: any
 
-        public componentDidMount() {
+        public async componentDidMount() {
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
-            this.socket = SocketIOClient('https://api.salto.nl/nowplaying');
-            this.socket.emit('join', { channel: 'stadsfm' });// emits 'hi server' to your server
+            this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
+            this.socket.emit('join', { channel: 'stadsfm' })// emits 'hi server' to your server
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
                 console.log(data)
                 this.setState({ programData: data })
-            });
+            })
+
+            const schedule = await Videos.getScheduleByChannel('stadsfm')
+
+            this.setState({ schedule })
+
         }
 
         public componentWillUnmount() {
@@ -50,7 +57,7 @@ export const RadioScreen = withThemeContext(
         }
 
         public render() {
-            const { programData } = this.state
+            const { programData, schedule } = this.state
             const { colors } = this.props.themeContext.theme
 
             if (!programData) {
@@ -61,21 +68,15 @@ export const RadioScreen = withThemeContext(
                 )
             }
 
-
             return (
                 <View style={this.getStyles()}>
                     <StatusBar hidden={true} animated={true} />
-
-                    <TouchableOpacity onPress={this.toggleRadio}>
-                        <View style={styles.controls}>
-                            <Image resizeMode={'cover'} style={{ height: '100%', width: '100%', position: 'absolute' }} source={{ uri: programData.logo }} />
-                            <View style={styles.cover} />
-                            {this.renderControls()}
-                        </View>
-                    </TouchableOpacity>
-                    <LiveIndicator color={colors.LiveIndicatorBackgroundColor} textColor={colors.LiveIndicatorTextColor} />
-
-                    {/* <Text>{item.description}</Text> */}
+                    <ScrollView>
+                        <InformationList
+                            data={schedule}
+                            theme={this.props.themeContext.theme}
+                        />
+                    </ScrollView>
                 </View>
             )
         }
@@ -97,16 +98,11 @@ export const RadioScreen = withThemeContext(
             )
         }
 
-        private toggleRadio = () => {
-
-        }
-
         private getStyles() {
-            const { style, themeContext } = this.props
+            const { themeContext } = this.props
             return [
                 styles.container,
-                { color: themeContext.theme.colors.PageBackgroundColor },
-                style,
+                { backgroundColor: themeContext.theme.colors.BottomDrawerColor },
             ]
         }
     }
@@ -115,6 +111,7 @@ export const RadioScreen = withThemeContext(
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingHorizontal: 12,
     },
     controls: {
         overflow: 'hidden',
