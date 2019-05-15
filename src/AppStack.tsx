@@ -44,8 +44,6 @@ const TabNavigator = createBottomTabNavigator({
 },
     {
         tabBarOptions: {
-            activeTintColor: '#42f44b',
-            inactiveTintColor: 'gray',
             showLabel: false,
             style: {
                 backgroundColor: 'transparent',
@@ -91,7 +89,6 @@ export const RootNavigator = createStackNavigator({
         screen: RadioScreen,
         navigationOptions: {
             gesturesEnabled: true,
-            headerMode: 'none',
             mode: 'modal',
         },
     },
@@ -108,5 +105,9 @@ export const RootNavigator = createStackNavigator({
             gesturesEnabled: false,
             mode: 'modal',
         },
-    },
-})
+    }
+}, {
+        headerMode: 'none',
+        mode: 'modal',
+    }
+)

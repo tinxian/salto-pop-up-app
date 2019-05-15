@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -38,6 +38,7 @@ export const MoreScreen = withThemeContext(
                     <Image
                         style={styles.background}
                         source={HeaderBackgroundUrl}
+                        resizeMode={'repeat'}
                     />
                     <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
                     <FlatList<MoreItem>
@@ -58,18 +59,19 @@ export const MoreScreen = withThemeContext(
         }
 
         private renderItem(item: MoreItem) {
+            const { colors } = this.props.themeContext.theme
             return (
                 <TouchableHighlight onPress={() => this.onItemPress(item)}>
                     <View style={styles.itemContainer}>
                         <Icon
                             name={item.icon}
-                            color={'#000'}
+                            color={colors.TextColor}
                             size={25}
                         />
-                        <View style={styles.labelContainer}>
-                            <Text style={styles.label}>
+                        <View style={this.getLabelContainerStyles()}>
+                            <Title color={colors.TextColor}>
                                 {item.label}
-                            </Text>
+                            </Title>
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -80,6 +82,14 @@ export const MoreScreen = withThemeContext(
             const { navigation } = this.props
 
             navigation.navigate(item.screen)
+        }
+
+        private getLabelContainerStyles() {
+            const { colors } = this.props.themeContext.theme
+            return [
+                { borderColor: colors.SeperatorColor },
+                styles.labelContainer,
+            ]
         }
 
         private getWrapperStyles() {
@@ -119,12 +129,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderBottomWidth: StyleSheet.hairlineWidth,
-        borderColor: '#ccc',
         marginLeft: 12,
-    },
-    label: {
-        fontSize: 12,
-        fontWeight: '700',
     },
     background: {
         position: 'absolute',
@@ -139,7 +144,7 @@ const styles = StyleSheet.create({
     content: {
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
-        borderRadius: 8,
+        borderRadius: 25,
     },
     titleContainer: {
         flexDirection: 'row',

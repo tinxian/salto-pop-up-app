@@ -42,6 +42,7 @@ export const OnDemandListScreen = withThemeContext(
                     <Image
                         style={styles.background}
                         source={HeaderBackgroundUrl}
+                        resizeMode={'repeat'}
                     />
                     <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
                     {this.renderList()}
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     content: {
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
-        borderRadius: 8,
+        borderRadius: 25,
     },
     titleContainer: {
         flexDirection: 'row',

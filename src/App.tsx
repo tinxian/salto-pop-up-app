@@ -7,7 +7,7 @@ import {
     NavigationScreenProp,
     NavigationRouter,
 } from 'react-navigation'
-import { ThemeInjectedProps } from './providers/ThemeProvider';
+import { ThemeInjectedProps, ThemeProvider } from './providers/ThemeProvider';
 import { RootNavigator } from './AppStack'
 import SplashScreen from 'react-native-splash-screen';
 
@@ -22,11 +22,13 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
         return (
 
             <View style={styles.container}>
-                <LocalizationProvider initialize={initializeLocalization}>
-                    <RootNavigator
-                        navigation={this.props.navigation}
-                    />
-                </LocalizationProvider>
+                <ThemeProvider>
+                    <LocalizationProvider initialize={initializeLocalization}>
+                        <RootNavigator
+                            navigation={this.props.navigation}
+                        />
+                    </LocalizationProvider>
+                </ThemeProvider>
             </View>
         )
     }

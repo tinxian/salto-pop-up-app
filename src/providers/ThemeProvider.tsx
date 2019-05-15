@@ -39,35 +39,38 @@ export interface ConfigType {
 
 interface ContextType {
     theme: ThemeType
-    setThemeState?: (values: { [key in keyof ThemeType]: string }) => void
+    setThemeState: (values: ThemeType) => void
 }
 
-export const ThemeContext: Context<ContextType> = React.createContext({ theme })
+export const ThemeContext: Context<ContextType> = React.createContext({
+    theme,
+    setThemeState: () => 'Context not set',
+})
 
-export class ThemeProvider extends React.Component<Props, ThemeType> {
+export class ThemeProvider extends React.Component<Props, ContextType> {
 
-    public state: ThemeType = theme
+    public state: ContextType = {
+        theme,
+        setThemeState: newTheme => this.setThemeStateValue(newTheme),
+    }
 
     public render() {
         const { children } = this.props
 
         return (
             <ThemeContext.Provider
-                value={{
-                    theme: this.state,
-                    setThemeState: this.setThemeStateValue,
-                }}
+                value={this.state}
             >
                 {children}
             </ThemeContext.Provider>
         )
     }
 
-    private setThemeStateValue = (values: { [key in keyof ThemeType]: any }) => {
-        this.setState({
-            ...this.state,
-            ...values,
-        })
+    private setThemeStateValue(newThemeState: ThemeType) {
+        console.log('new', newThemeState)
+        this.setState({ theme: newThemeState })
+        console.log('updated', this.state.theme)
+        return true
     }
 }
 

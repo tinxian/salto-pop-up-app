@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'

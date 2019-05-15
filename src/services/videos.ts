@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { format, isAfter } from 'date-fns';
+import { format } from 'date-fns';
 
 export interface EpisodeResponseType {
     episodes: EpisodeType[]

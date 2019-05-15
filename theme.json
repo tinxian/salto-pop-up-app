@@ -1,27 +1,27 @@
 {
     "colors": {
-        "NavigationBackgroundColor": "#484848",
-        "NavigationIconsColor": "#ffffff",
-        "NavigationIconsActiveColor": "yellow",
-        "RadioPlayerControlsColor": "yellow",
-        "RadioPlayerBackgroundColor": "#212121",
-        "ButtonColor": "yellow",
-        "LabelColor": "yellow",
-        "LabelTextColor": "#000",
-        "PageBackgroundColor": "#000000",
+        "NavigationBackgroundColor": "#f5f5f5",
+        "NavigationIconsColor": "#000000",
+        "NavigationIconsActiveColor": "#F06159",
+        "RadioPlayerControlsColor": "#F06159",
+        "RadioPlayerBackgroundColor": "#c2c2c2",
+        "ButtonColor": "#F06159",
+        "LabelColor": "#F06159",
+        "LabelTextColor": "#ffffff",
+        "PageBackgroundColor": "#ffffff",
         "SaltoColor": "#E30613",
-        "TextColor": "#ffffff",
-        "TitleColor": "#ffffff",
-        "VideoBackgroundColor": "#ffffff",
+        "TextColor": "#000000",
+        "TitleColor": "#000000",
+        "VideoBackgroundColor": "#000000",
         "SubTitleColor": "#868686",
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
         "LiveIndicatorTextColor": "#ffffff",
-        "SeperatorColor": "purple"
+        "SeperatorColor": "#F06159"
     },
     "images": {
         "HeaderBackgroundUrl": {
-            "uri": "https://i2.wp.com/www.redpers.nl/wp-content/uploads/2016/10/Brading_ade_opening_mauricevinken.jpg?fit=1024%2C683&ssl=1"
+            "uri": "https://i.ibb.co/svjhCgG/achtergrond-2.jpg"
         },
         "saltoLogo": {
             "uri": ""
