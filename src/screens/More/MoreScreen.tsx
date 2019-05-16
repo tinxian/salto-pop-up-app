@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions, Linking, Alert } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -47,6 +47,7 @@ export const MoreScreen = withThemeContext(
                                 <Title size={TitleSizeType.large} color={colors.TitleColor}>Meer</Title>
                             </View>
                         )}
+                        ListFooterComponent={this.renderFooter}
                         contentContainerStyle={this.getWrapperStyles()}
                         contentInset={{ top: 100 }}
                         contentOffset={{ x: 0, y: -100 }}
@@ -63,11 +64,13 @@ export const MoreScreen = withThemeContext(
             return (
                 <TouchableHighlight onPress={() => this.onItemPress(item)}>
                     <View style={styles.itemContainer}>
-                        <Icon
-                            name={item.icon}
-                            color={colors.TextColor}
-                            size={25}
-                        />
+                        <View style={{ width: 25 }}>
+                            <Icon
+                                name={item.icon}
+                                color={colors.TextColor}
+                                size={25}
+                            />
+                        </View>
                         <View style={this.getLabelContainerStyles()}>
                             <Title color={colors.TextColor}>
                                 {item.label}
@@ -76,6 +79,49 @@ export const MoreScreen = withThemeContext(
                     </View>
                 </TouchableHighlight>
             )
+        }
+
+        private renderFooter = () => {
+            const { links, colors } = this.props.themeContext.theme
+
+            const elements = links.map((link, index) => (
+                <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link.link)}>
+                    <View style={styles.itemContainer}>
+                        <View style={{ width: 25 }}>
+                            <Icon
+                                name={getIcon(link.logo)}
+                                color={colors.TextColor}
+                                size={25}
+                            />
+                        </View>
+                        <View style={this.getLabelContainerStyles()}>
+                            <Title color={colors.TextColor}>
+                                {link.title}
+                            </Title>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+            ))
+
+            return (
+                <View style={{ marginTop: 44 }}>
+                    {elements}
+                </View>
+
+            )
+        }
+
+        private handleOpenUrl(url: string) {
+            Linking.canOpenURL(url).then(supported => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    Alert.alert(
+                        'Alert',
+                        'WhatsApp is not installed',
+                    )
+                }
+            });
         }
 
         private onItemPress = (item: MoreItem) => {

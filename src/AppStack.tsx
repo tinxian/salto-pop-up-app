@@ -75,35 +75,30 @@ export const RootNavigator = createStackNavigator({
         screen: OnDemandVideoScreen,
         navigationOptions: {
             gesturesEnabled: true,
-            mode: 'modal',
         },
     },
     LivestreamVideoScreen: {
         screen: LivestreamVideoScreen,
         navigationOptions: {
             gesturesEnabled: true,
-            mode: 'modal',
         },
     },
     RadioScreen: {
         screen: RadioScreen,
         navigationOptions: {
             gesturesEnabled: true,
-            mode: 'modal',
         },
     },
     SettingsScreen: {
         screen: SettingsScreen,
         navigationOptions: {
-            gesturesEnabled: false,
-            mode: 'modal',
+
         },
     },
     OtherEventsScreen: {
         screen: OtherEventsScreen,
         navigationOptions: {
-            gesturesEnabled: false,
-            mode: 'modal',
+
         },
     }
 }, {

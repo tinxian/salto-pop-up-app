@@ -27,5 +27,28 @@
         "saltoLogo": {
             "uri": ""
         }
-    }
+    },
+    "links": [
+        {
+            "title": "Salto op Facebook",
+            "link": "https://www.facebook.com/saltoamsterdam/",
+            "logo": "logo-facebook"
+        },
+        {
+            "title": "Salto op Twitter",
+            "link": "https://twitter.com/SALTOamsterdam",
+            "logo": "logo-twitter"
+        },
+        {
+            "title": "Salto op Instagram",
+            "link": "https://www.instagram.com/saltoamsterdam/",
+            "logo": "logo-instagram"
+        },
+        {
+            "title": "Over Salto",
+            "link": "https://www.salto.nl/over/",
+            "logo": "information-circle"
+        },
+    ],
+    "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
 }
