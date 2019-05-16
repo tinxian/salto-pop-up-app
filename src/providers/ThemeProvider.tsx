@@ -1,6 +1,6 @@
 import React, { Context } from 'react'
 import theme from '../../theme.json'
-import { ImageSourcePropType } from 'react-native';
+import { ImageSourcePropType } from 'react-native'
 
 interface Props { }
 
@@ -35,10 +35,28 @@ export interface LinkType {
     logo: string
 }
 
+export interface GeneralContentType {
+    general: ContentType
+    OtherEvents: OtherEventType[]
+}
+
+export interface ContentType {
+    RadioName: string
+    AppIntroduction: string
+}
+
+export interface OtherEventType {
+    title: string
+    subtitle: string
+    logo: string
+    link: string
+}
+
 export interface ThemeType {
     colors: ColorsType
     links: LinkType[]
     images: ImagesType
+    content: GeneralContentType
 }
 
 export interface ConfigType {
@@ -96,8 +114,7 @@ export function withThemeContext<Props>(Component: React.ComponentClass<ThemeInj
 
                 <ThemeContext.Consumer>
                     {
-                        context => <Component {...this.props} themeContext={context} />
-                    }
+                        context => <Component {...this.props} themeContext={context} />}
                 </ThemeContext.Consumer>
             )
         }

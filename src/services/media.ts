@@ -6,6 +6,11 @@ export class Media {
     }
 }
 
+export interface musicDataType {
+    artists: string[]
+    title: string
+}
+
 export interface LiveStreamDataType {
     artwork: string
     channel: string
@@ -13,6 +18,8 @@ export interface LiveStreamDataType {
     link: string
     live: boolean
     logo: string
+    news: boolean
+    music: musicDataType
     poster: string
     time: Date
     title: string

@@ -23,7 +23,7 @@ function getScreenHeight() {
     return Dimensions.get('window').height
 }
 function getHalfScreenHeight() {
-    return 450
+    return 350
 }
 export class BottomDrawer extends React.Component<Props, State> {
     public UP_POSITION = 0
@@ -154,6 +154,7 @@ const styles = StyleSheet.create({
         height: SWIPABLE_HEIGHT,
         alignItems: 'center',
         justifyContent: 'center',
+
     },
     swiper: {
         backgroundColor: 'rgba(255,255,255,0.8)',
@@ -163,6 +164,6 @@ const styles = StyleSheet.create({
         width: 48,
     },
     content: {
-        backgroundColor: '#ffffff',
+        backgroundColor: '#fff',
     },
 })

@@ -27,5 +27,25 @@
         "saltoLogo": {
             "uri": ""
         }
+    },
+    "content": {
+        "general": {
+            "RadioName": "PrideFM",
+            "AppIntroduction": "Placeholder..."
+        },
+        "OtherEvents": [
+            {
+                "title": "ADE x SALTO",
+                "subtitle": "Tijdlijn, nieuws en live",
+                "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
+                "link": ""
+            },
+            {
+                "title": "ADE x PRIDE",
+                "subtitle": "Livebeeld en meer!",
+                "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
+                "link": ""
+            }
+        ]
     }
 }
