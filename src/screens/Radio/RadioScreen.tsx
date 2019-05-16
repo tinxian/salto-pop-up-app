@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Image, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { View, StyleSheet, StatusBar, ActivityIndicator, ScrollView } from 'react-native'
 import Video from 'react-native-video'
 import { Media, LiveStreamDataType } from 'src/services/media'
-import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
 import SocketIOClient from 'socket.io-client'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
@@ -11,7 +9,7 @@ import { Videos, ScheduleType } from 'src/services/videos'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { InformationList } from 'src/components/core/List/InformationList'
 
-interface Props  {
+interface Props {
     uri?: string,
 }
 
@@ -58,7 +56,6 @@ export const RadioScreen = withThemeContext(
 
         public render() {
             const { programData, schedule } = this.state
-            const { colors } = this.props.themeContext.theme
 
             if (!programData) {
                 return (
