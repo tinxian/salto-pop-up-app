@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions, Linking, Alert } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -82,11 +82,11 @@ export const MoreScreen = withThemeContext(
         private renderFooter = () => {
             const { links, colors } = this.props.themeContext.theme
 
-            const elements = links.map(link => (
-                <TouchableHighlight onPress={() => undefined}>
+            const elements = links.map((link, index) => (
+                <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link.link)}>
                     <View style={styles.itemContainer}>
                         <Icon
-                            name={link.logo}
+                            name={getIcon(link.logo)}
                             color={colors.TextColor}
                             size={25}
                         />
@@ -100,11 +100,24 @@ export const MoreScreen = withThemeContext(
             ))
 
             return (
-                <View style={{ marginTop: 24 }}>
+                <View style={{ marginTop: 44 }}>
                     {elements}
                 </View>
 
             )
+        }
+
+        private handleOpenUrl(url: string) {
+            Linking.canOpenURL(url).then(supported => {
+                if (supported) {
+                    Linking.openURL(url);
+                } else {
+                    Alert.alert(
+                        'Alert',
+                        'WhatsApp is not installed',
+                    )
+                }
+            });
         }
 
         private onItemPress = (item: MoreItem) => {

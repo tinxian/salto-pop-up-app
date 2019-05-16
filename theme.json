@@ -31,18 +31,13 @@
     "links": [
         {
             "title": "salto on facebook",
-            "link": "www.google.nl",
+            "link": "https://www.facebook.com/saltoamsterdam/",
             "logo": "logo-facebook"
         },
         {
-            "title": "Pride on facebook",
-            "link": "www.google.nl",
-            "logo": "logo-facebook"
-        },
-        {
-            "title": "salto on twitter",
-            "link": "www.google.nl",
-            "logo": "logo-twitter"
+            "title": "Over Salto",
+            "link": "https://www.salto.nl/over/",
+            "logo": "information-circle"
         }
     ],
     "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
