@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     logo: {
         position: 'absolute',
         top: 20,
-        left: 20,
+        left: 12,
     },
     labelContainer: {
         flexDirection: 'row',

@@ -49,8 +49,6 @@ export const MoreScreen = withThemeContext(
                         )}
                         ListFooterComponent={this.renderFooter}
                         contentContainerStyle={this.getWrapperStyles()}
-                        contentInset={{ top: 100 }}
-                        contentOffset={{ x: 0, y: -100 }}
                         data={moreItems}
                         renderItem={item => this.renderItem(item.item)}
                         keyExtractor={item => item.label}
@@ -185,9 +183,10 @@ const styles = StyleSheet.create({
     logo: {
         position: 'absolute',
         top: 20,
-        left: 20,
+        left: 12,
     },
     content: {
+        marginTop: 100,
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
         borderRadius: 25,

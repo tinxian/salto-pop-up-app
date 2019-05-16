@@ -54,35 +54,25 @@ export const OnDemandListScreen = withThemeContext(
             const { theme } = this.props.themeContext
             const { data, loading } = this.state
 
-            if (this.state.loading) {
-                return (
-                    <View
-                        style={[
-                            this.getWrapperStyles(),
-                            { top: 100, paddingTop: 24 },
-                        ]}
-                    >
-                        <ActivityIndicator />
-                    </View>
-                )
-            }
+
 
             return (
                 <FlatList
                     ListHeaderComponent={() => (
-                        <View style={styles.titleContainer}>
-                            <Title
-                                size={TitleSizeType.large}
-                                color={theme.colors.TitleColor}
-                            >
-                                Videos
+                        <>
+                            <View style={styles.titleContainer}>
+                                <Title
+                                    size={TitleSizeType.large}
+                                    color={theme.colors.TitleColor}
+                                >
+                                    Videos
                             </Title>
-                        </View>
+                            </View>
+                            {this.renderLoading()}
+                        </>
                     )}
                     refreshing={loading}
                     contentContainerStyle={this.getWrapperStyles()}
-                    contentInset={{ top: 100 }}
-                    contentOffset={{ x: 0, y: -100 }}
                     data={data}
                     keyExtractor={item => {
                         return item.id
@@ -100,6 +90,19 @@ export const OnDemandListScreen = withThemeContext(
                 />
             )
 
+        }
+
+        private renderLoading() {
+            if (this.state.loading) {
+                return (
+                    <View
+                        style={{ paddingTop: 100 }}
+                    >
+                        <ActivityIndicator />
+                    </View>
+                )
+            }
+            return null
         }
         private getWrapperStyles() {
             const { PageBackgroundColor } = this.props.themeContext.theme.colors
@@ -130,12 +133,13 @@ const styles = StyleSheet.create({
     logo: {
         position: 'absolute',
         top: 20,
-        left: 20,
+        left: 12,
     },
     content: {
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
         borderRadius: 25,
+        marginTop: 100,
     },
     titleContainer: {
         flexDirection: 'row',

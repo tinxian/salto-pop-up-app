@@ -23,9 +23,6 @@
     "images": {
         "HeaderBackgroundUrl": {
             "uri": "https://i.ibb.co/svjhCgG/achtergrond-2.jpg"
-        },
-        "saltoLogo": {
-            "uri": ""
         }
     },
     "links": [
@@ -48,7 +45,7 @@
             "title": "Over Salto",
             "link": "https://www.salto.nl/over/",
             "logo": "information-circle"
-        },
+        }
     ],
     "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
 }
