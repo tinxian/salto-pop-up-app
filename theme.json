@@ -27,5 +27,23 @@
         "saltoLogo": {
             "uri": ""
         }
-    }
+    },
+    "links": [
+        {
+            "title": "salto on facebook",
+            "link": "www.google.nl",
+            "logo": "logo-facebook"
+        },
+        {
+            "title": "Pride on facebook",
+            "link": "www.google.nl",
+            "logo": "logo-facebook"
+        },
+        {
+            "title": "salto on twitter",
+            "link": "www.google.nl",
+            "logo": "logo-twitter"
+        }
+    ],
+    "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
 }

@@ -47,6 +47,7 @@ export const MoreScreen = withThemeContext(
                                 <Title size={TitleSizeType.large} color={colors.TitleColor}>Meer</Title>
                             </View>
                         )}
+                        ListFooterComponent={this.renderFooter}
                         contentContainerStyle={this.getWrapperStyles()}
                         contentInset={{ top: 100 }}
                         contentOffset={{ x: 0, y: -100 }}
@@ -75,6 +76,34 @@ export const MoreScreen = withThemeContext(
                         </View>
                     </View>
                 </TouchableHighlight>
+            )
+        }
+
+        private renderFooter = () => {
+            const { links, colors } = this.props.themeContext.theme
+
+            const elements = links.map(link => (
+                <TouchableHighlight onPress={() => undefined}>
+                    <View style={styles.itemContainer}>
+                        <Icon
+                            name={link.logo}
+                            color={colors.TextColor}
+                            size={25}
+                        />
+                        <View style={this.getLabelContainerStyles()}>
+                            <Title color={colors.TextColor}>
+                                {link.title}
+                            </Title>
+                        </View>
+                    </View>
+                </TouchableHighlight>
+            ))
+
+            return (
+                <View style={{ marginTop: 24 }}>
+                    {elements}
+                </View>
+
             )
         }
 

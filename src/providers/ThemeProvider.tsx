@@ -29,8 +29,15 @@ export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
 }
 
+export interface LinkType {
+    title: string
+    link: string
+    logo: string
+}
+
 export interface ThemeType {
     colors: ColorsType
+    links: LinkType[]
     images: ImagesType
 }
 
