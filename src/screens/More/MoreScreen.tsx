@@ -64,11 +64,13 @@ export const MoreScreen = withThemeContext(
             return (
                 <TouchableHighlight onPress={() => this.onItemPress(item)}>
                     <View style={styles.itemContainer}>
-                        <Icon
-                            name={item.icon}
-                            color={colors.TextColor}
-                            size={25}
-                        />
+                        <View style={{ width: 25 }}>
+                            <Icon
+                                name={item.icon}
+                                color={colors.TextColor}
+                                size={25}
+                            />
+                        </View>
                         <View style={this.getLabelContainerStyles()}>
                             <Title color={colors.TextColor}>
                                 {item.label}
@@ -85,11 +87,13 @@ export const MoreScreen = withThemeContext(
             const elements = links.map((link, index) => (
                 <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link.link)}>
                     <View style={styles.itemContainer}>
-                        <Icon
-                            name={getIcon(link.logo)}
-                            color={colors.TextColor}
-                            size={25}
-                        />
+                        <View style={{ width: 25 }}>
+                            <Icon
+                                name={getIcon(link.logo)}
+                                color={colors.TextColor}
+                                size={25}
+                            />
+                        </View>
                         <View style={this.getLabelContainerStyles()}>
                             <Title color={colors.TextColor}>
                                 {link.title}
