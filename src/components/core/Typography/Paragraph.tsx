@@ -28,6 +28,6 @@ export class Paragraph extends React.Component<Props, {}> {
 const styles = StyleSheet.create({
     container: {
         fontSize: 18,
-        fontWeight: '700',
+        fontWeight: '500',
     }
 })

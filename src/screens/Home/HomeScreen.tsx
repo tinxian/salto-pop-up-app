@@ -8,6 +8,8 @@ import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { getEventMessage } from 'src/utils/date';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { isWithinRange } from 'date-fns';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { colors } from 'src/utils/colors';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -20,7 +22,7 @@ interface State {
 export const HomeScreen = withThemeContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public render() {
-            const { LabelColor, LabelTextColor, TitleColor } = this.props.themeContext.theme.colors
+            const { LabelColor, LabelTextColor, TitleColor, TextColor } = this.props.themeContext.theme.colors
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
             return (
                 <View style={this.getStyles()}>
@@ -50,6 +52,9 @@ export const HomeScreen = withThemeContext(
                                         text={getEventMessage(new Date(), new Date())}
                                     />
                                 </View>
+                                <Paragraph textStyle={{ marginBottom: 24 }} color={TextColor}>
+                                    Tijdens de jaarlijkse Pride Amsterdam week gaat SALTO op roze! Van 28 juli t/m 5 augustus worden SALTO1 en StadsFM omgedoopt tot PRIDE TV en PRIDE FM! Hou SALTO in de gaten voor alle updates en informatie over de programma's!
+                                </Paragraph>
                                 {this.getMedia()}
 
                             </View>
