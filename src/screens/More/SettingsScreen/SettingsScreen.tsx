@@ -1,11 +1,12 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, TouchableOpacity, Button, Switch } from 'react-native'
+import { View, StyleSheet, StyleProp, TouchableOpacity, Switch, Text } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import themeAde from '../../../../themeAde.json'
 import theme from '../../../../theme.json'
+import { Title } from 'src/components/core/Typography/Title.js'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -23,12 +24,16 @@ export const SettingsScreen = withThemeContext(
         }
 
         public render() {
+            const { themeContext } = this.props
             return (
                 <View style={this.getStyles()}>
                     <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                         <Icon name={getIcon('close')} size={50} />
-                        <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
                     </TouchableOpacity>
+                    <View style={styles.settingsPageItem}>
+                        <Title  color={themeContext.theme.colors.TitleColor}>Placeholder</Title>
+                        <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
+                    </View>
                 </View>
             )
         }
@@ -57,5 +62,11 @@ export const SettingsScreen = withThemeContext(
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    settingsPageItem: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 12,
     },
 })

@@ -44,6 +44,7 @@ export class RadioBar extends React.Component<Props, State> {
 
     public render() {
         const { programData } = this.state
+        const { theme } = this.props
 
         if (!programData) {
             return (
@@ -68,7 +69,8 @@ export class RadioBar extends React.Component<Props, State> {
                             </View>
                         </TouchableOpacity>
                         <View style={{ flex: 1, paddingRight: 12 }}>
-                            <SubTitle numberOfLines={1} color={this.props.theme.colors.TextColor}>Nu live:  {programData.title}</SubTitle>
+                            {/* TODO: Make prideFM dynamic */}
+                            <SubTitle numberOfLines={1} color={theme.colors.TextColor}>{theme.content.general.RadioName}: {programData.title}</SubTitle>
                         </View>
                         <Icon
                             name={getIcon('arrow-up')}
@@ -79,7 +81,7 @@ export class RadioBar extends React.Component<Props, State> {
                 </TouchableOpacity>
             )}
                 renderContent={() => (
-                    <RadioScreen/>
+                    <RadioScreen toggleRadio={this.toggleRadio} active={this.state.active}/>
                 )}
             />
 

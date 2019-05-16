@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { View, StyleSheet, StyleProp, Image, ScrollView, Dimensions } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation';
-import { Label } from 'src/components/core/Label/Label';
-import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
-import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
-import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
-import { getEventMessage } from 'src/utils/date';
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { isWithinRange } from 'date-fns';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { colors } from 'src/utils/colors';
+import { NavigationScreenProps } from 'react-navigation'
+import { Label } from 'src/components/core/Label/Label'
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
+import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem'
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title'
+import { getEventMessage } from 'src/utils/date'
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { isWithinRange } from 'date-fns'
+import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { colors } from 'src/utils/colors'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -22,8 +22,9 @@ interface State {
 export const HomeScreen = withThemeContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public render() {
-            const { LabelColor, LabelTextColor, TitleColor, TextColor } = this.props.themeContext.theme.colors
-            const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
+            const { themeContext } = this.props
+            const { LabelColor, LabelTextColor, TitleColor } = themeContext.theme.colors
+            const { HeaderBackgroundUrl } = themeContext.theme.images
             return (
                 <View style={this.getStyles()}>
                     <Image
@@ -31,7 +32,7 @@ export const HomeScreen = withThemeContext(
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
+                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
 
                     <View style={styles.wrapper} >
                         <ScrollView style={{ flex: 1 }}>
@@ -52,9 +53,9 @@ export const HomeScreen = withThemeContext(
                                         text={getEventMessage(new Date(), new Date())}
                                     />
                                 </View>
-                                <Paragraph textStyle={{ marginBottom: 24 }} color={TextColor}>
-                                    Tijdens de jaarlijkse Pride Amsterdam week gaat SALTO op roze! Van 28 juli t/m 5 augustus worden SALTO1 en StadsFM omgedoopt tot PRIDE TV en PRIDE FM! Hou SALTO in de gaten voor alle updates en informatie over de programma's!
-                                </Paragraph>
+                                <View style={styles.introText}>
+                                    <Title color={TitleColor}>{themeContext.theme.content.general.AppIntroduction}</Title>
+                                </View>
                                 {this.getMedia()}
 
                             </View>
@@ -76,7 +77,7 @@ export const HomeScreen = withThemeContext(
                             theme={theme}
                             title={'Pride door salto live'}
                             onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
-                        // thumbnail={require("../../../../src/assets/images/logos/salto.png")}
+                            // thumbnail={require('../../../../src/assets/images/logos/salto.png')}
                         />
                     </View>
                 )
@@ -87,7 +88,7 @@ export const HomeScreen = withThemeContext(
                     theme={theme}
                     title={'Aftermovie pride 2018'}
                     poster={{
-                        uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e'
+                        uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e',
                     }}
                 />
             )
@@ -114,7 +115,6 @@ export const HomeScreen = withThemeContext(
 
 )
 
-
 const styles = StyleSheet.create({
     container: {
 
@@ -127,6 +127,12 @@ const styles = StyleSheet.create({
     wrapper: {
         width: '100%',
         height: '100%',
+    },
+    introText: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingBottom: 20,
     },
     content: {
         paddingHorizontal: 12,
@@ -150,5 +156,5 @@ const styles = StyleSheet.create({
     },
     titleContainer: {
         marginBottom: 12,
-    }
+    },
 })

@@ -4,7 +4,7 @@ import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import { Title } from 'src/components/core/Typography/Title'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { withThemeContext, ThemeInjectedProps, OtherEventType } from 'src/providers/ThemeProvider'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -14,27 +14,17 @@ interface State {
 
 }
 
-interface OtherEventItem {
-    title: string
-    subtitle: string
-    logo: string
-    link?: string
-}
-
-const OtherEventItems: OtherEventItem[] = [
-    { title: 'ADE x SALTO', subtitle: 'Tijdlijn, nieuws en live ', logo: 'https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg' },
-    { title: 'SALTO x SALTO', subtitle: 'Nieuws, nieuws en nieuws ', logo: 'https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg' },
-]
-
 export const OtherEventsScreen = withThemeContext(
     class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
 
         public render() {
-            const { colors } = this.props.themeContext.theme
+            const { themeContext } = this.props
+            const { colors } = themeContext.theme
+
             return (
                 <View style={this.getStyles()}>
 
-                    <FlatList<OtherEventItem>
+                    <FlatList<OtherEventType>
                         ListHeaderComponent={() => (
                             <>
                                 <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
@@ -46,7 +36,7 @@ export const OtherEventsScreen = withThemeContext(
                             </>
                         )}
                         contentContainerStyle={this.getWrapperStyles()}
-                        data={OtherEventItems}
+                        data={themeContext.theme.content.OtherEvents}
                         renderItem={item => this.renderItem(item.item)}
                         keyExtractor={item => item.title}
                     />
@@ -54,7 +44,7 @@ export const OtherEventsScreen = withThemeContext(
             )
         }
 
-        private renderItem(item: OtherEventItem) {
+        private renderItem(item: OtherEventType) {
             return (
                 <View style={styles.itemContainer}>
                     <Image

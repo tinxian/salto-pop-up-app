@@ -47,5 +47,25 @@
             "logo": "information-circle"
         }
     ],
+    "content": {
+        "general": {
+            "RadioName": "PrideFM",
+            "AppIntroduction": "Nederland is het land van meningen. En Amsterdam is daar de hoofdstad van. Hier komen de meeste meningen bij elkaar. En mag je zeggen wat je wilt. Daar zijn we trots op. Voeg die elementen bij elkaar en je krijgt waar SALTO voor staat: de trotse, vrije mening van iedereen."
+        },
+        "OtherEvents": [
+            {
+                "title": "ADE x SALTO",
+                "subtitle": "Tijdlijn, nieuws en live",
+                "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
+                "link": ""
+            },
+            {
+                "title": "ADE x PRIDE",
+                "subtitle": "Livebeeld en meer!",
+                "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
+                "link": ""
+            }
+        ]
+    },
     "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
 }
