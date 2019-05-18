@@ -11,6 +11,7 @@ import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvide
 import { InformationList } from 'src/components/core/List/InformationList'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Title } from 'src/components/core/Typography/Title'
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
 
 interface Props {
     uri?: string,
@@ -61,8 +62,7 @@ export const RadioScreen = withThemeContext(
 
         public render() {
             const { programData, schedule } = this.state
-            const { themeContext, toggleRadio, active } = this.props
-            const { colors } = themeContext.theme
+            const { toggleRadio, } = this.props
 
             if (!programData) {
                 return (
@@ -88,10 +88,10 @@ export const RadioScreen = withThemeContext(
                             </View>
                         </TouchableOpacity>
                     </View>
-                        <InformationList
-                            data={schedule}
-                            theme={this.props.themeContext.theme}
-                        />
+                    <InformationList
+                        data={schedule}
+                        theme={this.props.themeContext.theme}
+                    />
                 </View>
             )
         }
@@ -125,15 +125,17 @@ export const RadioScreen = withThemeContext(
 
             return (
                 <>
-                <Image style={styles.image} source={{ uri: programData.logo }}/>
-                <View style={styles.cover} />
+                    <Image style={styles.image} source={{ uri: programData.logo }} />
+                    <View style={styles.cover} />
                 </>
             )
         }
 
         private renderSongInfo() {
             const { programData } = this.state
-            const { themeContext } = this.props
+            const { colors } = this.props.themeContext.theme
+
+            console.log(programData)
 
             if (!programData) {
                 return <ActivityIndicator />
@@ -142,16 +144,17 @@ export const RadioScreen = withThemeContext(
             if (!programData.music) {
                 return (
                     <View style={{ flexWrap: 'wrap', width: Dimensions.get('window').width / 1.5 }}>
-                        <Title color={themeContext.theme.colors.TitleColor}>{programData.title}</Title>
+                        <Title color={colors.TitleColor}>{programData.title}</Title>
                     </View>
                 )
             }
 
             return (
                 <View style={{ flexWrap: 'wrap', width: Dimensions.get('window').width / 1.5 }}>
-                    <Title color={themeContext.theme.colors.TitleColor}>{programData.music.title}</Title>
-                    {programData.music.artists.map((item, key) => (
-                        <SubTitle key={key} color={themeContext.theme.colors.SubTitleColor}>{item}</SubTitle>
+                    <Title color={colors.TitleColor}>{programData.title}</Title>
+                    {programData.music.title && (<Paragraph color={colors.TextColor}>{programData.music.title}</Paragraph>)}
+                    {programData.music.artists && programData.music.artists.map((item, key) => (
+                        <SubTitle key={key} color={colors.SubTitleColor}>{item}</SubTitle>
                     ))}
                 </View>
             )

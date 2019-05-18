@@ -60,28 +60,28 @@ export class RadioBar extends React.Component<Props, State> {
             <BottomDrawerManager
                 renderHandler={open => (
                     <TouchableOpacity onPress={open}>
-                    <View style={this.getStyles()}>
-                        <TouchableOpacity onPress={this.toggleRadio}>
-                            <View style={styles.controls}>
-                                <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
-                                <View style={styles.cover} />
-                                {this.renderControls()}
+                        <View style={this.getStyles()}>
+                            <TouchableOpacity onPress={this.toggleRadio}>
+                                <View style={styles.controls}>
+                                    <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
+                                    <View style={styles.cover} />
+                                    {this.renderControls()}
+                                </View>
+                            </TouchableOpacity>
+                            <View style={{ flex: 1, paddingRight: 12 }}>
+                                {/* TODO: Make prideFM dynamic */}
+                                <SubTitle numberOfLines={1} color={theme.colors.TextColor}>{theme.content.general.RadioName}: {programData.title}</SubTitle>
                             </View>
-                        </TouchableOpacity>
-                        <View style={{ flex: 1, paddingRight: 12 }}>
-                            {/* TODO: Make prideFM dynamic */}
-                            <SubTitle numberOfLines={1} color={theme.colors.TextColor}>{theme.content.general.RadioName}: {programData.title}</SubTitle>
+                            <Icon
+                                name={getIcon('arrow-up')}
+                                color={this.props.theme.colors.TextColor}
+                                size={22}
+                            />
                         </View>
-                        <Icon
-                            name={getIcon('arrow-up')}
-                            color={this.props.theme.colors.TextColor}
-                            size={22}
-                        />
-                    </View>
-                </TouchableOpacity>
-            )}
+                    </TouchableOpacity>
+                )}
                 renderContent={() => (
-                    <RadioScreen toggleRadio={this.toggleRadio} active={this.state.active}/>
+                    <RadioScreen toggleRadio={this.toggleRadio} active={this.state.active} />
                 )}
             />
 
@@ -150,7 +150,7 @@ export class RadioBar extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: 40,
+        height: 46,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000',
         marginRight: 12,
         width: 56,
-        height: 40,
+        height: 46,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',

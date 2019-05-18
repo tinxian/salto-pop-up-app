@@ -23,6 +23,9 @@
     "images": {
         "HeaderBackgroundUrl": {
             "uri": "https://i.ibb.co/svjhCgG/achtergrond-2.jpg"
+        },
+        "defaultThumbnail": {
+            "uri": "https://i.ibb.co/chXbWHY/thumbnail.jpg"
         }
     },
     "links": [
@@ -48,6 +51,10 @@
         }
     ],
     "content": {
+        "App": {
+            "startDate": "Fri May 18 2019 00:00:00 GMT+0200 (CEST)",
+            "endDate": "Sat May 19 2019 00:00:00 GMT+0200 (CEST)"
+        },
         "general": {
             "RadioName": "PrideFM",
             "AppIntroduction": "Nederland is het land van meningen. En Amsterdam is daar de hoofdstad van. Hier komen de meeste meningen bij elkaar. En mag je zeggen wat je wilt. Daar zijn we trots op. Voeg die elementen bij elkaar en je krijgt waar SALTO voor staat: de trotse, vrije mening van iedereen."
@@ -67,5 +74,4 @@
             }
         ]
     },
-    "_comment": "refer to https://ionicons.com/ to see the available icons you can use"
 }

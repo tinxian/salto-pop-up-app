@@ -27,6 +27,7 @@ export interface ColorsType {
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
+    defaultThumbnail: ImageSourcePropType
 }
 
 export interface LinkType {
@@ -36,8 +37,14 @@ export interface LinkType {
 }
 
 export interface GeneralContentType {
+    App: AppType
     general: ContentType
     OtherEvents: OtherEventType[]
+}
+
+export interface AppType {
+    startDate: string
+    endDate: string
 }
 
 export interface ContentType {
@@ -57,10 +64,6 @@ export interface ThemeType {
     links: LinkType[]
     images: ImagesType
     content: GeneralContentType
-}
-
-export interface ConfigType {
-
 }
 
 interface ContextType {
@@ -93,9 +96,7 @@ export class ThemeProvider extends React.Component<Props, ContextType> {
     }
 
     private setThemeStateValue(newThemeState: ThemeType) {
-        console.log('new', newThemeState)
         this.setState({ theme: newThemeState })
-        console.log('updated', this.state.theme)
         return true
     }
 }

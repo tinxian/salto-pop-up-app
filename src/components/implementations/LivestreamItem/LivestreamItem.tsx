@@ -47,6 +47,7 @@ export class LivestreamItem extends React.Component<Props, State> {
                                 onLoadEnd={() => this.setState({ loading: false })}
                             />
                         )}
+                        <View style={styles.cover} />
                         <Icon
                             name={getIcon('play-circle')}
                             color={theme.colors.playButtonColor}
@@ -128,5 +129,12 @@ const styles = StyleSheet.create({
     },
     title: {
         marginVertical: 12,
+    },
+    cover: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%',
+        backgroundColor: '#000',
+        opacity: 0.4,
     }
 })

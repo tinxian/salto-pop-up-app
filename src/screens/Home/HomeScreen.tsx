@@ -23,13 +23,13 @@ export const HomeScreen = withThemeContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public render() {
             const { themeContext } = this.props
-            const { LabelColor, LabelTextColor, TitleColor } = themeContext.theme.colors
-            const { HeaderBackgroundUrl } = themeContext.theme.images
+            const { colors, images, content } = themeContext.theme
+
             return (
                 <View style={this.getStyles()}>
                     <Image
                         style={styles.background}
-                        source={HeaderBackgroundUrl}
+                        source={images.HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
                     <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
@@ -42,19 +42,21 @@ export const HomeScreen = withThemeContext(
 
                                 <View style={styles.labelContainer}>
                                     <Title
-                                        color={TitleColor}
+                                        color={colors.TitleColor}
                                         size={TitleSizeType.large}
                                     >
                                         Home
                                     </Title>
                                     <Label
-                                        color={LabelColor}
-                                        textColor={LabelTextColor}
-                                        text={getEventMessage(new Date(), new Date())}
+                                        color={colors.LabelColor}
+                                        textColor={colors.LabelTextColor}
+                                        text={getEventMessage(new Date(content.App.startDate), new Date(content.App.endDate))}
                                     />
                                 </View>
                                 <View style={styles.introText}>
-                                    <Title color={TitleColor}>{themeContext.theme.content.general.AppIntroduction}</Title>
+                                    <Paragraph color={colors.TitleColor}>
+                                        {themeContext.theme.content.general.AppIntroduction}
+                                    </Paragraph>
                                 </View>
                                 {this.getMedia()}
 
@@ -77,7 +79,7 @@ export const HomeScreen = withThemeContext(
                             theme={theme}
                             title={'Pride door salto live'}
                             onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
-                            // thumbnail={require('../../../../src/assets/images/logos/salto.png')}
+                            thumbnail={theme.images.defaultThumbnail}
                         />
                     </View>
                 )
