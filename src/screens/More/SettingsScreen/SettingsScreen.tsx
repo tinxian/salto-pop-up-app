@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, TouchableOpacity, Switch, Text } from 'react-native'
+import { View, StyleSheet, StyleProp, TouchableOpacity, Switch } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -31,7 +31,7 @@ export const SettingsScreen = withThemeContext(
                         <Icon name={getIcon('close')} size={50} />
                     </TouchableOpacity>
                     <View style={styles.settingsPageItem}>
-                        <Title  color={themeContext.theme.colors.TitleColor}>Placeholder</Title>
+                        <Title color={themeContext.theme.colors.TitleColor}>Placeholder</Title>
                         <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
                     </View>
                 </View>

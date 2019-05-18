@@ -1,8 +1,8 @@
 import React from 'react'
-import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native';
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { NavigationScreenProps, NavigationRoute, NavigationState } from 'react-navigation';
-import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar';
+import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native'
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { NavigationScreenProps, NavigationRoute, NavigationState } from 'react-navigation'
+import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 interface State {
@@ -22,7 +22,6 @@ export const SaltoTabBarBottom = withThemeContext(
                 <View style={this.getStyles()}>
                     <RadioBar
                         theme={theme}
-                        onPressBar={this.navigateToRadioScreen}
                     />
                     <View style={styles.tabContainer}>
                         {this.renderTabs()}
@@ -50,11 +49,6 @@ export const SaltoTabBarBottom = withThemeContext(
         private handleOnPress = (index: number, route: NavigationRoute<{}>) => {
             this.setState({ activeIndex: index })
             this.props.navigation.navigate(route.routeName)
-        }
-
-        private navigateToRadioScreen = () => {
-            const { navigation } = this.props
-            navigation.navigate('RadioScreen')
         }
 
         private getIcon(route: NavigationRoute<{}>) {

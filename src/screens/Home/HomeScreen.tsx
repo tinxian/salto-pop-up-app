@@ -9,7 +9,6 @@ import { getEventMessage } from 'src/utils/date'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { isWithinRange } from 'date-fns'
 import { Paragraph } from 'src/components/core/Typography/Paragraph'
-import { colors } from 'src/utils/colors'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>

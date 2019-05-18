@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StatusBar, Text, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
+import { View, StyleSheet, StatusBar, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
 import Video from 'react-native-video'
 import { Media, LiveStreamDataType } from 'src/services/media'
 import SocketIOClient from 'socket.io-client'
@@ -62,7 +61,7 @@ export const RadioScreen = withThemeContext(
 
         public render() {
             const { programData, schedule } = this.state
-            const { toggleRadio, } = this.props
+            const { toggleRadio } = this.props
 
             if (!programData) {
                 return (
@@ -116,8 +115,7 @@ export const RadioScreen = withThemeContext(
         }
 
         private renderCover() {
-            const { loading, active, programData } = this.state
-            const { themeContext } = this.props
+            const { loading, programData } = this.state
 
             if (loading || !programData) {
                 return <ActivityIndicator />

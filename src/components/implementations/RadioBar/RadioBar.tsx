@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity, Text } from 'react-native'
+import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider'
@@ -63,14 +63,23 @@ export class RadioBar extends React.Component<Props, State> {
                         <View style={this.getStyles()}>
                             <TouchableOpacity onPress={this.toggleRadio}>
                                 <View style={styles.controls}>
-                                    <Image resizeMode={'cover'} style={{ height: 56, width: 100, position: 'absolute' }} source={{ uri: programData.logo }} />
+                                    <Image
+                                        resizeMode={'cover'}
+                                        style={styles.image}
+                                        source={{ uri: programData.logo }}
+                                    />
                                     <View style={styles.cover} />
                                     {this.renderControls()}
                                 </View>
                             </TouchableOpacity>
                             <View style={{ flex: 1, paddingRight: 12 }}>
                                 {/* TODO: Make prideFM dynamic */}
-                                <SubTitle numberOfLines={1} color={theme.colors.TextColor}>{theme.content.general.RadioName}: {programData.title}</SubTitle>
+                                <SubTitle
+                                    numberOfLines={1}
+                                    color={theme.colors.TextColor}
+                                >
+                                    {theme.content.general.RadioName}: {programData.title}
+                                </SubTitle>
                             </View>
                             <Icon
                                 name={getIcon('arrow-up')}
@@ -111,14 +120,6 @@ export class RadioBar extends React.Component<Props, State> {
                 size={33}
             />
         )
-    }
-
-    private onPressBar = () => {
-        const { onPressBar } = this.props
-
-        if (onPressBar) {
-            onPressBar()
-        }
     }
 
     private toggleRadio = () => {
@@ -173,4 +174,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#000',
         opacity: 0.4,
     },
+    image: {
+        height: 56,
+        width: 100,
+        position: 'absolute',
+    }
 })

@@ -7,11 +7,11 @@ import {
     TouchableHighlight,
     ImageSourcePropType,
 } from 'react-native'
-import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator';
-import { getIcon } from 'src/utils/icons';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Title } from 'src/components/core/Typography/Title';
-import { ThemeType } from 'src/providers/ThemeProvider';
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
+import { getIcon } from 'src/utils/icons'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { Title } from 'src/components/core/Typography/Title'
+import { ThemeType } from 'src/providers/ThemeProvider'
 
 export interface Props {
     style?: StyleProp<{}>,
