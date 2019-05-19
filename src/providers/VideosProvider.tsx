@@ -39,7 +39,6 @@ export class VideosProvider extends React.Component<{}, {}> {
     private async getVideos() {
         this.setState({ loading: true })
         const episodes = await Videos.getAllVideos()
-        console.log(episodes)
         this.setState({ episodes, loading: false })
         return true
     }

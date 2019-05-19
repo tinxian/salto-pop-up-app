@@ -60,6 +60,7 @@ export class TabNavigatorComponent extends React.Component<NavigationScreenProps
     public componentDidMount() {
         console.log(TabNavigatorComponent.router)
     }
+
     public render() {
         const { navigation } = this.props
         return (
