@@ -89,7 +89,7 @@ export class RadioBar extends React.Component<Props, State> {
                     </TouchableOpacity>
                 )}
                 renderContent={() => (
-                    <RadioScreen toggleRadio={this.toggleRadio} active={this.state.active} />
+                    <RadioScreen programData={programData} toggleRadio={this.toggleRadio} active={this.state.active} />
                 )}
             />
 

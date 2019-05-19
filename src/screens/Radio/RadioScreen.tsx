@@ -2,7 +2,6 @@ import * as React from 'react'
 import { View, StyleSheet, StatusBar, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
 import Video from 'react-native-video'
 import { LiveStreamDataType, Media } from 'src/services/media'
-import SocketIOClient from 'socket.io-client'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
 import { ScheduleType } from 'src/services/videos'
@@ -16,11 +15,11 @@ interface Props {
     uri?: string,
     active: boolean
     toggleRadio: () => void
+    programData?: LiveStreamDataType
 }
 
 interface State {
     loading: boolean
-    programData?: LiveStreamDataType
     schedule: ScheduleType[]
     active: boolean
 }
@@ -29,23 +28,13 @@ export const RadioScreen = withThemeContext(
     class RadioScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public state: State = {
             loading: true,
-            programData: undefined,
             active: false,
             schedule: [],
         }
 
         public player: Video | null
-        private socket: any
 
         public async componentDidMount() {
-            StatusBar.setHidden(true, 'fade')
-            this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-            this.socket.emit('join', { channel: 'stadsfm' })// emits 'hi server' to your server
-
-            // Listens to channel2 and display the data recieved
-            this.socket.on('update', (data: LiveStreamDataType) => {
-                this.setState({ programData: data })
-            })
 
             const schedule = await Media.getScheduleByChannel(Media.getRadioChannelName())
             schedule.splice(4)
@@ -59,8 +48,8 @@ export const RadioScreen = withThemeContext(
         }
 
         public render() {
-            const { programData, schedule } = this.state
-            const { toggleRadio } = this.props
+            const { schedule } = this.state
+            const { toggleRadio, programData } = this.props
 
             if (!programData) {
                 return (
@@ -114,7 +103,8 @@ export const RadioScreen = withThemeContext(
         }
 
         private renderCover() {
-            const { loading, programData } = this.state
+            const { programData } = this.props
+            const { loading } = this.state
 
             if (loading || !programData) {
                 return <ActivityIndicator />
@@ -129,7 +119,7 @@ export const RadioScreen = withThemeContext(
         }
 
         private renderSongInfo() {
-            const { programData } = this.state
+            const { programData } = this.props
             const { colors } = this.props.themeContext.theme
 
             if (!programData) {
