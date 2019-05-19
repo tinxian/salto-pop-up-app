@@ -1,4 +1,5 @@
 import { ImageSourcePropType } from "react-native";
+import Config from "react-native-config";
 
 export interface ColorsType {
     NavigationBackgroundColor: string
@@ -68,4 +69,12 @@ export interface ThemeType {
 export interface ThemeContextType {
     theme: ThemeType
     setThemeState: (values: ThemeType) => void
+}
+
+
+export class Theme {
+    public static getExternalTheme() {
+        return Config.EXTERNAL_THEME_URL
+    }
+
 }

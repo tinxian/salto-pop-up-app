@@ -43,10 +43,6 @@ export const RadioScreen = withThemeContext(
 
         }
 
-        public componentWillUnmount() {
-            StatusBar.setHidden(false, 'fade')
-        }
-
         public render() {
             const { schedule } = this.state
             const { toggleRadio, programData } = this.props

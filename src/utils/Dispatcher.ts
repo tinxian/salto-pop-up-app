@@ -42,7 +42,7 @@ export class Dispatcher {
      * @param {String} event
      * @param {Object} event parameters
      */
-    public dispatch(event: string, eventCallbackData: any) {
+    public dispatch(event: string, eventCallbackData?: any) {
         if (this.destroyed) {
             return
         }

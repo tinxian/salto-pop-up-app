@@ -85,7 +85,6 @@ export const HomeScreen = withThemeContext(withVideosContext(
                     />
                 )
             }
-            console.log(afterMovie)
 
             if (afterMovie) {
                 return (

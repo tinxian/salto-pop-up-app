@@ -30,6 +30,11 @@
     },
     "links": [
         {
+            "title": "Pride Amsterdam",
+            "link": "https://pride.amsterdam/",
+            "logo": "planet"
+        },
+        {
             "title": "Salto op Facebook",
             "link": "https://www.facebook.com/saltoamsterdam/",
             "logo": "logo-facebook"
@@ -52,10 +57,19 @@
     ],
     "content": {
         "App": {
-            "startDate": "Fri May 18 2019 00:00:00 GMT+0200 (CEST)",
-            "endDate": "Sat May 19 2019 00:00:00 GMT+0200 (CEST)"
+            "startDate": "Fri May 16 2019 00:00:00 GMT+0200 (CEST)",
+            "endDate": "Sat May 16 2019 00:00:00 GMT+0200 (CEST)"
         },
         "general": {
+            "AftermovieId": "3TXQ36FPJ6uu2Mu64OgKaw",
+            "HighlightedVideoIds": [
+                "3TXQ36FPJ6uu2Mu64OgKaw",
+                "7EEHKSCbU4uOQ6aU6sy0qs",
+                "1d1nsC9uVuSAQ0sKKEKges",
+                "EqsKzf55QGCw4cQMw4GOK",
+                "7UxKNgpvhYqMCaQuOiyYQ",
+                "2R7GFhEx1CEW2qioSkKAu0"
+            ],
             "EventName": "Pride 2018",
             "RadioName": "PrideFM",
             "AppIntroduction": "Nederland is het land van meningen. En Amsterdam is daar de hoofdstad van. Hier komen de meeste meningen bij elkaar. En mag je zeggen wat je wilt. Daar zijn we trots op. Voeg die elementen bij elkaar en je krijgt waar SALTO voor staat: de trotse, vrije mening van iedereen."

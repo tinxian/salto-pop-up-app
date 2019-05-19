@@ -24,7 +24,7 @@ interface State {
 }
 
 export class RadioBar extends React.Component<Props, State> {
-    private static radioDispatcher = new Dispatcher()
+    public static radioDispatcher = new Dispatcher()
 
     public state: State = {
         loading: false,
@@ -39,7 +39,6 @@ export class RadioBar extends React.Component<Props, State> {
         RadioBar.radioDispatcher.subscribe('stopRadio', () => {
             this.setState({ active: false })
         })
-
 
         SoundPlayer.onFinishedLoading(() => {
             this.setState({

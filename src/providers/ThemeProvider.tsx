@@ -1,6 +1,7 @@
 import React, { Context } from 'react'
 import theme from '../../theme.json'
-import { ThemeContextType, ThemeType } from 'src/services/theme.js';
+import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js';
+import axios from 'axios'
 
 export const ThemeContext: Context<ThemeContextType> = React.createContext({
     theme,
@@ -12,6 +13,11 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
     public state: ThemeContextType = {
         theme,
         setThemeState: newTheme => this.setThemeStateValue(newTheme),
+    }
+
+    public async componentDidMount() {
+        const response = await axios.get(Theme.getExternalTheme())
+        this.setState({ theme: response.data })
     }
 
     public render() {

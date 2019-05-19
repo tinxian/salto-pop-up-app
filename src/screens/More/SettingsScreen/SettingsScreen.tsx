@@ -4,7 +4,7 @@ import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import themeAde from '../../../../themeAde.json'
+import themeAlt from '../../../../themeAlt.json'
 import theme from '../../../../theme.json'
 import { Title } from 'src/components/core/Typography/Title.js'
 
@@ -41,7 +41,7 @@ export const SettingsScreen = withThemeContext(
         private onThemeChange = (bool: boolean) => {
             const { setThemeState } = this.props.themeContext
             if (bool) {
-                setThemeState(themeAde)
+                setThemeState(themeAlt)
                 this.setState({ themeSwitch: bool })
                 return
             }
