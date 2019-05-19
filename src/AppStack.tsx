@@ -57,6 +57,9 @@ const TabNavigator = createBottomTabNavigator({
 
 export class TabNavigatorComponent extends React.Component<NavigationScreenProps, {}> {
     private static router = TabNavigator.router
+    public componentDidMount() {
+        console.log(TabNavigatorComponent.router)
+    }
     public render() {
         const { navigation } = this.props
         return (
