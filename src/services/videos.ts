@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { format } from 'date-fns'
+import Config from 'react-native-config'
 
 export interface EpisodeResponseType {
     episodes: EpisodeType[]
@@ -58,7 +58,7 @@ export interface EpisodeStreamType {
 export class Videos {
     public static async getAllVideos() {
         try {
-            const result: AxiosResponse<EpisodeResponseType> = await axios.get('https://vod.salto.nl/data/ondemand/pride')
+            const result: AxiosResponse<EpisodeResponseType> = await axios.get(`https://vod.salto.nl/data/ondemand/${Config.VIDEOS_CHANNEL_NAME}`)
 
             return result.data.episodes
         } catch (err) {
@@ -67,20 +67,16 @@ export class Videos {
             return []
         }
     }
-
-    public static async getScheduleByChannel(channel: string) {
-        try {
-            const date = format(new Date(), 'YYYYMMDD')
-            const result: AxiosResponse<ScheduleResponseType> = await axios.get(`https://api.salto.nl/api/schedule/${channel}/day/${date}`)
-            console.log(result)
-            const schedule = result.data.schedule.filter(item => item.time.replace(':', '') >= format(new Date(), 'HHmm'))
-            schedule.sort((a, b) => parseInt(a.time, 10) - parseInt(b.time, 10))
-
-            return schedule
-        } catch (err) {
-            console.log(err)
-
-            return []
-        }
+    public static getLivestreamUrl() {
+        return Config.LIVESTREAM_URL
     }
+
+    public static getVideosChannelName() {
+        return Config.VIDEOS_CHANNEL_NAME
+    }
+
+    public static getLivestreamChannelName() {
+        return Config.LIVESTREAM_CHANNEL_NAME
+    }
+
 }

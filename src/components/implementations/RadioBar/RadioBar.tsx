@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { ThemeType } from 'src/providers/ThemeProvider'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
-import { LiveStreamDataType } from 'src/services/media'
+import { LiveStreamDataType, Media } from 'src/services/media'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/BottomDrawerManager'
 import { RadioScreen } from 'src/screens/Radio/RadioScreen'
@@ -73,7 +73,6 @@ export class RadioBar extends React.Component<Props, State> {
                                 </View>
                             </TouchableOpacity>
                             <View style={{ flex: 1, paddingRight: 12 }}>
-                                {/* TODO: Make prideFM dynamic */}
                                 <SubTitle
                                     numberOfLines={1}
                                     color={theme.colors.TextColor}
@@ -99,7 +98,7 @@ export class RadioBar extends React.Component<Props, State> {
 
     private initLiveData() {
         this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-        this.socket.emit('join', { channel: 'stadsfm' })
+        this.socket.emit('join', { channel: Media.getRadioChannelName() })
 
         this.socket.on('update', (data: LiveStreamDataType) => {
             this.setState({ programData: data })

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import { View, StyleSheet, StatusBar, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
 import Video from 'react-native-video'
-import { Media, LiveStreamDataType } from 'src/services/media'
+import { LiveStreamDataType, Media } from 'src/services/media'
 import SocketIOClient from 'socket.io-client'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
-import { Videos, ScheduleType } from 'src/services/videos'
+import { ScheduleType } from 'src/services/videos'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { InformationList } from 'src/components/core/List/InformationList'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
@@ -38,7 +38,6 @@ export const RadioScreen = withThemeContext(
         private socket: any
 
         public async componentDidMount() {
-            Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
             this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
             this.socket.emit('join', { channel: 'stadsfm' })// emits 'hi server' to your server
@@ -48,7 +47,7 @@ export const RadioScreen = withThemeContext(
                 this.setState({ programData: data })
             })
 
-            const schedule = await Videos.getScheduleByChannel('stadsfm')
+            const schedule = await Media.getScheduleByChannel(Media.getRadioChannelName())
             schedule.splice(4)
 
             this.setState({ schedule, loading: false })
@@ -133,8 +132,6 @@ export const RadioScreen = withThemeContext(
             const { programData } = this.state
             const { colors } = this.props.themeContext.theme
 
-            console.log(programData)
-
             if (!programData) {
                 return <ActivityIndicator />
             }
@@ -172,6 +169,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 12,
+        borderTopRightRadius: 16,
+        borderTopLeftRadius: 16,
     },
     wrapper: {
         paddingVertical: 15,

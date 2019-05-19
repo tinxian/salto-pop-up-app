@@ -6,6 +6,8 @@ import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoI
 import { Videos, EpisodeType } from 'src/services/videos';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
+import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
+import { isWithinRange } from 'date-fns';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -53,23 +55,25 @@ export const OnDemandListScreen = withThemeContext(
         private renderList() {
             const { theme } = this.props.themeContext
             const { data, loading } = this.state
+            console.log(data)
 
 
 
             return (
                 <FlatList
                     ListHeaderComponent={() => (
-                        <>
+                        <React.Fragment>
                             <View style={styles.titleContainer}>
                                 <Title
                                     size={TitleSizeType.large}
                                     color={theme.colors.TitleColor}
                                 >
                                     Videos
-                            </Title>
+                                </Title>
                             </View>
+                            {this.renderPinnedMedia()}
                             {this.renderLoading()}
-                        </>
+                        </React.Fragment>
                     )}
                     refreshing={loading}
                     contentContainerStyle={this.getWrapperStyles()}
@@ -90,6 +94,24 @@ export const OnDemandListScreen = withThemeContext(
                 />
             )
 
+        }
+
+        private renderPinnedMedia() {
+            const { theme } = this.props.themeContext
+            const currentDate = new Date()
+
+            if (!isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
+                return null
+            }
+
+            return (
+                <LivestreamItem
+                    theme={theme}
+                    title={`${theme.content.general.EventName} live`}
+                    onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
+                    thumbnail={theme.images.defaultThumbnail}
+                />
+            )
         }
 
         private renderLoading() {

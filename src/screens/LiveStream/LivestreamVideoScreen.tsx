@@ -48,14 +48,14 @@ export const LivestreamVideoScreen = withThemeContext(
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
             this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-            this.socket.emit('join', { channel: 'salto1' })// emits 'hi server' to your server
+            this.socket.emit('join', { channel: Videos.getLivestreamChannelName() })// emits 'hi server' to your server
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
                 this.setState({ programData: data })
             })
 
-            const schedule = await Videos.getScheduleByChannel('salto1')
+            const schedule = await Media.getScheduleByChannel(Videos.getLivestreamChannelName())
 
             this.setState({ schedule })
         }
@@ -80,7 +80,7 @@ export const LivestreamVideoScreen = withThemeContext(
                         <VideoPlayer
                             style={{ flex: 1 }}
                             ref={(ref: Video) => this.player = ref}
-                            source={{ uri: 'https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8' }}
+                            source={{ uri: Videos.getLivestreamUrl() }}
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenToggle}
                             onExitFullscreen={this.handleFullScreenToggle}

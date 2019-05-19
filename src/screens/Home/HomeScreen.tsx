@@ -58,11 +58,9 @@ export const HomeScreen = withThemeContext(
                                     </Paragraph>
                                 </View>
                                 {this.getMedia()}
-
                             </View>
                         </ScrollView>
                     </View>
-
                 </View>
             )
         }
@@ -71,23 +69,20 @@ export const HomeScreen = withThemeContext(
             const { theme } = this.props.themeContext
             const currentDate = new Date()
 
-            if (isWithinRange(currentDate, new Date(), new Date())) {
+            if (isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
                 return (
-                    <View>
-                        <LivestreamItem
-                            theme={theme}
-                            title={'Pride door salto live'}
-                            onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
-                            thumbnail={theme.images.defaultThumbnail}
-                        />
-                    </View>
+                    <LivestreamItem
+                        theme={theme}
+                        onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
+                        thumbnail={theme.images.defaultThumbnail}
+                    />
                 )
             }
 
             return (
                 <OnDemandVideoItem
                     theme={theme}
-                    title={'Aftermovie pride 2018'}
+                    title={`Aftermovie ${theme.content.general.EventName}`}
                     poster={{
                         uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e',
                     }}

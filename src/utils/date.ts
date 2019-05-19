@@ -24,7 +24,7 @@ export function getEventMessage(startDate: Date, endDate: Date) {
         return `Evenement begint over ${numbDays} dag${numbDays !== 1 ? 'en' : ''}`
     }
 
-    return `Evenement is beeindigd`
+    return `Evenement is beëindigd`
 }
 
 export function getMillisecondsInMinutes(milliseconds: number) {

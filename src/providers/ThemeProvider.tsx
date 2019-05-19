@@ -37,6 +37,7 @@ export interface LinkType {
 }
 
 export interface GeneralContentType {
+    HighlightedVideoIds: string[]
     App: AppType
     general: ContentType
     OtherEvents: OtherEventType[]
@@ -48,6 +49,7 @@ export interface AppType {
 }
 
 export interface ContentType {
+    EventName: string
     RadioName: string
     AppIntroduction: string
 }
