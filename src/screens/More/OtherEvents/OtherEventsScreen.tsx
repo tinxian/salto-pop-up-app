@@ -4,7 +4,8 @@ import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import { Title } from 'src/components/core/Typography/Title'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { withThemeContext, ThemeInjectedProps, OtherEventType } from 'src/providers/ThemeProvider'
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { OtherEventType } from 'src/services/theme';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -27,7 +28,7 @@ export const OtherEventsScreen = withThemeContext(
                     <FlatList<OtherEventType>
                         ListHeaderComponent={() => (
                             <>
-                                <TouchableOpacity onPress={() => { this.props.navigation.goBack() }}>
+                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
                                     <Icon name={getIcon('close')} size={50} />
                                 </TouchableOpacity>
                                 <View style={styles.titleContainer}>

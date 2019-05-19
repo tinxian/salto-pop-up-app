@@ -2,13 +2,14 @@ import * as React from 'react'
 import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
 import SoundPlayer from 'react-native-sound-player'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { ThemeType } from 'src/providers/ThemeProvider'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
 import { LiveStreamDataType, Media } from 'src/services/media'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/BottomDrawerManager'
 import { RadioScreen } from 'src/screens/Radio/RadioScreen'
+import { ThemeType } from 'src/services/theme';
+import { Dispatcher } from 'src/utils/Dispatcher';
 
 interface Props {
     style?: StyleProp<{}>
@@ -23,6 +24,7 @@ interface State {
 }
 
 export class RadioBar extends React.Component<Props, State> {
+    private static radioDispatcher = new Dispatcher()
 
     public state: State = {
         loading: false,
@@ -30,9 +32,15 @@ export class RadioBar extends React.Component<Props, State> {
         programData: undefined,
     }
 
+
     private socket: any
 
     public componentDidMount() {
+        RadioBar.radioDispatcher.subscribe('stopRadio', () => {
+            this.setState({ active: false })
+        })
+
+
         SoundPlayer.onFinishedLoading(() => {
             this.setState({
                 loading: false,
@@ -40,6 +48,10 @@ export class RadioBar extends React.Component<Props, State> {
         })
 
         this.initLiveData()
+    }
+
+    public componentWillUnmount() {
+        RadioBar.radioDispatcher.destroy()
     }
 
     public render() {
@@ -77,7 +89,7 @@ export class RadioBar extends React.Component<Props, State> {
                                     numberOfLines={1}
                                     color={theme.colors.TextColor}
                                 >
-                                    {theme.content.general.RadioName}: {programData.title}
+                                    {theme.content.general.RadioName}: {programData.title} {programData.music && `-${programData.music.title}`}
                                 </SubTitle>
                             </View>
                             <Icon

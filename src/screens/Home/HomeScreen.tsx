@@ -9,6 +9,7 @@ import { getEventMessage } from 'src/utils/date'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { isWithinRange } from 'date-fns'
 import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -18,8 +19,8 @@ interface State {
 
 }
 
-export const HomeScreen = withThemeContext(
-    class HomeScreen extends React.Component<Props & ThemeInjectedProps, State> {
+export const HomeScreen = withThemeContext(withVideosContext(
+    class HomeScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
         public render() {
             const { themeContext } = this.props
             const { colors, images, content } = themeContext.theme
@@ -46,18 +47,21 @@ export const HomeScreen = withThemeContext(
                                     >
                                         Home
                                     </Title>
-                                    <Label
-                                        color={colors.LabelColor}
-                                        textColor={colors.LabelTextColor}
-                                        text={getEventMessage(new Date(content.App.startDate), new Date(content.App.endDate))}
-                                    />
+                                    <View>
+                                        <Label
+                                            color={colors.LabelColor}
+                                            textColor={colors.LabelTextColor}
+                                            text={getEventMessage(new Date(content.App.startDate), new Date(content.App.endDate))}
+                                        />
+                                    </View>
+
                                 </View>
+                                {this.getMedia()}
                                 <View style={styles.introText}>
                                     <Paragraph color={colors.TitleColor}>
                                         {themeContext.theme.content.general.AppIntroduction}
                                     </Paragraph>
                                 </View>
-                                {this.getMedia()}
                             </View>
                         </ScrollView>
                     </View>
@@ -67,7 +71,10 @@ export const HomeScreen = withThemeContext(
 
         private getMedia() {
             const { theme } = this.props.themeContext
+            const { episodes } = this.props.videosContext
             const currentDate = new Date()
+            const afterMovie = episodes.find(episode => episode.id === theme.content.general.AftermovieId)
+
 
             if (isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
                 return (
@@ -78,17 +85,20 @@ export const HomeScreen = withThemeContext(
                     />
                 )
             }
+            console.log(afterMovie)
 
-            return (
-                <OnDemandVideoItem
-                    theme={theme}
-                    title={`Aftermovie ${theme.content.general.EventName}`}
-                    poster={{
-                        uri: 'blob:https://www.salto.nl/a186d03c-6eda-4ccb-9567-2adff821b23e',
-                    }}
-                />
-            )
+            if (afterMovie) {
+                return (
+                    <OnDemandVideoItem
+                        theme={theme}
+                        title={`Aftermovie ${theme.content.general.EventName}`}
+                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie, data: episodes })}
+                        poster={theme.images.defaultThumbnail}
+                    />
+                )
+            }
 
+            return null
         }
 
         private getStyles() {
@@ -109,7 +119,7 @@ export const HomeScreen = withThemeContext(
         }
     }
 
-)
+))
 
 const styles = StyleSheet.create({
     container: {

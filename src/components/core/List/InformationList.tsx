@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet, StyleProp, Text } from 'react-native'
-import { ThemeType } from 'src/providers/ThemeProvider'
 import { ScheduleType } from 'src/services/videos';
+import { ThemeType } from 'src/services/theme';
 
 interface Props {
     style?: StyleProp<{}>

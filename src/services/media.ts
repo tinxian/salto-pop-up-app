@@ -3,6 +3,7 @@ import { ScheduleResponseType } from './videos';
 import { format } from 'date-fns';
 import axios, { AxiosResponse } from 'axios'
 import Config from 'react-native-config'
+import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar';
 
 export interface MusicDataType {
     artists: string[]
@@ -25,6 +26,7 @@ export interface LiveStreamDataType {
 
 export class Media {
     public static stopOtherMedia() {
+        RadioBar.radioDispatcher.dispatch('stopRadio')
         SoundPlayer.pause()
     }
 

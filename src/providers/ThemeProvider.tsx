@@ -1,86 +1,15 @@
 import React, { Context } from 'react'
 import theme from '../../theme.json'
-import { ImageSourcePropType } from 'react-native'
+import { ThemeContextType, ThemeType } from 'src/services/theme.js';
 
-interface Props { }
-
-export interface ColorsType {
-    NavigationBackgroundColor: string
-    NavigationIconsColor: string
-    NavigationIconsActiveColor: string
-    RadioPlayerControlsColor: string,
-    RadioPlayerBackgroundColor: string
-    BottomDrawerColor: string
-    ButtonColor: string
-    LabelColor: string
-    LabelTextColor: string
-    PageBackgroundColor: string
-    SaltoColor: string
-    TextColor: string
-    SubTitleColor: string
-    TitleColor: string
-    VideoBackgroundColor: string
-    playButtonColor: string
-    LiveIndicatorBackgroundColor: string
-    LiveIndicatorTextColor: string
-    SeperatorColor: string
-}
-export interface ImagesType {
-    HeaderBackgroundUrl: ImageSourcePropType
-    defaultThumbnail: ImageSourcePropType
-}
-
-export interface LinkType {
-    title: string
-    link: string
-    logo: string
-}
-
-export interface GeneralContentType {
-    HighlightedVideoIds: string[]
-    App: AppType
-    general: ContentType
-    OtherEvents: OtherEventType[]
-}
-
-export interface AppType {
-    startDate: string
-    endDate: string
-}
-
-export interface ContentType {
-    EventName: string
-    RadioName: string
-    AppIntroduction: string
-}
-
-export interface OtherEventType {
-    title: string
-    subtitle: string
-    logo: string
-    link: string
-}
-
-export interface ThemeType {
-    colors: ColorsType
-    links: LinkType[]
-    images: ImagesType
-    content: GeneralContentType
-}
-
-interface ContextType {
-    theme: ThemeType
-    setThemeState: (values: ThemeType) => void
-}
-
-export const ThemeContext: Context<ContextType> = React.createContext({
+export const ThemeContext: Context<ThemeContextType> = React.createContext({
     theme,
     setThemeState: () => 'Context not set',
 })
 
-export class ThemeProvider extends React.Component<Props, ContextType> {
+export class ThemeProvider extends React.Component<{}, ThemeContextType> {
 
-    public state: ContextType = {
+    public state: ThemeContextType = {
         theme,
         setThemeState: newTheme => this.setThemeStateValue(newTheme),
     }
@@ -106,7 +35,7 @@ export class ThemeProvider extends React.Component<Props, ContextType> {
 const hoistStatics = require('hoist-non-react-statics')
 
 export interface ThemeInjectedProps {
-    themeContext: ContextType
+    themeContext: ThemeContextType
 }
 
 export function withThemeContext<Props>(Component: React.ComponentClass<ThemeInjectedProps & Props>) {

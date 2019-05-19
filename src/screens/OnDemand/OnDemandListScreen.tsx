@@ -3,38 +3,18 @@ import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar, Im
 import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
-import { Videos, EpisodeType } from 'src/services/videos';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
 import { isWithinRange } from 'date-fns';
+import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
 }
 
-interface State {
-    loading: boolean,
-    data: EpisodeType[]
-}
-
-export const OnDemandListScreen = withThemeContext(
-    class OnDemandListScreen extends React.Component<Props & ThemeInjectedProps, State> {
-        public state: State = {
-            loading: true,
-            data: [],
-        }
-
-        public async componentDidMount() {
-            const episodes = await Videos.getAllVideos()
-
-            this.setState({
-                data: episodes,
-                loading: false,
-            })
-        }
-
-
+export const OnDemandListScreen = withThemeContext(withVideosContext(
+    class OnDemandListScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, {}> {
 
         public render() {
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
@@ -54,10 +34,7 @@ export const OnDemandListScreen = withThemeContext(
 
         private renderList() {
             const { theme } = this.props.themeContext
-            const { data, loading } = this.state
-            console.log(data)
-
-
+            const { episodes, loading } = this.props.videosContext
 
             return (
                 <FlatList
@@ -77,13 +54,13 @@ export const OnDemandListScreen = withThemeContext(
                     )}
                     refreshing={loading}
                     contentContainerStyle={this.getWrapperStyles()}
-                    data={data}
+                    data={episodes}
                     keyExtractor={item => {
                         return item.id
                     }}
                     renderItem={({ item }) => (
                         <OnDemandVideoItem
-                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data })}
+                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data: episodes })}
                             poster={{ uri: item.poster }}
                             theme={theme}
                             title={item.title}
@@ -115,7 +92,8 @@ export const OnDemandListScreen = withThemeContext(
         }
 
         private renderLoading() {
-            if (this.state.loading) {
+            const { loading } = this.props.videosContext
+            if (loading) {
                 return (
                     <View
                         style={{ paddingTop: 100 }}
@@ -141,7 +119,7 @@ export const OnDemandListScreen = withThemeContext(
             ]
         }
     }
-)
+))
 
 const styles = StyleSheet.create({
     container: {

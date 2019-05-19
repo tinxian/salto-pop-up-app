@@ -13,10 +13,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Title } from 'src/components/core/Typography/Title';
 import { EpisodeType } from 'src/services/videos';
 import { Label } from 'src/components/core/Label/Label';
-import { ThemeType } from 'src/providers/ThemeProvider';
 import { getMillisecondsInMinutes } from 'src/utils/date';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { format } from 'date-fns';
+import { ThemeType } from 'src/services/theme';
 
 export interface Props {
     style?: StyleProp<{}>,
