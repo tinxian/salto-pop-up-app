@@ -68,7 +68,7 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         public render() {
-            const { fullScreen, height, programData, schedule, loadingInformationList } = this.state
+            const { fullScreen, height, programData } = this.state
             const { themeContext } = this.props
 
             return (

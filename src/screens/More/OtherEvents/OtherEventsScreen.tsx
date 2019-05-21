@@ -68,14 +68,14 @@ export const OtherEventsScreen = withThemeContext(
         private handleItemPress = (item: OtherEventType) => {
             const url = Platform.OS === 'android' ? item.androidLink : item.iosLink
             Linking.canOpenURL(url)
-                .then((supported) => {
+                .then(supported => {
                     if (!supported) {
                         console.log("Can't handle url: " + url);
-                    } else {
-                        return Linking.openURL(url);
+                        return
                     }
+                    return Linking.openURL(url);
                 })
-                .catch((err) => console.error('An error occurred', err));
+                .catch(err => console.error('An error occurred', err));
         }
 
         private getWrapperStyles() {
