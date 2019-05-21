@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Switch, SafeAreaView } from 'react-native'
+import { View, StyleSheet, StyleProp, SafeAreaView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import themeAlt from '../../../../themeAlt.json'
-import theme from '../../../../theme.json'
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js'
-import { Title } from 'src/components/core/Typography/Title.js'
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent.js'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -28,30 +26,33 @@ export const SettingsScreen = withThemeContext(
                 <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                     <HeaderNavigation navigation={navigation} title={'Instellingen'} />
                     <View style={this.getStyles()}>
-                        <View style={styles.settingsPageItem}>
+                        {/* <View style={styles.settingsPageItem}>
                             <Title color={themeContext.theme.colors.TitleColor}>Alternate theme</Title>
-                            <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
-                        </View>
+                            <Button title={'Toggle theme'} onPress={this.onThemeChange} />
+                        </View> */}
+                        <EmptyComponent theme={themeContext.theme} onPress={() => undefined} />
                     </View>
                 </SafeAreaView>
             )
         }
 
-        private onThemeChange = (bool: boolean) => {
-            const { setThemeState } = this.props.themeContext
-            if (bool) {
-                setThemeState(themeAlt)
-                this.setState({ themeSwitch: bool })
-                return
-            }
-            this.setState({ themeSwitch: bool })
-            setThemeState(theme)
-        }
+        // private onThemeChange = () => {
+        //     const { setThemeState, theme } = this.props.themeContext
+        //     const { themeSwitch } = this.state
+        //     if (themeSwitch) {
+        //         setThemeState(themeAlt)
+        //         this.setState({ themeSwitch: false })
+        //         return
+        //     }
+        //     this.setState({ themeSwitch: true })
+        //     setThemeState(theme)
+        // }
 
         private getStyles() {
-            const { style } = this.props
+            const { style, themeContext } = this.props
             return [
                 styles.container,
+                { backgroundColor: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }
