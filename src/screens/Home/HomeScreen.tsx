@@ -9,7 +9,7 @@ import { getEventMessage } from 'src/utils/date'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { isWithinRange } from 'date-fns'
 import { Paragraph } from 'src/components/core/Typography/Paragraph'
-import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
+import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -74,7 +74,6 @@ export const HomeScreen = withThemeContext(withVideosContext(
             const { episodes } = this.props.videosContext
             const currentDate = new Date()
             const afterMovie = episodes.find(episode => episode.id === theme.content.general.AftermovieId)
-
 
             if (isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
                 return (
@@ -146,7 +145,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 20,
+        top: 60,
         left: 12,
     },
     labelContainer: {

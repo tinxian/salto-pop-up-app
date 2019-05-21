@@ -112,14 +112,14 @@ export const MoreScreen = withThemeContext(
         private handleOpenUrl(url: string) {
             Linking.canOpenURL(url).then(supported => {
                 if (supported) {
-                    Linking.openURL(url);
+                    Linking.openURL(url)
                 } else {
                     Alert.alert(
                         'Alert',
-                        'WhatsApp is not installed',
+                        'WhatsApp is not installed'
                     )
                 }
-            });
+            })
         }
 
         private onItemPress = (item: MoreItem) => {
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 20,
+        top: 60,
         left: 12,
     },
     content: {

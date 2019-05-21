@@ -3,12 +3,12 @@ import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar, Im
 import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
-import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
-import { isWithinRange } from 'date-fns';
-import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
-import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
+import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title'
+import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem'
+import { isWithinRange } from 'date-fns'
+import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -27,7 +27,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Image style={styles.logo} source={require("../../../../src/assets/images/logos/salto.png")} />
+                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
                     {this.renderList()}
                 </View>
             )
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 20,
+        top: 60,
         left: 12,
     },
     content: {

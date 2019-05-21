@@ -7,10 +7,10 @@ import {
     NavigationScreenProp,
     NavigationRouter,
 } from 'react-navigation'
-import { ThemeInjectedProps, ThemeProvider } from './providers/ThemeProvider';
+import { ThemeInjectedProps, ThemeProvider } from './providers/ThemeProvider'
 import { RootNavigator } from './AppStack'
-import SplashScreen from 'react-native-splash-screen';
-import { VideosProvider } from './providers/VideosProvider';
+import SplashScreen from 'react-native-splash-screen'
+import { VideosProvider } from './providers/VideosProvider'
 
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
     public static router: NavigationRouter<{}, {}> = RootNavigator.router
@@ -21,18 +21,17 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
 
     public render() {
         return (
-
-            <View style={styles.container}>
-                <ThemeProvider>
-                    <VideosProvider>
-                        <LocalizationProvider initialize={initializeLocalization}>
-                            <RootNavigator
-                                navigation={this.props.navigation}
-                            />
-                        </LocalizationProvider>
-                    </VideosProvider>
-                </ThemeProvider>
-            </View>
+                <View style={styles.container}>
+                    <ThemeProvider>
+                        <VideosProvider>
+                            <LocalizationProvider initialize={initializeLocalization}>
+                                <RootNavigator
+                                    navigation={this.props.navigation}
+                                />
+                            </LocalizationProvider>
+                        </VideosProvider>
+                    </ThemeProvider>
+                </View>
         )
     }
 }

@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Switch } from 'react-native'
+import { View, StyleSheet, StyleProp, Switch, SafeAreaView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import themeAlt from '../../../../themeAlt.json'
 import theme from '../../../../theme.json'
-import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js';
-import { Title } from 'src/components/core/Typography/Title.js';
+import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js'
+import { Title } from 'src/components/core/Typography/Title.js'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -25,7 +25,7 @@ export const SettingsScreen = withThemeContext(
         public render() {
             const { themeContext, navigation } = this.props
             return (
-                <>
+                <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                     <HeaderNavigation navigation={navigation} title={'Instellingen'} />
                     <View style={this.getStyles()}>
                         <View style={styles.settingsPageItem}>
@@ -33,7 +33,7 @@ export const SettingsScreen = withThemeContext(
                             <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
                         </View>
                     </View>
-                </>
+                </SafeAreaView>
             )
         }
 
