@@ -7,11 +7,11 @@ import {
     NavigationScreenProp,
     NavigationRouter,
 } from 'react-navigation'
-import { ThemeInjectedProps, ThemeProvider } from './providers/ThemeProvider';
+import { ThemeInjectedProps, ThemeProvider } from './providers/ThemeProvider'
 import { RootNavigator } from './AppStack'
-import SplashScreen from 'react-native-splash-screen';
-import { VideosProvider } from './providers/VideosProvider';
-import { AppNotificationManager } from './components/core/AppNotification/AppNotificationManager';
+import SplashScreen from 'react-native-splash-screen'
+import { VideosProvider } from './providers/VideosProvider'
+import { AppNotificationManager } from './components/core/AppNotification/AppNotificationManager'
 
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
     public static router: NavigationRouter<{}, {}> = RootNavigator.router

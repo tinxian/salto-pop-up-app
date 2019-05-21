@@ -1,4 +1,4 @@
-import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
@@ -30,8 +30,8 @@ const MoreNavigator = createStackNavigator({
         },
     },
 }, {
-        headerMode: 'none'
-    })
+    headerMode: 'none',
+})
 
 const TabNavigator = createBottomTabNavigator({
     HomeScreen: {
@@ -78,9 +78,9 @@ export class TabNavigatorComponent extends React.Component<NavigationScreenProps
     public render() {
         const { navigation } = this.props
         return (
-            <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+            // <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
                 <TabNavigator navigation={navigation} />
-            </SafeAreaView>
+            // </SafeAreaView>
         )
     }
 }
@@ -108,8 +108,8 @@ export const RootNavigator = createStackNavigator({
         },
     },
 }, {
-        headerMode: 'none',
-        mode: 'modal',
-    }
+    headerMode: 'none',
+    mode: 'modal',
+}
 )
 

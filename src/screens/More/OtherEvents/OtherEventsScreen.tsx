@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity, Linking, Platform } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity, Linking, Platform, SafeAreaView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { OtherEventType } from 'src/services/theme';
-import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation';
-import { getIcon } from 'src/utils/icons';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { OtherEventType } from 'src/services/theme'
+import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation'
+import { getIcon } from 'src/utils/icons'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -22,7 +22,7 @@ export const OtherEventsScreen = withThemeContext(
             const { themeContext, navigation } = this.props
 
             return (
-                <>
+                <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                     <HeaderNavigation navigation={navigation} title={'Andere evenementen'} />
                     <View style={this.getStyles()}>
 
@@ -33,7 +33,7 @@ export const OtherEventsScreen = withThemeContext(
                             keyExtractor={item => item.title}
                         />
                     </View>
-                </>
+                </SafeAreaView>
             )
         }
 
@@ -70,12 +70,12 @@ export const OtherEventsScreen = withThemeContext(
             Linking.canOpenURL(url)
                 .then(supported => {
                     if (!supported) {
-                        console.log("Can't handle url: " + url);
+                        console.log('Can\'t handle url: ' + url)
                         return
                     }
-                    return Linking.openURL(url);
+                    return Linking.openURL(url)
                 })
-                .catch(err => console.error('An error occurred', err));
+                .catch(err => console.error('An error occurred', err))
         }
 
         private getWrapperStyles() {
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 20,
+        top: 60,
         left: 20,
     },
     itemLogo: {

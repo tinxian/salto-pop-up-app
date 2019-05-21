@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp } from 'react-native'
+import { View, StyleSheet, StyleProp, SafeAreaView } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js';
-import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent.js';
+import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js'
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent.js'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -23,7 +23,7 @@ export const SettingsScreen = withThemeContext(
         public render() {
             const { themeContext, navigation } = this.props
             return (
-                <>
+                <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
                     <HeaderNavigation navigation={navigation} title={'Instellingen'} />
                     <View style={this.getStyles()}>
                         {/* <View style={styles.settingsPageItem}>
@@ -32,7 +32,7 @@ export const SettingsScreen = withThemeContext(
                         </View> */}
                         <EmptyComponent theme={themeContext.theme} onPress={() => undefined} />
                     </View>
-                </>
+                </SafeAreaView>
             )
         }
 
