@@ -59,7 +59,8 @@ export interface OtherEventType {
     title: string
     subtitle: string
     logo: string
-    link: string
+    androidLink: string
+    iosLink: string
 }
 
 export interface ThemeType {

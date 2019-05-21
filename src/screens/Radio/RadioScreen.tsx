@@ -44,7 +44,7 @@ export const RadioScreen = withThemeContext(
         }
 
         public render() {
-            const { schedule } = this.state
+            const { schedule, loading } = this.state
             const { toggleRadio, programData } = this.props
 
             if (!programData) {
@@ -72,6 +72,7 @@ export const RadioScreen = withThemeContext(
                         </TouchableOpacity>
                     </View>
                     <InformationList
+                        loading={loading}
                         data={schedule}
                         theme={this.props.themeContext.theme}
                     />

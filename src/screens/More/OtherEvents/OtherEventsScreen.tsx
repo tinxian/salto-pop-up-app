@@ -1,9 +1,11 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity, Linking, Platform } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { OtherEventType } from 'src/services/theme';
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation';
+import { getIcon } from 'src/utils/icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -36,22 +38,44 @@ export const OtherEventsScreen = withThemeContext(
         }
 
         private renderItem(item: OtherEventType) {
+            const { themeContext } = this.props
             return (
-                <View style={styles.itemContainer}>
-                    <Image
-                        style={styles.itemLogo}
-                        source={{ uri: item.logo }}
-                    />
-                    <View style={styles.labelContainer}>
-                        <Text style={this.getTitleStyles()}>
-                            {item.title}
-                        </Text>
-                        <Text style={this.getSubtitleStyles()}>
-                            {item.subtitle}
-                        </Text>
+                <TouchableOpacity onPress={() => this.handleItemPress(item)}>
+                    <View style={styles.itemContainer}>
+                        <Image
+                            style={styles.itemLogo}
+                            source={{ uri: item.logo }}
+                        />
+                        <View style={styles.labelContainer}>
+                            <Text style={this.getTitleStyles()}>
+                                {item.title}
+                            </Text>
+                            <Text style={this.getSubtitleStyles()}>
+                                {item.subtitle}
+                            </Text>
+                        </View>
+                        <Icon
+                            name={getIcon('download')}
+                            color={themeContext.theme.colors.RadioPlayerControlsColor}
+                            size={33}
+                        />
                     </View>
-                </View>
+                </TouchableOpacity>
+
             )
+        }
+
+        private handleItemPress = (item: OtherEventType) => {
+            const url = Platform.OS === 'android' ? item.androidLink : item.iosLink
+            Linking.canOpenURL(url)
+                .then((supported) => {
+                    if (!supported) {
+                        console.log("Can't handle url: " + url);
+                    } else {
+                        return Linking.openURL(url);
+                    }
+                })
+                .catch((err) => console.error('An error occurred', err));
         }
 
         private getWrapperStyles() {
