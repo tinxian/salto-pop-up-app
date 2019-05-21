@@ -148,6 +148,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         borderRadius: 25,
         marginTop: 100,
+        paddingBottom: 100,
     },
     titleContainer: {
         flexDirection: 'row',
