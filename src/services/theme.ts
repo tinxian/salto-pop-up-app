@@ -21,6 +21,9 @@ export interface ColorsType {
     LiveIndicatorBackgroundColor: string
     LiveIndicatorTextColor: string
     SeperatorColor: string
+    HeaderBackground: string
+    HeaderTitleText: string
+    HeaderBackButtonColor: string
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType

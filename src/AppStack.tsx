@@ -10,14 +10,28 @@ import { RadioScreen } from './screens/Radio/RadioScreen'
 import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
 import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
 
-const OnDemandVideo = createStackNavigator({
-    OnDemandVideoListScreen: {
-        screen: OnDemandListScreen,
+const MoreNavigator = createStackNavigator({
+    MoreMainScreen: {
+        screen: MoreScreen,
         navigationOptions: {
-            header: null,
+
         },
     },
-})
+    SettingsScreen: {
+        screen: SettingsScreen,
+        navigationOptions: {
+
+        },
+    },
+    OtherEventsScreen: {
+        screen: OtherEventsScreen,
+        navigationOptions: {
+
+        },
+    },
+}, {
+        headerMode: 'none'
+    })
 
 const TabNavigator = createBottomTabNavigator({
     HomeScreen: {
@@ -28,14 +42,14 @@ const TabNavigator = createBottomTabNavigator({
         },
     },
     OnDemandVideo: {
-        screen: OnDemandVideo,
+        screen: OnDemandListScreen,
         navigationOptions: {
             // gesturesEnabled: false,
             header: null,
         },
     },
     MoreScreen: {
-        screen: MoreScreen,
+        screen: MoreNavigator,
         navigationOptions: {
             // gesturesEnabled: false,
             header: null,
@@ -93,20 +107,9 @@ export const RootNavigator = createStackNavigator({
             gesturesEnabled: true,
         },
     },
-    SettingsScreen: {
-        screen: SettingsScreen,
-        navigationOptions: {
-
-        },
-    },
-    OtherEventsScreen: {
-        screen: OtherEventsScreen,
-        navigationOptions: {
-
-        },
-    }
 }, {
         headerMode: 'none',
         mode: 'modal',
     }
 )
+

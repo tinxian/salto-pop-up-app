@@ -18,7 +18,10 @@
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
         "LiveIndicatorTextColor": "#ffffff",
-        "SeperatorColor": "#F06159"
+        "SeperatorColor": "#F06159",
+        "HeaderBackground": "#c2c2c2",
+        "HeaderTitleText": "#000000",
+        "HeaderBackButtonColor": "#F06159"
     },
     "images": {
         "HeaderBackgroundUrl": {
