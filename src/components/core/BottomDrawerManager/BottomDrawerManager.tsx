@@ -16,6 +16,7 @@ export class BottomDrawerManager extends React.Component<Props, {}> {
             <ModalManager
                 renderHandler={renderHandler}
                 renderModal={closeModal => (
+
                     <BottomDrawer
                         onDismiss={closeModal}
                         children={renderContent(closeModal)}

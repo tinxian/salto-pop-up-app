@@ -1,6 +1,6 @@
 import React, { Context } from 'react'
 import theme from '../../theme.json'
-import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js';
+import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js'
 import axios from 'axios'
 
 export const ThemeContext: Context<ThemeContextType> = React.createContext({
