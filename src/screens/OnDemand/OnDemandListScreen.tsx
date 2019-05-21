@@ -9,13 +9,14 @@ import { LivestreamItem } from 'src/components/implementations/LivestreamItem/Li
 import { isWithinRange } from 'date-fns'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
+import { PortraitScreen } from 'src/components/core/ScreenExtenders/OrientationScreens';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
 }
 
 export const OnDemandListScreen = withThemeContext(withVideosContext(
-    class OnDemandListScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, {}> {
+    class OnDemandListScreen extends PortraitScreen<Props & ThemeInjectedProps & VideosInjectedProps, {}> {
 
         public render() {
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images

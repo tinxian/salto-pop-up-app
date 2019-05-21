@@ -12,12 +12,14 @@ import { RootNavigator } from './AppStack'
 import SplashScreen from 'react-native-splash-screen'
 import { VideosProvider } from './providers/VideosProvider'
 import { AppNotificationManager } from './components/core/AppNotification/AppNotificationManager'
+import Orientation from 'react-native-orientation'
 
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
     public static router: NavigationRouter<{}, {}> = RootNavigator.router
 
     public componentDidMount() {
         SplashScreen.hide()
+        Orientation.lockToPortrait()
     }
 
     public render() {

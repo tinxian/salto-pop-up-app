@@ -19,30 +19,47 @@ import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
+import Orientation from 'react-native-orientation';
+import { LandscapeAndPortraitScreen, LandscapeAndPortraitScreenStateType } from 'src/components/core/ScreenExtenders/OrientationScreens';
 
 interface Params {
     item: EpisodeType,
 }
 
-interface Props extends NavigationScreenProps<Params> {
+type Extensions = ThemeInjectedProps & VideosInjectedProps & NavigationScreenProps<Params>
+
+interface Props extends Extensions {
     style: StyleProp<{}>,
     uri?: string,
 }
 
-interface State {
+interface State extends LandscapeAndPortraitScreenStateType {
     loading: boolean
     fullScreen: boolean
     height: number
 }
+
 export const OnDemandVideoScreen = withThemeContext(withVideosContext(
-    class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
+    class OnDemandVideoScreen extends LandscapeAndPortraitScreen<Props, State> {
+
         public state: State = {
+            isLandscape: Orientation.getInitialOrientation() === 'LANDSCAPE',
             loading: true,
             fullScreen: false,
             height: Dimensions.get('window').height,
         }
 
         public player: Video | null
+
+        public componentDidUpdate(nextProps: Props, nextState: State) {
+
+            if (nextState.isLandscape && !this.state.isLandscape) {
+                this.handleEnterPressFullscreen()
+            }
+            if (!nextState.isLandscape && this.state.isLandscape) {
+                this.handleExitPressFullScreen()
+            }
+        }
 
         public componentDidMount() {
             Media.stopOtherMedia()
@@ -147,9 +164,16 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             Share.open(this.getShareOptions())
         }
 
-        private handleFullScreenToggle = () => {
-            const { fullScreen } = this.state
-            this.setState({ fullScreen: !fullScreen })
+        private handleEnterPressFullscreen = () => {
+
+            Orientation.lockToLandscape()
+            this.setState({ fullScreen: true })
+        }
+
+        private handleExitPressFullScreen = () => {
+
+            Orientation.lockToPortrait()
+            this.setState({ fullScreen: false })
         }
 
         private getShareOptions = () => {

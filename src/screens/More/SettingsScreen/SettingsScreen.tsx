@@ -4,6 +4,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent.js'
+import { PortraitScreen } from 'src/components/core/ScreenExtenders/OrientationScreens';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -14,7 +15,7 @@ interface State {
 }
 
 export const SettingsScreen = withThemeContext(
-    class SettingsScreen extends React.Component<Props & ThemeInjectedProps, State> {
+    class SettingsScreen extends PortraitScreen<Props & ThemeInjectedProps, State> {
 
         public state: State = {
             themeSwitch: false,

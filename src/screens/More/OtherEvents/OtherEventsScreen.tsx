@@ -6,6 +6,7 @@ import { OtherEventType } from 'src/services/theme'
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation'
 import { getIcon } from 'src/utils/icons'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { PortraitScreen } from 'src/components/core/ScreenExtenders/OrientationScreens';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -16,7 +17,7 @@ interface State {
 }
 
 export const OtherEventsScreen = withThemeContext(
-    class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
+    class OtherEventsScreen extends PortraitScreen<Props & ThemeInjectedProps, State> {
 
         public render() {
             const { themeContext, navigation } = this.props

@@ -30,8 +30,8 @@ const MoreNavigator = createStackNavigator({
         },
     },
 }, {
-    headerMode: 'none',
-})
+        headerMode: 'none',
+    })
 
 const TabNavigator = createBottomTabNavigator({
     HomeScreen: {
@@ -78,9 +78,7 @@ export class TabNavigatorComponent extends React.Component<NavigationScreenProps
     public render() {
         const { navigation } = this.props
         return (
-            // <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-                <TabNavigator navigation={navigation} />
-            // </SafeAreaView>
+            <TabNavigator navigation={navigation} />
         )
     }
 }
@@ -108,8 +106,8 @@ export const RootNavigator = createStackNavigator({
         },
     },
 }, {
-    headerMode: 'none',
-    mode: 'modal',
-}
+        headerMode: 'none',
+        mode: 'modal',
+    }
 )
 

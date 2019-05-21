@@ -17,6 +17,7 @@ import { Label } from 'src/components/core/Label/Label'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Videos, ScheduleType } from 'src/services/videos'
 import { InformationList } from 'src/components/core/List/InformationList'
+import { PortraitScreen } from 'src/components/core/ScreenExtenders/OrientationScreens';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -33,7 +34,7 @@ interface State {
 }
 
 export const LivestreamVideoScreen = withThemeContext(
-    class LivestreamVideoScreen extends React.Component<Props & ThemeInjectedProps, State> {
+    class LivestreamVideoScreen extends PortraitScreen<Props & ThemeInjectedProps, State> {
         public state: State = {
             loadingDetail: true,
             loadingInformationList: true,
