@@ -57,7 +57,6 @@ export const RadioScreen = withThemeContext(
 
             return (
                 <View style={this.getStyles()}>
-                    <StatusBar hidden={true} animated={true} />
                     <View style={styles.wrapper}>
                         <View style={styles.info}>
                             <View style={styles.title}>
