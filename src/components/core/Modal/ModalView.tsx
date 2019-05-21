@@ -9,6 +9,9 @@ import {
     TouchableHighlight,
     TouchableOpacity,
 } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons';
+import { getIcon } from 'src/utils/icons';
+import { ThemeType } from 'src/services/theme';
 
 
 interface Props {
@@ -17,30 +20,26 @@ interface Props {
     actionText?: string
     onRequestClose?: () => void
     onAction?: () => void
+    theme: ThemeType
 }
 
 export class ModalView extends React.Component<Props, {}> {
     public render() {
-        const { title, onRequestClose, actionText, onAction, children } = this.props
+        const { actionText, onAction, children, theme } = this.props
 
         return (
             <View style={this.getStyles()}>
                 <View style={styles.modal}>
-                    <View style={styles.topBar}>
-                        <Text style={styles.title}>{title}</Text>
-                        <TouchableHighlight onPress={onRequestClose}>
-                            <View style={styles.closeButton}>
-                                <Text>X</Text>
-                            </View>
-                        </TouchableHighlight>
-                    </View>
-
                     {children}
 
                     <TouchableOpacity onPress={onAction}>
                         <View style={styles.actionButton}>
                             <Text style={styles.actionText}>{actionText}</Text>
-                            <Text>X</Text>
+                            <Icon
+                                name={getIcon('arrow-dropright')}
+                                color={theme.colors.TextColor}
+                                size={22}
+                            />
                         </View>
                     </TouchableOpacity>
                 </View>
@@ -63,6 +62,8 @@ const styles = StyleSheet.create({
     },
     modal: {
         backgroundColor: '#ffffff',
+        borderRadius: 16,
+        overflow: 'hidden',
     },
     title: {
         color: 'rgb(124, 126, 128)',
@@ -72,7 +73,6 @@ const styles = StyleSheet.create({
     topBar: {
         width: '100%',
         height: 36,
-        paddingLeft: 12,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',

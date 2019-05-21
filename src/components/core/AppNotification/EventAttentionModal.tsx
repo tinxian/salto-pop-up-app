@@ -1,31 +1,35 @@
 
 import React from 'react'
-import { Text, Dimensions } from 'react-native'
+import { Dimensions, Platform } from 'react-native'
 
 import { StyleSheet, StyleProp, View } from 'react-native'
+import { Title } from '../Typography/Title';
+import { ThemeType } from 'src/services/theme';
+import { Paragraph } from '../Typography/Paragraph';
 
 
 interface Props {
     style?: StyleProp<{}>
-    appNotification: any
+    theme: ThemeType
 }
 
 export class EventAttentionModal extends React.Component<Props, {}> {
     public render() {
-        const { appNotification } = this.props
-        const message = 'hey'
-        const { width } = Dimensions.get('window')
-        const itemWidth = width - (18 + 18 + 18 + 18)
+        const { theme } = this.props
+        const store = Platform.OS === 'android' ? 'play store' : 'app store'
 
         return (
             <View style={this.getStyles()}>
                 <View>
                     <View style={styles.content}>
                         <View style={{ minHeight: 40 }}>
-                            {message && <Text style={styles.text}>{message}</Text>}
-                        </View>
-                        <View style={styles.feedbackItemWrapper}>
-
+                            <Title color={theme.colors.TextColor}>Dit evenement is voorbij</Title>
+                            <Paragraph
+                                color={theme.colors.TextColor}
+                            >
+                                De app zal geen live content meer bevatten.
+                                Hou de {store} in de gaten voor het volgende evenement
+                            </Paragraph>
                         </View>
                     </View>
                 </View>
@@ -49,13 +53,6 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(0,0,0,0.12)',
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderTopWidth: StyleSheet.hairlineWidth,
-    },
-    text: {
-        fontSize: 28,
-        fontWeight: '700',
-        lineHeight: Math.round(28 * 1.29),
-        color: '#333333',
-        marginBottom: 28,
     },
     content: {
         padding: 18,
