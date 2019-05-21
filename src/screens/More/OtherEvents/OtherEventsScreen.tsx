@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native'
-import { getIcon } from 'src/utils/icons'
+import { View, StyleSheet, StyleProp, Text, FlatList, Image, Dimensions, TouchableOpacity, Linking, Platform } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import { Title } from 'src/components/core/Typography/Title'
-import Icon from 'react-native-vector-icons/Ionicons'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { OtherEventType } from 'src/services/theme';
+import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation';
+import { getIcon } from 'src/utils/icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -19,49 +19,63 @@ export const OtherEventsScreen = withThemeContext(
     class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
 
         public render() {
-            const { themeContext } = this.props
-            const { colors } = themeContext.theme
+            const { themeContext, navigation } = this.props
 
             return (
-                <View style={this.getStyles()}>
+                <>
+                    <HeaderNavigation navigation={navigation} title={'Andere evenementen'} />
+                    <View style={this.getStyles()}>
 
-                    <FlatList<OtherEventType>
-                        ListHeaderComponent={() => (
-                            <>
-                                <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                                    <Icon name={getIcon('close')} size={50} />
-                                </TouchableOpacity>
-                                <View style={styles.titleContainer}>
-                                    <Title color={colors.TextColor}>Andere evenementen</Title>
-                                </View>
-                            </>
-                        )}
-                        contentContainerStyle={this.getWrapperStyles()}
-                        data={themeContext.theme.content.OtherEvents}
-                        renderItem={item => this.renderItem(item.item)}
-                        keyExtractor={item => item.title}
-                    />
-                </View>
+                        <FlatList<OtherEventType>
+                            contentContainerStyle={this.getWrapperStyles()}
+                            data={themeContext.theme.content.OtherEvents}
+                            renderItem={item => this.renderItem(item.item)}
+                            keyExtractor={item => item.title}
+                        />
+                    </View>
+                </>
             )
         }
 
         private renderItem(item: OtherEventType) {
+            const { themeContext } = this.props
             return (
-                <View style={styles.itemContainer}>
-                    <Image
-                        style={styles.itemLogo}
-                        source={{ uri: item.logo }}
-                    />
-                    <View style={styles.labelContainer}>
-                        <Text style={this.getTitleStyles()}>
-                            {item.title}
-                        </Text>
-                        <Text style={this.getSubtitleStyles()}>
-                            {item.subtitle}
-                        </Text>
+                <TouchableOpacity onPress={() => this.handleItemPress(item)}>
+                    <View style={styles.itemContainer}>
+                        <Image
+                            style={styles.itemLogo}
+                            source={{ uri: item.logo }}
+                        />
+                        <View style={styles.labelContainer}>
+                            <Text style={this.getTitleStyles()}>
+                                {item.title}
+                            </Text>
+                            <Text style={this.getSubtitleStyles()}>
+                                {item.subtitle}
+                            </Text>
+                        </View>
+                        <Icon
+                            name={getIcon('download')}
+                            color={themeContext.theme.colors.RadioPlayerControlsColor}
+                            size={33}
+                        />
                     </View>
-                </View>
+                </TouchableOpacity>
+
             )
+        }
+
+        private handleItemPress = (item: OtherEventType) => {
+            const url = Platform.OS === 'android' ? item.androidLink : item.iosLink
+            Linking.canOpenURL(url)
+                .then(supported => {
+                    if (!supported) {
+                        console.log("Can't handle url: " + url);
+                        return
+                    }
+                    return Linking.openURL(url);
+                })
+                .catch(err => console.error('An error occurred', err));
         }
 
         private getWrapperStyles() {
@@ -137,8 +151,7 @@ const styles = StyleSheet.create({
     },
     content: {
         minHeight: Dimensions.get('screen').height,
-        paddingHorizontal: 22,
-        borderRadius: 25,
+        paddingHorizontal: 12,
     },
     titleContainer: {
         flexDirection: 'row',

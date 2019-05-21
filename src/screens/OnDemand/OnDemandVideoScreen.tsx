@@ -17,10 +17,11 @@ import { format } from 'date-fns';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
+import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
 
 interface Params {
     item: EpisodeType,
-    data: EpisodeType[],
 }
 
 interface Props extends NavigationScreenProps<Params> {
@@ -33,8 +34,8 @@ interface State {
     fullScreen: boolean
     height: number
 }
-export const OnDemandVideoScreen = withThemeContext(
-    class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps, State> {
+export const OnDemandVideoScreen = withThemeContext(withVideosContext(
+    class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
         public state: State = {
             loading: true,
             fullScreen: false,
@@ -79,6 +80,12 @@ export const OnDemandVideoScreen = withThemeContext(
 
                     <FlatList
                         ListHeaderComponent={() => this.renderMetaHeader(item)}
+                        ListEmptyComponent={() => (
+                            <EmptyComponent
+                                theme={theme}
+                                onPress={() => this.props.videosContext.refresh()}
+                            />
+                        )}
                         data={data}
                         contentContainerStyle={this.getWrapperStyles()}
                         keyExtractor={item => {
@@ -157,7 +164,7 @@ export const OnDemandVideoScreen = withThemeContext(
         }
 
         private getRelevantVideosFromEpisode() {
-            const data = this.props.navigation.getParam('data')
+            const data = this.props.videosContext.episodes
             const item = this.props.navigation.getParam('item')
 
             return data.filter(i => {
@@ -185,7 +192,7 @@ export const OnDemandVideoScreen = withThemeContext(
             ]
         }
     }
-)
+))
 
 const styles = StyleSheet.create({
     container: {

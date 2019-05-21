@@ -8,6 +8,7 @@ import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem';
 import { isWithinRange } from 'date-fns';
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -52,6 +53,13 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                             {this.renderLoading()}
                         </React.Fragment>
                     )}
+                    ListEmptyComponent={() => (
+                        <EmptyComponent
+                            theme={theme}
+                            onPress={() => this.props.videosContext.refresh()}
+                        />
+                    )
+                    }
                     refreshing={loading}
                     contentContainerStyle={this.getWrapperStyles()}
                     data={episodes}
@@ -60,7 +68,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                     }}
                     renderItem={({ item }) => (
                         <OnDemandVideoItem
-                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item, data: episodes })}
+                            onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item })}
                             poster={{ uri: item.poster }}
                             theme={theme}
                             title={item.title}

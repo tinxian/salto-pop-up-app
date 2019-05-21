@@ -21,6 +21,9 @@ export interface ColorsType {
     LiveIndicatorBackgroundColor: string
     LiveIndicatorTextColor: string
     SeperatorColor: string
+    HeaderBackground: string
+    HeaderTitleText: string
+    HeaderBackButtonColor: string
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
@@ -56,7 +59,8 @@ export interface OtherEventType {
     title: string
     subtitle: string
     logo: string
-    link: string
+    androidLink: string
+    iosLink: string
 }
 
 export interface ThemeType {

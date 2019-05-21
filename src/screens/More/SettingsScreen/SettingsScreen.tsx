@@ -1,12 +1,11 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, TouchableOpacity, Switch } from 'react-native'
-import { getIcon } from 'src/utils/icons'
+import { View, StyleSheet, StyleProp, Switch } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import themeAlt from '../../../../themeAlt.json'
 import theme from '../../../../theme.json'
-import { Title } from 'src/components/core/Typography/Title.js'
+import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js';
+import { Title } from 'src/components/core/Typography/Title.js';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -24,17 +23,17 @@ export const SettingsScreen = withThemeContext(
         }
 
         public render() {
-            const { themeContext } = this.props
+            const { themeContext, navigation } = this.props
             return (
-                <View style={this.getStyles()}>
-                    <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
-                        <Icon name={getIcon('close')} size={50} />
-                    </TouchableOpacity>
-                    <View style={styles.settingsPageItem}>
-                        <Title color={themeContext.theme.colors.TitleColor}>Placeholder</Title>
-                        <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
+                <>
+                    <HeaderNavigation navigation={navigation} title={'Instellingen'} />
+                    <View style={this.getStyles()}>
+                        <View style={styles.settingsPageItem}>
+                            <Title color={themeContext.theme.colors.TitleColor}>Alternate theme</Title>
+                            <Switch value={this.state.themeSwitch} onValueChange={this.onThemeChange} />
+                        </View>
                     </View>
-                </View>
+                </>
             )
         }
 
@@ -62,6 +61,7 @@ export const SettingsScreen = withThemeContext(
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 16,
     },
     settingsPageItem: {
         flex: 1,

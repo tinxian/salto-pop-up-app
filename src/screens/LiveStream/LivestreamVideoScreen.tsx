@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
@@ -24,7 +24,8 @@ interface Props extends NavigationScreenProps {
 }
 
 interface State {
-    loading: boolean
+    loadingInformationList: boolean
+    loadingDetail: boolean
     fullScreen: boolean
     height: number
     programData?: LiveStreamDataType
@@ -34,7 +35,8 @@ interface State {
 export const LivestreamVideoScreen = withThemeContext(
     class LivestreamVideoScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public state: State = {
-            loading: true,
+            loadingDetail: true,
+            loadingInformationList: true,
             fullScreen: false,
             height: Dimensions.get('window').height,
             programData: undefined,
@@ -52,12 +54,13 @@ export const LivestreamVideoScreen = withThemeContext(
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
-                this.setState({ programData: data })
+                this.setState({ programData: data, loadingDetail: false })
             })
 
             const schedule = await Media.getScheduleByChannel(Videos.getLivestreamChannelName())
 
-            this.setState({ schedule })
+
+            this.setState({ schedule, loadingInformationList: false })
         }
 
         public componentWillUnmount() {
@@ -65,7 +68,7 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         public render() {
-            const { fullScreen, height, programData, schedule } = this.state
+            const { fullScreen, height, programData } = this.state
             const { themeContext } = this.props
 
             return (
@@ -97,44 +100,60 @@ export const LivestreamVideoScreen = withThemeContext(
                         )}
 
                     </ExpandableContainer>
+                    {this.renderInformation()}
+                </View>
+            )
+        }
 
-                    {/* <Title numberOfLines={2} >{item.title}</Title> */}
+        private renderInformation() {
+            const { loadingDetail, loadingInformationList, programData, schedule } = this.state
+            const { themeContext } = this.props
+            if (loadingDetail || !programData) {
+                return this.renderLoading()
+            }
 
-                    {programData && (
-
-                        <ScrollView>
-                            <View style={styles.meta}>
-                                <View style={{ flex: 1 }}>
-                                    <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{programData.title}</Title>
-                                </View>
-                                <TouchableHighlight onPress={this.handleShare}>
-                                    <View style={styles.shareButton}>
-                                        <Icon
-                                            name={getIcon('share')}
-                                            color={this.props.themeContext.theme.colors.ButtonColor}
-                                            size={25}
-                                        />
-                                    </View>
-                                </TouchableHighlight>
-                            </View>
-                            <View style={styles.content}>
-                                <View style={styles.labelWrapper}>
-                                    <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
-                                    <Label
-                                        color={themeContext.theme.colors.LabelColor}
-                                        textColor={themeContext.theme.colors.LabelTextColor}
-                                        text={programData.channel}
-                                    />
-
-                                </View>
-
-                                <InformationList
-                                    data={schedule}
-                                    theme={themeContext.theme}
+            return (
+                <ScrollView>
+                    <View style={styles.meta}>
+                        <View style={{ flex: 1 }}>
+                            <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{programData.title}</Title>
+                        </View>
+                        <TouchableHighlight onPress={this.handleShare}>
+                            <View style={styles.shareButton}>
+                                <Icon
+                                    name={getIcon('share')}
+                                    color={this.props.themeContext.theme.colors.ButtonColor}
+                                    size={25}
                                 />
                             </View>
-                        </ScrollView>
-                    )}
+                        </TouchableHighlight>
+                    </View>
+                    <View style={styles.content}>
+                        <View style={styles.labelWrapper}>
+                            <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
+                            <Label
+                                color={themeContext.theme.colors.LabelColor}
+                                textColor={themeContext.theme.colors.LabelTextColor}
+                                text={programData.channel}
+                            />
+
+                        </View>
+
+                        <InformationList
+                            loading={loadingInformationList}
+                            data={schedule}
+                            theme={themeContext.theme}
+                        />
+                    </View>
+                </ScrollView>
+
+            )
+        }
+
+        private renderLoading() {
+            return (
+                <View style={styles.loader}>
+                    <ActivityIndicator />
                 </View>
             )
         }

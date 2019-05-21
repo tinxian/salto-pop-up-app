@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, Text } from 'react-native'
+import { View, StyleSheet, StyleProp, Text, ActivityIndicator } from 'react-native'
 import { ScheduleType } from 'src/services/videos';
 import { ThemeType } from 'src/services/theme';
 
@@ -7,14 +7,22 @@ interface Props {
     style?: StyleProp<{}>
     data: ScheduleType[]
     theme: ThemeType
+    loading: boolean
 }
 
 export class InformationList extends React.Component<Props, {}> {
 
     public render() {
-        const { data } = this.props
+        const { data, loading } = this.props
+        if (loading) {
+            return (
+                <View style={this.getStyles(true)}>
+                    <ActivityIndicator />
+                </View>
+            )
+        }
         return (
-            <View style={this.getStyles()}>
+            <View style={this.getStyles(false)}>
                 {data.map(this.renderItem)}
             </View>
         )
@@ -50,10 +58,14 @@ export class InformationList extends React.Component<Props, {}> {
         ]
     }
 
-    private getStyles() {
+    private getStyles(loading: boolean) {
         const { style } = this.props
         return [
             styles.container,
+            loading && {
+                justifyContent: 'center',
+                alignItems: 'center',
+            },
             style,
         ]
     }
