@@ -103,9 +103,10 @@ export const OtherEventsScreen = withThemeContext(
         }
 
         private getStyles() {
-            const { style } = this.props
+            const { style, themeContext } = this.props
             return [
                 styles.container,
+                { backgroundColor: themeContext.theme.colors.PageBackgroundColor },
                 style,
             ]
         }

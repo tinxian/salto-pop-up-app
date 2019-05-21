@@ -18,7 +18,10 @@
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
         "LiveIndicatorTextColor": "#ffffff",
-        "SeperatorColor": "yellow"
+        "SeperatorColor": "yellow",
+        "HeaderBackground": "#868686",
+        "HeaderTitleText": "#000000",
+        "HeaderBackButtonColor": "yellow"
     },
     "images": {
         "HeaderBackgroundUrl": {
@@ -58,7 +61,7 @@
     "content": {
         "App": {
             "startDate": "Fri May 16 2019 00:00:00 GMT+0200 (CEST)",
-            "endDate": "Sat May 16 2019 00:00:00 GMT+0200 (CEST)"
+            "endDate": "Sat May 29 2019 00:00:00 GMT+0200 (CEST)"
         },
         "general": {
             "AftermovieId": "3TXQ36FPJ6uu2Mu64OgKaw",
@@ -79,13 +82,15 @@
                 "title": "ADE x SALTO",
                 "subtitle": "Tijdlijn, nieuws en live",
                 "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
-                "link": ""
+                "androidLink": "https://play.google.com/store/apps/details?id=nl.at5.app&gl=NL",
+                "iosLink": "https://itunes.apple.com/nl/app/at5/id585591468?mt=8"
             },
             {
                 "title": "ADE x PRIDE",
                 "subtitle": "Livebeeld en meer!",
                 "logo": "https://www.xlr8r.com/.image/t_share/MTU1MzE4ODM2MDI0ODQ1NTAw/amsterdam-dance-event-ade-logo.jpg",
-                "link": ""
+                "androidLink": "https://play.google.com/store/apps/details?id=nl.at5.app&gl=NL",
+                "iosLink": "https://itunes.apple.com/nl/app/at5/id585591468?mt=8"
             }
         ]
     }
