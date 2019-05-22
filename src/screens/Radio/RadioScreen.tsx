@@ -66,6 +66,7 @@ export const RadioScreen = withThemeContext(
                         <TouchableOpacity onPress={toggleRadio}>
                             <View style={styles.imageWrapper}>
                                 {this.renderCover()}
+                                <View style={styles.cover} />
                                 {this.renderControls()}
                             </View>
                         </TouchableOpacity>
@@ -103,15 +104,10 @@ export const RadioScreen = withThemeContext(
             const { loading } = this.state
 
             if (loading || !programData) {
-                return <ActivityIndicator />
+                return null
             }
 
-            return (
-                <>
-                    <Image style={styles.image} source={{ uri: programData.logo }} />
-                    <View style={styles.cover} />
-                </>
-            )
+            return <Image style={styles.image} source={{ uri: programData.logo }} />
         }
 
         private renderSongInfo() {
