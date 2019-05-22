@@ -23,7 +23,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
                     <Image
-                        style={styles.background}
+                        style={this.getBackgroundStyles()}
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
@@ -112,6 +112,16 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
             }
             return null
         }
+
+        private getBackgroundStyles() {
+            const { colors } = this.props.themeContext.theme
+            return [
+                { backgroundColor: colors.SaltoColor },
+                styles.background,
+            ]
+
+        }
+
         private getWrapperStyles() {
             const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [

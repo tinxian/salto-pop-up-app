@@ -87,10 +87,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             outputRange: [0, -Dimensions.get('window').height / FULLSCREEN_OFFSET],
         })
 
-
-
         return [
-
             {
                 backgroundColor: 'blue',
                 height: heightInterpolation,
@@ -101,8 +98,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             },
             styles.innerContainer,
         ]
-
-
     }
 
     private getStyles() {

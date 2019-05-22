@@ -28,9 +28,10 @@ export const HomeScreen = withThemeContext(withVideosContext(
             return (
                 <View style={this.getStyles()}>
                     <Image
-                        style={styles.background}
+                        style={this.getBackgroundStyles()}
                         source={images.HeaderBackgroundUrl}
                         resizeMode={'repeat'}
+
                     />
                     <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
 
@@ -97,6 +98,15 @@ export const HomeScreen = withThemeContext(withVideosContext(
             }
 
             return null
+        }
+
+        private getBackgroundStyles() {
+            const { colors } = this.props.themeContext.theme
+            return [
+                { backgroundColor: colors.SaltoColor },
+                styles.background,
+            ]
+
         }
 
         private getStyles() {

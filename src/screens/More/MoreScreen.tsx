@@ -36,7 +36,7 @@ export const MoreScreen = withThemeContext(
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
                     <Image
-                        style={styles.background}
+                        style={this.getBackgroundStyles()}
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
@@ -134,6 +134,15 @@ export const MoreScreen = withThemeContext(
                 { borderColor: colors.SeperatorColor },
                 styles.labelContainer,
             ]
+        }
+
+        private getBackgroundStyles() {
+            const { colors } = this.props.themeContext.theme
+            return [
+                { backgroundColor: colors.SaltoColor },
+                styles.background,
+            ]
+
         }
 
         private getWrapperStyles() {
