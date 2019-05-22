@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StatusBar, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
 import Video from 'react-native-video'
 import { LiveStreamDataType, Media } from 'src/services/media'
 import Icon from 'react-native-vector-icons/Ionicons'

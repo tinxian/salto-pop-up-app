@@ -5,7 +5,7 @@ import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
 import { Title } from 'src/components/core/Typography/Title'
 import Video from 'react-native-video'
-import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer';
+import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer';
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
 
@@ -54,7 +54,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
         }
 
         public render() {
-            const { fullScreen, height } = this.state
+            const { fullScreen } = this.state
             const { theme } = this.props.themeContext
             const item = this.props.navigation.getParam('item')
             const data = this.getRelevantVideosFromEpisode()
@@ -62,10 +62,9 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
-                    <ExpandableContainer
+                    <ExpandableRotationContainer
                         expand={fullScreen}
                         startHeight={300}
-                        maxHeight={height}
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
@@ -76,7 +75,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                             onEnterFullscreen={this.handleFullScreenToggle}
                             onExitFullscreen={this.handleFullScreenToggle}
                         />
-                    </ExpandableContainer>
+                    </ExpandableRotationContainer>
 
                     <FlatList
                         ListHeaderComponent={() => this.renderMetaHeader(item)}

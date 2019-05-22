@@ -3,7 +3,7 @@ import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, Touchab
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
-import { ExpandableContainer } from 'src/components/core/Animation/ExpandableContainer'
+import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
 import Share from 'react-native-share'
 import { Media, LiveStreamDataType } from 'src/services/media'
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
@@ -68,20 +68,19 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         public render() {
-            const { fullScreen, height, programData } = this.state
+            const { fullScreen, programData } = this.state
             const { themeContext } = this.props
 
             return (
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
-                    <ExpandableContainer
+                    <ExpandableRotationContainer
                         expand={fullScreen}
                         startHeight={300}
-                        maxHeight={height}
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
-                            style={{ flex: 1 }}
+                            style={{ width: '100%', height: '100%' }}
                             ref={(ref: Video) => this.player = ref}
                             source={{ uri: Videos.getLivestreamUrl() }}
                             onBack={() => this.props.navigation.goBack()}
@@ -90,6 +89,7 @@ export const LivestreamVideoScreen = withThemeContext(
                             disableSeekbar={true}
                             disableTimer={true}
                             disablePlayPause={true}
+                            toggleResizeModeOnFullscreen={true}
                         />
                         {programData && (
                             <LiveIndicator
@@ -99,7 +99,7 @@ export const LivestreamVideoScreen = withThemeContext(
                             />
                         )}
 
-                    </ExpandableContainer>
+                    </ExpandableRotationContainer>
                     {this.renderInformation()}
                 </View>
             )
@@ -213,7 +213,6 @@ const styles = StyleSheet.create({
     },
     videoContainer: {
         backgroundColor: '#000',
-        overflow: 'hidden',
     },
     loader: {
         width: '100%',
