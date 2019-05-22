@@ -1,23 +1,27 @@
 import * as React from 'react'
 import { StyleProp, Animated, StyleSheet, Dimensions } from 'react-native'
+import Orientation from 'react-native-orientation'
 
 
 interface Props {
     style?: StyleProp<{}>,
     expand: boolean
     startHeight: number
+    onRotationChange: () => void
 }
 
 interface State {
     heightAnim: Animated.Value
+    nextRotation: string
 }
 
 const ANIMATION_DURATION = 300
-const FULLSCREEN_OFFSET = 4.5
+const FULLSCREEN_OFFSET = 2.1
 
 export class ExpandableRotationContainer extends React.Component<Props, State> {
     public state: State = {
         heightAnim: new Animated.Value(0),
+        nextRotation: '90deg',
     }
 
     public componentDidUpdate(prevProps: Props) {
@@ -28,6 +32,14 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
                 this.animateOut()
             }
         }
+    }
+
+    public componentDidMount() {
+        Orientation.addSpecificOrientationListener(this.orientationDidChange);
+    }
+
+    public componentWillUnmount() {
+        Orientation.removeSpecificOrientationListener(this.orientationDidChange)
     }
 
     public render() {
@@ -65,7 +77,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
     private getInnerStyles() {
         const { startHeight } = this.props
-        const { heightAnim } = this.state
+        const { heightAnim, nextRotation } = this.state
 
         const widthInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
@@ -79,12 +91,12 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
         const rotateInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: ['0deg', '90deg'],
+            outputRange: ['0deg', nextRotation]
         })
 
         const offsetInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -Dimensions.get('window').height / FULLSCREEN_OFFSET],
+            outputRange: [0, -startHeight / FULLSCREEN_OFFSET],
         })
 
         return [
@@ -99,6 +111,25 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             styles.innerContainer,
         ]
     }
+
+    private orientationDidChange = (orientation: string) => {
+        const { onRotationChange } = this.props
+        if (orientation === 'LANDSCAPE-LEFT') {
+            this.setState({ nextRotation: '90deg' })
+            this.animateIn()
+
+        }
+        if (orientation === 'LANDSCAPE-RIGHT') {
+            this.setState({ nextRotation: '-90deg' })
+            this.animateIn()
+
+        }
+        if (orientation === 'PORTRAIT') {
+            this.setState({ nextRotation: '90deg' })
+            this.animateOut()
+        }
+    }
+
 
     private getStyles() {
         const { style, startHeight } = this.props
