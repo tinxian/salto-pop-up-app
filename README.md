@@ -1,10 +1,4 @@
-[![Build Status](https://app.bitrise.io/app/42235946ce09ec44/status.svg?token=D4Xlt04I8HPTkF9hPgNgQA&branch=develop)](https://app.bitrise.io/app/42235946ce09ec44)
 
-# Mobile boilerplate (WIP, not usable yet)
-
-This is a fully ready react-native project that can be used for developing. If you wish to create your own opinion-less project and just use features like TypeScript, you can refer to the [react-native guides at Lifely Docs](https://docs.lifely.nl/development/react-native/REACT_NATIVE.html) to get you started.
-
-The intention is to keep this boilerplate up to date with the newest versions of React and React-Native as they are being released.
 
 ## Getting started
 
@@ -29,5 +23,18 @@ The intention is to keep this boilerplate up to date with the newest versions of
 4. For adding app icon and splash screen, please refer to [this guide](https://github.com/bamlab/generator-rn-toolbox/tree/master/generators/assets) and follow it closely
 
 ### Startup
+We use itermocil to start all scripts for the project with on command. You need the Iterm terminal for this to work. refer to https://github.com/TomAnthony/itermocil
+
 1. `yarn start`
 2. Follow instructions in the terminal
+
+### Startup without itermocil
+
+1. run `yarn start-metro`
+2. run `yarn watch`
+3. run `node help.js
+
+### known issues
+
+- At the moment `react-native run-PLATFORM` is not working properly with this version of React-native. Start your app using xcode and android studio
+
