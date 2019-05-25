@@ -19,11 +19,11 @@ export const SaltoTabBarBottom = withThemeContext(
         public render() {
             const { theme } = this.props.themeContext
             return (
-                <View style={this.getStyles()}>
+                <View style={styles.container}>
                     <RadioBar
                         theme={theme}
                     />
-                    <View style={styles.tabContainer}>
+                    <View style={this.getTabStyles()}>
                         {this.renderTabs()}
                     </View>
                 </View>
@@ -74,9 +74,9 @@ export const SaltoTabBarBottom = withThemeContext(
 
         }
 
-        private getStyles() {
+        private getTabStyles() {
             return [
-                styles.container,
+                styles.tabContainer,
                 { backgroundColor: this.props.themeContext.theme.colors.NavigationBackgroundColor },
             ]
         }
