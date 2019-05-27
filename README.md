@@ -23,7 +23,7 @@
 4. For adding app icon and splash screen, please refer to [this guide](https://github.com/bamlab/generator-rn-toolbox/tree/master/generators/assets) and follow it closely
 
 ### Startup
-We use itermocil to start all scripts for the project with on command. You need the Iterm terminal for this to work. refer to https://github.com/TomAnthony/itermocil
+We use itermocil to start all scripts for the project with one command. You need the Iterm terminal for this to work. refer to https://github.com/TomAnthony/itermocil
 
 1. `yarn start`
 2. Follow instructions in the terminal
@@ -32,9 +32,9 @@ We use itermocil to start all scripts for the project with on command. You need 
 
 1. run `yarn start-metro`
 2. run `yarn watch`
-3. run `node help.js
+3. run `node help.js` for other instructions
 
 ### known issues
 
-- At the moment `react-native run-PLATFORM` is not working properly with this version of React-native. Start your app using xcode and android studio
+- At the moment `react-native run-PLATFORM` is not working properly on some systems with this version of React-native. Start your app using xcode and android studio
 
