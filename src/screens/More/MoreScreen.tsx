@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { StatusBar } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { TitleSizeType, Title } from 'src/components/core/Typography/Title'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -28,6 +29,10 @@ const moreItems: MoreItem[] = [
 
 export const MoreScreen = withThemeContext(
     class MoreScreen extends React.Component<Props & ThemeInjectedProps, State> {
+
+        public componentDidMount() {
+            AnalyticsData.trackScreen('More screen')
+        }
 
         public render() {
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images

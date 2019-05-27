@@ -17,6 +17,7 @@ import { Label } from 'src/components/core/Label/Label'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Videos, ScheduleType } from 'src/services/videos'
 import { InformationList } from 'src/components/core/List/InformationList'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -47,6 +48,7 @@ export const LivestreamVideoScreen = withThemeContext(
         private socket: any
 
         public async componentDidMount() {
+            AnalyticsData.trackScreen('Livestream video screen')
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
             this.socket = SocketIOClient('https://api.salto.nl/nowplaying')

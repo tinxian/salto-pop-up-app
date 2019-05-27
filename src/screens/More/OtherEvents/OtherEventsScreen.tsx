@@ -6,6 +6,7 @@ import { OtherEventType } from 'src/services/theme'
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation'
 import { getIcon } from 'src/utils/icons'
 import Icon from 'react-native-vector-icons/Ionicons'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -17,6 +18,10 @@ interface State {
 
 export const OtherEventsScreen = withThemeContext(
     class OtherEventsScreen extends React.Component<Props & ThemeInjectedProps, State> {
+
+        public componentDidMount() {
+            AnalyticsData.trackScreen('Other events')
+        }
 
         public render() {
             const { themeContext, navigation } = this.props

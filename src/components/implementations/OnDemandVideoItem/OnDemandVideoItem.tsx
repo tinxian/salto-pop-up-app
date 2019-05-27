@@ -17,6 +17,7 @@ import { getMillisecondsInMinutes } from 'src/utils/date';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { format } from 'date-fns';
 import { ThemeType } from 'src/services/theme';
+import { AnalyticsData } from 'src/services/Analytics';
 
 export interface Props {
     style?: StyleProp<{}>,
@@ -83,9 +84,15 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     private handleOnPress = () => {
-        const { onPress } = this.props
+        const { onPress, item } = this.props
 
-        if (onPress) {
+        if (onPress && item) {
+            AnalyticsData.trackVideoEvent('ondemand_video_item_click', {
+                title: item.title,
+                duration: getMillisecondsInMinutes(item.duration),
+                url: item.streams.mp4,
+                id: item.id,
+            })
             onPress()
         }
     }

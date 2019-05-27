@@ -3,6 +3,7 @@ package com.saltopopupapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
@@ -30,18 +31,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-            new MainReactPackage(),
-            new OrientationPackage(),
-            new VectorIconsPackage(),
-            new RNSoundPlayerPackage(),
-            new RNSharePackage(),
-            new ReactVideoPackage(),
-            new RNGestureHandlerPackage(),
-            new SvgPackage(),
-            new ReactNativeConfigPackage(),
-            new SplashScreenReactPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNFirebasePackage(), new OrientationPackage(),
+          new VectorIconsPackage(), new RNSoundPlayerPackage(), new RNSharePackage(), new ReactVideoPackage(),
+          new RNGestureHandlerPackage(), new SvgPackage(), new ReactNativeConfigPackage(),
+          new SplashScreenReactPackage());
     }
 
     @Override
