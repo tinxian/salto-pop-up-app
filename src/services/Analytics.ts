@@ -27,13 +27,6 @@ class Analytics {
     public async trackVideoEvent(event: string, videoParams: VideoEvent) {
         await firebase.analytics().logEvent(event, videoParams)
     }
-
-    public async trackLivestreamEvent(event: string, videoParams: VideoEvent) {
-        setInterval(() => {
-            this.timer += 1
-            console.log(this.timer)
-        }, 100)
-    }
 }
 
 export const AnalyticsData = new Analytics()
