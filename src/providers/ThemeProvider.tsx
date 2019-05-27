@@ -2,6 +2,7 @@ import React, { Context } from 'react'
 import theme from '../../theme.json'
 import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js'
 import axios from 'axios'
+import { AsyncStorage } from 'react-native';
 
 export const ThemeContext: Context<ThemeContextType> = React.createContext({
     theme,
@@ -16,8 +17,13 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
     }
 
     public async componentDidMount() {
-        const response = await axios.get(Theme.getExternalTheme())
-        this.setState({ theme: response.data })
+        try {
+            await this.setCachedThemeToState()
+            await this.setExternalThemeToState()
+            await this.setThemeToCache()
+        } catch (error) {
+            console.error(error)
+        }
     }
 
     public render() {
@@ -35,6 +41,29 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
     private setThemeStateValue(newThemeState: ThemeType) {
         this.setState({ theme: newThemeState })
         return true
+    }
+
+    private async setCachedThemeToState() {
+        const cachedThemeString = await AsyncStorage.getItem('theme')
+
+        if (cachedThemeString) {
+            const cachedThemeObject = JSON.parse(cachedThemeString)
+            this.setState({ theme: cachedThemeObject })
+        }
+    }
+
+    private async setExternalThemeToState() {
+        const response = await axios.get(Theme.getExternalTheme())
+
+        if (response) {
+            this.setState({ theme: response.data })
+        }
+    }
+
+    private async setThemeToCache() {
+        const { theme } = this.state
+
+        await AsyncStorage.setItem('theme', JSON.stringify(theme))
     }
 }
 
