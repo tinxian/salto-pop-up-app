@@ -5,17 +5,14 @@ interface VideoEvent {
     title: string
     id: string
     url: string
-    duration: string
+    videoDuration: string
+}
+
+interface LivestreamEvent {
+
 }
 
 class Analytics {
-
-    public timer: number
-
-    constructor() {
-        this.timer = 0
-    }
-
     public getAnalyticsID() {
         return Config.ANALYTICS_ID
     }
@@ -24,8 +21,12 @@ class Analytics {
         await firebase.analytics().setCurrentScreen(screen)
     }
 
-    public async trackVideoEvent(event: string, videoParams: VideoEvent) {
-        await firebase.analytics().logEvent(event, videoParams)
+    public async trackOndemandVideoClickEvent(videoParams: VideoEvent) {
+        await firebase.analytics().logEvent('consumed_ondemand_video', videoParams)
+    }
+
+    public async trackLivesteamClickEvent(livestreamParams: LivestreamEvent) {
+        await firebase.analytics().logEvent('consumed_ondemand_video', livestreamParams)
     }
 }
 

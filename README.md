@@ -27,12 +27,14 @@ We use itermocil to start all scripts for the project with one command. You need
 
 1. `yarn start`
 2. Follow instructions in the terminal
+3. copy and edit `.env.example` and make .env file in the root folder
 
 ### Startup without itermocil
 
 1. run `yarn start-metro`
 2. run `yarn watch`
 3. run `node help.js` for other instructions
+4. copy and edit `.env.example` and make .env file in the root folder
 
 ### known issues
 

@@ -7,7 +7,7 @@ interface Props {
     style?: StyleProp<{}>,
     expand: boolean
     startHeight: number
-    onRotationChange: () => void
+    onRotationChange?: () => void
 }
 
 interface State {
@@ -113,7 +113,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     }
 
     private orientationDidChange = (orientation: string) => {
-        const { onRotationChange } = this.props
         if (orientation === 'LANDSCAPE-LEFT') {
             this.setState({ nextRotation: '90deg' })
             this.animateIn()

@@ -87,9 +87,9 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
         const { onPress, item } = this.props
 
         if (onPress && item) {
-            AnalyticsData.trackVideoEvent('ondemand_video_item_click', {
+            AnalyticsData.trackOndemandVideoClickEvent({
                 title: item.title,
-                duration: getMillisecondsInMinutes(item.duration),
+                videoDuration: getMillisecondsInMinutes(item.duration),
                 url: item.streams.mp4,
                 id: item.id,
             })

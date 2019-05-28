@@ -22,8 +22,8 @@ interface MoreItem {
     icon: string
 }
 
+//    { screen: 'SettingsScreen', label: 'Instellingen', icon: getIcon('settings') },
 const moreItems: MoreItem[] = [
-    { screen: 'SettingsScreen', label: 'Instellingen', icon: getIcon('settings') },
     { screen: 'OtherEventsScreen', label: 'Andere evenementen', icon: getIcon('megaphone') },
 ]
 
