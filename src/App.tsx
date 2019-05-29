@@ -22,11 +22,10 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
 
     public render() {
         return (
-
             <View style={styles.container}>
+                <AppNotificationManager />
                 <ThemeProvider>
                     <VideosProvider>
-                        <AppNotificationManager />
                         <LocalizationProvider initialize={initializeLocalization}>
                             <RootNavigator
                                 navigation={this.props.navigation}

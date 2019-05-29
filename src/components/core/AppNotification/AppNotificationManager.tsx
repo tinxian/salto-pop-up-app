@@ -11,7 +11,10 @@ import { EventAttentionModal } from '../Modal/EventAttentionModal';
 interface Props {
 }
 
-interface State { }
+interface State {
+    dataIndex: number
+    closed: boolean
+}
 
 export enum AppNotifcationTypeValue {
     EventStopped = 'EventStopped',
@@ -21,6 +24,7 @@ export const AppNotificationManager = withThemeContext(
     class AppNotificationManager extends React.Component<Props & ThemeInjectedProps, State> {
         public state: State = {
             dataIndex: 0,
+            closed: false,
         }
 
         public render() {
@@ -45,9 +49,11 @@ export const AppNotificationManager = withThemeContext(
 
         private renderHandler(open: () => void) {
             const { endDate } = this.props.themeContext.theme.content.App
+            const { closed } = this.state
 
-            if (isPast(endDate)) {
+            if (!closed && isPast(endDate)) {
                 open()
+                this.setState({ closed: true })
             }
 
             return <View />
