@@ -4,6 +4,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { HeaderNavigation } from 'src/components/core/Navigation/HeaderNavigation.js'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent.js'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -15,6 +16,10 @@ interface State {
 
 export const SettingsScreen = withThemeContext(
     class SettingsScreen extends React.Component<Props & ThemeInjectedProps, State> {
+
+        public componentDidMount() {
+            AnalyticsData.trackScreen('Settings screen')
+        }
 
         public state: State = {
             themeSwitch: false,

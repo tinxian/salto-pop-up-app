@@ -19,6 +19,7 @@ import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Params {
     item: EpisodeType,
@@ -45,6 +46,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
         public player: Video | null
 
         public componentDidMount() {
+            AnalyticsData.trackScreen('Ondemand video screen')
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
         }

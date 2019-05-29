@@ -10,6 +10,7 @@ import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvide
 import { isWithinRange } from 'date-fns'
 import { Paragraph } from 'src/components/core/Typography/Paragraph'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -21,6 +22,11 @@ interface State {
 
 export const HomeScreen = withThemeContext(withVideosContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
+
+        public componentDidMount() {
+            AnalyticsData.trackScreen('HomeScreen')
+        }
+
         public render() {
             const { themeContext } = this.props
             const { colors, images, content } = themeContext.theme

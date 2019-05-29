@@ -9,6 +9,7 @@ import { LivestreamItem } from 'src/components/implementations/LivestreamItem/Li
 import { isWithinRange } from 'date-fns'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
+import { AnalyticsData } from 'src/services/Analytics';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -16,6 +17,10 @@ interface Props extends NavigationScreenProps<{}> {
 
 export const OnDemandListScreen = withThemeContext(withVideosContext(
     class OnDemandListScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, {}> {
+
+        public componentDidMount() {
+            AnalyticsData.trackScreen('Livestream video screen')
+        }
 
         public render() {
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images

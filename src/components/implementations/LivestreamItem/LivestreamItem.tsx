@@ -12,6 +12,7 @@ import { getIcon } from 'src/utils/icons'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { Title } from 'src/components/core/Typography/Title'
 import { ThemeType } from 'src/services/theme';
+import { AnalyticsData } from 'src/services/Analytics';
 
 export interface Props {
     style?: StyleProp<{}>,
@@ -70,6 +71,7 @@ export class LivestreamItem extends React.Component<Props, State> {
         const { onPress } = this.props
 
         if (onPress) {
+            AnalyticsData.trackLivesteamClickEvent({})
             onPress()
         }
     }
