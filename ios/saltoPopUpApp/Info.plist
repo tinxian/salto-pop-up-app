@@ -40,9 +40,9 @@
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We don't use the user location, It's just standard within React Native. As for the API, its a public api that does not store sensitive data, it returns videos and text about radio programs in Amsterdam</string>
+	<string>We don&apos;t use the user location, It&apos;s just standard within React Native. As for the API, its a public api that does not store sensitive data, it returns videos and text about radio programs in Amsterdam</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We don't use the user location, It's just standard within React Native. As for the API, its a public api that does not store sensitive data, it returns videos and text about radio programs in Amsterdam</string>
+	<string>We don&apos;t use the user location, It&apos;s just standard within React Native. As for the API, its a public api that does not store sensitive data, it returns videos and text about radio programs in Amsterdam</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
