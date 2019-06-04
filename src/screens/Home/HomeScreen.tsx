@@ -11,6 +11,7 @@ import { isWithinRange } from 'date-fns'
 import { Paragraph } from 'src/components/core/Typography/Paragraph'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { AnalyticsData } from 'src/services/Analytics';
+import { Logo } from 'src/components/core/Logo/Logo';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -39,7 +40,7 @@ export const HomeScreen = withThemeContext(withVideosContext(
                         resizeMode={'repeat'}
 
                     />
-                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
+                    <Logo style={styles.logo} navigation={this.props.navigation} />
 
                     <View style={styles.wrapper} >
                         <ScrollView style={{ flex: 1 }}>

@@ -7,6 +7,7 @@ import { StatusBar } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { TitleSizeType, Title } from 'src/components/core/Typography/Title'
 import { AnalyticsData } from 'src/services/Analytics';
+import { Logo } from 'src/components/core/Logo/Logo';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -45,7 +46,7 @@ export const MoreScreen = withThemeContext(
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
+                    <Logo style={styles.logo} navigation={this.props.navigation} />
                     <FlatList<MoreItem>
                         ListHeaderComponent={() => (
                             <View style={styles.titleContainer}>

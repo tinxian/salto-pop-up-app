@@ -10,6 +10,7 @@ import { isWithinRange } from 'date-fns'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
 import { AnalyticsData } from 'src/services/Analytics';
+import { Logo } from 'src/components/core/Logo/Logo';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -32,7 +33,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Image style={styles.logo} source={require('../../../../src/assets/images/logos/salto.png')} />
+                    <Logo style={styles.logo} navigation={this.props.navigation} />
                     {this.renderList()}
                 </View>
             )
