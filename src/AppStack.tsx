@@ -1,4 +1,4 @@
-import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps } from 'react-navigation'
+import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
 import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
@@ -9,6 +9,7 @@ import React from 'react'
 import { RadioScreen } from './screens/Radio/RadioScreen'
 import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
 import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
+import { withThemeContext, ThemeInjectedProps } from './providers/ThemeProvider';
 
 const MoreNavigator = createStackNavigator({
     MoreMainScreen: {
@@ -69,21 +70,23 @@ const TabNavigator = createBottomTabNavigator({
     } as any // refer to react-navigation createBottomTabNavigator for all possible settings
 )
 
-export class TabNavigatorComponent extends React.Component<NavigationScreenProps, {}> {
-    private static router = TabNavigator.router
-    public componentDidMount() {
-        console.log(TabNavigatorComponent.router)
-    }
+export const TabNavigatorComponent = withThemeContext(
+    class TabNavigatorComponent extends React.Component<NavigationScreenProps & ThemeInjectedProps, {}> {
+        private static router = TabNavigator.router
+        public componentDidMount() {
+            console.log(TabNavigatorComponent.router)
+        }
 
-    public render() {
-        const { navigation } = this.props
-        return (
-            // <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-            <TabNavigator navigation={navigation} />
-            // </SafeAreaView>
-        )
+        public render() {
+            const { navigation } = this.props
+            return (
+                <SafeAreaView style={{ flex: 1, backgroundColor: this.props.themeContext.theme.colors.NavigationBackgroundColor }}>
+                    <TabNavigator navigation={navigation} />
+                </SafeAreaView>
+            )
+        }
     }
-}
+)
 
 export const RootNavigator = createStackNavigator({
     Main: {
