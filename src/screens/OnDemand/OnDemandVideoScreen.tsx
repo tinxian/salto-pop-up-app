@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, TouchableHighlight, FlatList } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -34,6 +34,7 @@ interface State {
     loading: boolean
     fullScreen: boolean
     height: number
+    metaExpand: boolean
 }
 export const OnDemandVideoScreen = withThemeContext(withVideosContext(
     class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
@@ -41,6 +42,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             loading: true,
             fullScreen: false,
             height: Dimensions.get('window').height,
+            metaExpand: false,
         }
 
         public player: Video | null
@@ -109,34 +111,75 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
 
         private renderMetaHeader(item: EpisodeType) {
             const { themeContext } = this.props
+            const { metaExpand } = this.state
 
             return (
                 <View>
-                    <View style={styles.meta}>
-                        <View style={{ flex: 1 }}>
-                            <Title color={themeContext.theme.colors.TextColor} numberOfLines={2} >{item.title}</Title>
-                        </View>
-                        <TouchableHighlight onPress={this.handleShare}>
-                            <View style={styles.shareButton}>
-                                <Icon
-                                    name={getIcon('share')}
-                                    color={this.props.themeContext.theme.colors.ButtonColor}
-                                    size={25}
-                                />
+                    <TouchableOpacity onPress={this.handleMetaExpand}>
+                        <View
+                            style={styles.titleContainer}
+                        >
+                            <View style={{ flex: 1 }}>
+                                <Title
+                                    color={themeContext.theme.colors.TextColor}
+                                    numberOfLines={!metaExpand ? 2 : undefined}
+                                >
+                                    {item.title}
+                                </Title>
                             </View>
-                        </TouchableHighlight>
+                            <View>
+                                <View style={styles.shareButton}>
+                                    <Icon
+                                        name={getIcon('arrow-down')}
+                                        color={this.props.themeContext.theme.colors.ButtonColor}
+                                        size={25}
+                                        style={{ transform: [{ rotate: metaExpand ? '180deg' : '0deg' }] }}
+                                    />
+                                </View>
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+                    {this.renderMetaContent()}
+
+                    <View style={styles.metaContainer}>
+                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                        <View style={styles.metaActions}>
+                            <Label
+                                color={themeContext.theme.colors.LabelColor}
+                                textColor={themeContext.theme.colors.LabelTextColor}
+                                text={item.programName}
+                            />
+                            <TouchableOpacity onPress={this.handleShare}>
+                                <View style={styles.shareButton}>
+                                    <Icon
+                                        name={getIcon('share')}
+                                        color={this.props.themeContext.theme.colors.ButtonColor}
+                                        size={25}
+                                    />
+                                </View>
+                            </TouchableOpacity>
+                        </View>
                     </View>
 
-                    <View style={styles.labelWrapper}>
-                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                        <Label
-                            color={themeContext.theme.colors.LabelColor}
-                            textColor={themeContext.theme.colors.LabelTextColor}
-                            text={item.programName}
-                        />
-                    </View>
-                    <Paragraph color={themeContext.theme.colors.TextColor}>{item.description}</Paragraph>
                 </View>
+            )
+        }
+
+        private renderMetaContent() {
+            const { themeContext } = this.props
+            const { metaExpand } = this.state
+            const item = this.props.navigation.getParam('item')
+
+            if (!metaExpand) {
+                return null
+            }
+
+            if (!item.description) {
+                return <Paragraph color={themeContext.theme.colors.TextColor}>Geen beschrijving beschikbaar</Paragraph>
+            }
+
+            return (
+                <Paragraph color={themeContext.theme.colors.TextColor}>{item.description}</Paragraph>
             )
         }
 
@@ -146,6 +189,10 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
 
         private handleShare = () => {
             Share.open(this.getShareOptions())
+        }
+
+        private handleMetaExpand = () => {
+            this.setState({ metaExpand: !this.state.metaExpand })
         }
 
         private handleFullScreenToggle = () => {
@@ -169,9 +216,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             const item = this.props.navigation.getParam('item')
 
             return data.filter(i => {
-
                 return i.programName === item.programName && i.id !== item.id
-
             })
 
         }
@@ -203,7 +248,7 @@ const styles = StyleSheet.create({
     content: {
         paddingHorizontal: 12,
     },
-    labelWrapper: {
+    metaContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -219,10 +264,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    meta: {
+    titleContainer: {
         width: '100%',
         justifyContent: 'space-between',
-        alignItems: 'center',
         flexDirection: 'row',
         paddingVertical: 8,
     },
@@ -230,6 +274,11 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         width: 44,
         height: 44,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    metaActions: {
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
     },
