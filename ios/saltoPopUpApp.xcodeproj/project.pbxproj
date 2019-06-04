@@ -518,7 +518,6 @@
 				086B58A8427E4D248917F5C6 /* libRNSoundPlayer.a in Frameworks */,
 				91995550D5DA4BC39C0C3F95 /* libRNVectorIcons.a in Frameworks */,
 				EF05ECC6DF78443BAEDEC2D1 /* libRCTOrientation.a in Frameworks */,
-				38C302CC38AD410EBFD81797 /* libRCTGoogleAnalyticsBridge.a in Frameworks */,
 				AAC48C65A15746BA9B4420DE /* CoreData.framework in Frameworks */,
 				662E178CE52B4D80B4B66C07 /* SystemConfiguration.framework in Frameworks */,
 				6C4B61EA1EA14464A972A935 /* libz.tbd in Frameworks */,
