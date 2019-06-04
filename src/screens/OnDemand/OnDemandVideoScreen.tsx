@@ -119,7 +119,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                         <View
                             style={styles.titleContainer}
                         >
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, justifyContent: 'center' }}>
                                 <Title
                                     color={themeContext.theme.colors.TextColor}
                                     numberOfLines={!metaExpand ? 2 : undefined}
