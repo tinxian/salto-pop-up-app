@@ -9,7 +9,7 @@ import { ExpandableRotationContainer } from 'src/components/core/Animation/Expan
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
 
-import { getIcon } from 'src/utils/icons';
+import { getIcon, PlatformIconType } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { Label } from 'src/components/core/Label/Label';
@@ -152,7 +152,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                             <TouchableOpacity onPress={this.handleShare}>
                                 <View style={styles.shareButton}>
                                     <Icon
-                                        name={getIcon('share')}
+                                        name={getIcon('share', PlatformIconType.md)}
                                         color={this.props.themeContext.theme.colors.ButtonColor}
                                         size={25}
                                     />

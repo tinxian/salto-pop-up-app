@@ -10,7 +10,7 @@ import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
 import SocketIOClient from 'socket.io-client'
 import { Title } from 'src/components/core/Typography/Title'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { getIcon } from 'src/utils/icons'
+import { getIcon, PlatformIconType } from 'src/utils/icons'
 import { format } from 'date-fns'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { Label } from 'src/components/core/Label/Label'
@@ -123,7 +123,7 @@ export const LivestreamVideoScreen = withThemeContext(
                         <TouchableHighlight onPress={this.handleShare}>
                             <View style={styles.shareButton}>
                                 <Icon
-                                    name={getIcon('share')}
+                                    name={getIcon('share', PlatformIconType.md)}
                                     color={this.props.themeContext.theme.colors.ButtonColor}
                                     size={25}
                                 />
