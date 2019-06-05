@@ -39,7 +39,6 @@ export class Logo extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        zIndex: 5,
 
     },
 })
