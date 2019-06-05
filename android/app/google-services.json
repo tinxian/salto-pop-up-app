@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "202773215761",
+    "firebase_url": "https://salto-pop-up-app.firebaseio.com",
+    "project_id": "salto-pop-up-app",
+    "storage_bucket": "salto-pop-up-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202773215761:android:cdcfef52ec3bb985",
+        "android_client_info": {
+          "package_name": "com.salto.saltoPopUpApp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202773215761-f9qgtr0o88calq52qkk6nsfnvgrhv3f3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4yiKNmAQUVcIQAi_-Mwy_xF1cHIw-yRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202773215761-f9qgtr0o88calq52qkk6nsfnvgrhv3f3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "202773215761-6mu8qvko8itq93i8lejeq397m848ckto.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salto.saltoPopUpApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202773215761:android:2d630bb39adfc6ca",
+        "android_client_info": {
+          "package_name": "com.saltopopupapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "202773215761-f9qgtr0o88calq52qkk6nsfnvgrhv3f3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4yiKNmAQUVcIQAi_-Mwy_xF1cHIw-yRk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "202773215761-f9qgtr0o88calq52qkk6nsfnvgrhv3f3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "202773215761-6mu8qvko8itq93i8lejeq397m848ckto.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.salto.saltoPopUpApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

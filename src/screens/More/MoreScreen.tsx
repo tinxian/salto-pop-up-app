@@ -197,11 +197,11 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 60,
+        top: 42,
         left: 12,
     },
     content: {
-        marginTop: 100,
+        marginTop: 72,
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
         borderRadius: 25,
