@@ -38,6 +38,14 @@ export class RadioBar extends React.Component<Props, State> {
     public componentDidMount() {
         this.initLiveData()
 
+        TrackPlayer.updateOptions({
+            capabilities: [
+                TrackPlayer.CAPABILITY_PLAY,
+                TrackPlayer.CAPABILITY_PAUSE,
+                TrackPlayer.CAPABILITY_STOP,
+            ]
+        })
+
         TrackPlayer.setupPlayer().then(async () => {
             // Adds a track to the queue
             await TrackPlayer.add({
@@ -47,12 +55,6 @@ export class RadioBar extends React.Component<Props, State> {
                 artist: 'Track Artist',
                 artwork: 'https://placehold.it/200x200'
             });
-            TrackPlayer.updateOptions({
-                capabilities: [
-                    TrackPlayer.CAPABILITY_PLAY,
-                    TrackPlayer.CAPABILITY_PAUSE,
-                    TrackPlayer.CAPABILITY_STOP,
-                ]})
         })
     }
 
