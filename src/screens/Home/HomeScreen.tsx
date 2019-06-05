@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         position: 'absolute',
-        top: 60,
+        top: 42,
         left: 12,
     },
     labelContainer: {
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         paddingVertical: 24,
     },
     emptySpace: {
-        height: 100,
+        height: 72,
         flex: 1,
     },
     titleContainer: {
