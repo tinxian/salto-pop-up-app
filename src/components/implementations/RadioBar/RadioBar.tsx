@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
-import SoundPlayer from 'react-native-sound-player'
+
+import TrackPlayer from 'react-native-track-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
@@ -32,25 +33,33 @@ export class RadioBar extends React.Component<Props, State> {
         programData: undefined,
     }
 
-
     private socket: any
 
     public componentDidMount() {
-        RadioBar.radioDispatcher.subscribe('stopRadio', () => {
-            this.setState({ active: false })
-        })
-
-        SoundPlayer.onFinishedLoading(() => {
-            this.setState({
-                loading: false,
-            })
-        })
-
         this.initLiveData()
+
+        TrackPlayer.updateOptions({
+            capabilities: [
+                TrackPlayer.CAPABILITY_PLAY,
+                TrackPlayer.CAPABILITY_PAUSE,
+                TrackPlayer.CAPABILITY_STOP,
+            ]
+        })
+
+        TrackPlayer.setupPlayer().then(async () => {
+            // Adds a track to the queue
+            await TrackPlayer.add({
+                id: 'trackId',
+                url: 'https://icecast.streamone.net/46ANH44CYA8S',
+                title: 'Track Title',
+                artist: 'Track Artist',
+                artwork: 'https://placehold.it/200x200'
+            });
+        })
     }
 
     public componentWillUnmount() {
-        RadioBar.radioDispatcher.destroy()
+        TrackPlayer.destroy()
     }
 
     public render() {
@@ -113,6 +122,7 @@ export class RadioBar extends React.Component<Props, State> {
 
         this.socket.on('update', (data: LiveStreamDataType) => {
             this.setState({ programData: data })
+            return data
         })
     }
 
@@ -138,10 +148,10 @@ export class RadioBar extends React.Component<Props, State> {
             this.setState({ loading: false, active: !active })
 
             if (!active) {
-                SoundPlayer.playUrl('https://icecast.streamone.net/46ANH44CYA8S')
+                TrackPlayer.play()
                 return
             }
-            SoundPlayer.pause()
+            TrackPlayer.pause()
 
         } catch (e) {
             throw (e)
