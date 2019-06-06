@@ -25,7 +25,7 @@ interface MoreItem {
 
 //    { screen: 'SettingsScreen', label: 'Instellingen', icon: getIcon('settings') },
 const moreItems: MoreItem[] = [
-    { screen: 'OtherEventsScreen', label: 'Andere evenementen', icon: getIcon('megaphone') },
+    // { screen: 'OtherEventsScreen', label: 'Andere evenementen', icon: getIcon('megaphone') },
 ]
 
 export const MoreScreen = withThemeContext(

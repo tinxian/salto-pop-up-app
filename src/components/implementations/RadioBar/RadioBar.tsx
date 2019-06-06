@@ -11,6 +11,7 @@ import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/Bot
 import { RadioScreen } from 'src/screens/Radio/RadioScreen'
 import { ThemeType } from 'src/services/theme';
 import { Dispatcher } from 'src/utils/Dispatcher';
+import Config from "react-native-config";
 
 interface Props {
     style?: StyleProp<{}>
@@ -50,7 +51,7 @@ export class RadioBar extends React.Component<Props, State> {
             // Adds a track to the queue
             await TrackPlayer.add({
                 id: 'trackId',
-                url: 'https://icecast.streamone.net/46ANH44CYA8S',
+                url: Config.RADIO_URL,
                 title: 'Track Title',
                 artist: 'Track Artist',
                 artwork: 'https://placehold.it/200x200'
