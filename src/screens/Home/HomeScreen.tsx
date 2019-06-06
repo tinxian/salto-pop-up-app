@@ -64,12 +64,12 @@ export const HomeScreen = withThemeContext(withVideosContext(
                                     </View>
 
                                 </View>
-                                {this.getMedia()}
                                 <View style={styles.introText}>
                                     <Paragraph color={colors.TitleColor}>
                                         {themeContext.theme.content.general.AppIntroduction}
                                     </Paragraph>
                                 </View>
+                                {this.getMedia()}
                             </View>
                         </ScrollView>
                     </View>
