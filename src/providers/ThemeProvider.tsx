@@ -80,8 +80,7 @@ export function withThemeContext<Props>(Component: React.ComponentClass<ThemeInj
             return (
 
                 <ThemeContext.Consumer>
-                    {
-                        context => <Component {...this.props} themeContext={context} />}
+                    {context => <Component {...this.props} themeContext={context} />}
                 </ThemeContext.Consumer>
             )
         }

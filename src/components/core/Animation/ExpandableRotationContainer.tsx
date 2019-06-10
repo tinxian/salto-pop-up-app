@@ -129,7 +129,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
         return [
             {
-                backgroundColor: 'blue',
                 height: heightInterpolation,
                 transform: [
                     { rotate: rotateInterpolation },
@@ -139,7 +138,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     }
 
     private getInnerContainerViewStyles() {
-        const { heightAnim } = this.state
+        const { heightAnim, nextRotation } = this.state
         const { startHeight } = this.props
         const deviceHeight = Dimensions.get('screen').height
         const deviceWidth = Dimensions.get('screen').width
@@ -154,11 +153,18 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             outputRange: [startHeight, deviceWidth],
         })
 
+        const offsetInterpolation = heightAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -startHeight],
+        })
+
         return [
             {
+
                 height: heightInterpolation,
                 width: widthInterpolation,
             },
+            nextRotation === '-90deg' && { left: offsetInterpolation }
         ]
 
     }
