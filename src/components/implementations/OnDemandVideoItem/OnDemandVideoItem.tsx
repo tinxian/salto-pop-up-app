@@ -7,6 +7,7 @@ import {
     TouchableHighlight,
     ImageSourcePropType,
     Text,
+    TouchableWithoutFeedback,
 } from 'react-native'
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -46,39 +47,41 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
         return (
             <View style={this.getStyles()}>
 
-                <TouchableHighlight onPress={this.handleOnPress}>
-
-                    <View style={styles.thumbnail}>
-                        {poster && (
-                            <Image
-                                style={styles.item}
-                                source={poster}
-                                onLoadEnd={() => this.setState({ loading: false })}
+                <TouchableWithoutFeedback onPress={this.handleOnPress}>
+                    <React.Fragment>
+                        <View style={styles.thumbnail}>
+                            {poster && (
+                                <Image
+                                    style={styles.item}
+                                    source={poster}
+                                    onLoadEnd={() => this.setState({ loading: false })}
+                                />
+                            )}
+                            <View style={styles.cover} />
+                            <Icon
+                                name={getIcon('play-circle')}
+                                color={'#ffffff'}
+                                size={60}
+                                style={styles.playButton}
                             />
-                        )}
-                        <View style={styles.cover} />
-                        <Icon
-                            name={getIcon('play-circle')}
-                            color={'#ffffff'}
-                            size={60}
-                            style={styles.playButton}
-                        />
+                            {item && (
+                                <View style={styles.durationContainer}>
+                                    <Text style={styles.durationText}>{getMillisecondsInMinutes(item.duration)}</Text>
+                                </View>
+                            )}
+                        </View>
+
+                        <View style={styles.descriptionContainer}>
+                            <Title color={theme.colors.TextColor} numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
+                        </View>
                         {item && (
-                            <View style={styles.durationContainer}>
-                                <Text style={styles.durationText}>{getMillisecondsInMinutes(item.duration)}</Text>
+                            <View style={styles.metaContainer}>
+                                <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                                <Label style={styles.label} color={LabelColor} textColor={LabelTextColor} text={item.programName} />
                             </View>
                         )}
-                    </View>
-                </TouchableHighlight >
-                <View style={styles.descriptionContainer}>
-                    <Title color={theme.colors.TextColor} numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
-                </View>
-                {item && (
-                    <View style={styles.metaContainer}>
-                        <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                        <Label style={styles.label} color={LabelColor} textColor={LabelTextColor} text={item.programName} />
-                    </View>
-                )}
+                    </React.Fragment>
+                </TouchableWithoutFeedback >
             </View>
         )
     }

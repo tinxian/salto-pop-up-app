@@ -53,7 +53,7 @@ export const MoreScreen = withThemeContext(
                                 <Title size={TitleSizeType.large} color={colors.TitleColor}>Meer</Title>
                             </View>
                         )}
-                        ListFooterComponent={this.renderFooter}
+                        ListFooterComponent={this.renderFooter()}
                         contentContainerStyle={this.getWrapperStyles()}
                         data={moreItems}
                         renderItem={item => this.renderItem(item.item)}
@@ -85,7 +85,7 @@ export const MoreScreen = withThemeContext(
             )
         }
 
-        private renderFooter = () => {
+        private renderFooter() {
             const { links, colors } = this.props.themeContext.theme
 
             const elements = links.map((link, index) => (
@@ -108,7 +108,7 @@ export const MoreScreen = withThemeContext(
             ))
 
             return (
-                <View style={{ marginTop: 44 }}>
+                <View style={moreItems.length ? { marginTop: 44 } : undefined}>
                     {elements}
                 </View>
 
