@@ -4,10 +4,9 @@ import {
     Image,
     StyleSheet,
     StyleProp,
-    TouchableHighlight,
     ImageSourcePropType,
     Text,
-    TouchableWithoutFeedback,
+    TouchableOpacity,
 } from 'react-native'
 import { getIcon } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -47,7 +46,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
         return (
             <View style={this.getStyles()}>
 
-                <TouchableWithoutFeedback onPress={this.handleOnPress}>
+                <TouchableOpacity onPress={this.handleOnPress}>
                     <React.Fragment>
                         <View style={styles.thumbnail}>
                             {poster && (
@@ -81,7 +80,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                             </View>
                         )}
                     </React.Fragment>
-                </TouchableWithoutFeedback >
+                </TouchableOpacity >
             </View>
         )
     }
