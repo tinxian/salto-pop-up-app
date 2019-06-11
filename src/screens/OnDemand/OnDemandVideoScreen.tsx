@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -35,7 +35,7 @@ interface State {
     fullScreen: boolean
     height: number
     metaExpand: boolean
-    appState: any
+    appState: AppStateStatus
     paused: boolean
 }
 export const OnDemandVideoScreen = withThemeContext(withVideosContext(
@@ -86,6 +86,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenToggle}
                             onExitFullscreen={this.handleFullScreenToggle}
+                            toggleResizeModeOnFullscreen={false}
                         />
                     </ExpandableRotationContainer>
 
@@ -208,10 +209,10 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
         private handleAppStateChange = (nextAppState: any) => {
             this.setState({ appState: nextAppState })
             if (nextAppState === 'background' || 'inactive') {
-                this.setState({ paused: true  });
+                this.setState({ paused: true });
             }
             if (nextAppState === 'active') {
-                this.setState({ paused: false  });
+                this.setState({ paused: false });
             }
         };
 

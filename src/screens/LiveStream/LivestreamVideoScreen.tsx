@@ -92,7 +92,7 @@ export const LivestreamVideoScreen = withThemeContext(
                             disableTimer={true}
                             disablePlayPause={true}
                             playInBackground={false}
-                            toggleResizeModeOnFullscreen={true}
+                            toggleResizeModeOnFullscreen={false}
                         />
                         {programData && (
                             <LiveIndicator
