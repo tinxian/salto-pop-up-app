@@ -96,12 +96,10 @@ export const HomeScreen = withThemeContext(withVideosContext(
             if (afterMovie) {
                 return (
                     <OnDemandVideoItem
-                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie })}
-                        poster={{ uri: afterMovie.poster }}
                         theme={theme}
                         title={`Aftermovie ${theme.content.general.EventName}`}
-                        programName={afterMovie.programName}
-                        item={afterMovie}
+                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie, data: episodes })}
+                        poster={theme.images.defaultThumbnail}
                     />
                 )
             }
