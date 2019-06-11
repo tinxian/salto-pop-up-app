@@ -37,9 +37,7 @@ export class LivestreamItem extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
-
                 <TouchableHighlight onPress={this.handleOnPress}>
-
                     <View style={this.getThumbnailStyles()}>
                         {thumbnail && (
                             <Image
@@ -61,8 +59,8 @@ export class LivestreamItem extends React.Component<Props, State> {
                             style={styles.liveIndicator}
                         />
                     </View>
+                    <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
                 </TouchableHighlight >
-                <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
             </View>
         )
     }
