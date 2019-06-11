@@ -82,6 +82,7 @@ export const HomeScreen = withThemeContext(withVideosContext(
             const { episodes } = this.props.videosContext
             const currentDate = new Date()
             const afterMovie = episodes.find(episode => episode.id === theme.content.general.AftermovieId)
+            console.log(afterMovie)
 
             if (isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
                 return (
@@ -96,10 +97,12 @@ export const HomeScreen = withThemeContext(withVideosContext(
             if (afterMovie) {
                 return (
                     <OnDemandVideoItem
+                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie })}
+                        poster={{ uri: afterMovie.poster }}
                         theme={theme}
-                        title={`Aftermovie ${theme.content.general.EventName}`}
-                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie, data: episodes })}
-                        poster={theme.images.defaultThumbnail}
+                        title={afterMovie.title}
+                        programName={afterMovie.programName}
+                        item={afterMovie}
                     />
                 )
             }
