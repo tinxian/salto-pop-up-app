@@ -98,13 +98,13 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
         const heightInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [startHeight, Dimensions.get('screen').height],
+            outputRange: [startHeight, Dimensions.get('window').height],
         })
 
         return [
             {
                 height: heightInterpolation,
-                width: Dimensions.get('screen').width,
+                width: Dimensions.get('window').width,
             },
             style,
         ]
@@ -113,7 +113,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     private getRotationContainerStyles() {
         const { startHeight } = this.props
         const { heightAnim, nextRotation } = this.state
-        const deviceWidth = Dimensions.get('screen').width
+        const deviceWidth = Dimensions.get('window').width
 
 
 
@@ -140,8 +140,8 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     private getInnerContainerViewStyles() {
         const { heightAnim, nextRotation } = this.state
         const { startHeight } = this.props
-        const deviceHeight = Dimensions.get('screen').height
-        const deviceWidth = Dimensions.get('screen').width
+        const deviceHeight = Dimensions.get('window').height
+        const deviceWidth = Dimensions.get('window').width
 
         const widthInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
