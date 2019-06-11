@@ -118,6 +118,7 @@ export const MoreScreen = withThemeContext(
         private handleOpenUrl(url: string) {
             Linking.canOpenURL(url).then(supported => {
                 if (supported) {
+                    AnalyticsData.trackSocialLinkEvent(url)
                     Linking.openURL(url)
                 } else {
                     Alert.alert(

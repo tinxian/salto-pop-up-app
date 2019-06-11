@@ -1,4 +1,4 @@
-import Config from "react-native-config"
+import Config from 'react-native-config'
 import firebase from 'react-native-firebase'
 
 interface VideoEvent {
@@ -27,6 +27,14 @@ class Analytics {
 
     public async trackLivesteamClickEvent(livestreamParams: LivestreamEvent) {
         await firebase.analytics().logEvent('consumed_ondemand_video', livestreamParams)
+    }
+
+    public async trackShareClickEvent(shareEvent: string) {
+        await firebase.analytics().logEvent('clicked_share_button', shareEvent)
+    }
+
+    public async trackSocialLinkEvent(socialEvent: string) {
+        await firebase.analytics().logEvent('clicked_social_button', socialEvent)
     }
 }
 

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -35,6 +35,8 @@ interface State {
     fullScreen: boolean
     height: number
     metaExpand: boolean
+    appState: any
+    paused: boolean
 }
 export const OnDemandVideoScreen = withThemeContext(withVideosContext(
     class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
@@ -43,17 +45,21 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             fullScreen: false,
             height: Dimensions.get('window').height,
             metaExpand: false,
+            appState: AppState.currentState,
+            paused: false,
         }
 
         public player: Video | null
 
         public componentDidMount() {
+            AppState.addEventListener('change', this.handleAppStateChange);
             AnalyticsData.trackScreen('Ondemand video screen')
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
         }
 
         public componentWillUnmount() {
+            AppState.removeEventListener('change', this.handleAppStateChange);
             StatusBar.setHidden(false, 'fade')
         }
 
@@ -72,9 +78,11 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
-                            style={{ flex: 1 }}
+                            style={{ flex: 1, overflow: 'hidden' }}
                             ref={(ref: Video) => this.player = ref}
                             source={{ uri: item.streams.mp4 }}
+                            playInBackground={false}
+                            paused={this.state.paused}
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenToggle}
                             onExitFullscreen={this.handleFullScreenToggle}
@@ -160,7 +168,11 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                             </TouchableOpacity>
                         </View>
                     </View>
-
+                    <Title
+                        color={themeContext.theme.colors.TextColor}
+                    >
+                        Relevante Videos
+                    </Title>
                 </View>
             )
         }
@@ -188,8 +200,20 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
         }
 
         private handleShare = () => {
+            const item = this.props.navigation.getParam('item')
+            AnalyticsData.trackShareClickEvent(item.title)
             Share.open(this.getShareOptions())
         }
+
+        private handleAppStateChange = (nextAppState: any) => {
+            this.setState({ appState: nextAppState })
+            if (nextAppState === 'background' || 'inactive') {
+                this.setState({ paused: true  });
+            }
+            if (nextAppState === 'active') {
+                this.setState({ paused: false  });
+            }
+        };
 
         private handleMetaExpand = () => {
             this.setState({ metaExpand: !this.state.metaExpand })

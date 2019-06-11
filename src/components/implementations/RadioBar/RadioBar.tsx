@@ -34,11 +34,11 @@ export class RadioBar extends React.Component<Props, State> {
         programData: undefined,
     }
 
+
     private socket: any
 
     public componentDidMount() {
         this.initLiveData()
-
         TrackPlayer.updateOptions({
             capabilities: [
                 TrackPlayer.CAPABILITY_PLAY,
@@ -47,16 +47,8 @@ export class RadioBar extends React.Component<Props, State> {
             ]
         })
 
-        TrackPlayer.setupPlayer().then(async () => {
-            // Adds a track to the queue
-            await TrackPlayer.add({
-                id: 'trackId',
-                url: Config.RADIO_URL,
-                title: 'Track Title',
-                artist: 'Track Artist',
-                artwork: 'https://placehold.it/200x200'
-            });
-        })
+        TrackPlayer.setupPlayer().then(async () => {})
+
     }
 
     public componentWillUnmount() {
@@ -98,7 +90,7 @@ export class RadioBar extends React.Component<Props, State> {
                                     numberOfLines={1}
                                     color={theme.colors.TextColor}
                                 >
-                                    {theme.content.general.RadioName}: {programData.title} {programData.music && `-${programData.music.title}`}
+                                    {theme.content.general.RadioName}: {programData.title} {programData.music && `- ${programData.music.title}`}
                                 </SubTitle>
                             </View>
                             <Icon
@@ -123,6 +115,7 @@ export class RadioBar extends React.Component<Props, State> {
 
         this.socket.on('update', (data: LiveStreamDataType) => {
             this.setState({ programData: data })
+            this.setTrackPlayer(data)
             return data
         })
     }
@@ -141,6 +134,16 @@ export class RadioBar extends React.Component<Props, State> {
                 size={33}
             />
         )
+    }
+
+    private setTrackPlayer = async (data: LiveStreamDataType) => {
+        await TrackPlayer.add({
+            id: 'trackId',
+            url: Config.RADIO_URL,
+            title: data.music.title,
+            artist: data.channel,
+            artwork: data.logo
+        });
     }
 
     private toggleRadio = () => {
