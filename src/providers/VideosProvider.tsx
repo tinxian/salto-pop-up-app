@@ -27,8 +27,6 @@ export class VideosProvider extends React.Component<{}, {}> {
     public render() {
         const { children } = this.props
 
-        console.log(this.state.episodes)
-
         return (
             <VideosContext.Provider
                 value={this.state}

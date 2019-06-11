@@ -75,7 +75,6 @@ export const OtherEventsScreen = withThemeContext(
             Linking.canOpenURL(url)
                 .then(supported => {
                     if (!supported) {
-                        console.log('Can\'t handle url: ' + url)
                         return
                     }
                     return Linking.openURL(url)

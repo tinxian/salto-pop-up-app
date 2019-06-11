@@ -82,7 +82,7 @@ export const LivestreamVideoScreen = withThemeContext(
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
-                            style={{ width: '100%', height: '100%' }}
+                            style={{ width: '100%', height: '100%', overflow: 'hidden' }}
                             ref={(ref: Video) => this.player = ref}
                             source={{ uri: Videos.getLivestreamUrl() }}
                             onBack={() => this.props.navigation.goBack()}
@@ -91,7 +91,8 @@ export const LivestreamVideoScreen = withThemeContext(
                             disableSeekbar={true}
                             disableTimer={true}
                             disablePlayPause={true}
-                            toggleResizeModeOnFullscreen={true}
+                            playInBackground={false}
+                            toggleResizeModeOnFullscreen={false}
                         />
                         {programData && (
                             <LiveIndicator
