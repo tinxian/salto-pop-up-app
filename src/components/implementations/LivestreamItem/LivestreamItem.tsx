@@ -38,28 +38,30 @@ export class LivestreamItem extends React.Component<Props, State> {
         return (
             <View style={this.getStyles()}>
                 <TouchableHighlight onPress={this.handleOnPress}>
-                    <View style={this.getThumbnailStyles()}>
-                        {thumbnail && (
-                            <Image
-                                style={styles.item}
-                                source={thumbnail}
-                                onLoadEnd={() => this.setState({ loading: false })}
+                    <React.Fragment>
+                        <View style={this.getThumbnailStyles()}>
+                            {thumbnail && (
+                                <Image
+                                    style={styles.item}
+                                    source={thumbnail}
+                                    onLoadEnd={() => this.setState({ loading: false })}
+                                />
+                            )}
+                            <View style={styles.cover} />
+                            <Icon
+                                name={getIcon('play-circle')}
+                                color={theme.colors.playButtonColor}
+                                size={60}
+                                style={styles.playButton}
                             />
-                        )}
-                        <View style={styles.cover} />
-                        <Icon
-                            name={getIcon('play-circle')}
-                            color={theme.colors.playButtonColor}
-                            size={60}
-                            style={styles.playButton}
-                        />
-                        <LiveIndicator
-                            color={theme.colors.RadioPlayerBackgroundColor}
-                            textColor={theme.colors.LiveIndicatorTextColor}
-                            style={styles.liveIndicator}
-                        />
-                    </View>
-                    <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
+                            <LiveIndicator
+                                color={theme.colors.RadioPlayerBackgroundColor}
+                                textColor={theme.colors.LiveIndicatorTextColor}
+                                style={styles.liveIndicator}
+                            />
+                        </View>
+                        <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
+                    </React.Fragment>
                 </TouchableHighlight >
             </View>
         )
