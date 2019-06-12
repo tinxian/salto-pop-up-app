@@ -73,8 +73,9 @@ const TabNavigator = createBottomTabNavigator({
 export const TabNavigatorComponent = withThemeContext(
     class TabNavigatorComponent extends React.Component<NavigationScreenProps & ThemeInjectedProps, {}> {
         private static router = TabNavigator.router
-        public componentDidMount() {
 
+        public componentDidMount() {
+            console.log(TabNavigatorComponent.router)
         }
 
         public render() {

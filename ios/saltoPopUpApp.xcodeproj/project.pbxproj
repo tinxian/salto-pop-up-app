@@ -39,7 +39,6 @@
 		74466B45689D4BB38BA745E0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A339DDF432554FB7A534F9BB /* FontAwesome.ttf */; };
 		7E1077FB229BE23800F1CC58 /* Ah.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1077FA229BE23800F1CC58 /* Ah.swift */; };
 		7E21105CD5134A16AC12849A /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 495B9868A73546CA867A6C20 /* Octicons.ttf */; };
-		7EB647E422AF93E4009F870B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7EB647E322AF93E3009F870B /* GoogleService-Info.plist */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8984736EA6A14F999E0BC345 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D9EC084B8F284220999C3E48 /* Foundation.ttf */; };
 		8ABFC4FB65AF47729C9EFCCB /* RNPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F06F7385BFA14E1DA31AAEB3 /* RNPlaceholder.swift */; };
@@ -54,6 +53,7 @@
 		D3CABC5FED1A03A8C470E2AE /* libPods-saltoPopUpApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60B862B3D19ACB23BB5EFBCD /* libPods-saltoPopUpApp.a */; };
 		D3D12FE045A4436FB738CC34 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 849C2E62900B40C8B209BB18 /* libSplashScreen.a */; };
 		D7079958C5F444B695634F44 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C785B186A7A46A698FE6C2E /* EvilIcons.ttf */; };
+		E4FC094C22B0ED4F0046B87D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E4FC094B22B0ED4F0046B87D /* GoogleService-Info.plist */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED2971652150620600B7C4FE /* (null) in Resources */ = {isa = PBXBuildFile; };
 		EF05ECC6DF78443BAEDEC2D1 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9BD5BEDDA0D4F7C91046103 /* libRCTOrientation.a */; };
@@ -479,7 +479,6 @@
 		7D97703BC62A486AB03CC4B8 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7E1077FA229BE23800F1CC58 /* Ah.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Ah.swift; path = saltoPopUpApp/Ah.swift; sourceTree = "<group>"; };
 		7E1077FC229BE24B00F1CC58 /* saltoPopUpApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "saltoPopUpApp-Bridging-Header.h"; sourceTree = "<group>"; };
-		7EB647E322AF93E3009F870B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		849C2E62900B40C8B209BB18 /* libSplashScreen.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSplashScreen.a; sourceTree = "<group>"; };
 		84ECD897E31342E1BF4360BA /* libRNTrackPlayer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNTrackPlayer.a; sourceTree = "<group>"; };
@@ -499,6 +498,7 @@
 		D9EC084B8F284220999C3E48 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		DC6C55472DA74ABA90CC7523 /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
 		E244872483124EB094CB3CA2 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
+		E4FC094B22B0ED4F0046B87D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EA75B32C0AEE48C2B2A2BEA7 /* libRNSoundPlayer.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSoundPlayer.a; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		EF5B64F8C6A8416A9E62D94C /* libRNShare.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNShare.a; sourceTree = "<group>"; };
@@ -623,7 +623,7 @@
 		13B07FAE1A68108700A75B9A /* saltoPopUpApp */ = {
 			isa = PBXGroup;
 			children = (
-				7EB647E322AF93E3009F870B /* GoogleService-Info.plist */,
+				E4FC094B22B0ED4F0046B87D /* GoogleService-Info.plist */,
 				7E1077FC229BE24B00F1CC58 /* saltoPopUpApp-Bridging-Header.h */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1454,7 +1454,7 @@
 				58A0F152DBC44E75A8C51CEA /* FontAwesome5_Brands.ttf in Resources */,
 				331724A03ED648F1A993732C /* FontAwesome5_Regular.ttf in Resources */,
 				263FD20A6A8E42DB8E0AD56F /* FontAwesome5_Solid.ttf in Resources */,
-				7EB647E422AF93E4009F870B /* GoogleService-Info.plist in Resources */,
+				E4FC094C22B0ED4F0046B87D /* GoogleService-Info.plist in Resources */,
 				8984736EA6A14F999E0BC345 /* Foundation.ttf in Resources */,
 				A60AF841CAE6410FB55611B1 /* Ionicons.ttf in Resources */,
 				1CA8FE589E2146DFB866C215 /* MaterialCommunityIcons.ttf in Resources */,

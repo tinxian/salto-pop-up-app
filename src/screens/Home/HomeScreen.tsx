@@ -12,7 +12,6 @@ import { Paragraph } from 'src/components/core/Typography/Paragraph'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -65,11 +64,11 @@ export const HomeScreen = withThemeContext(withVideosContext(
                                     </View>
 
                                 </View>
-                                    <Title
-                                        color={colors.TitleColor}
-                                        size={TitleSizeType.medium}
-                                    >
-                                        Pride x SALTO
+                                <Title
+                                    color={colors.TitleColor}
+                                    size={TitleSizeType.medium}
+                                >
+                                    Pride x SALTO
                                     </Title>
                                 <View style={styles.introText}>
                                     <Paragraph color={colors.TitleColor}>
