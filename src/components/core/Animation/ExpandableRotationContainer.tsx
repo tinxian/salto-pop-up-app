@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleProp, Animated, Dimensions } from 'react-native'
+import { StyleProp, Animated, Dimensions, Platform } from 'react-native'
 import Orientation from 'react-native-orientation'
 
 interface Props {
@@ -16,6 +16,7 @@ interface State {
 }
 
 const ANIMATION_DURATION = 300
+const DIMENSION_FORMAT = Platform.OS === 'ios' ? 'screen' : 'window'
 
 export class ExpandableRotationContainer extends React.Component<Props, State> {
     public state: State = {
@@ -114,13 +115,13 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
         const heightInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [startHeight, Dimensions.get('window').height],
+            outputRange: [startHeight, Dimensions.get(DIMENSION_FORMAT).height],
         })
 
         return [
             {
                 height: heightInterpolation,
-                width: Dimensions.get('window').width,
+                width: Dimensions.get(DIMENSION_FORMAT).width,
             },
             style,
         ]
@@ -129,7 +130,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     private getRotationContainerStyles() {
         const { startHeight } = this.props
         const { heightAnim, nextRotation } = this.state
-        const deviceWidth = Dimensions.get('window').width
+        const deviceWidth = Dimensions.get(DIMENSION_FORMAT).width
 
         const heightInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
@@ -154,8 +155,8 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     private getInnerContainerViewStyles() {
         const { heightAnim, nextRotation } = this.state
         const { startHeight } = this.props
-        const deviceHeight = Dimensions.get('window').height
-        const deviceWidth = Dimensions.get('window').width
+        const deviceHeight = Dimensions.get(DIMENSION_FORMAT).height
+        const deviceWidth = Dimensions.get(DIMENSION_FORMAT).width
 
         const widthInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
