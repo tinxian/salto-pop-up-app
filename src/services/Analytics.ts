@@ -1,7 +1,7 @@
 import Config from 'react-native-config'
 import firebase from 'react-native-firebase'
 
-interface VideoEvent {
+interface VideoAnalyticsEvent {
     title: string
     id: string
     url: string
@@ -10,6 +10,11 @@ interface VideoEvent {
 
 interface LivestreamEvent {
 
+}
+
+interface SocialLinkAnalyticsEvent {
+    title: string
+    link: string
 }
 
 class Analytics {
@@ -21,20 +26,20 @@ class Analytics {
         await firebase.analytics().setCurrentScreen(screen)
     }
 
-    public async trackOndemandVideoClickEvent(videoParams: VideoEvent) {
-        await firebase.analytics().logEvent('consumed_ondemand_video', videoParams)
+    public async trackOndemandVideoClickEvent(videoParams: VideoAnalyticsEvent) {
+        await firebase.analytics().logEvent('ondemand_video_click_event', videoParams)
     }
 
     public async trackLivesteamClickEvent(livestreamParams: LivestreamEvent) {
-        await firebase.analytics().logEvent('consumed_ondemand_video', livestreamParams)
+        await firebase.analytics().logEvent('livestream_click_event', livestreamParams)
     }
 
-    public async trackShareClickEvent(shareEvent: string) {
-        await firebase.analytics().logEvent('clicked_share_button', shareEvent)
+    public async trackShareClickEvent(shareEvent: VideoAnalyticsEvent) {
+        await firebase.analytics().logEvent('share_button_click', shareEvent)
     }
 
-    public async trackSocialLinkEvent(socialEvent: string) {
-        await firebase.analytics().logEvent('clicked_social_button', socialEvent)
+    public async trackSocialLinkEvent(socialEvent: SocialLinkAnalyticsEvent) {
+        await firebase.analytics().logEvent('social_link_button_click', socialEvent)
     }
 }
 

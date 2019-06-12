@@ -8,6 +8,7 @@ import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvide
 import { TitleSizeType, Title } from 'src/components/core/Typography/Title'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
+import { LinkType } from 'src/services/theme';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -89,7 +90,7 @@ export const MoreScreen = withThemeContext(
             const { links, colors } = this.props.themeContext.theme
 
             const elements = links.map((link, index) => (
-                <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link.link)}>
+                <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link)}>
                     <View style={styles.itemContainer}>
                         <View style={{ width: 25 }}>
                             <Icon
@@ -115,10 +116,16 @@ export const MoreScreen = withThemeContext(
             )
         }
 
-        private handleOpenUrl(url: string) {
+        private handleOpenUrl(link: LinkType) {
+            const url = link.link
+
+            AnalyticsData.trackSocialLinkEvent({
+                title: link.title,
+                link: url,
+            })
+
             Linking.canOpenURL(url).then(supported => {
                 if (supported) {
-                    AnalyticsData.trackSocialLinkEvent(url)
                     Linking.openURL(url)
                 } else {
                     Alert.alert(

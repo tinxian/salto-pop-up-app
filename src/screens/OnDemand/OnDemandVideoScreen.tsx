@@ -20,6 +20,7 @@ import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
 import { AnalyticsData } from 'src/services/Analytics';
+import { getMillisecondsInMinutes } from 'src/utils/date';
 
 interface Params {
     item: EpisodeType,
@@ -202,9 +203,14 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             this.setState({ height: Dimensions.get('window').height })
         }
 
-        private handleShare = async () => {
+        private handleShare = () => {
             const item = this.props.navigation.getParam('item')
-            await AnalyticsData.trackShareClickEvent(item.title)
+            AnalyticsData.trackShareClickEvent({
+                title: item.title,
+                videoDuration: getMillisecondsInMinutes(item.duration),
+                url: item.streams.mp4,
+                id: item.id,
+            })
             Share.open(this.getShareOptions())
         }
 
