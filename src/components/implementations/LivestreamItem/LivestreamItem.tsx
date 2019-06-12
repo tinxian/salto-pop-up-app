@@ -6,6 +6,7 @@ import {
     StyleProp,
     TouchableHighlight,
     ImageSourcePropType,
+    TouchableOpacity,
 } from 'react-native'
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
 import { getIcon } from 'src/utils/icons'
@@ -37,7 +38,7 @@ export class LivestreamItem extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
-                <TouchableHighlight onPress={this.handleOnPress}>
+                <TouchableOpacity onPress={this.handleOnPress}>
                     <React.Fragment>
                         <View style={this.getThumbnailStyles()}>
                             {thumbnail && (
@@ -62,7 +63,7 @@ export class LivestreamItem extends React.Component<Props, State> {
                         </View>
                         <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
                     </React.Fragment>
-                </TouchableHighlight >
+                </TouchableOpacity >
             </View>
         )
     }

@@ -202,9 +202,9 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             this.setState({ height: Dimensions.get('window').height })
         }
 
-        private handleShare = () => {
+        private handleShare = async () => {
             const item = this.props.navigation.getParam('item')
-            AnalyticsData.trackShareClickEvent(item.title)
+            await AnalyticsData.trackShareClickEvent(item.title)
             Share.open(this.getShareOptions())
         }
 
