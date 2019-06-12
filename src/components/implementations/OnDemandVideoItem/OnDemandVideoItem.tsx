@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     metaContainer: {
-        marginBottom: 12,
+        marginBottom: 18,
 
         width: '100%',
         flexDirection: 'row',

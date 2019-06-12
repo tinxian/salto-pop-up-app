@@ -1,9 +1,9 @@
-import SoundPlayer from 'react-native-sound-player'
 import { ScheduleResponseType } from './videos';
 import { format } from 'date-fns';
 import axios, { AxiosResponse } from 'axios'
 import Config from 'react-native-config'
-import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar';
+import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
+import TrackPlayer from 'react-native-track-player'
 
 export interface MusicDataType {
     artists: string[]
@@ -27,7 +27,7 @@ export interface LiveStreamDataType {
 export class Media {
     public static stopOtherMedia() {
         RadioBar.radioDispatcher.dispatch('stopRadio')
-        SoundPlayer.pause()
+        TrackPlayer.pause()
     }
 
     public static async getScheduleByChannel(channel: string) {

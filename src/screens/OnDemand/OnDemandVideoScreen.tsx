@@ -172,6 +172,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                     </View>
                     <Title
                         color={themeContext.theme.colors.TextColor}
+                        textStyle={styles.relevantTitle}
                     >
                         Relevante Videos
                     </Title>
@@ -308,4 +309,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    relevantTitle: {
+        marginBottom: 12,
+    }
 })
