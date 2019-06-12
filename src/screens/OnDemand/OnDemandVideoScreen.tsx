@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus, Platform } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import { EpisodeType } from 'src/services/videos'
@@ -73,6 +73,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
+                        disableAnimation={Platform.OS === 'android'}
                         expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}

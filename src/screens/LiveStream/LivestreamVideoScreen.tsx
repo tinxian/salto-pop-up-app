@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator, Platform } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import VideoPlayer from 'react-native-video-controls'
 import Video from 'react-native-video'
@@ -77,6 +77,7 @@ export const LivestreamVideoScreen = withThemeContext(
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
+                        disableAnimation={Platform.OS === 'android'}
                         expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}

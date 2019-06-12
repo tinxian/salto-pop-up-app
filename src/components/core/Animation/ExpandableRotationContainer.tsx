@@ -6,6 +6,7 @@ interface Props {
     style?: StyleProp<{}>,
     expand: boolean
     startHeight: number
+    disableAnimation: boolean
     onRotationChange?: () => void
 }
 
@@ -27,6 +28,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             if (this.props.expand === true) {
                 this.animateIn()
             } else {
+                console.log('out')
                 this.animateOut()
             }
         }
@@ -72,6 +74,13 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
     private animateIn() {
         const { heightAnim } = this.state
+        const { disableAnimation } = this.props
+
+        if (disableAnimation) {
+            this.setState({ heightAnim: new Animated.Value(1) })
+            return
+        }
+
         Animated.timing(
             heightAnim,
             {
@@ -82,7 +91,14 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     }
 
     private animateOut() {
+        const { disableAnimation } = this.props
         const { heightAnim } = this.state
+
+        if (disableAnimation) {
+            this.setState({ heightAnim: new Animated.Value(0) })
+            return
+        }
+
         Animated.timing(
             heightAnim,
             {
@@ -114,8 +130,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
         const { startHeight } = this.props
         const { heightAnim, nextRotation } = this.state
         const deviceWidth = Dimensions.get('window').width
-
-
 
         const heightInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
