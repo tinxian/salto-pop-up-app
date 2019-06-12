@@ -47,7 +47,15 @@ export class RadioBar extends React.Component<Props, State> {
             ]
         })
 
-        TrackPlayer.setupPlayer().then(async () => {})
+        TrackPlayer.setupPlayer().then(async () => {
+            await TrackPlayer.add({
+                id: 'trackId',
+                url: Config.RADIO_URL,
+                title: 'title',
+                artist: 'artist',
+                artwork: 'https://placehold.it/200x200'
+            });
+        })
 
     }
 
