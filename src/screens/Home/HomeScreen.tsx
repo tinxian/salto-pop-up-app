@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { View, StyleSheet, StyleProp, Image, ScrollView, Dimensions } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
-import { Label } from 'src/components/core/Label/Label'
-import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
-import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem'
-import { Title, TitleSizeType } from 'src/components/core/Typography/Title'
-import { getEventMessage } from 'src/utils/date'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { isWithinRange } from 'date-fns'
-import { Paragraph } from 'src/components/core/Typography/Paragraph'
-import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
-import { AnalyticsData } from 'src/services/Analytics';
+import * as React from 'react';
+import { Dimensions, FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native';
+import { NavigationScreenProps } from 'react-navigation';
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
+import { Label } from 'src/components/core/Label/Label';
 import { Logo } from 'src/components/core/Logo/Logo';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
+import { WidgetView } from 'src/components/core/Widgets/WidgetView';
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
+import { VideosInjectedProps } from 'src/providers/VideosProvider';
+import { AnalyticsData } from 'src/services/Analytics';
+import { getEventMessage } from 'src/utils/date';
+import { widgets, WidgetType } from './widgets';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
@@ -21,7 +21,7 @@ interface State {
 
 }
 
-export const HomeScreen = withThemeContext(withVideosContext(
+export const HomeScreen = withThemeContext(
     class HomeScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
 
         public componentDidMount() {
@@ -29,90 +29,99 @@ export const HomeScreen = withThemeContext(withVideosContext(
         }
 
         public render() {
-            const { themeContext } = this.props
-            const { colors, images, content } = themeContext.theme
+            const { images } = this.props.themeContext.theme
 
             return (
                 <View style={this.getStyles()}>
+                    <StatusBar hidden={false} animated={false} />
                     <Image
                         style={this.getBackgroundStyles()}
                         source={images.HeaderBackgroundUrl}
                         resizeMode={'repeat'}
-
                     />
                     <Logo style={styles.logo} navigation={this.props.navigation} />
+                    {this.renderList()}
+                </View>
+            )
+        }
 
-                    <View style={styles.wrapper} >
-                        <ScrollView style={{ flex: 1 }}>
-                            <View style={styles.emptySpace} />
+        private renderList() {
+            const { theme } = this.props.themeContext
 
-                            <View style={this.getContentStyles()}>
+            return (
+                <FlatList<WidgetType>
+                    ListHeaderComponent={() => this.renderHeader()}
+                    ListEmptyComponent={() => (
+                        <EmptyComponent
+                            theme={theme}
+                            onPress={() => this.props.videosContext.refresh()}
+                        />
+                    )
+                    }
+                    ItemSeparatorComponent={() => (
+                        <View style={{ height: 12 }} />
+                    )}
+                    contentContainerStyle={this.getWrapperStyles()}
+                    data={widgets}
+                    keyExtractor={item => {
+                        return item.id
+                    }}
+                    renderItem={item => this.renderWidgetItem(item)}
+                />
+            )
+        }
 
-                                <View style={styles.labelContainer}>
-                                    <Title
-                                        color={colors.TitleColor}
-                                        size={TitleSizeType.large}
-                                    >
-                                        Home
-                                    </Title>
-                                    <View>
-                                        <Label
-                                            color={colors.LabelColor}
-                                            textColor={colors.LabelTextColor}
-                                            text={getEventMessage(new Date(content.App.startDate), new Date(content.App.endDate))}
-                                        />
-                                    </View>
-
-                                </View>
-                                <Title
-                                    color={colors.TitleColor}
-                                    size={TitleSizeType.medium}
-                                >
-                                    Pride x SALTO
-                                    </Title>
-                                <View style={styles.introText}>
-                                    <Paragraph color={colors.TitleColor}>
-                                        {themeContext.theme.content.general.AppIntroduction}
-                                    </Paragraph>
-                                </View>
-                                {this.getMedia()}
-                            </View>
-                        </ScrollView>
+        private renderHeader() {
+            const { theme } = this.props.themeContext
+            return (
+                <View>
+                    <View style={styles.labelContainer}>
+                        <Title
+                            color={theme.colors.TitleColor}
+                            size={TitleSizeType.large}
+                        >
+                            Home
+                            </Title>
+                        <View>
+                            <Label
+                                color={theme.colors.LabelColor}
+                                textColor={theme.colors.LabelTextColor}
+                                text={getEventMessage(
+                                    new Date(theme.content.App.startDate),
+                                    new Date(theme.content.App.endDate)
+                                )}
+                            />
+                        </View>
+                    </View>
+                    <Title
+                        color={theme.colors.TitleColor}
+                        size={TitleSizeType.medium}
+                    >
+                        Pride x SALTO
+                        </Title>
+                    <View style={styles.introText}>
+                        <Paragraph color={theme.colors.TitleColor}>
+                            {theme.content.general.AppIntroduction}
+                        </Paragraph>
                     </View>
                 </View>
             )
         }
 
-        private getMedia() {
+        private renderWidgetItem(item: ListRenderItemInfo<WidgetType>) {
+            const widget = item.item
             const { theme } = this.props.themeContext
-            const { episodes } = this.props.videosContext
-            const currentDate = new Date()
-            const afterMovie = episodes.find(episode => episode.id === theme.content.general.AftermovieId)
+            const { navigation } = this.props
 
-            if (isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
-                return (
-                    <LivestreamItem
-                        theme={theme}
-                        onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
-                        thumbnail={theme.images.defaultThumbnail}
-                    />
-                )
-            }
-
-            if (afterMovie) {
-                return (
-                    <OnDemandVideoItem
-                        onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item: afterMovie })}
-                        poster={{ uri: afterMovie.poster }}
-                        theme={theme}
-                        title={afterMovie.title}
-                        programName={afterMovie.programName}
-                        item={afterMovie}
-                    />
-                )
-            }
-
-            return null
+            return (
+                <WidgetView
+                    theme={theme}
+                    title={widget.title}
+                    navigation={navigation}
+                >
+                    {widget.element}
+                </WidgetView>
+            )
         }
 
         private getBackgroundStyles() {
@@ -124,6 +133,14 @@ export const HomeScreen = withThemeContext(withVideosContext(
 
         }
 
+        private getWrapperStyles() {
+            const { PageBackgroundColor } = this.props.themeContext.theme.colors
+            return [
+                { backgroundColor: PageBackgroundColor },
+                styles.content,
+            ]
+        }
+
         private getStyles() {
             const { style, themeContext } = this.props
             return [
@@ -132,58 +149,56 @@ export const HomeScreen = withThemeContext(withVideosContext(
                 style,
             ]
         }
-
-        private getContentStyles() {
-            const { PageBackgroundColor } = this.props.themeContext.theme.colors
-            return [
-                { backgroundColor: PageBackgroundColor },
-                styles.content,
-            ]
-        }
     }
 
-))
+)
+export
 
-const styles = StyleSheet.create({
-    container: {
+    const styles = StyleSheet.create({
+        container: {
+            flex: 1,
+        },
+        background: {
+            position: 'absolute',
+            width: '100%',
+            height: '50%',
+        },
+        wrapper: {
+            width: '100%',
+            height: '100%',
+        },
+        labelContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 24,
+        },
+        emptySpace: {
+            height: 72,
+            flex: 1,
+        },
+        logo: {
+            position: 'absolute',
+            top: 42,
+            left: 12,
+        },
+        introText: {
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center',
+            paddingBottom: 20,
+        },
+        content: {
+            minHeight: Dimensions.get('screen').height,
+            paddingHorizontal: 12,
+            borderRadius: 25,
+            marginTop: 72,
 
-    },
-    background: {
-        position: 'absolute',
-        width: '100%',
-        height: '50%',
-    },
-    wrapper: {
-        width: '100%',
-        height: '100%',
-    },
-    introText: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingBottom: 20,
-    },
-    content: {
-        paddingHorizontal: 12,
-        height: Dimensions.get('screen').height,
-        borderRadius: 25,
-    },
-    logo: {
-        position: 'absolute',
-        top: 42,
-        left: 12,
-    },
-    labelContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingVertical: 24,
-    },
-    emptySpace: {
-        height: 72,
-        flex: 1,
-    },
-    titleContainer: {
-        marginBottom: 12,
-    },
-})
+        },
+        titleContainer: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            paddingVertical: 24,
+        },
+    })

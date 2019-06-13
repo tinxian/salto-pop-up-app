@@ -135,6 +135,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 styles.content,
             ]
         }
+
         private getStyles() {
             const { style } = this.props
             return [

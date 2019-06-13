@@ -60,7 +60,9 @@ export class LivestreamItem extends React.Component<Props, State> {
                                 style={styles.liveIndicator}
                             />
                         </View>
-                        <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
+                        {title && (
+                            <Title color={theme.colors.TextColor} textStyle={this.getTitleStyles()}>{title}</Title>
+                        )}
                     </React.Fragment>
                 </TouchableOpacity >
             </View>
