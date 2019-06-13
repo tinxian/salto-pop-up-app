@@ -9,8 +9,9 @@ export interface ColorsType {
     RadioPlayerBackgroundColor: string
     BottomDrawerColor: string
     ButtonColor: string
-    LabelColor: string
-    LabelTextColor: string
+    ButtonTextColor: string
+    LabelBorderColor: string
+    LabelBackgroundColor: string
     PageBackgroundColor: string
     SaltoColor: string
     TextColor: string
@@ -24,6 +25,7 @@ export interface ColorsType {
     HeaderBackground: string
     HeaderTitleText: string
     HeaderBackButtonColor: string
+    WidgetBackgroundColor: string
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
@@ -53,6 +55,8 @@ export interface ContentType {
     EventName: string
     RadioName: string
     AppIntroduction: string
+    livestreamIntroduction: string
+    videosIntroduction: string
 }
 
 export interface OtherEventType {

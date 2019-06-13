@@ -9,6 +9,9 @@ export const ThemeContext: Context<ThemeContextType> = React.createContext({
     setThemeState: () => 'Context not set',
 })
 
+
+const USE_LOCAL_DEVELOPMENT_MODE = true
+
 export class ThemeProvider extends React.Component<{}, ThemeContextType> {
 
     public state: ThemeContextType = {
@@ -18,9 +21,11 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
 
     public async componentDidMount() {
         try {
-            await this.setCachedThemeToState()
-            await this.setExternalThemeToState()
-            await this.setThemeToCache()
+            if (!USE_LOCAL_DEVELOPMENT_MODE) {
+                await this.setCachedThemeToState()
+                await this.setExternalThemeToState()
+                await this.setThemeToCache()
+            }
         } catch (error) {
             console.error(error)
         }

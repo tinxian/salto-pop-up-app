@@ -1,23 +1,14 @@
-import * as React from 'react'
-import {
-    View,
-    Image,
-    StyleSheet,
-    StyleProp,
-    ImageSourcePropType,
-    Text,
-    TouchableOpacity,
-} from 'react-native'
-import { getIcon } from 'src/utils/icons';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { Title } from 'src/components/core/Typography/Title';
-import { EpisodeType } from 'src/services/videos';
-import { Label } from 'src/components/core/Label/Label';
-import { getMillisecondsInMinutes } from 'src/utils/date';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { format } from 'date-fns';
-import { ThemeType } from 'src/services/theme';
+import * as React from 'react';
+import { Image, ImageSourcePropType, StyleProp, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { AnalyticsData } from 'src/services/Analytics';
+import { ThemeType } from 'src/services/theme';
+import { EpisodeType } from 'src/services/videos';
+import { getMillisecondsInMinutes } from 'src/utils/date';
+import { getIcon } from 'src/utils/icons';
 
 export interface Props {
     style?: StyleProp<{}>,
@@ -41,7 +32,7 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
 
     public render() {
         const { poster, title, item, theme } = this.props
-        const { LabelColor, SubTitleColor, LabelTextColor } = this.props.theme.colors
+        const { SubTitleColor } = this.props.theme.colors
 
         return (
             <View style={this.getStyles()}>
@@ -71,12 +62,18 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
                         </View>
 
                         <View style={styles.descriptionContainer}>
-                            <Title color={theme.colors.TextColor} numberOfLines={2} textStyle={this.getTitleStyles()}>{title}</Title>
+                            <Title
+                                color={theme.colors.TextColor}
+                                numberOfLines={2}
+                                textStyle={this.getTitleStyles()}
+                                size={TitleSizeType.small}
+                            >
+                                {title}
+                            </Title>
                         </View>
                         {item && (
                             <View style={styles.metaContainer}>
-                                <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
-                                <Label style={styles.label} color={LabelColor} textColor={LabelTextColor} text={item.programName} />
+                                <SubTitle color={SubTitleColor}>{format(item.date, 'DD-MM-YYYY')} - {item.programName}</SubTitle>
                             </View>
                         )}
                     </React.Fragment>

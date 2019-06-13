@@ -12,7 +12,6 @@ import { Media } from 'src/services/media';
 import { getIcon, PlatformIconType } from 'src/utils/icons';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { Label } from 'src/components/core/Label/Label';
 import { format } from 'date-fns';
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
@@ -153,13 +152,8 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                     {this.renderMetaContent()}
 
                     <View style={styles.metaContainer}>
-                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')}</SubTitle>
+                        <SubTitle color={themeContext.theme.colors.SubTitleColor}>{format(item.date, 'DD-MM-YYYY')} - {item.programName}</SubTitle>
                         <View style={styles.metaActions}>
-                            <Label
-                                color={themeContext.theme.colors.LabelColor}
-                                textColor={themeContext.theme.colors.LabelTextColor}
-                                text={item.programName}
-                            />
                             <TouchableOpacity onPress={this.handleShare}>
                                 <View style={styles.shareButton}>
                                     <Icon

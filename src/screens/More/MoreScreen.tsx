@@ -5,10 +5,11 @@ import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { StatusBar } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { TitleSizeType, Title } from 'src/components/core/Typography/Title'
+import { Title } from 'src/components/core/Typography/Title'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
 import { LinkType } from 'src/services/theme';
+import { PageHeader } from 'src/components/core/Header/PageHeader';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -38,7 +39,7 @@ export const MoreScreen = withThemeContext(
 
         public render() {
             const { HeaderBackgroundUrl } = this.props.themeContext.theme.images
-            const { colors } = this.props.themeContext.theme
+            const { theme } = this.props.themeContext
             return (
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
@@ -50,9 +51,7 @@ export const MoreScreen = withThemeContext(
                     <Logo style={styles.logo} navigation={this.props.navigation} />
                     <FlatList<MoreItem>
                         ListHeaderComponent={() => (
-                            <View style={styles.titleContainer}>
-                                <Title size={TitleSizeType.large} color={colors.TitleColor}>Meer</Title>
-                            </View>
+                            <PageHeader theme={theme} title={'Meer'} />
                         )}
                         ListFooterComponent={this.renderFooter()}
                         contentContainerStyle={this.getWrapperStyles()}

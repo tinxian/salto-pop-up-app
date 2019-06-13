@@ -4,8 +4,8 @@ import { StyleProp, StyleSheet, View, Text } from 'react-native'
 interface Props {
     style?: StyleProp<{}>,
     text: string
-    color: string
-    textColor: string
+    backgroundColor: string
+    borderColor: string
 }
 
 export class Label extends React.Component<Props, {}> {
@@ -19,19 +19,23 @@ export class Label extends React.Component<Props, {}> {
     }
 
     private getStyles() {
-        const { style, color = 'red' } = this.props
+        const { style, backgroundColor, borderColor = 'red' } = this.props
 
         return [
             styles.container,
-            { backgroundColor: color },
+            {
+                borderColor: borderColor,
+                backgroundColor: backgroundColor,
+
+            },
             style,
         ]
     }
 
     private getTextStyles() {
-        const { textColor = '#ffffff' } = this.props
+        const { borderColor = 'red' } = this.props
         return [
-            { color: textColor },
+            { color: borderColor },
             styles.text,
         ]
     }
@@ -43,6 +47,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingVertical: 6,
         borderRadius: 12,
+        borderWidth: StyleSheet.hairlineWidth,
     },
     text: {
         lineHeight: 14,

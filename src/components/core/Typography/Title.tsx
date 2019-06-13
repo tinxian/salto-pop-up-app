@@ -10,6 +10,7 @@ interface Props extends TextProps {
 export enum TitleSizeType {
     large = 'large',
     medium = 'medium',
+    small = 'small',
 }
 
 export class Title extends React.Component<Props, {}> {
@@ -26,6 +27,7 @@ export class Title extends React.Component<Props, {}> {
         return [
             styles.container,
             size === TitleSizeType.large && { fontSize: 24 },
+            size === TitleSizeType.small && { fontSize: 16 },
             { color },
             textStyle,
         ]

@@ -28,20 +28,22 @@ export class WidgetView extends React.Component<Props, State> {
 
         return (
             <View style={this.getStyles()}>
-                <View style={styles.headerContainer}>
-                    <Icon
-                        name={getIcon(widget.icon)}
-                        color={this.props.theme.colors.TextColor}
-                        size={25}
-                    />
-                    <Title
-                        color={theme.colors.TitleColor}
-                        textStyle={styles.title}
-                    >
-                        {widget.title}
-                    </Title>
+                {widget.title && (
+                    <View style={styles.headerContainer}>
+                        <Icon
+                            name={getIcon(widget.icon)}
+                            color={this.props.theme.colors.TextColor}
+                            size={25}
+                        />
+                        <Title
+                            color={theme.colors.TitleColor}
+                            textStyle={styles.title}
+                        >
+                            {widget.title}
+                        </Title>
+                    </View>
+                )}
 
-                </View>
                 {childrenWithProps}
             </View>
         )
@@ -51,7 +53,7 @@ export class WidgetView extends React.Component<Props, State> {
         const { style, theme } = this.props
         return [
             styles.container,
-            { backgroundColor: theme.colors.ButtonColor },
+            { backgroundColor: theme.colors.WidgetBackgroundColor },
             style,
         ]
     }
@@ -59,7 +61,6 @@ export class WidgetView extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: '#ccc',
         paddingHorizontal: 12,
         paddingVertical: 12,
         borderRadius: 16,

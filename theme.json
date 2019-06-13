@@ -5,10 +5,11 @@
         "NavigationIconsActiveColor": "#F06159",
         "RadioPlayerControlsColor": "#F06159",
         "RadioPlayerBackgroundColor": "#c2c2c2",
-        "BottomDrawerColor": "#fff",
+        "BottomDrawerColor": "#ffffff",
         "ButtonColor": "#F06159",
-        "LabelColor": "#F06159",
-        "LabelTextColor": "#ffffff",
+        "ButtonTextColor": "#ffffff",
+        "LabelBorderColor": "#faad14",
+        "LabelBackgroundColor": "#fffbe6",
         "PageBackgroundColor": "#ffffff",
         "SaltoColor": "#E30613",
         "TextColor": "#000000",
@@ -21,7 +22,8 @@
         "SeperatorColor": "#F06159",
         "HeaderBackground": "#c2c2c2",
         "HeaderTitleText": "#000000",
-        "HeaderBackButtonColor": "#F06159"
+        "HeaderBackButtonColor": "#F06159",
+        "WidgetBackgroundColor": "#fafafa"
     },
     "images": {
         "HeaderBackgroundUrl": {
@@ -73,9 +75,11 @@
                 "7UxKNgpvhYqMCaQuOiyYQ",
                 "2R7GFhEx1CEW2qioSkKAu0"
             ],
-            "EventName": "Pride 2018",
+            "EventName": "Pride evenement 2019",
             "RadioName": "PrideFM",
-            "AppIntroduction": "Tijdens de jaarlijkse Pride Amsterdam week gaat SALTO op roze! Van 27 juli t/m 5 augustus worden SALTO1 en Radio SALTO omgedoopt tot PrideTV en PrideFM! Hou deze app in de gaten voor alle updates en info over Pride op SALTO!"
+            "videosIntroduction": "Bekijk hier de livestream van het evenement Pride 2019",
+            "livestreamIntroduction": "Bekijk hier de meest relevante videos van het evenement Pride 2019",
+            "AppIntroduction": "Van 27 juli t/m 5 augustus worden SALTO1 en Radio SALTO omgedoopt tot PrideTV en PrideFM!"
         },
         "OtherEvents": [
             {

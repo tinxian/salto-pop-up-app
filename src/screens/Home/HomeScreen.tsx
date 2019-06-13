@@ -2,15 +2,12 @@ import * as React from 'react';
 import { Dimensions, FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
-import { Label } from 'src/components/core/Label/Label';
+import { PageHeader } from 'src/components/core/Header/PageHeader';
 import { Logo } from 'src/components/core/Logo/Logo';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { WidgetView } from 'src/components/core/Widgets/WidgetView';
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
 import { VideosInjectedProps } from 'src/providers/VideosProvider';
 import { AnalyticsData } from 'src/services/Analytics';
-import { getEventMessage } from 'src/utils/date';
 import { widgets, WidgetType } from './widgets';
 
 interface Props extends NavigationScreenProps {
@@ -74,37 +71,7 @@ export const HomeScreen = withThemeContext(
         private renderHeader() {
             const { theme } = this.props.themeContext
             return (
-                <View>
-                    <View style={styles.labelContainer}>
-                        <Title
-                            color={theme.colors.TitleColor}
-                            size={TitleSizeType.large}
-                        >
-                            Home
-                            </Title>
-                        <View>
-                            <Label
-                                color={theme.colors.LabelColor}
-                                textColor={theme.colors.LabelTextColor}
-                                text={getEventMessage(
-                                    new Date(theme.content.App.startDate),
-                                    new Date(theme.content.App.endDate)
-                                )}
-                            />
-                        </View>
-                    </View>
-                    <Title
-                        color={theme.colors.TitleColor}
-                        size={TitleSizeType.medium}
-                    >
-                        Pride x SALTO
-                        </Title>
-                    <View style={styles.introText}>
-                        <Paragraph color={theme.colors.TitleColor}>
-                            {theme.content.general.AppIntroduction}
-                        </Paragraph>
-                    </View>
-                </View>
+                <PageHeader theme={theme} title={theme.content.general.EventName} />
             )
         }
 
@@ -181,12 +148,6 @@ export
             position: 'absolute',
             top: 42,
             left: 12,
-        },
-        introText: {
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingBottom: 20,
         },
         content: {
             minHeight: Dimensions.get('screen').height,

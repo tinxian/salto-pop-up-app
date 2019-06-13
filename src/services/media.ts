@@ -30,6 +30,10 @@ export class Media {
         TrackPlayer.pause()
     }
 
+    public static startRadio() {
+        RadioBar.radioDispatcher.dispatch('startRadio')
+    }
+
     public static openRadioScreen() {
         RadioBar.radioDispatcher.dispatch('openRadioScreen')
     }

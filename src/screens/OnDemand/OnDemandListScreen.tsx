@@ -4,13 +4,14 @@ import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { Title, TitleSizeType } from 'src/components/core/Typography/Title'
 import { LivestreamItem } from 'src/components/implementations/LivestreamItem/LivestreamItem'
 import { isWithinRange } from 'date-fns'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
+import { PageHeader } from 'src/components/core/Header/PageHeader';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -47,15 +48,14 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 <FlatList
                     ListHeaderComponent={() => (
                         <React.Fragment>
-                            <View style={styles.titleContainer}>
-                                <Title
-                                    size={TitleSizeType.large}
-                                    color={theme.colors.TitleColor}
-                                >
-                                    Videos
-                                </Title>
-                            </View>
                             {this.renderPinnedMedia()}
+                            <View style={styles.videoDescription}>
+                                <PageHeader theme={theme} title={`Meest recente videos`} />
+                                <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
+                                    {theme.content.general.videosIntroduction}
+                                </Paragraph>
+                            </View>
+
                             {this.renderLoading()}
                         </React.Fragment>
                     )}
@@ -76,6 +76,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         <OnDemandVideoItem
                             onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item })}
                             poster={{ uri: item.poster }}
+                            style={{ paddingHorizontal: 12, }}
                             theme={theme}
                             title={item.title}
                             programName={item.programName}
@@ -96,12 +97,19 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
             }
 
             return (
-                <LivestreamItem
-                    theme={theme}
-                    title={`${theme.content.general.EventName} live`}
-                    onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
-                    thumbnail={theme.images.defaultThumbnail}
-                />
+                <View
+                    style={styles.topContent}
+                >
+                    <PageHeader theme={theme} title={`${theme.content.general.EventName} livestream`} />
+                    <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
+                        {theme.content.general.videosIntroduction}
+                    </Paragraph>
+                    <LivestreamItem
+                        theme={theme}
+                        onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
+                        thumbnail={theme.images.defaultThumbnail}
+                    />
+                </View>
             )
         }
 
@@ -160,17 +168,21 @@ const styles = StyleSheet.create({
         top: 42,
         left: 12,
     },
+    topContent: {
+        paddingHorizontal: 12,
+        paddingBottom: 12,
+        borderBottomColor: "#ccc",
+        borderBottomWidth: StyleSheet.hairlineWidth,
+
+    },
+    videoDescription: {
+        paddingHorizontal: 12,
+
+    },
     content: {
         minHeight: Dimensions.get('screen').height,
-        paddingHorizontal: 12,
         borderRadius: 25,
         marginTop: 72,
         paddingBottom: 100,
-    },
-    titleContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingVertical: 24,
     },
 })

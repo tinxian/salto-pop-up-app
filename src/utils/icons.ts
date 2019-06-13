@@ -1,4 +1,3 @@
-import { Platform } from "react-native";
 
 export enum PlatformIconType {
     md = 'md',
@@ -9,7 +8,8 @@ export function getIcon(icon: string, platform?: PlatformIconType) {
     if (icon.includes('logo-')) {
         return icon
     }
-    const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
 
-    return `${platform ? platform : prefix}-${icon}`
+    const prefix = 'ios'
+
+    return `${prefix}-${icon}`
 }

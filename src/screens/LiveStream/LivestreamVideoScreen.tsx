@@ -13,7 +13,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon, PlatformIconType } from 'src/utils/icons'
 import { format } from 'date-fns'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { Label } from 'src/components/core/Label/Label'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Videos, ScheduleType } from 'src/services/videos'
 import { InformationList } from 'src/components/core/List/InformationList'
@@ -134,13 +133,7 @@ export const LivestreamVideoScreen = withThemeContext(
                     </View>
                     <View style={styles.content}>
                         <View style={styles.labelWrapper}>
-                            <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')}</SubTitle>
-                            <Label
-                                color={themeContext.theme.colors.LabelColor}
-                                textColor={themeContext.theme.colors.LabelTextColor}
-                                text={programData.channel}
-                            />
-
+                            <SubTitle color={themeContext.theme.colors.SubTitleColor} >Gestart: {format(programData.time, 'HH:mm')} - {programData.channel}</SubTitle>
                         </View>
 
                         <InformationList

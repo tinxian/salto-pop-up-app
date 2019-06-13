@@ -23,6 +23,7 @@ interface State {
     loading: boolean
     active: boolean
     programData?: LiveStreamDataType
+    openRadioScreen: boolean
 }
 
 export class RadioBar extends React.Component<Props, State> {
@@ -32,6 +33,7 @@ export class RadioBar extends React.Component<Props, State> {
         loading: false,
         active: false,
         programData: undefined,
+        openRadioScreen: false,
     }
 
 
@@ -66,8 +68,7 @@ export class RadioBar extends React.Component<Props, State> {
     }
 
     public render() {
-        const { programData } = this.state
-        const { theme } = this.props
+        const { programData, openRadioScreen } = this.state
 
         if (!programData) {
             return (
@@ -81,40 +82,47 @@ export class RadioBar extends React.Component<Props, State> {
 
         return (
             <BottomDrawerManager
-                renderHandler={open => (
-                    <TouchableOpacity onPress={() => this.handleRadioBarPress(open)}>
-                        <View style={this.getStyles()}>
-                            <TouchableOpacity onPress={this.toggleRadio}>
-                                <View style={styles.controls}>
-                                    <Image
-                                        resizeMode={'cover'}
-                                        style={styles.image}
-                                        source={{ uri: programData.logo }}
-                                    />
-                                    <View style={styles.cover} />
-                                    {this.renderControls()}
-                                </View>
-                            </TouchableOpacity>
-                            <View style={{ flex: 1, paddingRight: 12 }}>
-                                <SubTitle
-                                    numberOfLines={1}
-                                    color={theme.colors.TextColor}
-                                >
-                                    {theme.content.general.RadioName}: {programData.title} {programData.music && `- ${programData.music.title}`}
-                                </SubTitle>
-                            </View>
-                            <Icon
-                                name={getIcon('arrow-up')}
-                                color={this.props.theme.colors.TextColor}
-                                size={22}
-                            />
-                        </View>
-                    </TouchableOpacity>
-                )}
+                requestOpenBottomDrawer={openRadioScreen}
+                renderHandler={open => this.renderHandler(open, programData)}
                 renderContent={() => (
                     <RadioScreen programData={programData} toggleRadio={this.toggleRadio} active={this.state.active} />
                 )}
             />
+        )
+    }
+
+    private renderHandler(open: () => void, programData: LiveStreamDataType) {
+        const { theme } = this.props
+
+        return (
+            <TouchableOpacity onPress={() => this.handleRadioBarPress(open)}>
+                <View style={this.getStyles()}>
+                    <TouchableOpacity onPress={this.toggleRadio}>
+                        <View style={styles.controls}>
+                            <Image
+                                resizeMode={'cover'}
+                                style={styles.image}
+                                source={{ uri: programData.logo }}
+                            />
+                            <View style={styles.cover} />
+                            {this.renderControls()}
+                        </View>
+                    </TouchableOpacity>
+                    <View style={{ flex: 1, paddingRight: 12 }}>
+                        <SubTitle
+                            numberOfLines={1}
+                            color={theme.colors.TextColor}
+                        >
+                            {theme.content.general.RadioName}: {programData.title} {programData.music && `- ${programData.music.title}`}
+                        </SubTitle>
+                    </View>
+                    <Icon
+                        name={getIcon('arrow-up')}
+                        color={this.props.theme.colors.TextColor}
+                        size={22}
+                    />
+                </View>
+            </TouchableOpacity>
         )
     }
 
@@ -137,8 +145,15 @@ export class RadioBar extends React.Component<Props, State> {
 
     private initDispatchers() {
         RadioBar.radioDispatcher.subscribe('stopRadio', () => this.setState({ active: false }))
-        RadioBar.radioDispatcher.subscribe('openRadioScreen', () => this.setState({ active: false }))
+        RadioBar.radioDispatcher.subscribe('openRadioScreen', () => this.handleRequestOpenRadioScreen())
+        RadioBar.radioDispatcher.subscribe('startRadio', () => this.startRadio())
 
+    }
+
+    private handleRequestOpenRadioScreen() {
+        this.setState({ openRadioScreen: true },
+            () => this.setState({ openRadioScreen: false })
+        )
     }
 
     private renderControls() {
@@ -167,8 +182,18 @@ export class RadioBar extends React.Component<Props, State> {
         });
     }
 
+    private startRadio = () => {
+        try {
+            this.setState({ loading: false, active: true })
+            TrackPlayer.play()
+        } catch (e) {
+            throw (e)
+        }
+    }
+
     private toggleRadio = () => {
         const { active } = this.state
+
         try {
             this.setState({ loading: false, active: !active })
 

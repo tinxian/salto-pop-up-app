@@ -5,16 +5,17 @@ import { ModalManager } from '../ModalManager/ModalManager'
 export interface Props {
     renderHandler: (openBottomDrawer: () => void) => JSX.Element
     renderContent: (closeModal: () => void) => JSX.Element
+    requestOpenBottomDrawer: boolean
 }
 
 export class BottomDrawerManager extends React.Component<Props, {}> {
 
     public render() {
-        const { renderHandler, renderContent } = this.props
+        const { renderContent } = this.props
 
         return (
             <ModalManager
-                renderHandler={renderHandler}
+                renderHandler={open => this.renderHandlerComponent(open)}
                 renderModal={closeModal => (
 
                     <BottomDrawer
@@ -24,5 +25,20 @@ export class BottomDrawerManager extends React.Component<Props, {}> {
                 )}
             />
         )
+    }
+
+    private renderHandlerComponent(open: () => void) {
+        const { requestOpenBottomDrawer, renderHandler } = this.props
+
+        if (requestOpenBottomDrawer) {
+            open()
+        }
+
+        return (
+            <React.Fragment>
+                {renderHandler(open)}
+            </React.Fragment>
+        )
+
     }
 }
