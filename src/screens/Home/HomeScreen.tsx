@@ -116,7 +116,7 @@ export const HomeScreen = withThemeContext(
             return (
                 <WidgetView
                     theme={theme}
-                    title={widget.title}
+                    widget={widget}
                     navigation={navigation}
                 >
                     {widget.element}

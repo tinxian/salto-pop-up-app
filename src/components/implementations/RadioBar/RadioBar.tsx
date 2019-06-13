@@ -39,6 +39,8 @@ export class RadioBar extends React.Component<Props, State> {
 
     public componentDidMount() {
         this.initLiveData()
+        this.initDispatchers()
+
         TrackPlayer.updateOptions({
             capabilities: [
                 TrackPlayer.CAPABILITY_PLAY,
@@ -80,7 +82,7 @@ export class RadioBar extends React.Component<Props, State> {
         return (
             <BottomDrawerManager
                 renderHandler={open => (
-                    <TouchableOpacity onPress={open}>
+                    <TouchableOpacity onPress={() => this.handleRadioBarPress(open)}>
                         <View style={this.getStyles()}>
                             <TouchableOpacity onPress={this.toggleRadio}>
                                 <View style={styles.controls}>
@@ -113,8 +115,13 @@ export class RadioBar extends React.Component<Props, State> {
                     <RadioScreen programData={programData} toggleRadio={this.toggleRadio} active={this.state.active} />
                 )}
             />
-
         )
+    }
+
+    private handleRadioBarPress(open?: () => void) {
+        if (open) {
+            open()
+        }
     }
 
     private initLiveData() {
@@ -126,6 +133,12 @@ export class RadioBar extends React.Component<Props, State> {
             this.setTrackPlayer(data)
             return data
         })
+    }
+
+    private initDispatchers() {
+        RadioBar.radioDispatcher.subscribe('stopRadio', () => this.setState({ active: false }))
+        RadioBar.radioDispatcher.subscribe('openRadioScreen', () => this.setState({ active: false }))
+
     }
 
     private renderControls() {
@@ -150,7 +163,7 @@ export class RadioBar extends React.Component<Props, State> {
             url: Config.RADIO_URL,
             title: data.music.title,
             artist: data.channel,
-            artwork: data.logo
+            artwork: data.logo,
         });
     }
 

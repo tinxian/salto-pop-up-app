@@ -30,6 +30,10 @@ export class Media {
         TrackPlayer.pause()
     }
 
+    public static openRadioScreen() {
+        RadioBar.radioDispatcher.dispatch('openRadioScreen')
+    }
+
     public static async getScheduleByChannel(channel: string) {
         try {
             const date = format(new Date(), 'YYYYMMDD')

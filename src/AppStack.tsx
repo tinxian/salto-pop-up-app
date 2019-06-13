@@ -1,6 +1,5 @@
 import { createStackNavigator, createBottomTabNavigator, NavigationScreenProps, SafeAreaView } from 'react-navigation'
 import { OnDemandVideoScreen } from './screens/OnDemand/OnDemandVideoScreen'
-import { HomeScreen } from './screens/Home/HomeScreen'
 import { OnDemandListScreen } from './screens/OnDemand/OnDemandListScreen'
 import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScreen'
 import { MoreScreen } from './screens/More/MoreScreen'
@@ -10,6 +9,8 @@ import { RadioScreen } from './screens/Radio/RadioScreen'
 import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
 import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
 import { withThemeContext, ThemeInjectedProps } from './providers/ThemeProvider';
+import { HomeScreen } from './screens/Home/HomeScreen';
+// import { HomeScreen } from './screens/Home/HomeScreen';
 
 const MoreNavigator = createStackNavigator({
     MoreMainScreen: {
