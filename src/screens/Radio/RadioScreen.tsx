@@ -1,15 +1,13 @@
-import * as React from 'react'
-import { View, StyleSheet, TouchableOpacity, ActivityIndicator, Image, Dimensions } from 'react-native'
-import Video from 'react-native-video'
-import { LiveStreamDataType, Media } from 'src/services/media'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { getIcon } from 'src/utils/icons'
-import { ScheduleType } from 'src/services/videos'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { InformationList } from 'src/components/core/List/InformationList'
-import { SubTitle } from 'src/components/core/Typography/SubTitle'
-import { Title } from 'src/components/core/Typography/Title'
+import * as React from 'react';
+import { ActivityIndicator, Dimensions, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import Video from 'react-native-video';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Title } from 'src/components/core/Typography/Title';
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
+import { LiveStreamDataType, Media } from 'src/services/media';
+import { getIcon } from 'src/utils/icons';
 
 interface Props {
     uri?: string,
@@ -20,7 +18,6 @@ interface Props {
 
 interface State {
     loading: boolean
-    schedule: ScheduleType[]
     active: boolean
 }
 
@@ -29,7 +26,6 @@ export const RadioScreen = withThemeContext(
         public state: State = {
             loading: true,
             active: false,
-            schedule: [],
         }
 
         public player: Video | null
@@ -39,12 +35,11 @@ export const RadioScreen = withThemeContext(
             const schedule = await Media.getScheduleByChannel(Media.getRadioChannelName())
             schedule.splice(4)
 
-            this.setState({ schedule, loading: false })
+            this.setState({ loading: false })
 
         }
 
         public render() {
-            const { schedule, loading } = this.state
             const { toggleRadio, programData } = this.props
 
             if (!programData) {
@@ -58,24 +53,19 @@ export const RadioScreen = withThemeContext(
             return (
                 <View style={this.getStyles()}>
                     <View style={styles.wrapper}>
-                        <View style={styles.info}>
-                            <View style={styles.title}>
-                                {this.renderSongInfo()}
-                            </View>
-                        </View>
                         <TouchableOpacity onPress={toggleRadio}>
                             <View style={styles.imageWrapper}>
                                 {this.renderCover()}
                                 <View style={styles.cover} />
-                                {this.renderControls()}
                             </View>
                         </TouchableOpacity>
+                        <View style={styles.info}>
+                            <View style={styles.title}>
+                                {this.renderSongInfo()}
+                            </View>
+                            {this.renderControls()}
+                        </View>
                     </View>
-                    <InformationList
-                        loading={loading}
-                        data={schedule}
-                        theme={this.props.themeContext.theme}
-                    />
                 </View>
             )
         }
@@ -120,14 +110,14 @@ export const RadioScreen = withThemeContext(
 
             if (!programData.music) {
                 return (
-                    <View style={{ flexWrap: 'wrap', width: Dimensions.get('window').width / 1.5 }}>
+                    <View style={{ flexWrap: 'wrap' }}>
                         <Title color={colors.TitleColor}>{programData.title}</Title>
                     </View>
                 )
             }
 
             return (
-                <View style={{ flexWrap: 'wrap', width: Dimensions.get('window').width / 1.5 }}>
+                <View style={{ flexWrap: 'wrap' }}>
                     <Title color={colors.TitleColor}>{programData.title}</Title>
                     {programData.music.title && (<Paragraph color={colors.TextColor}>{programData.music.title}</Paragraph>)}
                     {programData.music.artists && programData.music.artists.map((item, key) => (
@@ -156,12 +146,13 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         paddingVertical: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
     },
     info: {
         flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
 
     },
     title: {
@@ -170,12 +161,13 @@ const styles = StyleSheet.create({
     controls: {
         flexDirection: 'column',
 
-        paddingTop: 15,
-        paddingBottom: 10,
+        marginTop: 15,
+        marginBottom: 10,
+        borderRadius: 100,
     },
     imageWrapper: {
-        height: 80,
-        width: 80,
+        height: 150,
+        width: 150,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',

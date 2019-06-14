@@ -23,7 +23,7 @@ function getScreenHeight() {
     return Dimensions.get('window').height
 }
 function getHalfScreenHeight() {
-    return 350
+    return getScreenHeight() / 1.2
 }
 export class BottomDrawer extends React.Component<Props, State> {
     public UP_POSITION = 0
