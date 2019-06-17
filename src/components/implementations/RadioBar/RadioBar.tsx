@@ -85,7 +85,7 @@ export class RadioBar extends React.Component<Props, State> {
                 requestOpenBottomDrawer={openRadioScreen}
                 renderHandler={open => this.renderHandler(open, programData)}
                 renderContent={() => (
-                    <RadioScreen programData={programData} toggleRadio={this.toggleRadio} active={this.state.active} />
+                    <RadioScreen programData={programData} onToggleRadio={this.toggleRadio} active={this.state.active} />
                 )}
             />
         )

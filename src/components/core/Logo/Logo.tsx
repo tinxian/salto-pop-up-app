@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, StyleProp, Image, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, StyleProp, Image, TouchableOpacity } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 import { ThemeType } from 'src/services/theme';
 

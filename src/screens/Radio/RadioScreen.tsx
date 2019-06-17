@@ -1,18 +1,18 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Video from 'react-native-video';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { Title } from 'src/components/core/Typography/Title';
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { LiveStreamDataType, Media } from 'src/services/media';
+import { LiveStreamDataType } from 'src/services/media';
 import { getIcon } from 'src/utils/icons';
 
 interface Props {
     uri?: string,
     active: boolean
-    toggleRadio: () => void
+    onToggleRadio: () => void
     programData?: LiveStreamDataType
 }
 
@@ -31,16 +31,11 @@ export const RadioScreen = withThemeContext(
         public player: Video | null
 
         public async componentDidMount() {
-
-            const schedule = await Media.getScheduleByChannel(Media.getRadioChannelName())
-            schedule.splice(4)
-
             this.setState({ loading: false })
-
         }
 
         public render() {
-            const { toggleRadio, programData } = this.props
+            const { programData } = this.props
 
             if (!programData) {
                 return (
@@ -53,12 +48,9 @@ export const RadioScreen = withThemeContext(
             return (
                 <View style={this.getStyles()}>
                     <View style={styles.wrapper}>
-                        <TouchableOpacity onPress={toggleRadio}>
-                            <View style={styles.imageWrapper}>
-                                {this.renderCover()}
-                                <View style={styles.cover} />
-                            </View>
-                        </TouchableOpacity>
+                        <View style={styles.imageWrapper}>
+                            {this.renderSongImage()}
+                        </View>
                         <View style={styles.info}>
                             <View style={styles.title}>
                                 {this.renderSongInfo()}
@@ -72,24 +64,27 @@ export const RadioScreen = withThemeContext(
 
         private renderControls() {
             const { loading } = this.state
-            const { themeContext, active } = this.props
+            const { themeContext, active, onToggleRadio } = this.props
 
             if (loading) {
                 return <ActivityIndicator />
             }
 
             return (
-                <View style={styles.controls}>
-                    <Icon
-                        name={!active ? getIcon('play') : getIcon('square')}
-                        color={themeContext.theme.colors.RadioPlayerControlsColor}
-                        size={40}
-                    />
-                </View>
+                <TouchableWithoutFeedback onPress={() => onToggleRadio()}>
+                    <View style={this.getControlStyles()}>
+                        <Icon
+                            style={{ marginLeft: 2, marginTop: 2 }}
+                            name={!active ? getIcon('play') : getIcon('square')}
+                            color={themeContext.theme.colors.BottomDrawerColor}
+                            size={40}
+                        />
+                    </View>
+                </TouchableWithoutFeedback>
             )
         }
 
-        private renderCover() {
+        private renderSongImage() {
             const { programData } = this.props
             const { loading } = this.state
 
@@ -117,14 +112,34 @@ export const RadioScreen = withThemeContext(
             }
 
             return (
-                <View style={{ flexWrap: 'wrap' }}>
-                    <Title color={colors.TitleColor}>{programData.title}</Title>
-                    {programData.music.title && (<Paragraph color={colors.TextColor}>{programData.music.title}</Paragraph>)}
+                <View style={styles.musicInfoWrapper}>
+                    <Title color={colors.TitleColor}>
+                        {programData.title}
+                    </Title>
+
+                    {programData.music.title && (
+                        <Paragraph color={colors.TextColor}>
+                            {programData.music.title}
+                        </Paragraph>
+                    )}
                     {programData.music.artists && programData.music.artists.map((item, key) => (
-                        <SubTitle key={key} color={colors.SubTitleColor}>{item}</SubTitle>
+                        <SubTitle
+                            key={key}
+                            color={colors.SubTitleColor}
+                        >
+                            {item}
+                        </SubTitle>
                     ))}
                 </View>
             )
+        }
+
+        private getControlStyles() {
+            const { themeContext } = this.props
+            return [
+                styles.controls,
+                { backgroundColor: themeContext.theme.colors.RadioPlayerControlsColor },
+            ]
         }
 
         private getStyles() {
@@ -140,12 +155,11 @@ export const RadioScreen = withThemeContext(
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 12,
         borderTopRightRadius: 16,
         borderTopLeftRadius: 16,
+        overflow: 'hidden',
     },
     wrapper: {
-        paddingVertical: 15,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -159,33 +173,31 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
     },
     controls: {
-        flexDirection: 'column',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 52,
+        width: 52,
+        borderRadius: 52,
 
-        marginTop: 15,
-        marginBottom: 10,
-        borderRadius: 100,
     },
     imageWrapper: {
-        height: 150,
-        width: 150,
+        height: 300,
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
 
     },
-    cover: {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#000',
-        opacity: 0.3,
-        borderRadius: 16,
-    },
     image: {
-        position: 'absolute',
         height: '100%',
         width: '100%',
         backgroundColor: '#000',
-        borderRadius: 16,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
     },
+    musicInfoWrapper: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    }
 })

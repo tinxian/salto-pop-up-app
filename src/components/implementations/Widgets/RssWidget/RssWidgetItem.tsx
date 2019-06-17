@@ -5,7 +5,8 @@ import { Title } from 'src/components/core/Typography/Title';
 import { ThemeType } from 'src/services/theme';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import format = require('date-fns/format');
+import { format } from 'date-fns';
+
 
 interface Props {
     style?: StyleProp<{}>
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
     container: {
         width: '100%',
         paddingBottom: 12,
+        marginBottom: 16,
         borderBottomWidth: StyleSheet.hairlineWidth,
     }
 })
