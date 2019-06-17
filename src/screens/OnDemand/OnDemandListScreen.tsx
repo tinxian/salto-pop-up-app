@@ -21,7 +21,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
     class OnDemandListScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, {}> {
 
         public componentDidMount() {
-            AnalyticsData.trackScreen('Livestream video screen')
+            AnalyticsData.trackScreen('Videos screen')
         }
 
         public render() {
@@ -106,7 +106,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 >
                     <PageHeader theme={theme} titles={[{ title: `${theme.content.general.EventName} livestream` }]} />
                     <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
-                        {theme.content.general.videosIntroduction}
+                        {theme.content.general.livestreamIntroduction}
                     </Paragraph>
                     <LivestreamItem
                         theme={theme}

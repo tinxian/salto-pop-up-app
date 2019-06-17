@@ -33,7 +33,7 @@
             "uri": "https://www.salto.nl/wp-content/uploads/app/pride/logo.png"
         },
         "defaultThumbnail": {
-            "uri": "https://i.ibb.co/chXbWHY/thumbnail.jpg"
+            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/placeholder.png"
         }
     },
     "links": [
@@ -125,9 +125,9 @@
                 }
             ],
             "RadioName": "PrideFM",
-            "videosIntroduction": "Bekijk hier de livestream van het evenement Pride 2019",
-            "livestreamIntroduction": "Bekijk hier de meest relevante videos van het evenement Pride 2019",
-            "AppIntroduction": "Van 27 juli t/m 5 augustus worden SALTO1 en Radio SALTO omgedoopt tot PrideTV en PrideFM!"
+            "videosIntroduction": "Bekijk hier de videos van het evenement Pride 2019",
+            "livestreamIntroduction": "Bekijk de Pride TV Livestream",
+            "AppIntroduction": "Van 27 juli t/m 4 augustus gaat SALTO op roze met Pride TV en Pride FM."
         },
         "OtherEvents": [
             {
