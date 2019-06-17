@@ -1,5 +1,6 @@
 import { ImageSourcePropType } from "react-native";
 import Config from "react-native-config";
+import { TitleSizeType } from "src/components/core/Typography/Title";
 
 export interface ColorsType {
     NavigationBackgroundColor: string
@@ -37,6 +38,7 @@ export interface LinkType {
     title: string
     link: string
     logo: string
+    whitespace?: boolean
 }
 
 export interface GeneralContentType {
@@ -52,13 +54,20 @@ export interface AppType {
 
 export interface ContentType {
     AftermovieId: string
-    HighlightedVideoIds: string[]
     EventName: string
+    HomeHeaderTitles: HeaderTitleType[]
     RadioName: string
     AppIntroduction: string
     livestreamIntroduction: string
     videosIntroduction: string
 }
+
+export interface HeaderTitleType {
+    color?: string
+    fontSize?: TitleSizeType | string
+    title: string
+}
+
 
 export interface OtherEventType {
     title: string

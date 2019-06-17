@@ -1,11 +1,11 @@
 import React from 'react'
 import * as rssParser from 'react-native-rss-parser';
-import { View, ActivityIndicator, StyleProp, Text, StyleSheet } from 'react-native';
-import { ThemeInjectedProps } from 'src/providers/ThemeProvider';
-import { rssResponse, RssItem } from 'src/services/Rss';
+import { View, ActivityIndicator, StyleProp, StyleSheet } from 'react-native';
+import { RssItem, RssResponse } from 'src/services/Rss';
 import { RssWidgetItem } from './RssWidgetItem';
 import { PassedWidgetProps } from 'src/screens/Home/widgets';
 import { openPlatformSpecificWebViews } from 'src/services/Browser';
+import Config from 'react-native-config';
 
 interface Props {
     style?: StyleProp<{}>
@@ -25,11 +25,12 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
     }
 
     public async componentDidMount() {
-        const response = await fetch('https://pride.amsterdam/feed/')
+        const response = await fetch(Config.RSS_FEED_URL)
         const responseData = await response.text()
-        const convertedResponseDataObject: rssResponse = await rssParser.parse(responseData)
+        const convertedResponseDataObject: RssResponse = await rssParser.parse(responseData)
 
         console.log(convertedResponseDataObject)
+
 
         this.setState({
             rssData: convertedResponseDataObject.items,
@@ -54,8 +55,9 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
             return <ActivityIndicator />
         }
 
-        return rssData.map(item => (
+        return rssData.map((item, index) => (
             <RssWidgetItem
+                key={index}
                 onPress={this.handleItemPress}
                 item={item}
                 theme={themeContext.theme}
@@ -64,7 +66,7 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
     }
 
     private handleItemPress = (item: RssItem) => {
-        openPlatformSpecificWebViews(item.links[0])
+        openPlatformSpecificWebViews(item.links[0].url)
     }
 
     private getStyles() {

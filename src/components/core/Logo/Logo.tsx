@@ -18,7 +18,7 @@ export class Logo extends React.Component<Props, State> {
 
         return (
             <TouchableOpacity style={this.getStyles()} onPress={() => navigation.navigate('HomeScreen')}>
-                <Image style={styles.image} source={theme.images.logoUrl} />
+                <Image resizeMode={'contain'} style={styles.image} source={theme.images.logoUrl} />
             </TouchableOpacity>
 
         )

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { ActivityIndicator, Image, StyleSheet, TouchableOpacity, View, TouchableWithoutFeedback } from 'react-native';
+import { ActivityIndicator, Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Video from 'react-native-video';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';

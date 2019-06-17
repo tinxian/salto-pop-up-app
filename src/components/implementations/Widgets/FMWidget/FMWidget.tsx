@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View } from 'react-native';
-import { LiveStreamDataType, Media } from 'src/services/media';
-import { withThemeContext } from 'src/providers/ThemeProvider';
-import { PassedWidgetProps } from 'src/screens/Home/widgets';
 import { Button } from 'src/components/core/Button/Button';
+import { PassedWidgetProps } from 'src/screens/Home/widgets';
+import { LiveStreamDataType, Media } from 'src/services/media';
 
 
 interface Props {

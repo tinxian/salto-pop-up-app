@@ -2,10 +2,9 @@ import * as React from 'react';
 import { StyleProp, StyleSheet, View } from 'react-native';
 import { Label } from 'src/components/core/Label/Label';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { withThemeContext } from 'src/providers/ThemeProvider';
-import { PassedWidgetProps } from 'src/screens/Home/widgets';
 import { LiveStreamDataType } from 'src/services/media';
 import { getEventMessage } from 'src/utils/date';
+import { ThemeInjectedProps } from 'src/providers/ThemeProvider';
 
 
 interface Props {
@@ -19,7 +18,7 @@ interface State {
 }
 
 
-export class EventMetaWidget extends React.Component<Props & PassedWidgetProps, State> {
+export class EventMetaWidget extends React.Component<Props & ThemeInjectedProps, State> {
 
     public state: State = {
         loading: false,

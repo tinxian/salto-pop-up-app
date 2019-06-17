@@ -8,8 +8,8 @@
         "BottomDrawerColor": "#ffffff",
         "ButtonColor": "#f98ebb",
         "ButtonTextColor": "#ffffff",
-        "LabelBorderColor": "#faad14",
-        "LabelBackgroundColor": "#fffbe6",
+        "LabelBorderColor": "#f98ebb",
+        "LabelBackgroundColor": "#fef3f8",
         "PageBackgroundColor": "#ffffff",
         "SaltoColor": "#E30613",
         "TextColor": "#000000",
@@ -38,29 +38,70 @@
     },
     "links": [
         {
-            "title": "Pride Amsterdam",
-            "link": "https://pride.amsterdam/",
-            "logo": "planet"
+            "title": "Straat feesten",
+            "link": "https://pride.amsterdam/events/streetparties-2019/",
+            "logo": "boat"
         },
         {
-            "title": "SALTO op Facebook",
-            "link": "https://www.facebook.com/saltoamsterdam/",
-            "logo": "logo-facebook"
+            "title": "Bezoekers informatie",
+            "link": "https://pride.amsterdam/algemene-bezoekers-informatie/",
+            "logo": "people"
         },
         {
-            "title": "SALTO op Twitter",
-            "link": "https://twitter.com/SALTOamsterdam",
-            "logo": "logo-twitter"
+            "title": "Boten 2019",
+            "link": "https://pride.amsterdam/boten-2019/",
+            "logo": "boat"
         },
         {
-            "title": "SALTO op Instagram",
-            "link": "https://www.instagram.com/saltoamsterdam/",
-            "logo": "logo-instagram"
+            "title": "Botenparade",
+            "link": "https://pride.amsterdam/pride-vignetten-canal-parade-2019/",
+            "logo": "navigate"
+        },
+        {
+            "title": "Ambassadeurs",
+            "link": "https://pride.amsterdam/ambassadors/",
+            "logo": "ribbon"
+        },
+        {
+            "title": "Over Pride",
+            "link": "https://pride.amsterdam/stichting-amsterdam-gay-pride/",
+            "logo": "information-circle"
         },
         {
             "title": "Over SALTO",
             "link": "https://www.salto.nl/over/",
             "logo": "information-circle"
+        },
+        {
+            "title": "",
+            "link": "",
+            "logo": "",
+            "whitespace": true
+        },
+        {
+            "title": "Pride Amsterdam",
+            "link": "https://pride.amsterdam/",
+            "logo": "planet"
+        },
+        {
+            "title": "Pride op Facebook",
+            "link": "https://www.facebook.com/prideamsterdam/",
+            "logo": "logo-facebook"
+        },
+        {
+            "title": "Pride op Twitter",
+            "link": "https://twitter.com/amsterdampride",
+            "logo": "logo-twitter"
+        },
+        {
+            "title": "Pride op Instagram",
+            "link": "https://www.instagram.com/prideamsterdam/",
+            "logo": "logo-instagram"
+        },
+        {
+            "title": "Pride op Youtube",
+            "link": "https://www.youtube.com/channel/UCLTU5MweRSFgpQAUT6eGUVA",
+            "logo": "logo-youtube"
         }
     ],
     "content": {
@@ -70,15 +111,19 @@
         },
         "general": {
             "AftermovieId": "1HBGnq4lr20m2yYg0YCEUO",
-            "HighlightedVideoIds": [
-                "3TXQ36FPJ6uu2Mu64OgKaw",
-                "7EEHKSCbU4uOQ6aU6sy0qs",
-                "1d1nsC9uVuSAQ0sKKEKges",
-                "EqsKzf55QGCw4cQMw4GOK",
-                "7UxKNgpvhYqMCaQuOiyYQ",
-                "2R7GFhEx1CEW2qioSkKAu0"
-            ],
             "EventName": "Pride evenement 2019",
+            "HomeHeaderTitles": [
+                {
+                    "title": "REMEMBER THE PAST",
+                    "color": "#000000",
+                    "fontSize": "large"
+                },
+                {
+                    "title": "CREATE THE FUTURE",
+                    "color": "#000000",
+                    "fontSize": "medium"
+                }
+            ],
             "RadioName": "PrideFM",
             "videosIntroduction": "Bekijk hier de livestream van het evenement Pride 2019",
             "livestreamIntroduction": "Bekijk hier de meest relevante videos van het evenement Pride 2019",

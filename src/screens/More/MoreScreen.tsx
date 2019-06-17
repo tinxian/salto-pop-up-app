@@ -1,15 +1,16 @@
-import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions, Linking, StatusBar } from 'react-native'
-import { getIcon } from 'src/utils/icons'
-import { NavigationScreenProps } from 'react-navigation'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { Title } from 'src/components/core/Typography/Title'
-import { AnalyticsData } from 'src/services/Analytics';
-import { Logo } from 'src/components/core/Logo/Logo';
-import { LinkType } from 'src/services/theme';
+import * as React from 'react';
+import { Dimensions, FlatList, Image, Linking, StatusBar, StyleProp, StyleSheet, TouchableHighlight, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { NavigationScreenProps } from 'react-navigation';
 import { PageHeader } from 'src/components/core/Header/PageHeader';
+import { Logo } from 'src/components/core/Logo/Logo';
+import { Title } from 'src/components/core/Typography/Title';
+import { EventMetaWidget } from 'src/components/implementations/Widgets/EventMetaWidget/EventMetaWidget';
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
+import { AnalyticsData } from 'src/services/Analytics';
 import { openPlatformSpecificWebViews } from 'src/services/Browser';
+import { LinkType } from 'src/services/theme';
+import { getIcon } from 'src/utils/icons';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -18,17 +19,6 @@ interface Props extends NavigationScreenProps<{}> {
 interface State {
 
 }
-
-interface MoreItem {
-    screen: string
-    label: string
-    icon: string
-}
-
-//    { screen: 'SettingsScreen', label: 'Instellingen', icon: getIcon('settings') },
-const moreItems: MoreItem[] = [
-    // { screen: 'OtherEventsScreen', label: 'Andere evenementen', icon: getIcon('megaphone') },
-]
 
 export const MoreScreen = withThemeContext(
     class MoreScreen extends React.Component<Props & ThemeInjectedProps, State> {
@@ -53,47 +43,29 @@ export const MoreScreen = withThemeContext(
                         style={styles.logo}
                         navigation={this.props.navigation}
                     />
-                    <FlatList<MoreItem>
+                    <FlatList<LinkType>
                         ListHeaderComponent={() => (
-                            <PageHeader theme={theme} title={'Meer'} />
+                            <PageHeader titles={[{ title: `Meer` }]} theme={theme} />
                         )}
                         ListFooterComponent={this.renderFooter()}
                         contentContainerStyle={this.getWrapperStyles()}
-                        data={moreItems}
+                        data={theme.links}
                         renderItem={item => this.renderItem(item.item)}
-                        keyExtractor={item => item.label}
+                        keyExtractor={(item, index) => item.link}
                     />
                 </View>
             )
         }
 
-        private renderItem(item: MoreItem) {
+        private renderItem(link: LinkType) {
             const { colors } = this.props.themeContext.theme
+
+            if (link.whitespace) {
+                return <View style={{ height: 42 }} />
+            }
+
             return (
-                <TouchableHighlight onPress={() => this.onItemPress(item)}>
-                    <View style={styles.itemContainer}>
-                        <View style={{ width: 25 }}>
-                            <Icon
-                                name={item.icon}
-                                color={colors.TextColor}
-                                size={25}
-                            />
-                        </View>
-                        <View style={this.getLabelContainerStyles()}>
-                            <Title color={colors.TextColor}>
-                                {item.label}
-                            </Title>
-                        </View>
-                    </View>
-                </TouchableHighlight>
-            )
-        }
-
-        private renderFooter() {
-            const { links, colors } = this.props.themeContext.theme
-
-            const elements = links.map((link, index) => (
-                <TouchableHighlight key={index} onPress={() => this.handleOpenUrl(link)}>
+                <TouchableHighlight onPress={() => this.handleOpenUrl(link)}>
                     <View style={styles.itemContainer}>
                         <View style={{ width: 25 }}>
                             <Icon
@@ -109,12 +81,17 @@ export const MoreScreen = withThemeContext(
                         </View>
                     </View>
                 </TouchableHighlight>
-            ))
+            )
+        }
+
+        private renderFooter() {
+            const { themeContext } = this.props
 
             return (
-                <View style={moreItems.length ? { marginTop: 44 } : undefined}>
-                    {elements}
-                </View>
+                <EventMetaWidget
+                    style={{ marginTop: 26 }}
+                    themeContext={themeContext}
+                />
 
             )
         }
@@ -130,12 +107,6 @@ export const MoreScreen = withThemeContext(
             Linking.canOpenURL(url).then(supported => {
                 openPlatformSpecificWebViews(url)
             })
-        }
-
-        private onItemPress = (item: MoreItem) => {
-            const { navigation } = this.props
-
-            navigation.navigate(item.screen)
         }
 
         private getLabelContainerStyles() {
@@ -208,6 +179,7 @@ const styles = StyleSheet.create({
         marginTop: 72,
         minHeight: Dimensions.get('screen').height,
         paddingHorizontal: 12,
+        paddingBottom: 80,
         borderRadius: 25,
     },
     titleContainer: {

@@ -2,12 +2,12 @@
 import * as React from 'react'
 import { StyleSheet, StyleProp, View } from 'react-native'
 import { Title, TitleSizeType } from '../Typography/Title';
-import { ThemeType } from 'src/services/theme';
+import { ThemeType, HeaderTitleType } from 'src/services/theme';
 
 interface Props {
     style?: StyleProp<{}>
     theme: ThemeType
-    title: string
+    titles: HeaderTitleType[]
 }
 
 interface State {
@@ -16,18 +16,27 @@ interface State {
 
 export class PageHeader extends React.Component<Props, State> {
     public render() {
-        const { theme, title } = this.props
+        const { titles } = this.props
 
         return (
             <View style={this.getStyles()}>
-                <Title
-                    size={TitleSizeType.large}
-                    color={theme.colors.TitleColor}
-                >
-                    {title}
-                </Title>
+                {this.renderTitles(titles)}
             </View>
         )
+    }
+
+    private renderTitles(titles: HeaderTitleType[]) {
+        const { theme } = this.props
+
+        return titles.map((titleObj, index: number) => (
+            <Title
+                key={index}
+                size={titleObj.fontSize ? (titleObj.fontSize as TitleSizeType) : TitleSizeType.large}
+                color={titleObj.color ? titleObj.color : theme.colors.TextColor}
+            >
+                {titleObj.title}
+            </Title>
+        ))
     }
 
     private getStyles() {
@@ -42,9 +51,7 @@ export class PageHeader extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: 'column',
         paddingTop: 18,
         marginBottom: 12,
     },

@@ -6,12 +6,16 @@ export interface RssItem {
     enclosures: any[]
     id: string
     itunes: any
-    links: string[]
+    links: RssLinkType[]
     published: Date
     title: string
 
 }
 
-export interface rssResponse {
+export interface RssLinkType {
+    url: string
+}
+
+export interface RssResponse {
     items: RssItem[]
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleProp, StyleSheet, TouchableOpacity } from 'react-native';
 import { RssItem } from 'src/services/Rss';
-import { Title } from 'src/components/core/Typography/Title';
+import { Title, TitleSizeType } from 'src/components/core/Typography/Title';
 import { ThemeType } from 'src/services/theme';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
@@ -22,14 +22,14 @@ export class RssWidgetItem extends React.Component<Props, {}> {
         return (
             <TouchableOpacity onPress={this.handleOnPress}>
                 <View style={this.getStyles()}>
-                    <Title numberOfLines={2} color={theme.colors.TitleColor}>
+                    <Title numberOfLines={2} size={TitleSizeType.small} color={theme.colors.TitleColor}>
                         {item.title}
                     </Title>
                     <Paragraph numberOfLines={2} color={theme.colors.TitleColor}>
                         {item.description}
                     </Paragraph>
                     <SubTitle numberOfLines={2} color={theme.colors.TitleColor}>
-                        {format(item.published, 'H:m DD-MM-YYYY')}
+                        {format(item.published, 'HH:mm DD-MM-YYYY')}
                     </SubTitle>
                 </View>
             </TouchableOpacity>

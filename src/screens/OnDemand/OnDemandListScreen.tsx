@@ -54,7 +54,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         <React.Fragment>
                             {this.renderPinnedMedia()}
                             <View style={styles.videoDescription}>
-                                <PageHeader theme={theme} title={`Meest recente videos`} />
+                                <PageHeader theme={theme} titles={[{ title: `Meest recente videos` }]} />
                                 <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
                                     {theme.content.general.videosIntroduction}
                                 </Paragraph>
@@ -104,7 +104,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 <View
                     style={styles.topContent}
                 >
-                    <PageHeader theme={theme} title={`${theme.content.general.EventName} livestream`} />
+                    <PageHeader theme={theme} titles={[{ title: `${theme.content.general.EventName} livestream` }]} />
                     <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
                         {theme.content.general.videosIntroduction}
                     </Paragraph>

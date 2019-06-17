@@ -1,4 +1,5 @@
 import { isWithinRange, differenceInDays, isFuture } from 'date-fns'
+
 export function getEventMessage(startDate: Date, endDate: Date) {
     const currentDate = new Date()
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Dimensions, FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native';
+import { FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native';
 import { NavigationScreenProps } from 'react-navigation';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 import { PageHeader } from 'src/components/core/Header/PageHeader';
@@ -75,7 +75,7 @@ export const HomeScreen = withThemeContext(
         private renderHeader() {
             const { theme } = this.props.themeContext
             return (
-                <PageHeader theme={theme} title={theme.content.general.EventName} />
+                <PageHeader theme={theme} titles={theme.content.general.HomeHeaderTitles} />
             )
         }
 
