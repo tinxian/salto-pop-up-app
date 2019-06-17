@@ -1,15 +1,15 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions, Linking, Alert } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, TouchableHighlight, Image, Dimensions, Linking, StatusBar } from 'react-native'
 import { getIcon } from 'src/utils/icons'
 import { NavigationScreenProps } from 'react-navigation'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { StatusBar } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { Title } from 'src/components/core/Typography/Title'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
 import { LinkType } from 'src/services/theme';
 import { PageHeader } from 'src/components/core/Header/PageHeader';
+import { openPlatformSpecificWebViews } from 'src/services/Browser';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -124,14 +124,7 @@ export const MoreScreen = withThemeContext(
             })
 
             Linking.canOpenURL(url).then(supported => {
-                if (supported) {
-                    Linking.openURL(url)
-                } else {
-                    Alert.alert(
-                        'Alert',
-                        'WhatsApp is not installed'
-                    )
-                }
+                openPlatformSpecificWebViews(url)
             })
         }
 

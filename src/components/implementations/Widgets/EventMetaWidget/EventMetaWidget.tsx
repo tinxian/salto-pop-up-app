@@ -37,17 +37,15 @@ export const EventMetaWidget = withThemeContext(
                             {theme.content.general.AppIntroduction}
                         </Paragraph>
                     </View>
-                    <View>
-                        <View>
-                            <Label
-                                backgroundColor={theme.colors.LabelBackgroundColor}
-                                borderColor={theme.colors.LabelBorderColor}
-                                text={getEventMessage(
-                                    new Date(theme.content.App.startDate),
-                                    new Date(theme.content.App.endDate)
-                                )}
-                            />
-                        </View>
+                    <View style={styles.labelContainer}>
+                        <Label
+                            backgroundColor={theme.colors.LabelBackgroundColor}
+                            borderColor={theme.colors.LabelBorderColor}
+                            text={getEventMessage(
+                                new Date(theme.content.App.startDate),
+                                new Date(theme.content.App.endDate)
+                            )}
+                        />
                     </View>
                 </View>
             )
@@ -65,6 +63,9 @@ export const EventMetaWidget = withThemeContext(
 
 const styles = StyleSheet.create({
     container: {
+    },
+    labelContainer: {
+        flexDirection: 'row',
     },
     introText: {
         flexDirection: 'row',
