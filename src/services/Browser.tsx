@@ -1,6 +1,6 @@
 import { Platform, Linking } from "react-native";
 import SafariView from "react-native-safari-view";
-// import { CustomTabs } from "react-native-custom-tabs";
+import { CustomTabs } from "react-native-custom-tabs";
 
 export function openPlatformSpecificWebViews(url: string) {
     if (Platform.OS === 'ios') {
@@ -12,7 +12,17 @@ export function openPlatformSpecificWebViews(url: string) {
     }
 
     if (Platform.OS === 'android') {
-        // CustomTabs.openURL(url)
+        CustomTabs.openURL(url, {
+            enableUrlBarHiding: true,
+            showPageTitle: true,
+            enableDefaultShare: true,
+            animations: {
+                startEnter: 'slide_in_bottom',
+                startExit: 'slide_out_bottom',
+                endEnter: 'slide_in_bottom',
+                endExit: 'slide_out_bottom',
+            },
+        })
         return
     }
 

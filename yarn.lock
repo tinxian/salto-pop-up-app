@@ -952,6 +952,11 @@
   version "15.5.6"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.6.tgz#9c03d3fed70a8d517c191b7734da2879b50ca26c"
 
+"@types/react-native-custom-tabs@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-native-custom-tabs/-/react-native-custom-tabs-0.1.1.tgz#5a8fda21380dc119748f23ce9d724a6922ab2734"
+  integrity sha512-tFDXq0zR5Zk45E/BcKDDkQt1wTC++uVVmdBqcAUF3TEIZbzqOn5liulZRfwldCTQuCwicBVtSf1J5iwkqJZE1g==
+
 "@types/react-native-orientation@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-orientation/-/react-native-orientation-5.0.1.tgz#347f7041683249f9ca7386717aa4dd66b394d3fb"
@@ -5282,6 +5287,11 @@ react-lifecycles-compat@^3.0.4:
 react-native-config@^0.11.6:
   version "0.11.6"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.6.tgz#efe9027be534629a41a4561de50f76f40dabb78a"
+
+react-native-custom-tabs@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/react-native-custom-tabs/-/react-native-custom-tabs-0.1.7.tgz#2dfb4028b0a443610d94792b2019810f68dde525"
+  integrity sha512-Lgxh/KvhRnirnvN9FrS/+FJ8OIKJcWGdceSrZutZt2x02Sc72uQVD1O4rh2kzN8NUw8yU6KQz279ltkicISbaw==
 
 react-native-firebase@^5.4.0:
   version "5.4.0"

@@ -3,6 +3,7 @@ package com.saltopopupapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.github.droibit.android.reactnative.customtabs.CustomTabsPackage;
 import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
@@ -34,7 +35,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNFirebasePackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+          new CustomTabsPackage(), new RNFirebasePackage(),
           new RNFirebaseAnalyticsPackage(), new TrackPlayer(), new OrientationPackage(), new VectorIconsPackage(),
           new RNSoundPlayerPackage(), new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(),
           new SvgPackage(), new ReactNativeConfigPackage(), new SplashScreenReactPackage());
