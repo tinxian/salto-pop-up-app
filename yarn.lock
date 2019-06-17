@@ -944,6 +944,11 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/lodash@^4.14.134":
+  version "4.14.134"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.134.tgz#9032b440122db3a2a56200e91191996161dde5b9"
+  integrity sha512-2/O0khFUCFeDlbi7sZ7ZFRCcT812fAeOLm7Ev4KbwASkZ575TDrDcY7YyaoHdTOzKcNbfiwLYZqPmoC4wadrsw==
+
 "@types/node-polyglot@^0.4.31":
   version "0.4.31"
   resolved "http://registry.npmjs.org/@types/node-polyglot/-/node-polyglot-0.4.31.tgz#4185cb3a52a468ca12c349ef26cd6d76ee203ca0"
