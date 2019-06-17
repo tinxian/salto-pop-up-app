@@ -5319,6 +5319,13 @@ react-native-orientation@^3.1.3:
   resolved "https://registry.yarnpkg.com/react-native-orientation/-/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"
   integrity sha512-A0h0E+2f95X4avmhaBG1ZT8WDxBACA/q//JN2eF1E7kq8AJVxt5XDiavv+aSBkBlqFsfF3bIS+T/DB5mXmnxuA==
 
+react-native-rss-parser@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/react-native-rss-parser/-/react-native-rss-parser-1.3.0.tgz#9f203d811b44620bb748758dd4570af4fa31b87f"
+  integrity sha512-mKfGguzk+X3OYBFC+mWIRImaj902GTcaqLH5npXBMiAVnQGT9HOFz26QCWYQdK6XvEX3qpoDMRa4G3DFYhp6Xg==
+  dependencies:
+    xmldom "^0.1.27"
+
 react-native-safari-view@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
@@ -6883,7 +6890,7 @@ xmldoc@^0.4.0:
   dependencies:
     sax "~1.1.1"
 
-xmldom@0.1.x:
+xmldom@0.1.x, xmldom@^0.1.27:
   version "0.1.27"
   resolved "https://registry.yarnpkg.com/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 

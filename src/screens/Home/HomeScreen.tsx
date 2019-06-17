@@ -77,12 +77,12 @@ export const HomeScreen = withThemeContext(
 
         private renderWidgetItem(item: ListRenderItemInfo<WidgetType>) {
             const widget = item.item
-            const { theme } = this.props.themeContext
+            const { themeContext } = this.props
             const { navigation } = this.props
 
             return (
                 <WidgetView
-                    theme={theme}
+                    themeContext={themeContext}
                     widget={widget}
                     navigation={navigation}
                 >
@@ -150,10 +150,10 @@ export
             left: 12,
         },
         content: {
-            minHeight: Dimensions.get('screen').height,
             paddingHorizontal: 12,
             borderRadius: 25,
             marginTop: 72,
+            paddingBottom: 84,
 
         },
         titleContainer: {

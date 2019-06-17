@@ -18,48 +18,47 @@ interface State {
     programData?: LiveStreamDataType
 }
 
-export const EventMetaWidget = withThemeContext(
-    class EventMetaWidget extends React.Component<Props & PassedWidgetProps, State> {
 
-        public state: State = {
-            loading: false,
-            active: false,
-            programData: undefined,
-        }
+export class EventMetaWidget extends React.Component<Props & PassedWidgetProps, State> {
 
-        public render() {
-            const { theme } = this.props.themeContext
-
-            return (
-                <View style={this.getStyles()}>
-                    <View style={styles.introText}>
-                        <Paragraph color={theme.colors.TitleColor}>
-                            {theme.content.general.AppIntroduction}
-                        </Paragraph>
-                    </View>
-                    <View style={styles.labelContainer}>
-                        <Label
-                            backgroundColor={theme.colors.LabelBackgroundColor}
-                            borderColor={theme.colors.LabelBorderColor}
-                            text={getEventMessage(
-                                new Date(theme.content.App.startDate),
-                                new Date(theme.content.App.endDate)
-                            )}
-                        />
-                    </View>
-                </View>
-            )
-        }
-
-        private getStyles() {
-            const { style } = this.props
-            return [
-                styles.container,
-                style,
-            ]
-        }
+    public state: State = {
+        loading: false,
+        active: false,
+        programData: undefined,
     }
-)
+
+    public render() {
+        const { theme } = this.props.themeContext
+
+        return (
+            <View style={this.getStyles()}>
+                <View style={styles.introText}>
+                    <Paragraph color={theme.colors.TitleColor}>
+                        {theme.content.general.AppIntroduction}
+                    </Paragraph>
+                </View>
+                <View style={styles.labelContainer}>
+                    <Label
+                        backgroundColor={theme.colors.LabelBackgroundColor}
+                        borderColor={theme.colors.LabelBorderColor}
+                        text={getEventMessage(
+                            new Date(theme.content.App.startDate),
+                            new Date(theme.content.App.endDate)
+                        )}
+                    />
+                </View>
+            </View>
+        )
+    }
+
+    private getStyles() {
+        const { style } = this.props
+        return [
+            styles.container,
+            style,
+        ]
+    }
+}
 
 const styles = StyleSheet.create({
     container: {

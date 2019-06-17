@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { StyleProp, StyleSheet, View } from 'react-native';
 import { Title } from 'src/components/core/Typography/Title';
-import { ThemeType } from 'src/services/theme';
+import { ThemeContextType } from 'src/services/theme';
 import { NavigationScreenProps } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { getIcon } from 'src/utils/icons';
@@ -9,7 +9,7 @@ import { WidgetType } from 'src/screens/Home/widgets';
 
 interface Props extends NavigationScreenProps {
     style?: StyleProp<{}>
-    theme: ThemeType
+    themeContext: ThemeContextType
     widget: WidgetType
 }
 
@@ -20,10 +20,10 @@ interface State {
 export class WidgetView extends React.Component<Props, State> {
 
     public render() {
-        const { widget, theme, children, navigation } = this.props
+        const { widget, themeContext, children, navigation } = this.props
 
         const childrenWithProps = React.Children.map(children, child =>
-            React.cloneElement((child as JSX.Element), { theme, navigation })
+            React.cloneElement((child as JSX.Element), { themeContext, navigation })
         );
 
         return (
@@ -32,11 +32,11 @@ export class WidgetView extends React.Component<Props, State> {
                     <View style={styles.headerContainer}>
                         <Icon
                             name={getIcon(widget.icon)}
-                            color={this.props.theme.colors.TextColor}
+                            color={themeContext.theme.colors.TextColor}
                             size={25}
                         />
                         <Title
-                            color={theme.colors.TitleColor}
+                            color={themeContext.theme.colors.TitleColor}
                             textStyle={styles.title}
                         >
                             {widget.title}
@@ -50,10 +50,10 @@ export class WidgetView extends React.Component<Props, State> {
     }
 
     private getStyles() {
-        const { style, theme } = this.props
+        const { style, themeContext } = this.props
         return [
             styles.container,
-            { backgroundColor: theme.colors.WidgetBackgroundColor },
+            { backgroundColor: themeContext.theme.colors.WidgetBackgroundColor },
             style,
         ]
     }
