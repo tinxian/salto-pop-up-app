@@ -1,4 +1,3 @@
-
 import React from "react";
 import { NavigationScreenProps } from "react-navigation";
 import { FMWidget } from "src/components/implementations/Widgets/FMWidget/FMWidget";
@@ -30,7 +29,7 @@ export const widgets: WidgetType[] = [
     },
     {
         id: '4',
-        title: 'Rss feed',
+        title: 'Pride news',
         icon: 'logo-rss',
         element: <RssWidget />,
     },
