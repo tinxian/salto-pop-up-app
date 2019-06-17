@@ -2,11 +2,11 @@
     "colors": {
         "NavigationBackgroundColor": "#f5f5f5",
         "NavigationIconsColor": "#000000",
-        "NavigationIconsActiveColor": "#F06159",
-        "RadioPlayerControlsColor": "#F06159",
+        "NavigationIconsActiveColor": "#f98ebb",
+        "RadioPlayerControlsColor": "#f98ebb",
         "RadioPlayerBackgroundColor": "#c2c2c2",
         "BottomDrawerColor": "#ffffff",
-        "ButtonColor": "#F06159",
+        "ButtonColor": "#f98ebb",
         "ButtonTextColor": "#ffffff",
         "LabelBorderColor": "#faad14",
         "LabelBackgroundColor": "#fffbe6",
@@ -19,15 +19,18 @@
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
         "LiveIndicatorTextColor": "#ffffff",
-        "SeperatorColor": "#F06159",
+        "SeperatorColor": "#f98ebb",
         "HeaderBackground": "#c2c2c2",
         "HeaderTitleText": "#000000",
-        "HeaderBackButtonColor": "#F06159",
+        "HeaderBackButtonColor": "#f98ebb",
         "WidgetBackgroundColor": "#fafafa"
     },
     "images": {
         "HeaderBackgroundUrl": {
-            "uri": "https://i.ibb.co/svjhCgG/achtergrond-2.jpg"
+            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/background.png"
+        },
+        "logoUrl": {
+            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/logo.png"
         },
         "defaultThumbnail": {
             "uri": "https://i.ibb.co/chXbWHY/thumbnail.jpg"

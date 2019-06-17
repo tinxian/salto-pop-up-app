@@ -48,7 +48,11 @@ export const MoreScreen = withThemeContext(
                         source={HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Logo style={styles.logo} navigation={this.props.navigation} />
+                    <Logo
+                        theme={this.props.themeContext.theme}
+                        style={styles.logo}
+                        navigation={this.props.navigation}
+                    />
                     <FlatList<MoreItem>
                         ListHeaderComponent={() => (
                             <PageHeader theme={theme} title={'Meer'} />
@@ -196,8 +200,8 @@ const styles = StyleSheet.create({
         height: '50%',
     },
     logo: {
+        paddingTop: 15,
         position: 'absolute',
-        top: 42,
         left: 12,
     },
     content: {

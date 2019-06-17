@@ -29,6 +29,7 @@ export interface ColorsType {
 }
 export interface ImagesType {
     HeaderBackgroundUrl: ImageSourcePropType
+    logoUrl: ImageSourcePropType
     defaultThumbnail: ImageSourcePropType
 }
 

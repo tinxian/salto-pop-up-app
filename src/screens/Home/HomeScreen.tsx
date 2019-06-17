@@ -36,7 +36,11 @@ export const HomeScreen = withThemeContext(
                         source={images.HeaderBackgroundUrl}
                         resizeMode={'repeat'}
                     />
-                    <Logo style={styles.logo} navigation={this.props.navigation} />
+                    <Logo
+                        theme={this.props.themeContext.theme}
+                        style={styles.logo}
+                        navigation={this.props.navigation}
+                    />
                     {this.renderList()}
                 </View>
             )
@@ -145,8 +149,8 @@ export
             flex: 1,
         },
         logo: {
+            paddingTop: 15,
             position: 'absolute',
-            top: 42,
             left: 12,
         },
         content: {

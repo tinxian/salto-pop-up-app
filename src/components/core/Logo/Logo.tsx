@@ -1,10 +1,11 @@
 import * as React from 'react'
 import { StyleSheet, StyleProp, Image, View, TouchableOpacity } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import { images } from 'src/utils/images'
+import { ThemeType } from 'src/services/theme';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
+    theme: ThemeType
 }
 
 interface State {
@@ -13,16 +14,12 @@ interface State {
 
 export class Logo extends React.Component<Props, State> {
     public render() {
-        const { navigation } = this.props
+        const { navigation, theme } = this.props
 
         return (
-            <View style={this.getStyles()} >
-                <TouchableOpacity style={{ flex: 1 }} onPress={() => navigation.navigate('HomeScreen')}>
-                    <View>
-                        <Image source={images.logo} />
-                    </View>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity style={this.getStyles()} onPress={() => navigation.navigate('HomeScreen')}>
+                <Image style={styles.image} source={theme.images.logoUrl} />
+            </TouchableOpacity>
 
         )
     }
@@ -41,4 +38,8 @@ const styles = StyleSheet.create({
     container: {
 
     },
+    image: {
+        height: 42,
+        width: 42,
+    }
 })
