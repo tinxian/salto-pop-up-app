@@ -10,7 +10,6 @@ import com.guichaguri.trackplayer.TrackPlayer;
 
 import com.github.yamill.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.johnsonsu.rnsoundplayer.RNSoundPlayerPackage;
 import cl.json.RNSharePackage;
 import com.brentvatne.react.ReactVideoPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
