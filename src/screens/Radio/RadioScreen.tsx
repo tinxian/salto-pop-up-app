@@ -121,19 +121,19 @@ export const RadioScreen = withThemeContext(
                             {programData.music.title}
                         </Paragraph>
                     )}
-                    {this.renderArtists(programData.music.artists)}
+                    {this.renderArtist(programData.music.artist)}
                 </View>
             )
         }
 
-        private renderArtists(artists?: string[]) {
+        private renderArtist(artist?: string[]) {
             const { colors } = this.props.themeContext.theme
 
-            if (!artists) {
+            if (!artist) {
                 return null
             }
 
-            return artists && artists.map((item, key) => (
+            return artist && artist.map((item, key) => (
                 <SubTitle
                     key={key}
                     color={colors.SubTitleColor}

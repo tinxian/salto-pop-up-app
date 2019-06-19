@@ -114,7 +114,13 @@ export class RadioBar extends React.Component<Props, State> {
             return theme.content.general.RadioName
         }
 
-        return `${theme.content.general.RadioName}: ${programData.title} ${programData.music && `- ${programData.music.title}`}`
+        if (!programData.music || !programData.music.title) {
+            return programData.title
+        }
+
+        console.log(programData.music)
+
+        return `${programData.music.title} ${programData.music.artist ? ` - ${this.getArtist(programData.music.artist)}` : ''}`
     }
 
     private async initializeLiveData() {
@@ -150,6 +156,10 @@ export class RadioBar extends React.Component<Props, State> {
         }
 
         this.socket = null
+    }
+
+    private getArtist(artist: string[]) {
+        return artist.join(', ')
     }
 
     private getStyles() {
