@@ -10,7 +10,6 @@ import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProv
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
 import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
-import { PageHeader } from 'src/components/core/Header/PageHeader';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { TitleSizeType } from 'src/components/core/Typography/Title';
 import { ExpandableTitleContainer } from 'src/components/core/ExpandableTitleContainer/ExpandableTitleContainer';

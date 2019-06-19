@@ -37,7 +37,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
           new CustomTabsPackage(), new RNFirebasePackage(),
           new RNFirebaseAnalyticsPackage(), new TrackPlayer(), new OrientationPackage(), new VectorIconsPackage(),
-          new RNSoundPlayerPackage(), new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(),
+          new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(),
           new SvgPackage(), new ReactNativeConfigPackage(), new SplashScreenReactPackage());
     }
 
