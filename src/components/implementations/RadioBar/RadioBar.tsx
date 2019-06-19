@@ -1,7 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, ActivityIndicator, Image, TouchableOpacity } from 'react-native'
-
-import TrackPlayer from 'react-native-track-player'
+import { View, StyleSheet, StyleProp, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
@@ -11,7 +9,7 @@ import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/Bot
 import { RadioScreen } from 'src/screens/Radio/RadioScreen'
 import { ThemeType } from 'src/services/theme';
 import { Dispatcher } from 'src/utils/Dispatcher';
-import Config from "react-native-config";
+import { TrackPlayerControls } from '../TrackPlayer/TrackPlayer';
 
 interface Props {
     style?: StyleProp<{}>
@@ -27,7 +25,9 @@ interface State {
 }
 
 export class RadioBar extends React.Component<Props, State> {
-    public static radioDispatcher = new Dispatcher()
+
+    public static radioBarDispatcher = new Dispatcher()
+    public TrackPlayerControlsRef: TrackPlayerControls | null
 
     public state: State = {
         loading: false,
@@ -36,84 +36,53 @@ export class RadioBar extends React.Component<Props, State> {
         openRadioScreen: false,
     }
 
+    private socket: SocketIOClient.Socket | null = null
 
-    private socket: any
-
-    public componentDidMount() {
-        this.initLiveData()
-        this.initDispatchers()
-
-        TrackPlayer.updateOptions({
-            capabilities: [
-                TrackPlayer.CAPABILITY_PLAY,
-                TrackPlayer.CAPABILITY_PAUSE,
-                TrackPlayer.CAPABILITY_STOP,
-            ]
-        })
-
-        TrackPlayer.setupPlayer().then(async () => {
-            await TrackPlayer.add({
-                id: 'trackId',
-                url: Config.RADIO_URL,
-                title: 'title',
-                artist: 'artist',
-                artwork: 'https://placehold.it/200x200'
-            });
-        })
-
+    public async componentDidMount() {
+        await this.initializeDispatchers()
     }
 
-    public componentWillUnmount() {
-        TrackPlayer.destroy()
+    public async componentWillUnmount() {
+        RadioBar.radioBarDispatcher.unsubscribe('openRadioScreen', () => this.handleRequestOpenRadioScreen())
+        this.destroySocket()
     }
 
     public render() {
         const { programData, openRadioScreen } = this.state
 
-        if (!programData) {
-            return (
-                <View style={this.getStyles()}>
-                    <View style={styles.controls}>
-                        <ActivityIndicator />
-                    </View>
-                </View>
-            )
-        }
-
         return (
             <BottomDrawerManager
                 requestOpenBottomDrawer={openRadioScreen}
-                renderHandler={open => this.renderHandler(open, programData)}
+                renderHandler={() => this.renderHandler(programData)}
                 renderContent={() => (
-                    <RadioScreen programData={programData} onToggleRadio={this.toggleRadio} active={this.state.active} />
+                    <RadioScreen
+                        programData={programData}
+                        onToggleRadio={this.handleToggleRadio}
+                        active={this.state.active}
+                    />
                 )}
             />
         )
     }
 
-    private renderHandler(open: () => void, programData: LiveStreamDataType) {
+    private renderHandler(programData?: LiveStreamDataType) {
         const { theme } = this.props
 
         return (
-            <TouchableOpacity onPress={() => this.handleRadioBarPress(open)}>
+            <TouchableOpacity onPress={() => this.handleRequestOpenRadioScreen()}>
                 <View style={this.getStyles()}>
-                    <TouchableOpacity onPress={this.toggleRadio}>
-                        <View style={styles.controls}>
-                            <Image
-                                resizeMode={'cover'}
-                                style={styles.image}
-                                source={{ uri: programData.logo }}
-                            />
-                            <View style={styles.cover} />
-                            {this.renderControls()}
-                        </View>
-                    </TouchableOpacity>
+                    <TrackPlayerControls
+                        theme={theme}
+                        onToggleRadio={this.handleToggleRadio}
+                        programData={programData}
+                        ref={ref => this.TrackPlayerControlsRef = ref}
+                    />
                     <View style={{ flex: 1, paddingRight: 12 }}>
                         <SubTitle
                             numberOfLines={1}
                             color={theme.colors.TextColor}
                         >
-                            {theme.content.general.RadioName}: {programData.title} {programData.music && `- ${programData.music.title}`}
+                            {this.getRadioMeta()}
                         </SubTitle>
                     </View>
                     <Icon
@@ -126,86 +95,57 @@ export class RadioBar extends React.Component<Props, State> {
         )
     }
 
-    private handleRadioBarPress(open?: () => void) {
-        if (open) {
-            open()
+    private handleToggleRadio = (active: boolean) => {
+
+        if (active) {
+            this.initializeLiveData()
+            return
         }
+
+        this.destroySocket()
     }
 
-    private initLiveData() {
+    private getRadioMeta() {
+        const { theme } = this.props
+        const { programData } = this.state
+
+        if (!programData) {
+            return theme.content.general.RadioName
+        }
+
+        return `${theme.content.general.RadioName}: ${programData.title} ${programData.music && `- ${programData.music.title}`}`
+    }
+
+    private async initializeLiveData() {
         this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
         this.socket.emit('join', { channel: Media.getRadioChannelName() })
 
         this.socket.on('update', (data: LiveStreamDataType) => {
             this.setState({ programData: data })
-            this.setTrackPlayer(data)
+            if (this.TrackPlayerControlsRef) {
+                this.TrackPlayerControlsRef.setTrackPlayer(data)
+            }
             return data
         })
     }
 
-    private initDispatchers() {
-        RadioBar.radioDispatcher.subscribe('stopRadio', () => this.setState({ active: false }))
-        RadioBar.radioDispatcher.subscribe('openRadioScreen', () => this.handleRequestOpenRadioScreen())
-        RadioBar.radioDispatcher.subscribe('startRadio', () => this.startRadio())
-
-    }
-
     private handleRequestOpenRadioScreen() {
+        this.initializeLiveData()
         this.setState({ openRadioScreen: true },
             () => this.setState({ openRadioScreen: false })
         )
     }
 
-    private renderControls() {
-        const { loading, active } = this.state
-
-        if (loading) {
-            return <ActivityIndicator />
-        }
-
-        return (
-            <Icon
-                name={!active ? getIcon('play') : getIcon('square')}
-                color={this.props.theme.colors.RadioPlayerControlsColor}
-                size={33}
-            />
-        )
+    private initializeDispatchers() {
+        RadioBar.radioBarDispatcher.subscribe('openRadioScreen', () => this.handleRequestOpenRadioScreen())
     }
 
-    private setTrackPlayer = async (data: LiveStreamDataType) => {
-        await TrackPlayer.add({
-            id: 'trackId',
-            url: Config.RADIO_URL,
-            title: data.music.title,
-            artist: data.channel,
-            artwork: data.logo,
-        });
-    }
-
-    private startRadio = () => {
-        try {
-            this.setState({ loading: false, active: true })
-            TrackPlayer.play()
-        } catch (e) {
-            throw (e)
+    private destroySocket() {
+        if (this.socket) {
+            this.socket.disconnect()
         }
-    }
 
-    private toggleRadio = () => {
-        const { active } = this.state
-
-        try {
-            this.setState({ loading: false, active: !active })
-
-            if (!active) {
-                TrackPlayer.play()
-                return
-            }
-            TrackPlayer.pause()
-
-        } catch (e) {
-            throw (e)
-        }
+        this.socket = null
     }
 
     private getStyles() {
@@ -234,26 +174,4 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
     },
-    controls: {
-        overflow: 'hidden',
-        backgroundColor: '#000000',
-        marginRight: 12,
-        width: 56,
-        height: 46,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    cover: {
-        position: 'absolute',
-        height: '100%',
-        width: '100%',
-        backgroundColor: '#000',
-        opacity: 0.4,
-    },
-    image: {
-        height: 56,
-        width: 100,
-        position: 'absolute',
-    }
 })

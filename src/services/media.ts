@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios'
 import Config from 'react-native-config'
 import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
 import TrackPlayer from 'react-native-track-player'
+import { TrackPlayerControls } from 'src/components/implementations/TrackPlayer/TrackPlayer';
 
 export interface MusicDataType {
     artists: string[]
@@ -26,16 +27,16 @@ export interface LiveStreamDataType {
 
 export class Media {
     public static stopOtherMedia() {
-        RadioBar.radioDispatcher.dispatch('stopRadio')
+        TrackPlayerControls.trackPlayerDispatcher.dispatch('stopRadio')
         TrackPlayer.pause()
     }
 
     public static startRadio() {
-        RadioBar.radioDispatcher.dispatch('startRadio')
+        TrackPlayerControls.trackPlayerDispatcher.dispatch('startRadio')
     }
 
     public static openRadioScreen() {
-        RadioBar.radioDispatcher.dispatch('openRadioScreen')
+        RadioBar.radioBarDispatcher.dispatch('openRadioScreen')
     }
 
     public static async getScheduleByChannel(channel: string) {

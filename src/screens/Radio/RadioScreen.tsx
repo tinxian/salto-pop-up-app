@@ -12,7 +12,7 @@ import { getIcon } from 'src/utils/icons';
 interface Props {
     uri?: string,
     active: boolean
-    onToggleRadio: () => void
+    onToggleRadio: (active: boolean) => void
     programData?: LiveStreamDataType
 }
 
@@ -71,7 +71,7 @@ export const RadioScreen = withThemeContext(
             }
 
             return (
-                <TouchableWithoutFeedback onPress={() => onToggleRadio()}>
+                <TouchableWithoutFeedback onPress={() => onToggleRadio(active)}>
                     <View style={this.getControlStyles()}>
                         <Icon
                             style={{ marginLeft: 2, marginTop: 2 }}
