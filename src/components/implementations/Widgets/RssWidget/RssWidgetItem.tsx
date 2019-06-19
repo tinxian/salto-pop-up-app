@@ -27,10 +27,10 @@ export class RssWidgetItem extends React.Component<Props, {}> {
                         {item.title}
                     </Title>
                     <Paragraph numberOfLines={2} textStyle={{ marginBottom: 8 }} color={theme.colors.TitleColor}>
-                        {item.description && removeHtmlTagsFromString(item.description)}
+                        {item.content && removeHtmlTagsFromString(item.content)}
                     </Paragraph>
                     <SubTitle numberOfLines={2} color={theme.colors.TitleColor}>
-                        {format(item.published, 'HH:mm DD-MM-YYYY')}
+                        {format(item.date, 'HH:mm DD-MM-YYYY')}
                     </SubTitle>
                 </View>
             </TouchableOpacity>

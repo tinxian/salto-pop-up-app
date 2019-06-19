@@ -1,15 +1,8 @@
 export interface RssItem {
-    authors: any[]
-    categories: any[]
-    content?: string
-    description?: string
-    enclosures: any[]
-    id: string
-    itunes: any
-    links: RssLinkType[]
-    published: Date
+    content: string
+    date: Date
     title: string
-
+    url: string
 }
 
 export interface RssLinkType {

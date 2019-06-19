@@ -25,14 +25,19 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
     }
 
     public async componentDidMount() {
-        const response = await fetch(Config.RSS_FEED_URL)
-        const responseData = await response.text()
-        const convertedResponseDataObject: RssResponse = await rssParser.parse(responseData)
+        try {
+            const response = await fetch(Config.RSS_FEED_URL)
+            const responseData: RssResponse = await response.json()
+            console.log(responseData)
 
-        this.setState({
-            rssData: convertedResponseDataObject.items,
-            loading: false,
-        })
+            this.setState({
+                rssData: responseData.items,
+                loading: false,
+            })
+        } catch (err) {
+            console.error(err)
+        }
+
     }
 
     public render() {
@@ -63,7 +68,7 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
     }
 
     private handleItemPress = (item: RssItem) => {
-        openPlatformSpecificWebViews(item.links[0].url)
+        openPlatformSpecificWebViews(item.url)
     }
 
     private getStyles() {
