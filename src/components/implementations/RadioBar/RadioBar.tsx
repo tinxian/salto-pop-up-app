@@ -27,7 +27,6 @@ interface State {
 export class RadioBar extends React.Component<Props, State> {
 
     public static radioBarDispatcher = new Dispatcher()
-    public TrackPlayerControlsRef: TrackPlayerControls | null
 
     public state: State = {
         loading: false,
@@ -36,6 +35,8 @@ export class RadioBar extends React.Component<Props, State> {
         openRadioScreen: false,
     }
 
+    private TrackPlayerControlsRef: TrackPlayerControls | null
+    private BottomDrawerManager: BottomDrawerManager | null
     private socket: SocketIOClient.Socket | null = null
 
     public async componentDidMount() {
@@ -53,11 +54,11 @@ export class RadioBar extends React.Component<Props, State> {
         return (
             <BottomDrawerManager
                 requestOpenBottomDrawer={openRadioScreen}
+                ref={ref => this.BottomDrawerManager = ref}
                 renderHandler={() => this.renderHandler(programData)}
                 renderContent={() => (
                     <RadioScreen
                         programData={programData}
-                        onToggleRadio={this.handleToggleRadio}
                         active={this.state.active}
                     />
                 )}
@@ -96,7 +97,7 @@ export class RadioBar extends React.Component<Props, State> {
     }
 
     private handleToggleRadio = (active: boolean) => {
-
+        this.setState({ active })
         if (active) {
             this.initializeLiveData()
             return
@@ -120,20 +121,23 @@ export class RadioBar extends React.Component<Props, State> {
         this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
         this.socket.emit('join', { channel: Media.getRadioChannelName() })
 
-        this.socket.on('update', (data: LiveStreamDataType) => {
-            this.setState({ programData: data })
+        this.socket.on('update', (programData: LiveStreamDataType) => {
+            this.setState({ programData })
+
             if (this.TrackPlayerControlsRef) {
-                this.TrackPlayerControlsRef.setTrackPlayer(data)
+                this.TrackPlayerControlsRef.setTrackPlayer(programData)
             }
-            return data
+
+            return programData
         })
     }
 
     private handleRequestOpenRadioScreen() {
         this.initializeLiveData()
-        this.setState({ openRadioScreen: true },
-            () => this.setState({ openRadioScreen: false })
-        )
+        this.setState({ active: true })
+        if (this.BottomDrawerManager) {
+            this.BottomDrawerManager.requestOpenBottomDrawer()
+        }
     }
 
     private initializeDispatchers() {

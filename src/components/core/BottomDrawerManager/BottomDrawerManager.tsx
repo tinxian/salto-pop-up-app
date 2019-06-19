@@ -8,16 +8,28 @@ export interface Props {
     requestOpenBottomDrawer: boolean
 }
 
-export class BottomDrawerManager extends React.Component<Props, {}> {
+interface State {
+
+}
+
+export class BottomDrawerManager extends React.Component<Props, State> {
+
+    private ModalManagerRef: ModalManager | null
+
+    public requestOpenBottomDrawer() {
+        if (this.ModalManagerRef) {
+            this.ModalManagerRef.requestOpen()
+        }
+    }
 
     public render() {
         const { renderContent } = this.props
 
         return (
             <ModalManager
+                ref={(ref: ModalManager) => this.ModalManagerRef = ref}
                 renderHandler={open => this.renderHandlerComponent(open)}
                 renderModal={closeModal => (
-
                     <BottomDrawer
                         onDismiss={closeModal}
                         children={renderContent(closeModal)}
@@ -26,6 +38,7 @@ export class BottomDrawerManager extends React.Component<Props, {}> {
             />
         )
     }
+
 
     private renderHandlerComponent(open: () => void) {
         const { requestOpenBottomDrawer, renderHandler } = this.props

@@ -31,6 +31,10 @@ export class ModalManager<TModalParams = {}> extends React.Component<Props<TModa
 
     private AnimatedKeyboardAvoidingView = Animated.createAnimatedComponent(KeyboardAvoidingView)
 
+    public requestOpen() {
+        this.handleOpen()
+    }
+
     public render() {
         const { renderHandler, renderModal } = this.props
         const { modalActive, params, closeRequested } = this.state

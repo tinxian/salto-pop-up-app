@@ -38,14 +38,32 @@ export class TrackPlayerControls extends React.Component<Props, State> {
         TrackPlayer.destroy()
     }
 
-    public setTrackPlayer = (data: LiveStreamDataType) => {
+    public setTrackPlayer = (programData: LiveStreamDataType) => {
+        const TrackData = this.getTrackData(programData)
+
         TrackPlayer.add({
             id: 'trackId',
             url: Config.RADIO_URL,
-            title: data.music.title,
-            artist: data.channel,
+            title: TrackData.title,
+            artist: TrackData.artist,
             artwork: this.getNowPlayingLogo(),
         });
+    }
+
+    public getTrackData(programData: LiveStreamDataType) {
+        const { theme } = this.props
+
+        if (!programData.music) {
+            return {
+                title: theme.content.general.RadioName,
+                artist: '',
+            }
+        }
+
+        return {
+            title: programData.music.title ? programData.music.title : theme.content.general.RadioName,
+            artist: programData.music.artists ? this.getArtist(programData.music.artists) : '',
+        }
     }
 
     public render() {
@@ -97,13 +115,13 @@ export class TrackPlayerControls extends React.Component<Props, State> {
     }
 
     private startRadio = () => {
-        TrackPlayer.play()
         this.setState({ active: true })
+        TrackPlayer.play()
     }
 
     private stopRadio = () => {
         this.setState({ active: false })
-        TrackPlayer.stop()
+        TrackPlayer.pause()
     }
 
     private getNowPlayingLogo() {
@@ -134,6 +152,10 @@ export class TrackPlayerControls extends React.Component<Props, State> {
                 artwork: this.getNowPlayingLogo(),
             });
         })
+    }
+
+    private getArtist(artists: string[]) {
+        return artists.join(', ')
     }
 
     private initializeDispatchers() {

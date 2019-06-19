@@ -9,7 +9,7 @@ export const ThemeContext: Context<ThemeContextType> = React.createContext({
     setThemeState: () => 'Context not set',
 })
 
-const USE_LOCAL_DEVELOPMENT_MODE = true
+const USE_LOCAL_DEVELOPMENT_MODE = false
 
 export class ThemeProvider extends React.Component<{}, ThemeContextType> {
 
@@ -22,7 +22,9 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
         try {
             if (!USE_LOCAL_DEVELOPMENT_MODE) {
                 await this.setCachedThemeToState()
-                await this.setExternalThemeToState()
+                setInterval(async () => {
+                    await this.setExternalThemeToState()
+                }, 86400000)
                 await this.setThemeToCache()
             }
         } catch (error) {

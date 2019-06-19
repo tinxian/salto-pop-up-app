@@ -27,7 +27,6 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
         try {
             const response = await fetch(Config.RSS_FEED_URL)
             const responseData: RssResponse = await response.json()
-            console.log(responseData)
 
             this.setState({
                 rssData: responseData.items,

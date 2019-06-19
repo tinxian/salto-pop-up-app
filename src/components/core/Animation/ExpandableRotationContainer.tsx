@@ -29,7 +29,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
             if (this.props.expand === true) {
                 this.animateIn()
             } else {
-                console.log('out')
                 this.animateOut()
             }
         }
