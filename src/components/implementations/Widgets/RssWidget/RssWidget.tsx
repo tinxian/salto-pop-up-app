@@ -29,9 +29,6 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
         const responseData = await response.text()
         const convertedResponseDataObject: RssResponse = await rssParser.parse(responseData)
 
-        console.log(convertedResponseDataObject)
-
-
         this.setState({
             rssData: convertedResponseDataObject.items,
             loading: false,

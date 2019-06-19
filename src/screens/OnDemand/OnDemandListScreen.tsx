@@ -12,6 +12,8 @@ import { AnalyticsData } from 'src/services/Analytics';
 import { Logo } from 'src/components/core/Logo/Logo';
 import { PageHeader } from 'src/components/core/Header/PageHeader';
 import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { TitleSizeType } from 'src/components/core/Typography/Title';
+import { ExpandableTitleContainer } from 'src/components/core/ExpandableTitleContainer/ExpandableTitleContainer';
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -54,10 +56,16 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         <React.Fragment>
                             {this.renderPinnedMedia()}
                             <View style={styles.videoDescription}>
-                                <PageHeader theme={theme} titles={[{ title: `Meest recente videos` }]} />
-                                <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
-                                    {theme.content.general.videosIntroduction}
-                                </Paragraph>
+                                <ExpandableTitleContainer
+                                    title={`Meest recente videos`}
+                                    renderContent={() => (
+                                        <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
+                                            {theme.content.general.videosIntroduction}
+                                        </Paragraph>
+                                    )}
+                                    titleSize={TitleSizeType.large}
+                                    theme={theme}
+                                />
                             </View>
 
                             {this.renderLoading()}
@@ -104,10 +112,17 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                 <View
                     style={styles.topContent}
                 >
-                    <PageHeader theme={theme} titles={[{ title: `${theme.content.general.EventName} livestream` }]} />
-                    <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
-                        {theme.content.general.livestreamIntroduction}
-                    </Paragraph>
+                    <ExpandableTitleContainer
+                        title={`${theme.content.general.EventName} livestream`}
+                        renderContent={() => (
+                            <Paragraph color={theme.colors.TextColor} textStyle={{ marginBottom: 12 }}>
+                                {theme.content.general.livestreamIntroduction}
+                            </Paragraph>
+                        )}
+                        titleSize={TitleSizeType.large}
+                        theme={theme}
+                    />
+
                     <LivestreamItem
                         theme={theme}
                         onPress={() => this.props.navigation.navigate('LivestreamVideoScreen')}
