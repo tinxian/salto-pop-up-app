@@ -26,28 +26,35 @@ function getHalfScreenHeight() {
     return getScreenHeight() / 1.2
 }
 export class BottomDrawer extends React.Component<Props, State> {
+
     public UP_POSITION = 0
     public DOWN_POSITION = getScreenHeight()
+
     public state: State = {
         currentPosition: this.DOWN_POSITION,
         active: true,
     }
+
     public panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
         onPanResponderMove: (e, state) => this.handlePanResponderMove(e, state),
         onPanResponderRelease: (e, state) => this.handlePanResponderRelease(e, state),
     })
+
     private TOGGLE_THRESHOLD = getHalfScreenHeight() / 11
     private animatedPosition = new Animated.Value(this.state.currentPosition)
+
     public componentDidMount() {
         this.HandleOnToggle()
     }
+
     public componentDidUpdate(prevProps: Props, prevState: State) {
         const { active } = this.state
         if (prevState.active !== active) {
             this.HandleOnToggle()
         }
     }
+
     public handlePanResponderMove = (
         e: GestureResponderEvent,
         gesture: PanResponderGestureState
@@ -58,11 +65,13 @@ export class BottomDrawer extends React.Component<Props, State> {
             this.animatedPosition.setValue(this.UP_POSITION)
         }
     }
+
     public handlePanResponderRelease = (
         e: GestureResponderEvent,
         gesture: PanResponderGestureState
     ) => {
         const { currentPosition } = this.state
+
         if (gesture.dy > this.TOGGLE_THRESHOLD && currentPosition === this.UP_POSITION) {
             this.transitionTo(this.DOWN_POSITION)
             this.handleOnDismiss()
@@ -70,8 +79,10 @@ export class BottomDrawer extends React.Component<Props, State> {
             this.transitionTo(this.UP_POSITION)
         } else {
             this.transitionTo(this.DOWN_POSITION)
+            this.handleOnDismiss()
         }
     }
+
     public render() {
         const { children } = this.props
         const { active } = this.state
@@ -120,6 +131,7 @@ export class BottomDrawer extends React.Component<Props, State> {
             </View >
         )
     }
+
     private HandleOnToggle = () => {
         const { active } = this.state
         if (active) {
@@ -128,9 +140,11 @@ export class BottomDrawer extends React.Component<Props, State> {
             this.transitionTo(this.DOWN_POSITION)
         }
     }
+
     private swipeInBounds(gesture: PanResponderGestureState) {
         return this.state.currentPosition + gesture.dy > this.UP_POSITION
     }
+
     private transitionTo(position: number) {
         Animated.spring(this.animatedPosition, {
             toValue: position,
@@ -138,12 +152,14 @@ export class BottomDrawer extends React.Component<Props, State> {
         }).start()
         this.setState({ currentPosition: position })
     }
+
     private handleOnDismiss = () => {
         const { onDismiss } = this.props
         const { active } = this.state
         this.setState({ active: !active })
         onDismiss()
     }
+
 }
 const styles = StyleSheet.create({
     animationContainer: {
@@ -163,7 +179,6 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
 
         elevation: 5,
-
     },
     swiper: {
         backgroundColor: 'rgba(255,255,255,0.8)',
