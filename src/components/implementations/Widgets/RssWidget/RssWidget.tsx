@@ -1,5 +1,4 @@
 import React from 'react'
-import * as rssParser from 'react-native-rss-parser';
 import { View, ActivityIndicator, StyleProp, StyleSheet } from 'react-native';
 import { RssItem, RssResponse } from 'src/services/Rss';
 import { RssWidgetItem } from './RssWidgetItem';

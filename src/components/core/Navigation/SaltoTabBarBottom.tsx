@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, Platform, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { NavigationScreenProps, NavigationRoute, NavigationState } from 'react-navigation'
 import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
@@ -52,7 +52,7 @@ export const SaltoTabBarBottom = withThemeContext(
         }
 
         private getIcon(route: NavigationRoute<{}>) {
-            const prefix = Platform.OS === 'ios' ? 'ios' : 'md'
+            const prefix = 'ios'
             const navIcons = {
                 HomeScreen: `${prefix}-home`,
                 OnDemandVideo: `${prefix}-tv`,
