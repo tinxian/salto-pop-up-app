@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { LocalizationProvider, initializeLocalization } from './services/LocalizationService'
 
 import {
     createAppContainer,
@@ -26,11 +25,9 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
                 <AppNotificationManager />
                 <ThemeProvider>
                     <VideosProvider>
-                        <LocalizationProvider initialize={initializeLocalization}>
-                            <RootNavigator
-                                navigation={this.props.navigation}
-                            />
-                        </LocalizationProvider>
+                        <RootNavigator
+                            navigation={this.props.navigation}
+                        />
                     </VideosProvider>
                 </ThemeProvider>
             </View>

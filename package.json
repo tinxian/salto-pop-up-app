@@ -6,8 +6,6 @@
     "start": "itermocil",
     "start-metro": "node node_modules/react-native/local-cli/cli.js start",
     "rename": "node node_modules/react-native-rename/lib/index.js --",
-    "translations": "node bin/generateTranslationTypeFiles.js",
-    "translations-watch": "nodemon --watch ./src/services/i18n -e json --exec yarn translations || exit 1",
     "test": "jest",
     "tsc": "tsc",
     "clean": "rimraf artifacts",
