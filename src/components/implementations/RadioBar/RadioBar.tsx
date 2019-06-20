@@ -118,8 +118,6 @@ export class RadioBar extends React.Component<Props, State> {
             return programData.title
         }
 
-        console.log(programData.music)
-
         return `${programData.music.title} ${programData.music.artist ? ` - ${this.getArtist(programData.music.artist)}` : ''}`
     }
 
