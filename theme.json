@@ -4,7 +4,7 @@
         "NavigationIconsColor": "#000000",
         "NavigationIconsActiveColor": "#f98ebb",
         "RadioPlayerControlsColor": "#f98ebb",
-        "RadioPlayerBackgroundColor": "#c2c2c2",
+        "RadioPlayerBackgroundColor": "#fdddea",
         "BottomDrawerColor": "#ffffff",
         "ButtonColor": "#f98ebb",
         "ButtonTextColor": "#ffffff",
@@ -38,12 +38,12 @@
     },
     "links": [
         {
-            "title": "Straat feesten",
+            "title": "StraatFeesten",
             "link": "https://pride.amsterdam/events/streetparties-2019/",
             "logo": "boat"
         },
         {
-            "title": "Bezoekers informatie",
+            "title": "Bezoekersinformatie",
             "link": "https://pride.amsterdam/algemene-bezoekers-informatie/",
             "logo": "people"
         },
@@ -106,7 +106,7 @@
     ],
     "content": {
         "App": {
-            "startDate": "Sat jun 27 2019 00:00:00 GMT+0200 (CEST)",
+            "startDate": "Sat jul 27 2019 00:00:00 GMT+0200 (CEST)",
             "endDate": " Sun Aug 04 2019 00:00:00 GMT+0200 (CEST)"
         },
         "general": {
@@ -124,7 +124,7 @@
                     "fontSize": "medium"
                 }
             ],
-            "RadioName": "PrideFM",
+            "RadioName": "Pride FM",
             "videosIntroduction": "Bekijk hier de videos van het evenement Pride 2019",
             "livestreamIntroduction": "Bekijk de Pride TV Livestream",
             "AppIntroduction": "Van 27 juli t/m 4 augustus gaat SALTO op roze met Pride TV en Pride FM."

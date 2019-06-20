@@ -17,7 +17,7 @@ export class Button extends React.Component<Props, {}> {
         return (
             <TouchableOpacity  {...this.props} >
                 <View style={this.getStyles()}>
-                    <Paragraph color={theme.colors.ButtonTextColor}>Luister naar PrideFM</Paragraph>
+                    <Paragraph color={theme.colors.ButtonTextColor}>Luister naar {theme.content.general.RadioName}</Paragraph>
                 </View>
             </TouchableOpacity >
         )

@@ -29,7 +29,7 @@ export const widgets: WidgetType[] = [
     },
     {
         id: '4',
-        title: 'Pride news',
+        title: 'Pride Nieuws',
         icon: 'logo-rss',
         element: <RssWidget />,
     },

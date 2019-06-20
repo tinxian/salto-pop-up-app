@@ -32,8 +32,8 @@ export class FMWidget extends React.Component<Props & PassedWidgetProps, State> 
                     theme={themeContext.theme}
                     onPress={() => this.handleButtonClick()}
                 >
-                    Luister naar PrideFM
-                    </Button>
+                    Luister naar {themeContext.theme.content.general.RadioName}
+                </Button>
             </View>
         )
     }
