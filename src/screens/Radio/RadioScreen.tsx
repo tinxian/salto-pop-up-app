@@ -6,13 +6,13 @@ import { Paragraph } from 'src/components/core/Typography/Paragraph';
 import { SubTitle } from 'src/components/core/Typography/SubTitle';
 import { Title } from 'src/components/core/Typography/Title';
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { LiveStreamDataType } from 'src/services/media';
+import { LiveStreamDataType, Media } from 'src/services/media';
 import { getIcon } from 'src/utils/icons';
 
 interface Props {
     uri?: string,
     active: boolean
-    onToggleRadio: () => void
+    onToggleRadio?: (active: boolean) => void
     programData?: LiveStreamDataType
 }
 
@@ -25,7 +25,7 @@ export const RadioScreen = withThemeContext(
     class RadioScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public state: State = {
             loading: true,
-            active: false,
+            active: this.props.active,
         }
 
         public player: Video | null
@@ -36,7 +36,6 @@ export const RadioScreen = withThemeContext(
 
         public render() {
             const { programData } = this.props
-
             if (!programData) {
                 return (
                     <View style={this.getStyles()}>
@@ -63,15 +62,15 @@ export const RadioScreen = withThemeContext(
         }
 
         private renderControls() {
-            const { loading } = this.state
-            const { themeContext, active, onToggleRadio } = this.props
+            const { loading, active } = this.state
+            const { themeContext } = this.props
 
             if (loading) {
                 return <ActivityIndicator />
             }
 
             return (
-                <TouchableWithoutFeedback onPress={() => onToggleRadio()}>
+                <TouchableWithoutFeedback onPress={this.handleControlsPress}>
                     <View style={this.getControlStyles()}>
                         <Icon
                             style={{ marginLeft: 2, marginTop: 2 }}
@@ -122,16 +121,39 @@ export const RadioScreen = withThemeContext(
                             {programData.music.title}
                         </Paragraph>
                     )}
-                    {programData.music.artists && programData.music.artists.map((item, key) => (
-                        <SubTitle
-                            key={key}
-                            color={colors.SubTitleColor}
-                        >
-                            {item}
-                        </SubTitle>
-                    ))}
+                    {this.renderArtists(programData.music.artists)}
                 </View>
             )
+        }
+
+        private renderArtists(artists?: string[]) {
+            const { colors } = this.props.themeContext.theme
+
+            if (!artists) {
+                return null
+            }
+
+            return artists && artists.map((item, key) => (
+                <SubTitle
+                    key={key}
+                    color={colors.SubTitleColor}
+                >
+                    {item}
+                </SubTitle>
+            ))
+        }
+
+        private handleControlsPress = () => {
+            const { active } = this.state
+
+            if (active) {
+                this.setState({ active: false })
+                Media.stopOtherMedia()
+            } else {
+                this.setState({ active: true })
+                Media.startRadio()
+            }
+
         }
 
         private getControlStyles() {

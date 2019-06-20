@@ -62,8 +62,6 @@ export class Videos {
 
             return result.data.episodes
         } catch (err) {
-            console.log(err)
-
             return []
         }
     }
