@@ -6,7 +6,7 @@ import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
 import { TrackPlayerControls } from 'src/components/implementations/TrackPlayer/TrackPlayer';
 
 export interface MusicDataType {
-    artists?: string[]
+    artist?: string[]
     title?: string
 }
 

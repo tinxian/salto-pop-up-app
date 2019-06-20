@@ -62,7 +62,7 @@ export class TrackPlayerControls extends React.Component<Props, State> {
 
         return {
             title: programData.music.title ? programData.music.title : theme.content.general.RadioName,
-            artist: programData.music.artists ? this.getArtist(programData.music.artists) : '',
+            artist: programData.music.artist ? this.getArtist(programData.music.artist) : '',
         }
     }
 
@@ -154,8 +154,8 @@ export class TrackPlayerControls extends React.Component<Props, State> {
         })
     }
 
-    private getArtist(artists: string[]) {
-        return artists.join(', ')
+    private getArtist(artist: string[]) {
+        return artist.join(', ')
     }
 
     private initializeDispatchers() {
