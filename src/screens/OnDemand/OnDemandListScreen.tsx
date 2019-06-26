@@ -52,7 +52,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
             return (
                 <FlatList
                     ListHeaderComponent={() => (
-                        <React.Fragment>
+                        <View style={this.getHeaderStyles()}>
                             {this.renderPinnedMedia()}
                             <View style={styles.videoDescription}>
                                 <ExpandableTitleContainer
@@ -68,7 +68,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                             </View>
 
                             {this.renderLoading()}
-                        </React.Fragment>
+                        </View>
                     )}
                     ListEmptyComponent={() => (
                         <EmptyComponent
@@ -154,10 +154,22 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
 
         }
 
+        private getHeaderStyles() {
+            const { colors } = this.props.themeContext.theme
+            return [
+                {
+                    backgroundColor: colors.PageBackgroundColor
+                },
+                styles.header
+            ]
+        }
+
         private getWrapperStyles() {
             const { PageBackgroundColor } = this.props.themeContext.theme.colors
             return [
-                { backgroundColor: PageBackgroundColor },
+                {
+                    backgroundColor: PageBackgroundColor,
+                },
                 styles.content,
             ]
         }
@@ -197,9 +209,13 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
 
     },
+    header: {
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
+    },
     content: {
-        minHeight: Dimensions.get('screen').height,
-        borderRadius: 25,
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25,
         marginTop: 72,
         paddingBottom: 100,
     },

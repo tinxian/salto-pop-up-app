@@ -106,10 +106,11 @@ export class OnDemandVideoItem extends React.Component<Props, State> {
     }
 
     private getStyles() {
-        const { style } = this.props
+        const { style, theme } = this.props
 
         return [
             styles.container,
+            { backgroundColor: theme.colors.PageBackgroundColor },
             style,
         ]
     }
