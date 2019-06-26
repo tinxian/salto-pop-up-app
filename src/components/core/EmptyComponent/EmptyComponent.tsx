@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { StyleProp, StyleSheet, View, TouchableOpacity } from 'react-native'
-import { SubTitle } from '../Typography/SubTitle'
 import { Paragraph } from '../Typography/Paragraph'
 import { ThemeType } from 'src/services/theme'
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -9,7 +8,7 @@ import { getIcon } from 'src/utils/icons'
 interface Props {
     style?: StyleProp<{}>,
     theme: ThemeType
-    onPress: () => void
+    onPress?: () => void
 }
 
 export class EmptyComponent extends React.Component<Props, {}> {
@@ -24,7 +23,6 @@ export class EmptyComponent extends React.Component<Props, {}> {
                         size={40}
                     />
                     <Paragraph color={theme.colors.TextColor} >Deze lijst lijkt leeg te zijn</Paragraph>
-                    <SubTitle color={theme.colors.SubTitleColor} >Klik nog een keer om opnieuw te proberen </SubTitle>
                 </View>
             </TouchableOpacity>
         )

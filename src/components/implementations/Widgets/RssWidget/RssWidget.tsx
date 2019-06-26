@@ -5,6 +5,8 @@ import { RssWidgetItem } from './RssWidgetItem';
 import { PassedWidgetProps } from 'src/screens/Home/widgets';
 import { openPlatformSpecificWebViews } from 'src/services/Browser';
 import Config from 'react-native-config';
+import { format } from 'date-fns';
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
 
 interface Props {
     style?: StyleProp<{}>
@@ -25,11 +27,13 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
 
     public async componentDidMount() {
         try {
+            const { startDate } = this.props.themeContext.theme.content.App
             const response = await fetch(Config.RSS_FEED_URL)
             const responseData: RssResponse = await response.json()
+            const filteredItems = responseData.items.filter(item => format(item.date, 'YYYYY') === format(startDate, 'YYYYY'))
 
             this.setState({
-                rssData: responseData.items,
+                rssData: filteredItems,
                 loading: false,
             })
         } catch (err) {
@@ -53,6 +57,14 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
 
         if (loading) {
             return <ActivityIndicator />
+        }
+
+        if (!rssData.length) {
+            return (
+                <EmptyComponent
+                    theme={themeContext.theme}
+                />
+            )
         }
 
         return rssData.map((item, index) => (
