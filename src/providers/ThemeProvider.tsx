@@ -22,9 +22,7 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
         try {
             if (!USE_LOCAL_DEVELOPMENT_MODE) {
                 await this.setCachedThemeToState()
-                setInterval(async () => {
-                    await this.setExternalThemeToState()
-                }, 86400000)
+                await this.setExternalThemeToState()
                 await this.setThemeToCache()
             }
         } catch (error) {
