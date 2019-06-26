@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus, Platform } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import VideoPlayer from 'react-native-video-controls'
+
 import { EpisodeType } from 'src/services/videos'
 import { Title } from 'src/components/core/Typography/Title'
-import Video from 'react-native-video'
 import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer';
 import Share from 'react-native-share';
 import { Media } from 'src/services/media';
@@ -20,6 +19,7 @@ import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponen
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
 import { AnalyticsData } from 'src/services/Analytics';
 import { getMillisecondsInMinutes } from 'src/utils/date';
+import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer';
 
 interface Params {
     item: EpisodeType,
@@ -49,18 +49,16 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             paused: false,
         }
 
-        public player: Video | null
+        public player: VideoPlayer | null
 
         public componentDidMount() {
             AppState.addEventListener('change', this.handleAppStateChange);
             AnalyticsData.trackScreen('Ondemand video screen')
             Media.stopOtherMedia()
-            StatusBar.setHidden(true, 'fade')
         }
 
         public componentWillUnmount() {
             AppState.removeEventListener('change', this.handleAppStateChange);
-            StatusBar.setHidden(false, 'fade')
         }
 
         public render() {
@@ -73,14 +71,14 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
-                        disableAnimation={Platform.OS === 'android'}
+                        disableAnimation={false}
                         expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
                             style={{ flex: 1, overflow: 'hidden' }}
-                            ref={(ref: Video) => this.player = ref}
+                            ref={(ref: VideoPlayer) => this.player = ref}
                             source={{ uri: item.streams.mp4 }}
                             playInBackground={false}
                             paused={this.state.paused}

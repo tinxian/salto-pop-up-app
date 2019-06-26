@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator, Platform } from 'react-native'
+import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
-import VideoPlayer from 'react-native-video-controls'
-import Video from 'react-native-video'
 import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
 import Share from 'react-native-share'
 import { Media, LiveStreamDataType } from 'src/services/media'
@@ -17,6 +15,7 @@ import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Videos, ScheduleType } from 'src/services/videos'
 import { InformationList } from 'src/components/core/List/InformationList'
 import { AnalyticsData } from 'src/services/Analytics';
+import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer';
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -43,7 +42,7 @@ export const LivestreamVideoScreen = withThemeContext(
             schedule: [],
         }
 
-        public player: Video | null
+        public player: VideoPlayer | null
         private socket: any
 
         public async componentDidMount() {
@@ -76,14 +75,14 @@ export const LivestreamVideoScreen = withThemeContext(
                 <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
-                        disableAnimation={Platform.OS === 'android'}
+                        disableAnimation={false}
                         expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}
                     >
                         <VideoPlayer
                             style={{ width: '100%', height: '100%', overflow: 'hidden' }}
-                            ref={(ref: Video) => this.player = ref}
+                            ref={(ref: VideoPlayer) => this.player = ref}
                             source={{ uri: Videos.getLivestreamUrl() }}
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenToggle}

@@ -14,23 +14,27 @@ export interface WidgetType {
 
 export type PassedWidgetProps = ThemeInjectedProps & NavigationScreenProps
 
+const props: any = {
+
+}
+
 export const widgets: WidgetType[] = [
     {
         id: '1',
         title: 'Pride FM',
         icon: 'radio',
-        element: <FMWidget />,
+        element: <FMWidget {...props} />,
     },
     {
         id: '3',
         title: 'Pride TV',
         icon: 'videocam',
-        element: <TVWidget />,
+        element: <TVWidget {...props} />,
     },
     {
         id: '4',
         title: 'Pride Nieuws',
         icon: 'logo-rss',
-        element: <RssWidget />,
+        element: <RssWidget {...props} />,
     },
 ]

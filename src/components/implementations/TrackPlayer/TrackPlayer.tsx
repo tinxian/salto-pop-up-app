@@ -39,15 +39,15 @@ export class TrackPlayerControls extends React.Component<Props, State> {
     }
 
     public setTrackPlayer = (programData: LiveStreamDataType) => {
-        const TrackData = this.getTrackData(programData)
+        // const TrackData = this.getTrackData(programData)
 
-        TrackPlayer.add({
-            id: 'trackId',
-            url: Config.RADIO_URL,
-            title: TrackData.title,
-            artist: TrackData.artist,
-            artwork: this.getNowPlayingLogo(),
-        });
+        // TrackPlayer.add({
+        //     id: 'trackId',
+        //     url: Config.RADIO_URL,
+        //     title: TrackData.title,
+        //     artist: TrackData.artist,
+        //     artwork: this.getNowPlayingLogo(),
+        // });
     }
 
     public getTrackData(programData: LiveStreamDataType) {
@@ -135,6 +135,8 @@ export class TrackPlayerControls extends React.Component<Props, State> {
     }
 
     private initializeTrackPlayer() {
+        const { programData, theme } = this.props
+
         TrackPlayer.updateOptions({
             capabilities: [
                 TrackPlayer.CAPABILITY_PLAY,
@@ -147,8 +149,8 @@ export class TrackPlayerControls extends React.Component<Props, State> {
             await TrackPlayer.add({
                 id: 'trackId',
                 url: Config.RADIO_URL,
-                title: 'title',
-                artist: 'artist',
+                title: programData ? programData.title : theme.content.general.RadioName,
+                artist: '',
                 artwork: this.getNowPlayingLogo(),
             });
         })
