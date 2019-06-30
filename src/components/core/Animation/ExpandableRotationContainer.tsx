@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleProp, Animated, Dimensions, Platform } from 'react-native'
+import { StyleProp, Animated, Dimensions, Platform, View } from 'react-native'
 import Orientation from 'react-native-orientation'
 
 interface Props {
@@ -35,22 +35,32 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     }
 
     public componentDidMount() {
-        Orientation.addSpecificOrientationListener(this.orientationDidChange);
+        Orientation.addSpecificOrientationListener(this.orientationDidChange)
     }
 
     public componentWillUnmount() {
         Orientation.removeSpecificOrientationListener(this.orientationDidChange)
+        Orientation.lockToPortrait()
     }
 
     public render() {
         const { children } = this.props
+
+        if (Platform.OS === 'ios') {
+            return (
+                <Animated.View style={this.getOuterContainerStyles()}>
+                    <Animated.View style={this.getRotationContainerStyles()}>
+                        <Animated.View style={this.getInnerContainerViewStyles()}>
+                            {children}
+                        </Animated.View >
+                    </Animated.View>
+                </Animated.View>
+            )
+        }
         return (
             <Animated.View style={this.getOuterContainerStyles()}>
-                <Animated.View style={this.getRotationContainerStyles()}>
-                    <Animated.View style={this.getInnerContainerViewStyles()}>
-                        {children}
-                    </Animated.View >
-                </Animated.View>
+
+                {children}
             </Animated.View>
         )
     }
@@ -76,6 +86,10 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
         const { heightAnim } = this.state
         const { disableAnimation } = this.props
 
+        if (Platform.OS === 'android') {
+            Orientation.lockToLandscape()
+        }
+
         if (disableAnimation) {
             this.setState({ heightAnim: new Animated.Value(1) })
             return
@@ -93,6 +107,10 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     private animateOut() {
         const { disableAnimation } = this.props
         const { heightAnim } = this.state
+
+        if (Platform.OS === 'android') {
+            Orientation.lockToPortrait()
+        }
 
         if (disableAnimation) {
             this.setState({ heightAnim: new Animated.Value(0) })
@@ -138,7 +156,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
 
         const rotateInterpolation = heightAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: ['0deg', nextRotation]
+            outputRange: ['0deg', nextRotation],
         })
 
         return [
@@ -146,7 +164,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
                 height: heightInterpolation,
                 transform: [
                     { rotate: rotateInterpolation },
-                ]
+                ],
             },
         ]
     }
@@ -178,7 +196,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
                 height: heightInterpolation,
                 width: widthInterpolation,
             },
-            nextRotation === '-90deg' && { left: offsetInterpolation }
+            nextRotation === '-90deg' && { left: offsetInterpolation },
         ]
 
     }
