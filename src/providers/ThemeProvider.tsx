@@ -23,7 +23,6 @@ export class ThemeProvider extends React.Component<Props, ThemeContextType> {
     }
 
     public async componentDidMount() {
-        console.log(theme)
         try {
             if (!USE_LOCAL_DEVELOPMENT_MODE) {
                 await this.setCachedThemeToState()

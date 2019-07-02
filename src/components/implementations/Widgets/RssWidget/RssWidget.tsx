@@ -5,6 +5,7 @@ import { RssWidgetItem } from './RssWidgetItem'
 import { PassedWidgetProps } from 'src/screens/Home/widgets'
 import { openPlatformSpecificWebViews } from 'src/services/Browser'
 import { format } from 'date-fns'
+import { WidgetView } from 'src/components/core/Widgets/WidgetView'
 
 interface Props {
     style?: StyleProp<{}>
@@ -41,21 +42,28 @@ export class RssWidget extends React.Component<Props & PassedWidgetProps, State>
     }
 
     public render() {
+        const { themeContext, widget } = this.props
+        const { rssData } = this.state
+
+        if (rssData.length === 0) {
+            return null
+        }
 
         return (
-            <View style={this.getStyles()}>
-                {this.renderList()}
-            </View>
+            <WidgetView
+                themeContext={themeContext}
+                widget={widget}
+            >
+                <View style={this.getStyles()}>
+                    {this.renderList()}
+                </View>
+            </WidgetView>
         )
     }
 
     public renderList() {
         const { themeContext } = this.props
         const { loading, rssData } = this.state
-
-        if (!rssData.length) {
-            return null
-        }
 
         if (loading) {
             return <ActivityIndicator />

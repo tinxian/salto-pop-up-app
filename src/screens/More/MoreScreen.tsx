@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { Dimensions, FlatList, Image, Linking, StatusBar, StyleProp, StyleSheet, TouchableHighlight, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationScreenProps } from 'react-navigation';
-import { PageHeader } from 'src/components/core/Header/PageHeader';
-import { Logo } from 'src/components/core/Logo/Logo';
-import { Title } from 'src/components/core/Typography/Title';
-import { EventMetaWidget } from 'src/components/implementations/Widgets/EventMetaWidget/EventMetaWidget';
-import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { AnalyticsData } from 'src/services/Analytics';
-import { openPlatformSpecificWebViews } from 'src/services/Browser';
-import { LinkType } from 'src/services/theme';
-import { getIcon } from 'src/utils/icons';
+import * as React from 'react'
+import { Dimensions, FlatList, Image, Linking, StatusBar, StyleProp, StyleSheet, TouchableHighlight, View } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { NavigationScreenProps } from 'react-navigation'
+import { PageHeader } from 'src/components/core/Header/PageHeader'
+import { Logo } from 'src/components/core/Logo/Logo'
+import { Title } from 'src/components/core/Typography/Title'
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
+import { AnalyticsData } from 'src/services/Analytics'
+import { openPlatformSpecificWebViews } from 'src/services/Browser'
+import { LinkType } from 'src/services/theme'
+import { getIcon } from 'src/utils/icons'
+import { EventMetaWidget } from 'src/components/implementations/Widgets/EventMetaWidget/EventMetaWidget'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>

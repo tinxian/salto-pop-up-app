@@ -4,7 +4,7 @@ import { NavigationScreenProps } from 'react-navigation'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
 import { PageHeader } from 'src/components/core/Header/PageHeader'
 import { Logo } from 'src/components/core/Logo/Logo'
-import { WidgetView } from 'src/components/core/Widgets/WidgetView'
+import { WidgetContainer } from 'src/components/core/Widgets/WidgetContainer'
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
 import { VideosInjectedProps } from 'src/providers/VideosProvider'
 import { AnalyticsData } from 'src/services/Analytics'
@@ -85,13 +85,13 @@ export const HomeScreen = withThemeContext(
             const { navigation } = this.props
 
             return (
-                <WidgetView
+                <WidgetContainer
                     themeContext={themeContext}
                     widget={widget}
                     navigation={navigation}
                 >
                     {widget.element}
-                </WidgetView>
+                </WidgetContainer>
             )
         }
 

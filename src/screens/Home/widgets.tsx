@@ -12,7 +12,7 @@ export interface WidgetType {
     element: JSX.Element
 }
 
-export type PassedWidgetProps = ThemeInjectedProps & NavigationScreenProps
+export type PassedWidgetProps = ThemeInjectedProps & NavigationScreenProps & { widget: WidgetType }
 
 const props: any = {
 

@@ -1,13 +1,12 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View } from 'react-native';
-import { Title } from 'src/components/core/Typography/Title';
-import { ThemeContextType } from 'src/services/theme';
-import { NavigationScreenProps } from 'react-navigation';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { getIcon } from 'src/utils/icons';
-import { WidgetType } from 'src/screens/Home/widgets';
+import * as React from 'react'
+import { StyleProp, StyleSheet, View } from 'react-native'
+import { Title } from 'src/components/core/Typography/Title'
+import { ThemeContextType } from 'src/services/theme'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { getIcon } from 'src/utils/icons'
+import { WidgetType } from 'src/screens/Home/widgets'
 
-interface Props extends NavigationScreenProps {
+interface Props {
     style?: StyleProp<{}>
     themeContext: ThemeContextType
     widget: WidgetType
@@ -20,11 +19,7 @@ interface State {
 export class WidgetView extends React.Component<Props, State> {
 
     public render() {
-        const { widget, themeContext, children, navigation } = this.props
-
-        const childrenWithProps = React.Children.map(children, child =>
-            React.cloneElement((child as JSX.Element), { themeContext, navigation })
-        );
+        const { widget, themeContext, children } = this.props
 
         return (
             <View style={this.getStyles()}>
@@ -43,8 +38,7 @@ export class WidgetView extends React.Component<Props, State> {
                         </Title>
                     </View>
                 )}
-
-                {childrenWithProps}
+                {children}
             </View>
         )
     }
@@ -65,7 +59,7 @@ const styles = StyleSheet.create({
         paddingVertical: 12,
         borderRadius: 16,
         width: '100%',
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 1,
@@ -82,5 +76,5 @@ const styles = StyleSheet.create({
     title: {
         marginLeft: 12,
         marginBottom: 2,
-    }
+    },
 })

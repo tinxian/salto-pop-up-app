@@ -1,33 +1,30 @@
-import * as React from 'react';
-import { StyleProp, StyleSheet, View } from 'react-native';
-import { Label } from 'src/components/core/Label/Label';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { LiveStreamDataType } from 'src/services/media';
-import { getEventMessage } from 'src/utils/date';
-import { ThemeInjectedProps } from 'src/providers/ThemeProvider';
-
+import * as React from 'react'
+import { StyleProp, StyleSheet, View } from 'react-native'
+import { Label } from 'src/components/core/Label/Label'
+import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { ThemeContextType } from 'src/services/theme'
+import { getEventMessage } from 'src/utils/date'
 
 interface Props {
     style?: StyleProp<{}>
+    themeContext: ThemeContextType
 }
 
 interface State {
     loading: boolean
     active: boolean
-    programData?: LiveStreamDataType
 }
 
-
-export class EventMetaWidget extends React.Component<Props & ThemeInjectedProps, State> {
+export class EventMetaWidget extends React.Component<Props, State> {
 
     public state: State = {
         loading: false,
         active: false,
-        programData: undefined,
     }
 
     public render() {
-        const { theme } = this.props.themeContext
+        const { themeContext } = this.props
+        const { theme } = themeContext
 
         return (
             <View style={this.getStyles()}>
