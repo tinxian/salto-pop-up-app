@@ -2,16 +2,20 @@ import React, { Context } from 'react'
 import theme from '../../theme.json'
 import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js'
 import axios from 'axios'
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'
 
 export const ThemeContext: Context<ThemeContextType> = React.createContext({
     theme,
     setThemeState: () => 'Context not set',
 })
 
-const USE_LOCAL_DEVELOPMENT_MODE = false
+interface Props {
+    children: (state: ThemeContextType) => JSX.Element
+}
 
-export class ThemeProvider extends React.Component<{}, ThemeContextType> {
+const USE_LOCAL_DEVELOPMENT_MODE = true
+
+export class ThemeProvider extends React.Component<Props, ThemeContextType> {
 
     public state: ThemeContextType = {
         theme,
@@ -19,6 +23,7 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
     }
 
     public async componentDidMount() {
+        console.log(theme)
         try {
             if (!USE_LOCAL_DEVELOPMENT_MODE) {
                 await this.setCachedThemeToState()
@@ -37,7 +42,7 @@ export class ThemeProvider extends React.Component<{}, ThemeContextType> {
             <ThemeContext.Provider
                 value={this.state}
             >
-                {children}
+                {children(this.state)}
             </ThemeContext.Provider>
         )
     }

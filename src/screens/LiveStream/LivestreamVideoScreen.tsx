@@ -12,10 +12,10 @@ import { getIcon, PlatformIconType } from 'src/utils/icons'
 import { format } from 'date-fns'
 import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
-import { Videos, ScheduleType } from 'src/services/videos'
+import { ScheduleType } from 'src/services/videos'
 import { InformationList } from 'src/components/core/List/InformationList'
-import { AnalyticsData } from 'src/services/Analytics';
-import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer';
+import { AnalyticsData } from 'src/services/Analytics'
+import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -46,19 +46,19 @@ export const LivestreamVideoScreen = withThemeContext(
         private socket: any
 
         public async componentDidMount() {
+            const { channels } = this.props.themeContext.theme.content
             AnalyticsData.trackScreen('Livestream video screen')
             Media.stopOtherMedia()
             StatusBar.setHidden(true, 'fade')
             this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-            this.socket.emit('join', { channel: Videos.getLivestreamChannelName() })// emits 'hi server' to your server
+            this.socket.emit('join', { channel: channels.LivestreamChannelName })
 
             // Listens to channel2 and display the data recieved
             this.socket.on('update', (data: LiveStreamDataType) => {
                 this.setState({ programData: data, loadingDetail: false })
             })
 
-            const schedule = await Media.getScheduleByChannel(Videos.getLivestreamChannelName())
-
+            const schedule = await Media.getScheduleByChannel(channels.LivestreamChannelName)
 
             this.setState({ schedule, loadingInformationList: false })
         }
@@ -83,7 +83,7 @@ export const LivestreamVideoScreen = withThemeContext(
                         <VideoPlayer
                             style={{ width: '100%', height: '100%', overflow: 'hidden' }}
                             ref={(ref: VideoPlayer) => this.player = ref}
-                            source={{ uri: Videos.getLivestreamUrl() }}
+                            source={{ uri: themeContext.theme.content.urls.LivestreamUrl }}
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenToggle}
                             onExitFullscreen={this.handleFullScreenToggle}

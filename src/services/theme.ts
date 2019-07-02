@@ -1,6 +1,6 @@
-import { ImageSourcePropType } from "react-native";
-import Config from "react-native-config";
-import { TitleSizeType } from "src/components/core/Typography/Title";
+import { ImageSourcePropType } from 'react-native'
+import Config from 'react-native-config'
+import { TitleSizeType } from 'src/components/core/Typography/Title'
 
 export interface ColorsType {
     NavigationBackgroundColor: string
@@ -44,7 +44,21 @@ export interface LinkType {
 export interface GeneralContentType {
     App: AppType
     general: ContentType
+    urls: ThemeUrlsType
+    channels: ThemeChannelsType
     OtherEvents: OtherEventType[]
+}
+
+interface ThemeUrlsType {
+    LivestreamUrl: string,
+    RadioUrl: string,
+    RssFeedUrl: string
+}
+
+interface ThemeChannelsType {
+    VideosChannelName: string,
+    RadioChannelName: string,
+    LivestreamChannelName: string
 }
 
 export interface AppType {
@@ -68,7 +82,6 @@ export interface HeaderTitleType {
     title: string
 }
 
-
 export interface OtherEventType {
     title: string
     subtitle: string
@@ -88,7 +101,6 @@ export interface ThemeContextType {
     theme: ThemeType
     setThemeState: (values: ThemeType) => void
 }
-
 
 export class Theme {
     public static getExternalTheme() {

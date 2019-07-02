@@ -3,13 +3,13 @@ import { View, StyleSheet, StyleProp, TouchableOpacity } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
 import SocketIOClient from 'socket.io-client'
-import { LiveStreamDataType, Media } from 'src/services/media'
+import { LiveStreamDataType } from 'src/services/media'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { BottomDrawerManager } from 'src/components/core/BottomDrawerManager/BottomDrawerManager'
 import { RadioScreen } from 'src/screens/Radio/RadioScreen'
-import { ThemeType } from 'src/services/theme';
-import { Dispatcher } from 'src/utils/Dispatcher';
-import { TrackPlayerControls } from '../TrackPlayer/TrackPlayer';
+import { ThemeType } from 'src/services/theme'
+import { Dispatcher } from 'src/utils/Dispatcher'
+import { TrackPlayerControls } from '../TrackPlayer/TrackPlayer'
 
 interface Props {
     style?: StyleProp<{}>
@@ -123,7 +123,8 @@ export class RadioBar extends React.Component<Props, State> {
 
     private async initializeLiveData() {
         this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-        this.socket.emit('join', { channel: Media.getRadioChannelName() })
+        console.log(this.props.theme.content.channels.RadioChannelName)
+        this.socket.emit('join', { channel: this.props.theme.content.channels.RadioChannelName })
 
         this.socket.on('update', (programData: LiveStreamDataType) => {
             this.setState({ programData })
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingRight: 22,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,

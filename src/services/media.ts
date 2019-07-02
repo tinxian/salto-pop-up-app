@@ -1,9 +1,8 @@
-import { ScheduleResponseType } from './videos';
-import { format } from 'date-fns';
+import { ScheduleResponseType } from './videos'
+import { format } from 'date-fns'
 import axios, { AxiosResponse } from 'axios'
-import Config from 'react-native-config'
 import { RadioBar } from 'src/components/implementations/RadioBar/RadioBar'
-import { TrackPlayerControls } from 'src/components/implementations/TrackPlayer/TrackPlayer';
+import { TrackPlayerControls } from 'src/components/implementations/TrackPlayer/TrackPlayer'
 
 export interface MusicDataType {
     artist?: string[]
@@ -50,9 +49,5 @@ export class Media {
         } catch (err) {
             return []
         }
-    }
-
-    public static getRadioChannelName() {
-        return Config.RADIO_CHANNEL_NAME
     }
 }

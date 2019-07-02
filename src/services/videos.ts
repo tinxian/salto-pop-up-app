@@ -1,5 +1,4 @@
 import axios, { AxiosResponse } from 'axios'
-import Config from 'react-native-config'
 
 export interface EpisodeResponseType {
     episodes: EpisodeType[]
@@ -56,25 +55,13 @@ export interface EpisodeStreamType {
 }
 
 export class Videos {
-    public static async getAllVideos() {
+    public static async getAllVideosFromChannel(channel: string) {
         try {
-            const result: AxiosResponse<EpisodeResponseType> = await axios.get(`https://vod.salto.nl/data/ondemand/${Config.VIDEOS_CHANNEL_NAME}`)
+            const result: AxiosResponse<EpisodeResponseType> = await axios.get(`https://vod.salto.nl/data/ondemand/${channel}`)
 
             return result.data.episodes
         } catch (err) {
             return []
         }
     }
-    public static getLivestreamUrl() {
-        return Config.LIVESTREAM_URL
-    }
-
-    public static getVideosChannelName() {
-        return Config.VIDEOS_CHANNEL_NAME
-    }
-
-    public static getLivestreamChannelName() {
-        return Config.LIVESTREAM_CHANNEL_NAME
-    }
-
 }

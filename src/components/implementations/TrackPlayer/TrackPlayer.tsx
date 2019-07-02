@@ -4,9 +4,8 @@ import TrackPlayer from 'react-native-track-player'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { getIcon } from 'src/utils/icons'
 import { LiveStreamDataType } from 'src/services/media'
-import { ThemeType } from 'src/services/theme';
-import { Dispatcher } from 'src/utils/Dispatcher';
-import Config from "react-native-config";
+import { ThemeType } from 'src/services/theme'
+import { Dispatcher } from 'src/utils/Dispatcher'
 
 interface Props {
     style?: StyleProp<{}>
@@ -39,15 +38,7 @@ export class TrackPlayerControls extends React.Component<Props, State> {
     }
 
     public setTrackPlayer = (programData: LiveStreamDataType) => {
-        // const TrackData = this.getTrackData(programData)
 
-        // TrackPlayer.add({
-        //     id: 'trackId',
-        //     url: Config.RADIO_URL,
-        //     title: TrackData.title,
-        //     artist: TrackData.artist,
-        //     artwork: this.getNowPlayingLogo(),
-        // });
     }
 
     public getTrackData(programData: LiveStreamDataType) {
@@ -142,17 +133,17 @@ export class TrackPlayerControls extends React.Component<Props, State> {
                 TrackPlayer.CAPABILITY_PLAY,
                 TrackPlayer.CAPABILITY_PAUSE,
                 TrackPlayer.CAPABILITY_STOP,
-            ]
+            ],
         })
 
         TrackPlayer.setupPlayer().then(async () => {
             await TrackPlayer.add({
                 id: 'trackId',
-                url: Config.RADIO_URL,
+                url: this.props.theme.content.urls.RadioUrl,
                 title: programData ? programData.title : theme.content.general.RadioName,
                 artist: '',
                 artwork: this.getNowPlayingLogo(),
-            });
+            })
         })
     }
 
@@ -197,5 +188,5 @@ const styles = StyleSheet.create({
         height: 56,
         width: 100,
         position: 'absolute',
-    }
+    },
 })

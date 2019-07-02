@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleProp, Animated, Dimensions, Platform, View } from 'react-native'
+import { StyleProp, Animated, Dimensions, Platform } from 'react-native'
 import Orientation from 'react-native-orientation'
 
 interface Props {

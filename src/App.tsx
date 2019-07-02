@@ -24,11 +24,13 @@ export class AppProviders extends React.Component<{ navigation: NavigationScreen
             <View style={styles.container}>
                 <AppNotificationManager />
                 <ThemeProvider>
-                    <VideosProvider>
-                        <RootNavigator
-                            navigation={this.props.navigation}
-                        />
-                    </VideosProvider>
+                    {theme => (
+                        <VideosProvider theme={theme}>
+                            <RootNavigator
+                                navigation={this.props.navigation}
+                            />
+                        </VideosProvider>
+                    )}
                 </ThemeProvider>
             </View>
         )

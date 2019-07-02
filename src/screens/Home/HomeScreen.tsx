@@ -1,14 +1,14 @@
-import * as React from 'react';
-import { FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native';
-import { NavigationScreenProps } from 'react-navigation';
-import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
-import { PageHeader } from 'src/components/core/Header/PageHeader';
-import { Logo } from 'src/components/core/Logo/Logo';
-import { WidgetView } from 'src/components/core/Widgets/WidgetView';
-import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { VideosInjectedProps } from 'src/providers/VideosProvider';
-import { AnalyticsData } from 'src/services/Analytics';
-import { widgets, WidgetType } from './widgets';
+import * as React from 'react'
+import { FlatList, Image, ListRenderItemInfo, StatusBar, StyleProp, StyleSheet, View } from 'react-native'
+import { NavigationScreenProps } from 'react-navigation'
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
+import { PageHeader } from 'src/components/core/Header/PageHeader'
+import { Logo } from 'src/components/core/Logo/Logo'
+import { WidgetView } from 'src/components/core/Widgets/WidgetView'
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
+import { VideosInjectedProps } from 'src/providers/VideosProvider'
+import { AnalyticsData } from 'src/services/Analytics'
+import { widgets, WidgetType } from './widgets'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>

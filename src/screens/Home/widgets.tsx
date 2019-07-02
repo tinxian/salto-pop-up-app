@@ -1,9 +1,9 @@
-import React from "react";
-import { NavigationScreenProps } from "react-navigation";
-import { FMWidget } from "src/components/implementations/Widgets/FMWidget/FMWidget";
-import { RssWidget } from "src/components/implementations/Widgets/RssWidget/RssWidget";
-import { TVWidget } from "src/components/implementations/Widgets/TVWidget/TVWidget";
-import { ThemeInjectedProps } from "src/providers/ThemeProvider";
+import React from 'react'
+import { NavigationScreenProps } from 'react-navigation'
+import { FMWidget } from 'src/components/implementations/Widgets/FMWidget/FMWidget'
+import { RssWidget } from 'src/components/implementations/Widgets/RssWidget/RssWidget'
+import { TVWidget } from 'src/components/implementations/Widgets/TVWidget/TVWidget'
+import { ThemeInjectedProps } from 'src/providers/ThemeProvider'
 
 export interface WidgetType {
     id: string

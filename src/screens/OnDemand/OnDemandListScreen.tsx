@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar, Image, Dimensions } from 'react-native'
+import { View, StyleSheet, StyleProp, FlatList, ActivityIndicator, StatusBar, Image } from 'react-native'
 import { NavigationScreenProps } from 'react-navigation'
 
 import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
@@ -8,11 +8,11 @@ import { LivestreamItem } from 'src/components/implementations/LivestreamItem/Li
 import { isWithinRange } from 'date-fns'
 import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider'
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
-import { AnalyticsData } from 'src/services/Analytics';
-import { Logo } from 'src/components/core/Logo/Logo';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { TitleSizeType } from 'src/components/core/Typography/Title';
-import { ExpandableTitleContainer } from 'src/components/core/ExpandableTitleContainer/ExpandableTitleContainer';
+import { AnalyticsData } from 'src/services/Analytics'
+import { Logo } from 'src/components/core/Logo/Logo'
+import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { TitleSizeType } from 'src/components/core/Typography/Title'
+import { ExpandableTitleContainer } from 'src/components/core/ExpandableTitleContainer/ExpandableTitleContainer'
 
 interface Props extends NavigationScreenProps<{}> {
     style: StyleProp<{}>
@@ -87,7 +87,7 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
                         <OnDemandVideoItem
                             onPress={() => this.props.navigation.navigate('OnDemandVideoScreen', { item })}
                             poster={{ uri: item.poster }}
-                            style={{ paddingHorizontal: 12, }}
+                            style={{ paddingHorizontal: 12 }}
                             theme={theme}
                             title={item.title}
                             programName={item.programName}
@@ -158,9 +158,9 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
             const { colors } = this.props.themeContext.theme
             return [
                 {
-                    backgroundColor: colors.PageBackgroundColor
+                    backgroundColor: colors.PageBackgroundColor,
                 },
-                styles.header
+                styles.header,
             ]
         }
 
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     topContent: {
         paddingHorizontal: 12,
         paddingBottom: 12,
-        borderBottomColor: "#ccc",
+        borderBottomColor: '#ccc',
         borderBottomWidth: StyleSheet.hairlineWidth,
 
     },

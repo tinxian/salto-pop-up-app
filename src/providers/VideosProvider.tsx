@@ -1,5 +1,6 @@
 import React, { Context } from 'react'
-import { Videos, EpisodeType } from 'src/services/videos.js';
+import { Videos, EpisodeType } from 'src/services/videos.js'
+import { ThemeContextType } from 'src/services/theme'
 
 export interface VideosContextType {
     episodes: EpisodeType[]
@@ -13,7 +14,7 @@ export const VideosContext: Context<VideosContextType> = React.createContext({
     refresh: () => 'Context not set',
 })
 
-export class VideosProvider extends React.Component<{}, {}> {
+export class VideosProvider extends React.Component<{ theme: ThemeContextType }, {}> {
     public state: VideosContextType = {
         episodes: [],
         loading: true,
@@ -38,7 +39,7 @@ export class VideosProvider extends React.Component<{}, {}> {
 
     private async getVideos() {
         this.setState({ loading: true })
-        const episodes = await Videos.getAllVideos()
+        const episodes = await Videos.getAllVideosFromChannel(this.props.theme.theme.content.channels.VideosChannelName)
         this.setState({ episodes, loading: false })
         return true
     }
@@ -55,11 +56,9 @@ export function withVideosContext<Props>(Component: React.ComponentClass<VideosI
 
         public render() {
             return (
-
                 <VideosContext.Consumer>
                     {
-                        context => <Component {...this.props} videosContext={context} />
-                    }
+                        context => <Component {...this.props} videosContext={context} />}
                 </VideosContext.Consumer>
             )
         }
