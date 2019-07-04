@@ -34,11 +34,10 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-          new CustomTabsPackage(), new RNFirebasePackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new CustomTabsPackage(), new RNFirebasePackage(),
           new RNFirebaseAnalyticsPackage(), new TrackPlayer(), new OrientationPackage(), new VectorIconsPackage(),
-          new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(),
-          new SvgPackage(), new ReactNativeConfigPackage(), new SplashScreenReactPackage());
+          new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(), new SvgPackage(),
+          new ReactNativeConfigPackage(), new SplashScreenReactPackage());
     }
 
     @Override
