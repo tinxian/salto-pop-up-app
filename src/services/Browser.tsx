@@ -1,31 +1,29 @@
-import { Platform, Linking } from "react-native";
-import SafariView from "react-native-safari-view";
-import { CustomTabs } from "react-native-custom-tabs";
-import { debounce } from "lodash";
+import { Platform, Linking } from 'react-native'
+import InAppBrowser from 'react-native-inappbrowser-reborn'
+import { debounce } from 'lodash'
 
 export const openPlatformSpecificWebViews = debounce(
     (url: string) => {
-        if (Platform.OS === 'ios') {
-            SafariView.show({
-                url: url,
-                fromBottom: true,
-            })
-            return
-        }
+        if (InAppBrowser.isAvailable()) {
+            if (Platform.OS === 'ios') {
+                InAppBrowser.open(url, {
+                    dismissButtonStyle: 'cancel',
+                    readerMode: false,
 
-        if (Platform.OS === 'android') {
-            CustomTabs.openURL(url, {
-                enableUrlBarHiding: true,
-                showPageTitle: true,
-                enableDefaultShare: true,
-                animations: {
-                    startEnter: 'slide_in_bottom',
-                    startExit: 'slide_out_bottom',
-                    endEnter: 'slide_in_bottom',
-                    endExit: 'slide_out_bottom',
-                },
-            })
-            return
+                })
+                return
+            }
+
+            if (Platform.OS === 'android') {
+                InAppBrowser.open(url, {
+                    showTitle: true,
+                    secondaryToolbarColor: 'black',
+                    enableUrlBarHiding: true,
+                    enableDefaultShare: true,
+                    forceCloseOnRedirection: false,
+                })
+                return
+            }
         }
 
         Linking.openURL(url)

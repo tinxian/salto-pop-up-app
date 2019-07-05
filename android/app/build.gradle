@@ -161,7 +161,7 @@ android {
 }
 
 dependencies {
-    implementation project('com.android.support:customtabs:23.0.1')
+    implementation project(':react-native-inappbrowser-reborn')
     implementation project(':react-native-firebase')
     implementation project(':react-native-track-player')
     implementation project(':react-native-orientation')
@@ -177,6 +177,7 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation "com.google.firebase:firebase-core:16.0.9"
+
 }
 
 // Run this once to be able to run the application with BUCK

@@ -957,22 +957,10 @@
   version "15.5.6"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.6.tgz#9c03d3fed70a8d517c191b7734da2879b50ca26c"
 
-"@types/react-native-custom-tabs@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@types/react-native-custom-tabs/-/react-native-custom-tabs-0.1.1.tgz#5a8fda21380dc119748f23ce9d724a6922ab2734"
-  integrity sha512-tFDXq0zR5Zk45E/BcKDDkQt1wTC++uVVmdBqcAUF3TEIZbzqOn5liulZRfwldCTQuCwicBVtSf1J5iwkqJZE1g==
-
 "@types/react-native-orientation@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@types/react-native-orientation/-/react-native-orientation-5.0.1.tgz#347f7041683249f9ca7386717aa4dd66b394d3fb"
   integrity sha512-0Uvj73hXWXwxKISUSh8KDew9005D49NtbLJ/coldIMZNPhI+4obk2X6nzF3FBeIQ/2FbVUUZM6oMMIgQwPUJ2w==
-
-"@types/react-native-safari-view@^2.0.4":
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/@types/react-native-safari-view/-/react-native-safari-view-2.0.4.tgz#e63f63f2076706c55239549a6f37a248826531f1"
-  integrity sha512-3JudJX4RSO2ibf1SJ1nQzlNa/fErxQ5M6HTQwYMnmMl7agxEbO2z7ahuECkDiZZIHPd0BP+HnWHzJ2PQNe10yg==
-  dependencies:
-    "@types/react-native" "*"
 
 "@types/react-native-share@^1.1.1":
   version "1.1.1"
@@ -5293,11 +5281,6 @@ react-native-config@^0.11.6:
   version "0.11.6"
   resolved "https://registry.yarnpkg.com/react-native-config/-/react-native-config-0.11.6.tgz#efe9027be534629a41a4561de50f76f40dabb78a"
 
-react-native-custom-tabs@^0.1.7:
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/react-native-custom-tabs/-/react-native-custom-tabs-0.1.7.tgz#2dfb4028b0a443610d94792b2019810f68dde525"
-  integrity sha512-Lgxh/KvhRnirnvN9FrS/+FJ8OIKJcWGdceSrZutZt2x02Sc72uQVD1O4rh2kzN8NUw8yU6KQz279ltkicISbaw==
-
 react-native-firebase@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-5.4.0.tgz#64ee3a601fd421a931db0d81d6df1ea639997f95"
@@ -5314,15 +5297,17 @@ react-native-gesture-handler@^1.0.0, react-native-gesture-handler@^1.0.10:
     invariant "^2.2.2"
     prop-types "^15.5.10"
 
+react-native-inappbrowser-reborn@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-inappbrowser-reborn/-/react-native-inappbrowser-reborn-2.0.4.tgz#c71293eb217213c162b6f668fc8c045762c13149"
+  integrity sha512-mmPYw2XFOzSFN3Yx1azkXvA0dPGfFH+L6W0Sg5ztyv9nIG63w/vxHkOgtDWwSV4nIKU62l9wTbpApfgj7UrK7w==
+  dependencies:
+    invariant "^2.2.4"
+
 react-native-orientation@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/react-native-orientation/-/react-native-orientation-3.1.3.tgz#d45803841fe94b6cce9acbe904fd5ca191a3711e"
   integrity sha512-A0h0E+2f95X4avmhaBG1ZT8WDxBACA/q//JN2eF1E7kq8AJVxt5XDiavv+aSBkBlqFsfF3bIS+T/DB5mXmnxuA==
-
-react-native-safari-view@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-safari-view/-/react-native-safari-view-2.1.0.tgz#1e0cd12c62bce79bc1759c7e281646b08b61c959"
-  integrity sha1-HgzRLGK855vBdZx+KBZGsIthyVk=
 
 react-native-safe-area-view@^0.11.0:
   version "0.11.0"
