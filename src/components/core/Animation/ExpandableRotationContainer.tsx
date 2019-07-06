@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { StyleProp, Animated, Dimensions, Platform } from 'react-native'
-import Orientation from 'react-native-orientation'
+import Orientation from 'react-native-orientation-locker'
 
 interface Props {
     style?: StyleProp<{}>,
@@ -35,11 +35,12 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     }
 
     public componentDidMount() {
-        Orientation.addSpecificOrientationListener(this.orientationDidChange)
+        console.log(Orientation)
+        Orientation.addDeviceOrientationListener(this.orientationDidChange)
     }
 
     public componentWillUnmount() {
-        Orientation.removeSpecificOrientationListener(this.orientationDidChange)
+        Orientation.removeDeviceOrientationListener(this.orientationDidChange)
         Orientation.lockToPortrait()
     }
 

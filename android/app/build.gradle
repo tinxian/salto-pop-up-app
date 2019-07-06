@@ -164,7 +164,7 @@ dependencies {
     implementation project(':react-native-inappbrowser-reborn')
     implementation project(':react-native-firebase')
     implementation project(':react-native-track-player')
-    implementation project(':react-native-orientation')
+    implementation project(':react-native-orientation-locker')
     implementation project(':react-native-vector-icons')
     implementation project(':react-native-share')
     implementation project(':react-native-video')

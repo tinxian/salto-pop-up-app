@@ -8,7 +8,7 @@ import io.invertase.firebase.RNFirebasePackage;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
 import com.guichaguri.trackplayer.TrackPlayer;
 
-import com.github.yamill.orientation.OrientationPackage;
+import org.wonday.orientation.OrientationPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import cl.json.RNSharePackage;
 import com.brentvatne.react.ReactVideoPackage;
@@ -34,9 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(new MainReactPackage(),
-            new RNInAppBrowserPackage(), new CustomTabsPackage(), new RNFirebasePackage(),
-          new RNFirebaseAnalyticsPackage(), new TrackPlayer(), new OrientationPackage(), new VectorIconsPackage(),
+      return Arrays.<ReactPackage>asList(new MainReactPackage(), new RNInAppBrowserPackage(), new RNFirebasePackage(),
+          new OrientationPackage(), new RNFirebaseAnalyticsPackage(), new TrackPlayer(), new VectorIconsPackage(),
           new RNSharePackage(), new ReactVideoPackage(), new RNGestureHandlerPackage(), new SvgPackage(),
           new ReactNativeConfigPackage(), new SplashScreenReactPackage());
     }
