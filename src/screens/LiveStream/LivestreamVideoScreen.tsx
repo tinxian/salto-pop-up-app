@@ -1,21 +1,21 @@
-import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, ScrollView, TouchableHighlight, ActivityIndicator } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
-import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
-import Share from 'react-native-share'
-import { Media, LiveStreamDataType } from 'src/services/media'
-import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
-import SocketIOClient from 'socket.io-client'
-import { Title } from 'src/components/core/Typography/Title'
-import Icon from 'react-native-vector-icons/Ionicons'
-import { getIcon, PlatformIconType } from 'src/utils/icons'
 import { format } from 'date-fns'
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider'
-import { SubTitle } from 'src/components/core/Typography/SubTitle'
-import { ScheduleType } from 'src/services/videos'
+import * as React from 'react'
+import { ActivityIndicator, ScrollView, StatusBar, StyleProp, StyleSheet, TouchableHighlight, View } from 'react-native'
+import Share from 'react-native-share'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { NavigationScreenProps } from 'react-navigation'
+import SocketIOClient from 'socket.io-client'
+import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
 import { InformationList } from 'src/components/core/List/InformationList'
+import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
+import VideoPlayer from 'src/components/core/react-native-video-controls/Videoplayer'
+import { SubTitle } from 'src/components/core/Typography/SubTitle'
+import { Title } from 'src/components/core/Typography/Title'
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
 import { AnalyticsData } from 'src/services/Analytics'
-import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer'
+import { LiveStreamDataType, Media } from 'src/services/media'
+import { ScheduleType } from 'src/services/videos'
+import { getIcon, PlatformIconType } from 'src/utils/icons'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,
@@ -25,8 +25,6 @@ interface Props extends NavigationScreenProps {
 interface State {
     loadingInformationList: boolean
     loadingDetail: boolean
-    fullScreen: boolean
-    height: number
     programData?: LiveStreamDataType
     schedule: ScheduleType[]
 }
@@ -36,13 +34,11 @@ export const LivestreamVideoScreen = withThemeContext(
         public state: State = {
             loadingDetail: true,
             loadingInformationList: true,
-            fullScreen: false,
-            height: Dimensions.get('window').height,
             programData: undefined,
             schedule: [],
         }
 
-        public player: VideoPlayer | null
+        private expandableRotationContainerRef: ExpandableRotationContainer | null
         private socket: any
 
         public async componentDidMount() {
@@ -68,25 +64,23 @@ export const LivestreamVideoScreen = withThemeContext(
         }
 
         public render() {
-            const { fullScreen, programData } = this.state
+            const { programData } = this.state
             const { themeContext } = this.props
 
             return (
-                <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
+                <View style={this.getStyles()}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
-                        disableAnimation={false}
-                        expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}
+                        ref={ref => this.expandableRotationContainerRef = ref}
                     >
                         <VideoPlayer
                             style={{ width: '100%', height: '100%', overflow: 'hidden' }}
-                            ref={(ref: VideoPlayer) => this.player = ref}
                             source={{ uri: themeContext.theme.content.urls.LivestreamUrl }}
                             onBack={() => this.props.navigation.goBack()}
-                            onEnterFullscreen={this.handleFullScreenToggle}
-                            onExitFullscreen={this.handleFullScreenToggle}
+                            onEnterFullscreen={this.handleFullScreenIn}
+                            onExitFullscreen={this.handleFullScreenOut}
                             disableSeekbar={true}
                             disableTimer={true}
                             disablePlayPause={true}
@@ -154,17 +148,20 @@ export const LivestreamVideoScreen = withThemeContext(
             )
         }
 
-        private handleLayoutChange = () => {
-            this.setState({ height: Dimensions.get('window').height })
+        private handleFullScreenIn = () => {
+            if (this.expandableRotationContainerRef) {
+                this.expandableRotationContainerRef.animateIn()
+            }
+        }
+
+        private handleFullScreenOut = () => {
+            if (this.expandableRotationContainerRef) {
+                this.expandableRotationContainerRef.animateOut()
+            }
         }
 
         private handleShare = () => {
             Share.open(this.getShareOptions())
-        }
-
-        private handleFullScreenToggle = () => {
-            const { fullScreen } = this.state
-            this.setState({ fullScreen: !fullScreen })
         }
 
         private getShareOptions = () => {

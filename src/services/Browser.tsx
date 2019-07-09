@@ -28,6 +28,6 @@ export const openPlatformSpecificWebViews = debounce(
 
         Linking.openURL(url)
     },
-    2500,
+    1000,
     { leading: true, trailing: false }
 )

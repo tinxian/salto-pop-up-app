@@ -5,11 +5,11 @@ import { LivestreamVideoScreen } from './screens/LiveStream/LivestreamVideoScree
 import { MoreScreen } from './screens/More/MoreScreen'
 import { SaltoTabBarBottom } from './components/core/Navigation/SaltoTabBarBottom'
 import React from 'react'
-import { RadioScreen } from './screens/Radio/RadioScreen'
 import { SettingsScreen } from './screens/More/SettingsScreen/SettingsScreen'
 import { OtherEventsScreen } from './screens/More/OtherEvents/OtherEventsScreen'
-import { withThemeContext, ThemeInjectedProps } from './providers/ThemeProvider';
-import { HomeScreen } from './screens/Home/HomeScreen';
+import { withThemeContext, ThemeInjectedProps } from './providers/ThemeProvider'
+import { HomeScreen } from './screens/Home/HomeScreen'
+import { Platform } from 'react-native'
 // import { HomeScreen } from './screens/Home/HomeScreen';
 
 const MoreNavigator = createStackNavigator({
@@ -97,23 +97,14 @@ export const RootNavigator = createStackNavigator({
     OnDemandVideoScreen: {
         screen: OnDemandVideoScreen,
         navigationOptions: {
-            gesturesEnabled: true,
+            gesturesEnabled: Platform.OS === 'ios',
         },
     },
     LivestreamVideoScreen: {
         screen: LivestreamVideoScreen,
         navigationOptions: {
-            gesturesEnabled: true,
+            gesturesEnabled: Platform.OS === 'ios',
         },
     },
-    RadioScreen: {
-        screen: RadioScreen,
-        navigationOptions: {
-            gesturesEnabled: true,
-        },
-    },
-}, {
-        headerMode: 'none',
-        mode: 'modal',
-    }
+}, { headerMode: 'none', mode: 'modal' }
 )

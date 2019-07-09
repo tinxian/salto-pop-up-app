@@ -1,25 +1,23 @@
-import * as React from 'react'
-import { View, StyleSheet, StyleProp, StatusBar, Dimensions, FlatList, TouchableOpacity, AppState, AppStateStatus } from 'react-native'
-import { NavigationScreenProps } from 'react-navigation'
-
-import { EpisodeType } from 'src/services/videos'
-import { Title } from 'src/components/core/Typography/Title'
-import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer';
-import Share from 'react-native-share';
-import { Media } from 'src/services/media';
-
-import { getIcon, PlatformIconType } from 'src/utils/icons';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { withThemeContext, ThemeInjectedProps } from 'src/providers/ThemeProvider';
 import { format } from 'date-fns';
-import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import * as React from 'react';
+import { AppState, AppStateStatus, FlatList, StatusBar, StyleProp, StyleSheet, TouchableOpacity, View } from 'react-native';
+import Share from 'react-native-share';
+import Icon from 'react-native-vector-icons/Ionicons';
+import { NavigationScreenProps } from 'react-navigation';
+import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer';
 import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
-import { withVideosContext, VideosInjectedProps } from 'src/providers/VideosProvider';
+import VideoPlayer from 'src/components/core/react-native-video-controls/Videoplayer';
+import { Paragraph } from 'src/components/core/Typography/Paragraph';
+import { SubTitle } from 'src/components/core/Typography/SubTitle';
+import { Title } from 'src/components/core/Typography/Title';
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
+import { VideosInjectedProps, withVideosContext } from 'src/providers/VideosProvider';
 import { AnalyticsData } from 'src/services/Analytics';
+import { Media } from 'src/services/media';
+import { EpisodeType } from 'src/services/videos';
 import { getMillisecondsInMinutes } from 'src/utils/date';
-import VideoPlayer from 'src/components/core/react-native-video-controls/VideoPlayer';
+import { getIcon, PlatformIconType } from 'src/utils/icons';
 
 interface Params {
     item: EpisodeType,
@@ -33,58 +31,54 @@ interface Props extends NavigationScreenProps<Params> {
 interface State {
     loading: boolean
     fullScreen: boolean
-    height: number
     metaExpand: boolean
     appState: AppStateStatus
     paused: boolean
 }
+
 export const OnDemandVideoScreen = withThemeContext(withVideosContext(
     class OnDemandVideoScreen extends React.Component<Props & ThemeInjectedProps & VideosInjectedProps, State> {
         public state: State = {
             loading: true,
             fullScreen: false,
-            height: Dimensions.get('window').height,
             metaExpand: false,
             appState: AppState.currentState,
             paused: false,
         }
 
-        public player: VideoPlayer | null
+        private expandableRotationContainerRef: ExpandableRotationContainer | null
 
         public componentDidMount() {
-            AppState.addEventListener('change', this.handleAppStateChange);
+            AppState.addEventListener('change', this.handleAppStateChange)
             AnalyticsData.trackScreen('Ondemand video screen')
             Media.stopOtherMedia()
         }
 
         public componentWillUnmount() {
-            AppState.removeEventListener('change', this.handleAppStateChange);
+            AppState.removeEventListener('change', this.handleAppStateChange)
         }
 
         public render() {
-            const { fullScreen } = this.state
             const { theme } = this.props.themeContext
             const item = this.props.navigation.getParam('item')
             const data = this.getRelevantVideosFromEpisode()
 
             return (
-                <View style={this.getStyles()} onLayout={this.handleLayoutChange}>
+                <View style={this.getStyles()}>
                     <StatusBar hidden={true} animated={true} />
                     <ExpandableRotationContainer
-                        disableAnimation={false}
-                        expand={fullScreen}
                         startHeight={300}
                         style={styles.videoContainer}
+                        ref={ref => this.expandableRotationContainerRef = ref}
                     >
                         <VideoPlayer
-                            style={{ flex: 1, overflow: 'hidden' }}
-                            ref={(ref: VideoPlayer) => this.player = ref}
+                            style={{ flex: 1, overlfow: 'hidden' }}
                             source={{ uri: item.streams.mp4 }}
                             playInBackground={false}
                             paused={this.state.paused}
                             onBack={() => this.props.navigation.goBack()}
-                            onEnterFullscreen={this.handleFullScreenToggle}
-                            onExitFullscreen={this.handleFullScreenToggle}
+                            onEnterFullscreen={this.handleFullScreenIn}
+                            onExitFullscreen={this.handleFullScreenOut}
                             toggleResizeModeOnFullscreen={false}
                         />
                     </ExpandableRotationContainer>
@@ -191,10 +185,6 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             )
         }
 
-        private handleLayoutChange = () => {
-            this.setState({ height: Dimensions.get('window').height })
-        }
-
         private handleShare = () => {
             const item = this.props.navigation.getParam('item')
             AnalyticsData.trackShareClickEvent({
@@ -209,20 +199,27 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
         private handleAppStateChange = (nextAppState: any) => {
             this.setState({ appState: nextAppState })
             if (nextAppState === 'background' || 'inactive') {
-                this.setState({ paused: true });
+                this.setState({ paused: true })
             }
             if (nextAppState === 'active') {
-                this.setState({ paused: false });
+                this.setState({ paused: false })
             }
-        };
+        }
 
         private handleMetaExpand = () => {
             this.setState({ metaExpand: !this.state.metaExpand })
         }
 
-        private handleFullScreenToggle = () => {
-            const { fullScreen } = this.state
-            this.setState({ fullScreen: !fullScreen })
+        private handleFullScreenIn = () => {
+            if (this.expandableRotationContainerRef) {
+                this.expandableRotationContainerRef.animateIn()
+            }
+        }
+
+        private handleFullScreenOut = () => {
+            if (this.expandableRotationContainerRef) {
+                this.expandableRotationContainerRef.animateOut()
+            }
         }
 
         private getShareOptions = () => {
@@ -232,7 +229,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                 title: item.title,
                 message: `Kijk naar deze video van ${item.programName}`,
                 url: item.streams.mp4,
-                subject: `Kijk naar deze video van ${item.programName}` //  for email
+                subject: `Kijk naar deze video van ${item.programName}`, //  for email
             }
         }
 
@@ -268,7 +265,6 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'transparent',
     },
     content: {
         paddingHorizontal: 12,
@@ -309,5 +305,5 @@ const styles = StyleSheet.create({
     },
     relevantTitle: {
         marginBottom: 12,
-    }
+    },
 })
