@@ -8,7 +8,6 @@ import SocketIOClient from 'socket.io-client'
 import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
 import { InformationList } from 'src/components/core/List/InformationList'
 import { LiveIndicator } from 'src/components/core/LiveIndicator/LiveIndicator'
-import VideoPlayer from 'src/components/core/react-native-video-controls/Videoplayer'
 import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Title } from 'src/components/core/Typography/Title'
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
@@ -16,6 +15,7 @@ import { AnalyticsData } from 'src/services/Analytics'
 import { LiveStreamDataType, Media } from 'src/services/media'
 import { ScheduleType } from 'src/services/videos'
 import { getIcon, PlatformIconType } from 'src/utils/icons'
+import VideoPlayer from 'src/components/core/react-native-video-controls/VideoControls'
 
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>,

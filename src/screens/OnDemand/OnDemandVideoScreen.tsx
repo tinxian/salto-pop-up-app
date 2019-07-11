@@ -1,23 +1,23 @@
-import { format } from 'date-fns';
-import * as React from 'react';
-import { AppState, AppStateStatus, FlatList, StatusBar, StyleProp, StyleSheet, TouchableOpacity, View } from 'react-native';
-import Share from 'react-native-share';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { NavigationScreenProps } from 'react-navigation';
-import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer';
-import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent';
-import VideoPlayer from 'src/components/core/react-native-video-controls/Videoplayer';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import { Title } from 'src/components/core/Typography/Title';
-import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem';
-import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { VideosInjectedProps, withVideosContext } from 'src/providers/VideosProvider';
-import { AnalyticsData } from 'src/services/Analytics';
-import { Media } from 'src/services/media';
-import { EpisodeType } from 'src/services/videos';
-import { getMillisecondsInMinutes } from 'src/utils/date';
-import { getIcon, PlatformIconType } from 'src/utils/icons';
+import { format } from 'date-fns'
+import * as React from 'react'
+import { AppState, AppStateStatus, FlatList, StatusBar, StyleProp, StyleSheet, TouchableOpacity, View } from 'react-native'
+import Share from 'react-native-share'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { NavigationScreenProps } from 'react-navigation'
+import { ExpandableRotationContainer } from 'src/components/core/Animation/ExpandableRotationContainer'
+import { EmptyComponent } from 'src/components/core/EmptyComponent/EmptyComponent'
+import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { SubTitle } from 'src/components/core/Typography/SubTitle'
+import { Title } from 'src/components/core/Typography/Title'
+import { OnDemandVideoItem } from 'src/components/implementations/OnDemandVideoItem/OnDemandVideoItem'
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
+import { VideosInjectedProps, withVideosContext } from 'src/providers/VideosProvider'
+import { AnalyticsData } from 'src/services/Analytics'
+import { Media } from 'src/services/media'
+import { EpisodeType } from 'src/services/videos'
+import { getMillisecondsInMinutes } from 'src/utils/date'
+import { getIcon, PlatformIconType } from 'src/utils/icons'
+import VideoPlayer from 'src/components/core/react-native-video-controls/VideoControls'
 
 interface Params {
     item: EpisodeType,
@@ -135,7 +135,7 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
                                         name={getIcon('arrow-down')}
                                         color={this.props.themeContext.theme.colors.ButtonColor}
                                         size={25}
-                                        style={{ transform: [{ rotate: metaExpand ? '180deg' : '0deg' }] }}
+                                        style={{ transform: [{ rotate: metaExpand ? '180deg' : '0deg' }]}}
                                     />
                                 </View>
                             </View>

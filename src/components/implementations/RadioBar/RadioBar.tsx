@@ -19,7 +19,6 @@ interface Props {
 
 interface State {
     loading: boolean
-    active: boolean
     programData?: LiveStreamDataType
     openRadioScreen: boolean
 }
@@ -30,7 +29,6 @@ export class RadioBar extends React.Component<Props, State> {
 
     public state: State = {
         loading: false,
-        active: false,
         programData: undefined,
         openRadioScreen: false,
     }
@@ -59,7 +57,6 @@ export class RadioBar extends React.Component<Props, State> {
                 renderContent={() => (
                     <RadioScreen
                         programData={programData}
-                        active={this.state.active}
                     />
                 )}
             />
@@ -97,7 +94,6 @@ export class RadioBar extends React.Component<Props, State> {
     }
 
     private handleToggleRadio = (active: boolean) => {
-        this.setState({ active })
         if (active) {
             this.initializeLiveData()
             return
@@ -123,8 +119,17 @@ export class RadioBar extends React.Component<Props, State> {
 
     private async initializeLiveData() {
         this.socket = SocketIOClient('https://api.salto.nl/nowplaying')
-        console.log(this.props.theme.content.channels.RadioChannelName)
         this.socket.emit('join', { channel: this.props.theme.content.channels.RadioChannelName })
+
+        this.socket.on('connection', (programData: LiveStreamDataType) => {
+            this.setState({ programData })
+
+            if (this.TrackPlayerControlsRef) {
+                this.TrackPlayerControlsRef.setTrackPlayer(programData)
+            }
+
+            return programData
+        })
 
         this.socket.on('update', (programData: LiveStreamDataType) => {
             this.setState({ programData })
@@ -139,7 +144,7 @@ export class RadioBar extends React.Component<Props, State> {
 
     private handleRequestOpenRadioScreen() {
         this.initializeLiveData()
-        this.setState({ active: true })
+
         if (this.BottomDrawerManager) {
             this.BottomDrawerManager.requestOpenBottomDrawer()
         }

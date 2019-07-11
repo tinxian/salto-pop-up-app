@@ -124,7 +124,7 @@ export class BottomDrawer extends React.Component<Props, State> {
                             <View style={styles.swiper} />
                         </View>
                     </View>
-                    <View style={[styles.content, { height: getHalfScreenHeight() - SWIPABLE_HEIGHT }]}>
+                    <View style={[ styles.content, { height: getHalfScreenHeight() - SWIPABLE_HEIGHT } ]}>
                         {children}
                     </View>
                 </Animated.View>
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
         height: SWIPABLE_HEIGHT,
         alignItems: 'center',
         justifyContent: 'center',
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,

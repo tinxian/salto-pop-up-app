@@ -39,7 +39,6 @@ export class BottomDrawerManager extends React.Component<Props, State> {
         )
     }
 
-
     private renderHandlerComponent(open: () => void) {
         const { requestOpenBottomDrawer, renderHandler } = this.props
 

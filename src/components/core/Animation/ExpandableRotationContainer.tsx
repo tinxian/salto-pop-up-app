@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleProp, Animated, Dimensions, Platform } from 'react-native'
+import { Animated, Dimensions, StyleProp } from 'react-native'
 import Orientation from 'react-native-orientation-locker'
 
 interface Props {
@@ -35,7 +35,6 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
                 duration: ANIMATION_DURATION,
             }
         ).start()
-
     }
 
     public animateOut = () => {

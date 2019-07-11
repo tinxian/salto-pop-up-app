@@ -1,17 +1,17 @@
-import * as React from 'react';
-import { ActivityIndicator, Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import Video from 'react-native-video';
-import { Paragraph } from 'src/components/core/Typography/Paragraph';
-import { SubTitle } from 'src/components/core/Typography/SubTitle';
-import { Title } from 'src/components/core/Typography/Title';
-import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider';
-import { LiveStreamDataType, Media } from 'src/services/media';
-import { getIcon } from 'src/utils/icons';
+import * as React from 'react'
+import { ActivityIndicator, Image, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import Icon from 'react-native-vector-icons/Ionicons'
+import Video from 'react-native-video'
+import { Paragraph } from 'src/components/core/Typography/Paragraph'
+import { SubTitle } from 'src/components/core/Typography/SubTitle'
+import { Title } from 'src/components/core/Typography/Title'
+import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
+import { LiveStreamDataType, Media } from 'src/services/media'
+import { getIcon } from 'src/utils/icons'
+import TrackPlayer from 'react-native-track-player'
 
 interface Props {
     uri?: string,
-    active: boolean
     onToggleRadio?: (active: boolean) => void
     programData?: LiveStreamDataType
 }
@@ -25,20 +25,25 @@ export const RadioScreen = withThemeContext(
     class RadioScreen extends React.Component<Props & ThemeInjectedProps, State> {
         public state: State = {
             loading: true,
-            active: this.props.active,
+            active: false,
         }
 
         public player: Video | null
 
         public async componentDidMount() {
-            this.setState({ loading: false })
+            const active = await TrackPlayer.getState() === 'playing'
+
+            this.setState({
+                loading: false,
+                active,
+            })
         }
 
         public render() {
             const { programData } = this.props
             if (!programData) {
                 return (
-                    <View style={this.getStyles()}>
+                    <View style={styles.loading}>
                         <ActivityIndicator />
                     </View>
                 )
@@ -221,5 +226,10 @@ const styles = StyleSheet.create({
     musicInfoWrapper: {
         justifyContent: 'center',
         alignItems: 'center',
-    }
+    },
+    loading: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 })
