@@ -26,9 +26,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     public animateIn = () => {
         const { heightAnim } = this.state
 
-        if (Platform.OS === 'android') {
-            Orientation.lockToLandscape()
-        }
+        Orientation.lockToLandscape()
 
         Animated.timing(
             heightAnim,
@@ -43,9 +41,7 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
     public animateOut = () => {
         const { heightAnim } = this.state
 
-        if (Platform.OS === 'android') {
-            Orientation.lockToPortrait()
-        }
+        Orientation.lockToPortrait()
 
         Animated.timing(
             heightAnim,
@@ -96,8 +92,8 @@ export class ExpandableRotationContainer extends React.Component<Props, State> {
         const { heightAnim, fullscreenHeight } = this.state
 
         const heightInterpolation = heightAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [startHeight, fullscreenHeight],
+            inputRange: [ 0, 1 ],
+            outputRange: [ startHeight, fullscreenHeight ],
         })
 
         return [

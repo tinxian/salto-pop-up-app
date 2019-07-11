@@ -57,3 +57,6 @@ buck-out/
 
 artifacts/
 .env
+
+# CocoaPods
+/ios/Pods/
