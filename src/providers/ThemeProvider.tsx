@@ -2,36 +2,35 @@ import React, { Context } from 'react'
 import theme from '../../theme.json'
 import { ThemeContextType, ThemeType, Theme } from 'src/services/theme.js'
 import axios from 'axios'
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, AppState } from 'react-native'
 
 export const ThemeContext: Context<ThemeContextType> = React.createContext({
     theme,
     setThemeState: () => 'Context not set',
+    appState: AppState.currentState,
 })
 
 interface Props {
     children: (state: ThemeContextType) => JSX.Element
 }
 
-const USE_LOCAL_DEVELOPMENT_MODE = true
+const USE_LOCAL_DEVELOPMENT_MODE = false
 
 export class ThemeProvider extends React.Component<Props, ThemeContextType> {
 
     public state: ThemeContextType = {
         theme,
         setThemeState: newTheme => this.setThemeStateValue(newTheme),
+        appState: AppState.currentState,
     }
 
     public async componentDidMount() {
-        try {
-            if (!USE_LOCAL_DEVELOPMENT_MODE) {
-                await this.setCachedThemeToState()
-                await this.setExternalThemeToState()
-                await this.setThemeToCache()
-            }
-        } catch (error) {
-            console.error(error)
-        }
+        await this.getTheme()
+        AppState.addEventListener('change', this.handleAppStateChange)
+    }
+
+    public componentWillUnmount() {
+        AppState.removeEventListener('change', this.handleAppStateChange)
     }
 
     public render() {
@@ -44,6 +43,28 @@ export class ThemeProvider extends React.Component<Props, ThemeContextType> {
                 {children(this.state)}
             </ThemeContext.Provider>
         )
+    }
+
+    private async getTheme() {
+        try {
+            if (!USE_LOCAL_DEVELOPMENT_MODE) {
+                await this.setCachedThemeToState()
+                await this.setExternalThemeToState()
+                await this.setThemeToCache()
+            }
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    private handleAppStateChange = async (nextAppState: string) => {
+        if (
+            this.state.appState.match(/inactive|background/) &&
+            nextAppState === 'active'
+        ) {
+            await this.getTheme()
+        }
+        this.setState({ appState: nextAppState })
     }
 
     private setThemeStateValue(newThemeState: ThemeType) {

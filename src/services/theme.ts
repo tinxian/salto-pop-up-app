@@ -100,6 +100,7 @@ export interface ThemeType {
 export interface ThemeContextType {
     theme: ThemeType
     setThemeState: (values: ThemeType) => void
+    appState: string
 }
 
 export class Theme {
