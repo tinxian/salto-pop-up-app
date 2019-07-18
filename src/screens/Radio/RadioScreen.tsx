@@ -7,9 +7,8 @@ import { SubTitle } from 'src/components/core/Typography/SubTitle'
 import { Title } from 'src/components/core/Typography/Title'
 import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvider'
 import { LiveStreamDataType, Media } from 'src/services/media'
-import { getIcon } from 'src/utils/icons'
-import TrackPlayer from 'react-native-track-player'
 import { isMusicActive } from 'src/trackPlayBackService'
+import { getIcon } from 'src/utils/icons'
 
 interface Props {
     uri?: string,
