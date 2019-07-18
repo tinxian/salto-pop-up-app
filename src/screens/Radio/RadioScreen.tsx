@@ -9,6 +9,7 @@ import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvide
 import { LiveStreamDataType, Media } from 'src/services/media'
 import { getIcon } from 'src/utils/icons'
 import TrackPlayer from 'react-native-track-player'
+import { isMusicActive } from 'src/trackPlayBackService'
 
 interface Props {
     uri?: string,
@@ -31,7 +32,7 @@ export const RadioScreen = withThemeContext(
         public player: Video | null
 
         public async componentDidMount() {
-            const active = await TrackPlayer.getState() === 'playing'
+            const active = await isMusicActive()
 
             this.setState({
                 loading: false,
