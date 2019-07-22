@@ -4,4 +4,6 @@
 target 'saltoPopUpApp' do
 	pod 'Firebase/Core', '~> 5.6.0'
 	pod 'GoogleIDFASupport'
+  pod 'RNInAppBrowser', :path => '../node_modules/react-native-inappbrowser-reborn'
+
 end
