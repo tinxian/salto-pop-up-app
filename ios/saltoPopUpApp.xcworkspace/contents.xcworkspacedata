@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:/Users/quenten/tech/school/examens/salto-pop-up-app/ios/GoogleService-Info.plist">
-   </FileRef>
-   <FileRef
       location = "group:saltoPopUpApp.xcodeproj">
    </FileRef>
    <FileRef

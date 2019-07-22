@@ -237,9 +237,15 @@ export const OnDemandVideoScreen = withThemeContext(withVideosContext(
             const data = this.props.videosContext.episodes
             const item = this.props.navigation.getParam('item')
 
-            return data.filter(i => {
+            const filteredData = data.filter(i => {
                 return i.programName === item.programName && i.id !== item.id
             })
+
+            if (filteredData.length === 0) {
+                return data
+            } else {
+                return filteredData
+            }
 
         }
 
