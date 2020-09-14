@@ -60,3 +60,4 @@ artifacts/
 
 # CocoaPods
 /ios/Pods/
+.env
