@@ -130,6 +130,7 @@
                 }
             ],
             "RadioName": "Pride FM",
+            "showRadio": false,
             "videosIntroduction": "Bekijk hier de videos van het evenement Pride 2019",
             "livestreamIntroduction": "Bekijk de Pride TV Livestream",
             "AppIntroduction": "Van 27 juli t/m 4 augustus gaat SALTO op roze met Pride TV en Pride FM."

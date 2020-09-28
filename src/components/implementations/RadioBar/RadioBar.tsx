@@ -178,6 +178,7 @@ export class RadioBar extends React.Component<Props, State> {
 
 const styles = StyleSheet.create({
     container: {
+        display: 'none',
         width: '100%',
         height: 46,
         flexDirection: 'row',
