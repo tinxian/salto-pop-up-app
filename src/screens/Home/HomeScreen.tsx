@@ -9,7 +9,6 @@ import { ThemeInjectedProps, withThemeContext } from 'src/providers/ThemeProvide
 import { VideosInjectedProps } from 'src/providers/VideosProvider'
 import { AnalyticsData } from 'src/services/Analytics'
 import { widgets, WidgetType } from './widgets'
-
 interface Props extends NavigationScreenProps {
     style: StyleProp<{}>
 }
@@ -83,7 +82,6 @@ export const HomeScreen = withThemeContext(
             const widget = item.item
             const { themeContext } = this.props
             const { navigation } = this.props
-
             return (
                 <WidgetContainer
                     themeContext={themeContext}

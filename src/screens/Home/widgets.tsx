@@ -19,22 +19,22 @@ const props: any = {
 }
 
 export const widgets: WidgetType[] = [
-    // {
-    //     id: '1',
-    //     title: 'Pride FM',
-    //     icon: 'radio',
-    //     element: <FMWidget {...props} />,
-    // },
+    {
+        id: '1',
+        title: 'Pride FM',
+        icon: 'radio',
+        element: <FMWidget {...props} />,
+    },
     {
         id: '3',
         title: 'Pride TV',
         icon: 'videocam',
         element: <TVWidget {...props} />,
     },
-    // {
-    //     id: '4',
-    //     title: 'Pride Nieuws',
-    //     icon: 'logo-rss',
-    //     element: <RssWidget {...props} />,
-    // },
+    {
+        id: '4',
+        title: 'Pride Nieuws',
+        icon: 'logo-rss',
+        element: <RssWidget {...props} />,
+    },
 ]
