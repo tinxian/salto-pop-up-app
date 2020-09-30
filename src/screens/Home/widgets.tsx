@@ -18,23 +18,33 @@ const props: any = {
 
 }
 
-export const widgets: WidgetType[] = [
-    {
-        id: '1',
-        title: 'Pride FM',
-        icon: 'radio',
-        element: <FMWidget {...props} />,
-    },
+export const widgets: WidgetType[] = []
+
+// if (this.props.themeContext.theme.content.urls.RadioUrl == "") {}
+// else{
+    widgets.push(
+        {
+            id: '1',
+            title: 'Pride FM',
+            icon: 'radio',
+            element: <FMWidget {...props} />,
+        }
+    )
+// }
+widgets.push(
     {
         id: '3',
         title: 'Pride TV',
         icon: 'videocam',
         element: <TVWidget {...props} />,
-    },
+    }
+)
+widgets.push(
     {
         id: '4',
         title: 'Pride Nieuws',
         icon: 'logo-rss',
         element: <RssWidget {...props} />,
-    },
-]
+    }
+)
+

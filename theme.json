@@ -136,13 +136,13 @@
         },
         "urls": {
             "LivestreamUrl": "https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8",
-            "RadioUrl": "https://vod.salto.nl/icecast/so1",
+            "RadioUrl": "",
             "RssFeedUrl": "https://api.salto.nl/api/app/feed/pride"
         },
         "channels": {
             "VideosChannelName": "pride",
             "RadioChannelName": "soradio1",
-            "LivestreamChannelName": "salto1"
+            "LivestreamChannelName": "malive"
         },
         "OtherEvents": [
             {

@@ -14,7 +14,6 @@ interface Props extends NavigationScreenProps {
 }
 
 interface State {
-
 }
 
 export const HomeScreen = withThemeContext(
@@ -26,7 +25,6 @@ export const HomeScreen = withThemeContext(
 
         public render() {
             const { images } = this.props.themeContext.theme
-
             return (
                 <View style={this.getStyles()}>
                     <StatusBar hidden={false} animated={false} />
@@ -47,7 +45,6 @@ export const HomeScreen = withThemeContext(
 
         private renderList() {
             const { theme } = this.props.themeContext
-
             return (
                 <FlatList<WidgetType>
                     ListHeaderComponent={() => this.renderHeader()}
