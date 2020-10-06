@@ -45,6 +45,10 @@ export const HomeScreen = withThemeContext(
 
         private renderList() {
             const { theme } = this.props.themeContext
+            let visibleWidgets: WidgetType[] = widgets
+            if (this.props.themeContext.theme.content.urls.RadioUrl === "") {
+                visibleWidgets = visibleWidgets.filter( function (item) { return item.icon == "videocam" } )
+            }
             return (
                 <FlatList<WidgetType>
                     ListHeaderComponent={() => this.renderHeader()}
@@ -59,7 +63,7 @@ export const HomeScreen = withThemeContext(
                         <View style={{ height: 12 }} />
                     )}
                     contentContainerStyle={this.getWrapperStyles()}
-                    data={widgets}
+                    data={visibleWidgets}
                     keyExtractor={item => {
                         return item.id
                     }}

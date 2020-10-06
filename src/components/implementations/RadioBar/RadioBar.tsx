@@ -48,7 +48,6 @@ export class RadioBar extends React.Component<Props, State> {
 
     public render() {
         const { programData, openRadioScreen } = this.state
-
         return (
             <BottomDrawerManager
                 requestOpenBottomDrawer={openRadioScreen}

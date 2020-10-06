@@ -2,13 +2,13 @@
     "colors": {
         "NavigationBackgroundColor": "#f5f5f5",
         "NavigationIconsColor": "#000000",
-        "NavigationIconsActiveColor": "#f98ebb",
+        "NavigationIconsActiveColor": "#f8007a",
         "RadioPlayerControlsColor": "#f98ebb",
         "RadioPlayerBackgroundColor": "#fdddea",
         "BottomDrawerColor": "#ffffff",
-        "ButtonColor": "#f98ebb",
+        "ButtonColor": "#f8007a",
         "ButtonTextColor": "#ffffff",
-        "LabelBorderColor": "#f98ebb",
+        "LabelBorderColor": "#f8007a",
         "LabelBackgroundColor": "#fef3f8",
         "PageBackgroundColor": "#ffffff",
         "SaltoColor": "#E30613",
@@ -19,59 +19,24 @@
         "playButtonColor": "#ffffff",
         "LiveIndicatorBackgroundColor": "#E30613",
         "LiveIndicatorTextColor": "#ffffff",
-        "SeperatorColor": "#f98ebb",
+        "SeperatorColor": "#f8007a",
         "HeaderBackground": "#c2c2c2",
         "HeaderTitleText": "#000000",
-        "HeaderBackButtonColor": "#f98ebb",
+        "HeaderBackButtonColor": "#f8007a",
         "WidgetBackgroundColor": "#fafafa"
     },
     "images": {
         "HeaderBackgroundUrl": {
-            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/background.png"
+            "uri": "https://www.salto.nl/wp-content/uploads/sites/4/2020/10/malive-background.jpg"
         },
         "logoUrl": {
-            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/logo.png"
+            "uri": "https://www.salto.nl/wp-content/uploads/sites/4/2020/10/malive-logo.png"
         },
         "defaultThumbnail": {
-            "uri": "https://www.salto.nl/wp-content/uploads/app/pride/placeholder.png"
+            "uri": "https://www.salto.nl/wp-content/uploads/sites/4/2020/10/malive-placeholder.jpg"
         }
     },
     "links": [
-        {
-            "title": "Persberichten",
-            "link": "https://pride.amsterdam/press-releases/",
-            "logo": "megaphone"
-        },
-        {
-            "title": "Straatfeesten",
-            "link": "https://pride.amsterdam/events/streetparties-2019/",
-            "logo": "boat"
-        },
-        {
-            "title": "Bezoekersinformatie",
-            "link": "https://pride.amsterdam/algemene-bezoekers-informatie/",
-            "logo": "people"
-        },
-        {
-            "title": "Boten 2019",
-            "link": "https://pride.amsterdam/boten-2019/",
-            "logo": "boat"
-        },
-        {
-            "title": "Botenparade",
-            "link": "https://pride.amsterdam/pride-vignetten-canal-parade-2019/",
-            "logo": "navigate"
-        },
-        {
-            "title": "Ambassadeurs",
-            "link": "https://pride.amsterdam/ambassadors/",
-            "logo": "ribbon"
-        },
-        {
-            "title": "Over Pride",
-            "link": "https://pride.amsterdam/stichting-amsterdam-gay-pride/",
-            "logo": "information-circle"
-        },
         {
             "title": "Over SALTO",
             "link": "https://www.salto.nl/over/",
@@ -84,63 +49,63 @@
             "whitespace": true
         },
         {
-            "title": "Pride Amsterdam",
-            "link": "https://pride.amsterdam/",
+            "title": "MaLive",
+            "link": "https://ma-live.nl/",
             "logo": "planet"
         },
         {
-            "title": "Pride op Facebook",
-            "link": "https://www.facebook.com/prideamsterdam/",
+            "title": "MaLive op Soundcloud",
+            "link": "https://soundcloud.com/ma-live-668989666",
+            "logo": "megaphone"
+        },
+        {
+            "title": "Mediacollege op Facebook",
+            "link": "https://www.facebook.com/MediacollegeAmsterdam/",
             "logo": "logo-facebook"
         },
         {
-            "title": "Pride op Twitter",
-            "link": "https://twitter.com/amsterdampride",
-            "logo": "logo-twitter"
-        },
-        {
-            "title": "Pride op Instagram",
-            "link": "https://www.instagram.com/prideamsterdam/",
+            "title": "Mediacollege op Instagram",
+            "link": "https://www.instagram.com/mediacollege/",
             "logo": "logo-instagram"
         },
         {
-            "title": "Pride op Youtube",
-            "link": "https://www.youtube.com/channel/UCLTU5MweRSFgpQAUT6eGUVA",
+            "title": "Mediacollege op Youtube",
+            "link": "https://www.youtube.com/channel/UCVJXf2h5yIjAIYKK5DCmokQ",
             "logo": "logo-youtube"
         }
     ],
     "content": {
         "App": {
-            "startDate": "Sat Jul 27 2019 00:00:00 GMT+0200 (CEST)",
-            "endDate": "Sun Aug 04 2019 00:00:00 GMT+0200 (CEST)"
+            "startDate": "Sat Jul 27 2020 00:00:00 GMT+0200 (CEST)",
+            "endDate": "Sun Aug 04 2021 00:00:00 GMT+0200 (CEST)"
         },
         "general": {
             "AftermovieId": "4aOknl1q5iM8ouc48SOAs2",
-            "EventName": "Pride",
+            "EventName": "MaLive",
             "HomeHeaderTitles": [
                 {
-                    "title": "REMEMBER THE PAST",
+                    "title": "Welkom bij MaLive",
                     "color": "#000000",
                     "fontSize": "large"
                 },
                 {
-                    "title": "CREATE THE FUTURE",
+                    "title": "Luister nu mee!",
                     "color": "#000000",
                     "fontSize": "medium"
                 }
             ],
-            "RadioName": "Pride FM",
+            "RadioName": "MaLive FM",
             "videosIntroduction": "Bekijk hier de videos van het evenement Pride 2019",
-            "livestreamIntroduction": "Bekijk de Pride TV Livestream",
-            "AppIntroduction": "Van 27 juli t/m 4 augustus gaat SALTO op roze met Pride TV en Pride FM."
+            "livestreamIntroduction": "Bekijk de MaLive Livestream",
+            "AppIntroduction": "Welkom bij de MaLive App"
         },
         "urls": {
-            "LivestreamUrl": "https://media.streamone.net/hlslive/account=AgYIPooZRV0y/livestream=8wJNPcoQbUwW/8wJNPcoQbUwW.m3u8",
+            "LivestreamUrl": "https://live.salto.nl/hls/malive.m3u8",
             "RadioUrl": "",
-            "RssFeedUrl": "https://api.salto.nl/api/app/feed/pride"
+            "RssFeedUrl": ""
         },
         "channels": {
-            "VideosChannelName": "pride",
+            "VideosChannelName": "",
             "RadioChannelName": "soradio1",
             "LivestreamChannelName": "malive"
         },
