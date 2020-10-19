@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>202773215761-6mu8qvko8itq93i8lejeq397m848ckto.apps.googleusercontent.com</string>
+	<string>391799824738-dtvhpqqnb9jpm4t3m9su21rd0p4rkeus.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.202773215761-6mu8qvko8itq93i8lejeq397m848ckto</string>
+	<string>com.googleusercontent.apps.391799824738-dtvhpqqnb9jpm4t3m9su21rd0p4rkeus</string>
 	<key>API_KEY</key>
-	<string>AIzaSyA-lsdUixvRKFp0virqiZtciTbrLoCq1t4</string>
+	<string>AIzaSyDQA6MFR_v5IrT1rbDvmV3qbHKq6_x5aDw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>202773215761</string>
+	<string>391799824738</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.salto.saltoPopUpApp</string>
+	<string>nl.salto.malive</string>
 	<key>PROJECT_ID</key>
-	<string>salto-pop-up-app</string>
+	<string>malive-28965</string>
 	<key>STORAGE_BUCKET</key>
-	<string>salto-pop-up-app.appspot.com</string>
+	<string>malive-28965.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:202773215761:ios:cdcfef52ec3bb985</string>
+	<string>1:391799824738:ios:ffb53beba57563b14c0c3b</string>
 	<key>DATABASE_URL</key>
-	<string>https://salto-pop-up-app.firebaseio.com</string>
+	<string>https://malive-28965.firebaseio.com</string>
 </dict>
 </plist>
