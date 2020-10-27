@@ -18,6 +18,7 @@ export class EventAttentionModal extends React.Component<Props, {}> {
         const { theme } = this.props
         const store = Platform.OS === 'android' ? 'play store' : 'app store'
 
+    if(theme.content.App.showPopup === false) {
         return (
             <View style={this.getStyles()}>
                 <View>
@@ -35,6 +36,7 @@ export class EventAttentionModal extends React.Component<Props, {}> {
                 </View>
             </View>
         )
+    }
     }
 
     private getStyles() {

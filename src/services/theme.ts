@@ -62,6 +62,7 @@ interface ThemeChannelsType {
 }
 
 export interface AppType {
+    showModal: boolean
     showDays: boolean
     startDate: string
     endDate: string
