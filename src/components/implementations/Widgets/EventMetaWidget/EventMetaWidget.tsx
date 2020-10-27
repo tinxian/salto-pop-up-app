@@ -26,14 +26,25 @@ export class EventMetaWidget extends React.Component<Props, State> {
         const { themeContext } = this.props
         const { theme } = themeContext
 
-        return (
+        if (theme.content.App.showDays === false) {
+            return (
             <View style={this.getStyles()}>
                 <View style={styles.introText}>
                     <Paragraph color={theme.colors.TitleColor}>
                         {theme.content.general.AppIntroduction}
                     </Paragraph>
                 </View>
-                <View style={styles.labelContainer}>
+            </View>
+            )
+        } else {
+            return(
+        <View style={this.getStyles()}>
+            <View style={styles.introText}>
+                    <Paragraph color={theme.colors.TitleColor}>
+                        {theme.content.general.AppIntroduction}
+                    </Paragraph>
+            </View>
+            <View style={styles.labelContainer}>
                     <Label
                         backgroundColor={theme.colors.LabelBackgroundColor}
                         borderColor={theme.colors.LabelBorderColor}
@@ -44,7 +55,8 @@ export class EventMetaWidget extends React.Component<Props, State> {
                     />
                 </View>
             </View>
-        )
+            )
+        }
     }
 
     private getStyles() {

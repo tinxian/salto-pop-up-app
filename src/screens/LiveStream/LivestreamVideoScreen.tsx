@@ -77,7 +77,7 @@ export const LivestreamVideoScreen = withThemeContext(
                     >
                         <VideoPlayer
                             style={{ width: '100%', height: '100%', overflow: 'hidden' }}
-                            source={{ uri: themeContext.theme.content.urls.LivestreamUrl }}
+                            source={{ uri: themeContext.theme.content.urls.LivestreamUrl, type: 'm3u8'}}
                             onBack={() => this.props.navigation.goBack()}
                             onEnterFullscreen={this.handleFullScreenIn}
                             onExitFullscreen={this.handleFullScreenOut}

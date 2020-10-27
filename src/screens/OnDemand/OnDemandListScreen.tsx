@@ -106,7 +106,6 @@ export const OnDemandListScreen = withThemeContext(withVideosContext(
             if (!isWithinRange(currentDate, theme.content.App.startDate, theme.content.App.endDate)) {
                 return null
             }
-
             return (
                 <View
                     style={styles.topContent}
