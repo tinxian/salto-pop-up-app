@@ -18,25 +18,25 @@ export class EventAttentionModal extends React.Component<Props, {}> {
         const { theme } = this.props
         const store = Platform.OS === 'android' ? 'play store' : 'app store'
 
-    if(theme.content.App.showPopup === false) {
-        return (
-            <View style={this.getStyles()}>
-                <View>
-                    <View style={styles.content}>
-                        <View style={{ minHeight: 40 }}>
-                            <Title color={theme.colors.TextColor}>Dit evenement is voorbij</Title>
-                            <Paragraph
-                                color={theme.colors.TextColor}
-                            >
-                                De app zal geen live content meer bevatten.
-                                Hou de {store} in de gaten voor het volgende evenement
-                            </Paragraph>
+        if (theme.content.App.showModal === false) {
+            return (
+                <View style={this.getStyles()}>
+                    <View>
+                        <View style={styles.content}>
+                            <View style={{ minHeight: 40 }}>
+                                <Title color={theme.colors.TextColor}>Dit evenement is voorbij</Title>
+                                <Paragraph
+                                    color={theme.colors.TextColor}
+                                >
+                                    De app zal geen live content meer bevatten.
+                                    Hou de {store} in de gaten voor het volgende evenement
+                                </Paragraph>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </View>
-        )
-    }
+            )
+        }
     }
 
     private getStyles() {

@@ -107,7 +107,7 @@
             "RssFeedUrl": ""
         },
         "channels": {
-            "VideosChannelName": "",
+            "VideosChannelName": "program/malive",
             "RadioChannelName": "soradio1",
             "LivestreamChannelName": "malive"
         },
