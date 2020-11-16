@@ -69,7 +69,7 @@ export const LivestreamVideoScreen = withThemeContext(
 
             return (
                 <View style={this.getStyles()}>
-                    <StatusBar hidden={true} animated={true} />
+                    <StatusBar hidden={true} animated={true}/>
                     <ExpandableRotationContainer
                         startHeight={300}
                         style={styles.videoContainer}

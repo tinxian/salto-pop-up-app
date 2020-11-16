@@ -36,6 +36,10 @@ export class EventAttentionModal extends React.Component<Props, {}> {
                     </View>
                 </View>
             )
+        } else {
+            return(
+                <View></View>
+            );
         }
     }
 

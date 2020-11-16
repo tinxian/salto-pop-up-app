@@ -15,6 +15,7 @@ import { AppNotificationManager } from './components/core/AppNotification/AppNot
 export class AppProviders extends React.Component<{ navigation: NavigationScreenProp<{}> } & ThemeInjectedProps> {
     public static router: NavigationRouter<{}, {}> = RootNavigator.router
 
+
     public componentDidMount() {
         SplashScreen.hide()
     }

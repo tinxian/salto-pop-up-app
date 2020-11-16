@@ -27,7 +27,7 @@ export const HomeScreen = withThemeContext(
             const { images } = this.props.themeContext.theme
             return (
                 <View style={this.getStyles()}>
-                    <StatusBar hidden={false} animated={false} />
+                    <StatusBar hidden={false} animated={false}/>
                     <Image
                         style={this.getBackgroundStyles()}
                         source={images.HeaderBackgroundUrl}
